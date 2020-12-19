@@ -9,3 +9,12 @@ def home(request):
 
 def about(request):
     return render(request, 'about.html')
+
+def login(request):
+    return render(request, 'login.html')
+
+def log(request):
+    return render(request, 'log.html')
+
+def index(request):
+    return render(request, "index.html")
