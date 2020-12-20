@@ -29,3 +29,12 @@ def load_state(request):
     # state = State.objects.all()
     data = serializers.serialize('json', cities)
     return HttpResponse(data, content_type="application/json")
+
+def login(request):
+    return render(request, 'login.html')
+
+def log(request):
+    return render(request, 'log.html')
+
+def index(request):
+    return render(request, "index.html")
