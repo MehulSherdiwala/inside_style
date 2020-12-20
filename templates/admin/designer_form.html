@@ -1,0 +1,46 @@
+{% extends  "admin/change_form.html" %}
+
+{% block footer %}
+    {{ block.super }}
+
+    <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
+    <script type="text/javascript">
+        let url = window.location.href;
+        let index = url.indexOf("change");
+
+        if (index > 0) {
+            let city = $("#id_city").val();
+            $.ajax({
+                url: '/ajax/load-state',
+                data: {
+                    city: city
+                },
+                success: function (res) {
+                    $("#id_state>option[value=" + res[0].fields.state + "]").prop("selected", true)
+                }
+            });
+        }
+        $("#id_state").on('change', function () {
+            let state = $(this).val();
+            $.ajax({
+                url: '/ajax/load-cities',
+                data: {
+                    state: state
+                },
+                success: function (res) {
+                    let city = $("#id_city");
+
+                    city.empty()
+                        .append($("<option></option>")
+                            .attr("value", 0)
+                            .text("------"));
+                    $.each(res, function (key, value) {
+                        city.append($("<option></option>")
+                            .attr('value', value.pk)
+                            .text(value.fields.city_name))
+                    });
+                }
+            })
+        });
+    </script>
+{% endblock %}
