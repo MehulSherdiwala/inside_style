@@ -622,10 +622,10 @@
 
     </style>
     <!-- Font Icon -->
-    <link rel="stylesheet" href="fonts/material-icon/css/material-design-iconic-font.min.css">
+    <!-- <link rel="stylesheet" href="fonts/material-icon/css/material-design-iconic-font.min.css">
 
-    <!-- Main css -->
-    <link rel="stylesheet" href="{% static 'css/style.css'%}">
+     Main css-->
+    <link rel="stylesheet" href="{% static 'css/style.css' %}">
 </head>
 <body>
 
@@ -641,63 +641,25 @@
     <div class="container">
         <div class="booking-content">
             <div class="booking-image">
-                <img class="booking-img" src="../static/img/img2.jpg" alt="Booking Image">
+                <img class="booking-img" src="../static/img/img3.jpg" alt="Booking Image">
             </div>
             <div class="booking-form">
-                <form id="booking-form" action="{% url 'login' %}" method="post">
+                <form id="booking-form" action="{% url 'registration' %}" method="post">
                     {% csrf_token %}
-                    <h2>LOGIN NOW!</h2>
+                    <h2>Register now!</h2>
                     <div class="form-group form-input">
-                        <input type="text" name="email" id="email" value="" required/>
+                        <input type="text" name="name" id="name" value="" required/>
+                        <label for="name" class="form-label">Username</label>
+                    </div>
+                    <div class="form-group form-input">
+                        <input type="email" name="email" id="email" value="" required/>
                         <label for="email" class="form-label">E-mail id</label>
                     </div>
                     <div class="form-group form-input">
                         <input type="password" name="password" id="password" value="" required/>
                         <label for="password" class="form-label">Password</label>
                     </div>
-                    {#                        <div class="form-group">#}
-                    {#                            <div class="select-list">#}
-                    {#                                <select name="time" id="time" required>#}
-                    {#                                    <option value="">Time</option>#}
-                    {#                                    <option value="6pm">6:00 PM</option>#}
-                    {#                                    <option value="7pm">7:00 PM</option>#}
-                    {#                                </select>#}
-                    {#                            </div>#}
-                    {#                        </div>#}
-                    {#                        <div class="form-group">#}
-                    {#                            <div class="select-list">#}
-                    {#                                <select name="food" id="food" required>#}
-                    {#                                    <option value="">City</option>#}
-                    {#                                    <option value="surat">Surat</option>#}
-                    {#                                    <option value="mumbai">Mumbai</option>#}
-                    {#                                </select>#}
-                    {#                            </div>#}
-                    {#                        </div>#}
-                    {#                        <div class="form-radio">#}
-                    {#                            <label class="label-radio"> Select Your Dining Space</label>#}
-                    {#                            <div class="radio-item-list">#}
-                    {#                                <span class="radio-item">#}
-                    {#                                    <input type="radio" name="number_people" value="2" id="number_people_2" />#}
-                    {#                                    <label for="number_people_2">2</label>#}
-                    {#                                </span>#}
-                    {#                                <span class="radio-item active">#}
-                    {#                                    <input type="radio" name="number_people" value="4" id="number_people_4" checked="checked" />#}
-                    {#                                    <label for="number_people_4">4</label>#}
-                    {#                                </span>#}
-                    {#                                <span class="radio-item">#}
-                    {#                                    <input type="radio" name="number_people" value="6" id="number_people_6" />#}
-                    {#                                    <label for="number_people_6">6</label>#}
-                    {#                                </span>#}
-                    {#                                <span class="radio-item">#}
-                    {#                                    <input type="radio" name="number_people" value="8" id="number_people_8" />#}
-                    {#                                    <label for="number_people_8">8</label>#}
-                    {#                                </span>#}
-                    {#                                <span class="radio-item">#}
-                    {#                                    <input type="radio" name="number_people" value="10" id="number_people_10" />#}
-                    {#                                    <label for="number_people_10">10</label>#}
-                    {#                                </span>#}
-                    {#                            </div>#}
-                    {#                        </div>#}
+
                     <br>
                     {% for msg in messages %}
                         <p>{{ msg }}</p>
@@ -705,8 +667,8 @@
                     <br>
 
                     <div class="form-submit">
-                        <input type="submit" value="Login now" class="submit" id="submit" name="submit"/>
-                        <a href="{% url 'registration' %}" class="vertify-booking">Do not have an Account?</a>
+                        <input type="submit" value="Register Now" class="submit" id="submit" name="submit"/>
+                        <a href="{% url 'login' %}" class="vertify-booking">Already have an Account?</a>
                     </div>
                 </form>
             </div>
