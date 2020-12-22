@@ -1,3 +1,5 @@
+import datetime
+
 from django.contrib.auth.models import User as admin
 from djongo import models
 from django import forms
@@ -49,7 +51,7 @@ class User(models.Model):
     username = models.CharField(max_length=100)
     email = models.EmailField()
     password = models.CharField(max_length=100)
-    join_date = models.DateField()
+    join_date = models.DateField(default=datetime.date.today)
     status = models.BooleanField(default=True)
 
     def __str__(self):
