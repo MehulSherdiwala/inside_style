@@ -1,11 +1,5 @@
 /*-----------------------------------------------------------------------------------
 
-    Theme Name: Archo
-    Theme URI: http://
-    Description: Architecture & Interior Design HTML Template
-    Author: UI-ThemeZ
-    Author URI: http://themeforest.net/user/UI-ThemeZ
-    Version: 1.0
 
 -----------------------------------------------------------------------------------*/
 
