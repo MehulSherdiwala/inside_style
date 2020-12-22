@@ -4,7 +4,7 @@ from django.contrib import admin
 from django.contrib.admin import AdminSite
 from django import forms
 
-from main.models import State, City, Designer
+from main.models import State, City, Designer, User
 
 # Headers
 AdminSite.site_header = "Inside Style"
@@ -25,7 +25,7 @@ class StateAdmin(admin.ModelAdmin):
 # State
 @admin.register(City)
 class CityAdmin(admin.ModelAdmin):
-    list_display = ("id", "city_name", "state")
+    list_display = ("city_name", "state")
     list_filter = ("state",)
     search_fields = ("city_name",)
 
@@ -71,4 +71,10 @@ class DesignerAdmin(admin.ModelAdmin):
     list_display = ("designer_name", "email", "phone", "status")
     list_filter = ("status", "join_date")
 
+
 # Designer --end--
+
+@admin.register(User)
+class UserAdmin(admin.ModelAdmin):
+    list_display = ("username", "email",  "status")
+    list_filter = ("status", "join_date")

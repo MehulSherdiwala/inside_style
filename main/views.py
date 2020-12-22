@@ -34,6 +34,7 @@ def load_state(request):
     return HttpResponse(data, content_type="application/json")
 
 
+# Registration
 def registration(request):
     if request.method == 'POST':
         username = request.POST['name']
@@ -75,6 +76,10 @@ def login(request):
         return render(request, 'login.html')
 
 
+def logout(request):
+    request.session.flush()
+    return redirect('/')
+
+
 def index(request):
-    print(request.session['email'])
     return render(request, "index.html")
