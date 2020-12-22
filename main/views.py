@@ -48,11 +48,17 @@ def registration(request):
         else:
             user = User.objects.create(username=username, email=email, password=password)
             user.save()
+            request.session['email'] = user.email
+            request.session['username'] = user.username
+            request.session['id'] = user.id
 
         return redirect('/')
 
     else:
-        return render(request, 'registration.html')
+        if 'username' in request.session:
+            return redirect('/')
+        else:
+            return render(request, 'registration.html')
 
 
 def login(request):
@@ -73,7 +79,10 @@ def login(request):
             return redirect('login')
 
     else:
-        return render(request, 'login.html')
+        if 'username' in request.session:
+            return redirect('/')
+        else:
+            return render(request, 'login.html')
 
 
 def logout(request):
@@ -82,4 +91,5 @@ def logout(request):
 
 
 def index(request):
+    print(datetime.now())
     return render(request, "index.html")
