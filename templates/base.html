@@ -113,7 +113,7 @@
                         <a class="nav-link" href="#">Portfolio</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="#">Contact</a>
+                        <a class="nav-link" href="{% url 'contact' %}">Contact</a>
                     </li>
                 </ul>
                 <div class="social-icon dropdown">
@@ -233,6 +233,14 @@
 
     <!-- custom scripts -->
     <script src="{% static 'js/scripts.js' %}?version=4"></script>
+
+    <!-- Map -->
+    <script src="{% static 'js/map.js' %}"></script>
+
+    <!-- google map api -->
+    <script async defer
+        src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDUU5FZiF5WLFFfgIC1n64Zr0zfpQZjBBg&amp;callback=initMap">
+        </script>
 
     {% block script %}
 

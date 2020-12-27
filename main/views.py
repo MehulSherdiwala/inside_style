@@ -91,5 +91,13 @@ def logout(request):
 
 
 def index(request):
-    print(datetime.now())
     return render(request, "index.html")
+
+
+def contact(request):
+    return render(request, 'contact.html')
+
+def userdash(request):
+    return render(request, "userdash.html")
+
+
