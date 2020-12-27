@@ -7,24 +7,21 @@
     <script type="text/javascript">
 
 
-        $("#id_state").on('change', function () {
-            let state = $(this).val();
+        $("#id_inserted_by").on('change', function () {
+            let inserted_by = $(this).val();
             $.ajax({
-                url: '/ajax/load-cities',
-                data: {
-                    state: state
-                },
+                url: '/ajax/load-creator/' + inserted_by,
                 success: function (res) {
-                    let city = $("#id_city");
+                    let creator = $("#id_creator_id");
 
-                    city.empty()
+                    creator.empty()
                         .append($("<option></option>")
                             .attr("value", 0)
                             .text("------"));
                     $.each(res, function (key, value) {
-                        city.append($("<option></option>")
+                        creator.append($("<option></option>")
                             .attr('value', value.pk)
-                            .text(value.fields.city_name))
+                            .text((inserted_by == 1) ? value.fields.username : value.fields.designer_name))
                     });
                 }
             })

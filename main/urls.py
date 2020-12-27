@@ -12,4 +12,5 @@ urlpatterns = [
     path('logout/', views.logout, name="logout"),
     path('ajax/load-cities', views.load_city, name="load_city"),
     path('ajax/load-state', views.load_state, name="load_state"),
+    path('ajax/load-creator/<ins_by>', views.load_creator, name="load_creator"),
 ]

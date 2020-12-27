@@ -1,10 +1,11 @@
 from django.contrib import admin
 
 # Register your models here.
-from django.contrib.admin import AdminSite
+from django.contrib.admin import AdminSite, SimpleListFilter
 from django import forms
+from django.contrib.auth.models import User as adminUser
 
-from main.models import State, City, Designer, User
+from main.models import State, City, Designer, User, Branch, Category, Product, Design
 
 # Headers
 AdminSite.site_header = "Inside Style"
@@ -53,14 +54,29 @@ class DesignerForm(forms.ModelForm):
 
     class Meta:
         model = Designer
-        fields = ('designer_name', 'email', 'phone', 'description', 'join_date', 'state', 'city', 'admin', 'status')
+        fields = (
+            'designer_name', 'email', 'phone', 'password', 'description', 'join_date', 'state', 'city', 'admin',
+            'status')
 
+    # def __init__(self, *args, **kwargs):
+    #     super(DesignerForm, self).__init__(*args, **kwargs)
+    #     initial = kwargs.get('initial', {})
+    # d = {**initial, **args}
+    # print(self.instance.city.state_id)
     def __init__(self, *args, **kwargs):
         super(DesignerForm, self).__init__(*args, **kwargs)
+
+        if hasattr(self.instance, 'city'):
+            state_initial = self.instance.city.state_id
+            self.fields['city'].queryset = City.objects.filter(state=state_initial)
+        else:
+            state_initial = 0
+            self.fields['city'].queryset = City.objects.all()
+
         self.fields['state'] = forms.ChoiceField(
-            choices=get_state()
+            choices=get_state(),
+            initial=state_initial
         )
-        self.fields['city'].queryset = City.objects.all()
 
 
 @admin.register(Designer)
@@ -76,5 +92,122 @@ class DesignerAdmin(admin.ModelAdmin):
 
 @admin.register(User)
 class UserAdmin(admin.ModelAdmin):
-    list_display = ("username", "email",  "status")
+    list_display = ("username", "email", "status")
     list_filter = ("status", "join_date")
+
+
+# Branch Starts
+class BranchForm(forms.ModelForm):
+    state = forms.ChoiceField()
+
+    class Meta:
+        model = Branch
+        fields = ('branch_name', 'addr', 'state', 'city', 'admin')
+
+    def __init__(self, *args, **kwargs):
+        super(BranchForm, self).__init__(*args, **kwargs)
+        self.fields['state'] = forms.ChoiceField(
+            choices=get_state()
+        )
+        self.fields['city'].queryset = City.objects.all()
+
+
+@admin.register(Branch)
+class BranchAdmin(admin.ModelAdmin):
+    form = BranchForm
+    add_form_template = 'admin/designer_form.html'
+    change_form_template = 'admin/designer_form.html'
+    list_display = ("branch_name", "addr", "city")
+    list_filter = ("city", "created_at")
+
+
+# Branch Ends
+
+admin.site.register(Category)
+
+
+# Product Start
+class CatFilter(SimpleListFilter):
+    title = 'Category'
+    parameter_name = 'Category'
+
+    def lookups(self, request, model_admin):
+        cat = Category.objects.all()
+        cat_list = tuple((j.id, j.cat_name) for j in cat)
+        return cat_list
+
+    def queryset(self, request, queryset):
+        if not self.value():
+            return queryset
+        else:
+            return queryset.filter(category=self.value())
+
+
+@admin.register(Product)
+class ProductAdmin(admin.ModelAdmin):
+    fields = ("pdt_name", "description", "price", "image", "prodImg", "category", "status")
+    list_display = ("pdt_name", "price", "prodImg", "category", "status")
+    list_filter = (CatFilter, "status", "created_at")
+    search_fields = ("pdt_name",)
+    readonly_fields = ("prodImg",)
+
+    def catagory(self, obj):
+        result = Category.objects.filter(pk=obj)
+        return result['cat_name']
+
+
+# Product End
+
+# TODO: Edit Design creator Box Pending
+def get_creator(user):
+    if user == 1:
+        user_list = adminUser.objects.all()
+        user_list = tuple((j.id, j.username) for j in user_list)
+    else:
+        user_list = Designer.objects.all()
+        user_list = tuple((j.id, j.designer_name) for j in user_list)
+
+    select = tuple(((0, "--------"),))
+
+    user_list = select + user_list
+
+    return user_list
+
+
+class DesignForm(forms.ModelForm):
+
+    class Meta:
+        model = Design
+        fields = ('design_name', 'description', 'image', 'inserted_by', 'creator_id', 'status')
+        # readonly_fields = ("prodImg",)
+
+    def __init__(self, *args, **kwargs):
+        super(DesignForm, self).__init__(*args, **kwargs)
+
+        # if hasattr(self.instance, 'city'):
+        #     state_initial = self.instance.city.state_id
+        #     self.fields['city'].queryset = City.objects.filter(state=state_initial)
+        # else:
+        #     state_initial = 0
+        #     self.fields['city'].queryset = City.objects.all()
+
+        self.fields['creator_id'] = forms.ChoiceField(
+            choices=get_creator(1),
+        )
+
+
+@admin.register(Design)
+class DesignAdmin(admin.ModelAdmin):
+    form = DesignForm
+    add_form_template = "admin/design_form.html"
+    change_form_template = "admin/design_form.html"
+    # fields = ("prodImg", )
+    # readonly_fields = ("prodImg",)
+    list_display = ('design_name', 'prodImg', "inserted_by", 'creator')
+
+    def creator(self, obj):
+        if obj.inserted_by == 1:
+            return adminUser.objects.filter(pk=obj.creator_id)[0].username
+        else:
+            return Designer.objects.filter(pk=obj.creator_id)[0].designer_name
+
