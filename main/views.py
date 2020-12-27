@@ -3,7 +3,6 @@ from django.contrib import messages
 from django.http import HttpResponse, JsonResponse
 from django.shortcuts import render, redirect
 from django.contrib.auth.models import User as adminUser
-from passlib.hash import pbkdf2_sha256
 # Create your views here.
 from django.template import RequestContext
 

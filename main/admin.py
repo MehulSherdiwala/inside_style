@@ -184,15 +184,15 @@ class DesignForm(forms.ModelForm):
     def __init__(self, *args, **kwargs):
         super(DesignForm, self).__init__(*args, **kwargs)
 
-        # if hasattr(self.instance, 'city'):
-        #     state_initial = self.instance.city.state_id
-        #     self.fields['city'].queryset = City.objects.filter(state=state_initial)
-        # else:
-        #     state_initial = 0
-        #     self.fields['city'].queryset = City.objects.all()
+        if hasattr(self.instance, 'inserted_by'):
+            ins_by = self.instance.inserted_by
+            # self.fields['city'].queryset = City.objects.filter(state=state_initial)
+        else:
+            ins_by = 1
+            # self.fields['city'].queryset = City.objects.all()
 
         self.fields['creator_id'] = forms.ChoiceField(
-            choices=get_creator(1),
+            choices=get_creator(ins_by),
         )
 
 
@@ -201,9 +201,8 @@ class DesignAdmin(admin.ModelAdmin):
     form = DesignForm
     add_form_template = "admin/design_form.html"
     change_form_template = "admin/design_form.html"
-    # fields = ("prodImg", )
-    # readonly_fields = ("prodImg",)
-    list_display = ('design_name', 'prodImg', "inserted_by", 'creator')
+    list_display = ('design_name', 'prodImg', "inserted_by", 'creator', 'status')
+    list_filter = ('inserted_by', 'created_at', 'status')
 
     def creator(self, obj):
         if obj.inserted_by == 1:
