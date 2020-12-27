@@ -13,4 +13,6 @@ urlpatterns = [
     path('ajax/load-cities', views.load_city, name="load_city"),
     path('ajax/load-state', views.load_state, name="load_state"),
     path('ajax/load-creator/<ins_by>', views.load_creator, name="load_creator"),
+    path('contact/', views.contact, name="contact"),
+    path('userdash/', views.userdash, name="userdash")
 ]

@@ -1,7 +1,7 @@
 function initMap() {
 
     var map = new google.maps.Map(document.getElementById('ieatmaps'), {
-      center: {lat: 34.0937458, lng: -118.3614978},
+      center: {lat: 21.20252, lng: 72.83337},
       zoom: 12,
       styles: [
         {
@@ -182,7 +182,7 @@ function initMap() {
     });
 
     var marker = new google.maps.Marker({
-        position: new google.maps.LatLng(34.0937458, -118.3614978)
+        position: new google.maps.LatLng(21.20252, 72.83337)
         , title: 'ASL'
         , map : map
 

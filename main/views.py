@@ -103,3 +103,12 @@ def load_creator(request, ins_by):
         users = Designer.objects.all()
     data = serializers.serialize('json', users)
     return HttpResponse(data, content_type="application/json")
+
+
+def contact(request):
+    return render(request, 'contact.html')
+
+def userdash(request):
+    return render(request, "userdash.html")
+
+
