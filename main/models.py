@@ -1,8 +1,8 @@
 import datetime
 
 from django.contrib.auth.models import User as admin
+from django.utils.safestring import mark_safe
 from djongo import models
-from django import forms
 
 
 # Create your models here.
@@ -25,7 +25,7 @@ class Designer(models.Model):
     designer_name = models.CharField(max_length=100)
     email = models.EmailField()
     phone = models.CharField(max_length=12)
-    password = forms.CharField(widget=forms.PasswordInput)
+    password = models.CharField(max_length=100)
     description = models.TextField()
     join_date = models.DateField()
     status = models.BooleanField(default=True)
@@ -56,3 +56,63 @@ class User(models.Model):
 
     def __str__(self):
         return self.username
+
+
+class Branch(models.Model):
+    branch_name = models.CharField(max_length=50)
+    addr = models.TextField(verbose_name="Address")
+    created_at = models.DateField(default=datetime.date.today)
+    city = models.ForeignKey(City, on_delete=models.CASCADE)
+    admin = models.ForeignKey(admin, on_delete=models.CASCADE)
+
+    def __str__(self):
+        return self.branch_name
+
+
+class Category(models.Model):
+    cat_name = models.CharField(max_length=100, verbose_name="Category Name")
+
+    def __str__(self):
+        return self.cat_name
+
+
+class Product(models.Model):
+    pdt_name = models.CharField(max_length=100, verbose_name="Product Name")
+    description = models.TextField()
+    image = models.ImageField(upload_to='img')
+    price = models.IntegerField()
+    status = models.BooleanField(default=True)
+    created_at = models.DateField(default=datetime.date.today)
+    category = models.ForeignKey(Category, on_delete=models.CASCADE)
+
+    def prodImg(self):
+        return mark_safe('<img src="{}" width="100" />'.format(self.image.url))
+
+    prodImg.short_description = "Image"
+    prodImg.allow_tags = True
+
+    def __str__(self):
+        return self.pdt_name
+
+
+class Design(models.Model):
+    ins_choice = (
+        (1, "Admin"),
+        (2, "Designer")
+    )
+    design_name = models.CharField(max_length=100, verbose_name="Design Name")
+    description = models.TextField()
+    image = models.ImageField(upload_to='img')
+    status = models.BooleanField(default=True)
+    inserted_by = models.PositiveIntegerField(choices=ins_choice, default=1)
+    creator_id = models.IntegerField(verbose_name="Creator Name")
+    created_at = models.DateField(default=datetime.date.today)
+
+    def prodImg(self):
+        return mark_safe('<img src="{}" width="100" />'.format(self.image.url))
+
+    prodImg.short_description = "Image"
+    prodImg.allow_tags = True
+
+    def __str__(self):
+        return self.design_name

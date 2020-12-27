@@ -2,12 +2,12 @@ from django.core import serializers
 from django.contrib import messages
 from django.http import HttpResponse, JsonResponse
 from django.shortcuts import render, redirect
-from django.contrib.sessions.models import Session
-
+from django.contrib.auth.models import User as adminUser
+from passlib.hash import pbkdf2_sha256
 # Create your views here.
 from django.template import RequestContext
 
-from main.models import City, State, User
+from main.models import City, State, User, Designer
 
 
 def home(request):
@@ -40,6 +40,7 @@ def registration(request):
         username = request.POST['name']
         email = request.POST['email']
         password = request.POST['password']
+        # password = pbkdf2_sha256.encrypt(request.POST['password'])
 
         if User.objects.filter(email=email).exists():
             messages.info(request, "Email is already exist.")
@@ -66,6 +67,7 @@ def login(request):
         email = request.POST['email']
         password = request.POST['password']
 
+        # password = pbkdf2_sha256.encrypt(request.POST['password'])
         user = User.objects.filter(email=email, password=password)
 
         if user.exists():
@@ -92,6 +94,15 @@ def logout(request):
 
 def index(request):
     return render(request, "index.html")
+
+
+def load_creator(request, ins_by):
+    if int(ins_by) == 1:
+        users = adminUser.objects.all()
+    else:
+        users = Designer.objects.all()
+    data = serializers.serialize('json', users)
+    return HttpResponse(data, content_type="application/json")
 
 
 def contact(request):
