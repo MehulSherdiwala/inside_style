@@ -6,7 +6,7 @@ from django.contrib.auth.models import User as adminUser
 # Create your views here.
 from django.template import RequestContext
 
-from main.models import City, State, User, Designer
+from main.models import City, State, User, Designer, Contact
 
 
 def home(request):
@@ -105,9 +105,22 @@ def load_creator(request, ins_by):
 
 
 def contact(request):
-    return render(request, 'contact.html')
+    if request.method == "POST":
+        name = request.POST['name']
+        email = request.POST['email']
+        message = request.POST['message']
 
-def userdash(request):
-    return render(request, "userdash.html")
+        # Contact.name=name
+        # Contact.email=email
+        # Contact.message=message
+        c = Contact.objects.create(name=name, email=email, message=message)
+        c.save()
+
+        return render(request, 'contact.html', {'name': name})
+
+    else:
+        return render(request, 'contact.html')
+
+
 
 
