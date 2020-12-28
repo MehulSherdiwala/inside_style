@@ -123,7 +123,7 @@
                          <a class="nav-link dropdown-toggle" data-toggle="dropdown" href="#" role="button"
                                 aria-haspopup="true" aria-expanded="false">{{ request.session.username }}</a>
                         <div class="dropdown-menu">
-                            <a class="dropdown-item" href="#">Profile</a>
+                            <a class="dropdown-item" href="{% url 'user_dashboard' %}">Profile</a>
                             <a class="dropdown-item" href="{% url 'logout' %}">Logout</a>
                         </div>
                     {% endif %}

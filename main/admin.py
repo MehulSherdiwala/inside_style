@@ -5,7 +5,7 @@ from django.contrib.admin import AdminSite, SimpleListFilter
 from django import forms
 from django.contrib.auth.models import User as adminUser
 
-from main.models import State, City, Designer, User, Branch, Category, Product, Design
+from main.models import State, City, Designer, User, Branch, Category, Product, Design, Address
 
 # Headers
 AdminSite.site_header = "Inside Style"
@@ -95,6 +95,9 @@ class UserAdmin(admin.ModelAdmin):
     list_display = ("username", "email", "status")
     list_filter = ("status", "join_date")
 
+    def has_add_permission(self, request, obj=None):
+        return False
+
 
 # Branch Starts
 class BranchForm(forms.ModelForm):
@@ -158,7 +161,6 @@ class ProductAdmin(admin.ModelAdmin):
 
 # Product End
 
-# TODO: Edit Design creator Box Pending
 def get_creator(user):
     if user == 1:
         user_list = adminUser.objects.all()
@@ -175,7 +177,6 @@ def get_creator(user):
 
 
 class DesignForm(forms.ModelForm):
-
     class Meta:
         model = Design
         fields = ('design_name', 'description', 'image', 'inserted_by', 'creator_id', 'status')
@@ -210,3 +211,11 @@ class DesignAdmin(admin.ModelAdmin):
         else:
             return Designer.objects.filter(pk=obj.creator_id)[0].designer_name
 
+
+@admin.register(Address)
+class AddressAdmin(admin.ModelAdmin):
+    list_display = ('user', 'addr', "pincode", 'phone', 'city')
+    list_filter = ('user', 'city')
+
+    def has_add_permission(self, request, obj=None):
+        return False

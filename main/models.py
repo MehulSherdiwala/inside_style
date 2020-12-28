@@ -58,6 +58,18 @@ class User(models.Model):
         return self.username
 
 
+class Address(models.Model):
+    name = models.CharField(max_length=100)
+    phone = models.CharField(max_length=12)
+    addr = models.TextField(verbose_name="Address")
+    pincode = models.IntegerField()
+    city = models.ForeignKey(City, on_delete=models.CASCADE)
+    user = models.ForeignKey(User, on_delete=models.CASCADE)
+
+    def __str__(self):
+        return self.addr
+
+
 class Branch(models.Model):
     branch_name = models.CharField(max_length=50)
     addr = models.TextField(verbose_name="Address")

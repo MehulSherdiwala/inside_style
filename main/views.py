@@ -6,7 +6,7 @@ from django.contrib.auth.models import User as adminUser
 # Create your views here.
 from django.template import RequestContext
 
-from main.models import City, State, User, Designer
+from main.models import City, State, User, Designer, Address
 
 
 def home(request):
@@ -107,7 +107,55 @@ def load_creator(request, ins_by):
 def contact(request):
     return render(request, 'contact.html')
 
-def userdash(request):
-    return render(request, "userdash.html")
 
+def user_dashboard(request):
+    if 'id' in request.session:
+        user_id = request.session['id']
+        if request.method == "POST":
+            user = User.objects.filter(pk=user_id)[0]
+            user.username = request.POST['username']
 
+            if not request.POST['addr']:
+                addr = Address.objects.filter(user=user_id)[0]
+                addr.addr = request.POST['addr']
+                addr.phone = request.POST['phone']
+                addr.pincode = request.POST['pincode']
+                addr.city = City.objects.filter(pk=request.POST['city'])[0]
+
+            else:
+                addr = Address.objects.create(addr=request.POST['addr'], phone=request.POST['phone'],
+                                              pincode=request.POST['pincode'],
+                                              city=City.objects.filter(pk=request.POST['city'])[0],
+                                              user=user)
+
+            user.save()
+            addr.save()
+
+            return redirect("user_dashboard")
+
+        else:
+            user = User.objects.filter(pk=user_id)[0]
+
+            data = {
+                'username': user.username,
+                'email': user.email,
+            }
+            addr = Address.objects.filter(user=user_id)
+
+            state = State.objects.all()
+            city = None
+            if addr.count() > 0:
+                city = City.objects.filter(state=addr[0].city.state_id)
+                data.update({
+                    'addr': addr[0].addr,
+                    'phone': addr[0].phone,
+                    'pincode': addr[0].pincode,
+                    'selected_city': addr[0].city,
+                    'addr_id': addr[0].id
+                })
+
+            data.update({'state': state, 'city': city})
+
+            return render(request, "user_dashboard.html", data)
+    else:
+        return redirect('login')
