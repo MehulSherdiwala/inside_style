@@ -132,8 +132,13 @@ class BranchAdmin(admin.ModelAdmin):
 # Branch Ends
 
 class Catadmin(admin.ModelAdmin):
-    list_display = ("cat_name",)
+    list_display = ("cat_name", "total_product")
     search_fields = ("cat_name__startswith",)
+
+    def total_product(self, obj):
+        result = obj.product_set.count()
+        return result
+
 
 admin.site.register(Category, Catadmin)
 
@@ -186,7 +191,6 @@ def get_creator(user):
 
 
 class DesignForm(forms.ModelForm):
-
     class Meta:
         model = Design
         fields = ('design_name', 'description', 'image', 'inserted_by', 'creator_id', 'status')
@@ -232,6 +236,7 @@ class AddressAdmin(admin.ModelAdmin):
     def has_add_permission(self, request, obj=None):
         return False
 
+
 class ContactAdmin(admin.ModelAdmin):
     list_display = ('name', 'email', 'message')
     search_fields = ("name__startswith", "email__startswith")
@@ -241,5 +246,3 @@ class ContactAdmin(admin.ModelAdmin):
 
 
 admin.site.register(Contact, ContactAdmin)
-
-

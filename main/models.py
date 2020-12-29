@@ -129,6 +129,7 @@ class Design(models.Model):
     def __str__(self):
         return self.design_name
 
+
 class Contact(models.Model):
     name = models.CharField(max_length=50)
     email = models.EmailField()
@@ -136,4 +137,3 @@ class Contact(models.Model):
 
     def __str__(self):
         return self.name
-
