@@ -5,9 +5,11 @@ from django.contrib.admin import AdminSite, SimpleListFilter
 from django import forms
 from django.contrib.auth.models import User as adminUser
 
-from main.models import State, City, Designer, User, Branch, Category, Product, Design, Address
+from main.models import State, City, Designer, User, Branch, Category, Product, Design, Contact, Address
 
 # Headers
+from main.views import contact
+
 AdminSite.site_header = "Inside Style"
 AdminSite.site_title = "Inside Style"
 
@@ -86,6 +88,7 @@ class DesignerAdmin(admin.ModelAdmin):
     change_form_template = 'admin/designer_form.html'
     list_display = ("designer_name", "email", "phone", "status")
     list_filter = ("status", "join_date")
+    search_fields = ("designer_name__startswith", "email__startswith")
 
 
 # Designer --end--
@@ -94,6 +97,7 @@ class DesignerAdmin(admin.ModelAdmin):
 class UserAdmin(admin.ModelAdmin):
     list_display = ("username", "email", "status")
     list_filter = ("status", "join_date")
+    search_fields = ("username__startswith", "email__startswith",)
 
     def has_add_permission(self, request, obj=None):
         return False
@@ -122,11 +126,16 @@ class BranchAdmin(admin.ModelAdmin):
     change_form_template = 'admin/designer_form.html'
     list_display = ("branch_name", "addr", "city")
     list_filter = ("city", "created_at")
+    search_fields = ("branch_name__startswith", "city__startswith",)
 
 
 # Branch Ends
 
-admin.site.register(Category)
+class Catadmin(admin.ModelAdmin):
+    list_display = ("cat_name",)
+    search_fields = ("cat_name__startswith",)
+
+admin.site.register(Category, Catadmin)
 
 
 # Product Start
@@ -151,7 +160,7 @@ class ProductAdmin(admin.ModelAdmin):
     fields = ("pdt_name", "description", "price", "image", "prodImg", "category", "status")
     list_display = ("pdt_name", "price", "prodImg", "category", "status")
     list_filter = (CatFilter, "status", "created_at")
-    search_fields = ("pdt_name",)
+    search_fields = ("pdt_name", "category")
     readonly_fields = ("prodImg",)
 
     def catagory(self, obj):
@@ -177,9 +186,11 @@ def get_creator(user):
 
 
 class DesignForm(forms.ModelForm):
+
     class Meta:
         model = Design
         fields = ('design_name', 'description', 'image', 'inserted_by', 'creator_id', 'status')
+
         # readonly_fields = ("prodImg",)
 
     def __init__(self, *args, **kwargs):
@@ -204,6 +215,7 @@ class DesignAdmin(admin.ModelAdmin):
     change_form_template = "admin/design_form.html"
     list_display = ('design_name', 'prodImg', "inserted_by", 'creator', 'status')
     list_filter = ('inserted_by', 'created_at', 'status')
+    search_fields = ("design_name", "category")
 
     def creator(self, obj):
         if obj.inserted_by == 1:
@@ -219,3 +231,15 @@ class AddressAdmin(admin.ModelAdmin):
 
     def has_add_permission(self, request, obj=None):
         return False
+
+class ContactAdmin(admin.ModelAdmin):
+    list_display = ('name', 'email', 'message')
+    search_fields = ("name__startswith", "email__startswith")
+
+    def has_add_permission(self, request, obj=None):
+        return False
+
+
+admin.site.register(Contact, ContactAdmin)
+
+
