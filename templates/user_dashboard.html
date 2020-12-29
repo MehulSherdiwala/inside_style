@@ -149,7 +149,19 @@
     </style>
 {% endblock %}
 {% block content %}
-    <header class="" style="background-color: #252531; height: 11vh"></header>
+{#    <header class="" style="background-color: #252531; height: 11vh"></header>#}
+<header class="pages-header bg-img valign parallaxie" data-background="{% static 'img/pg1.jpg' %}"
+            data-overlay-dark="5" style="height: 42vh">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-12">
+                    <div class="cont text-center">
+                        <h1 style="margin-top: 50px;margin-bottom: 0;">Dashboard</h1>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </header>
 
     <div class="content">
 
