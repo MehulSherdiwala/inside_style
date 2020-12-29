@@ -88,6 +88,7 @@ class DesignerAdmin(admin.ModelAdmin):
     change_form_template = 'admin/designer_form.html'
     list_display = ("designer_name", "email", "phone", "status")
     list_filter = ("status", "join_date")
+    search_fields = ("designer_name__startswith", "email__startswith")
 
 
 # Designer --end--
@@ -127,7 +128,11 @@ class BranchAdmin(admin.ModelAdmin):
 
 # Branch Ends
 
-admin.site.register(Category)
+class Catadmin(admin.ModelAdmin):
+    list_display = ("cat_name",)
+    search_fields = ("cat_name__startswith",)
+
+admin.site.register(Category, Catadmin)
 
 
 # Product Start
@@ -152,7 +157,7 @@ class ProductAdmin(admin.ModelAdmin):
     fields = ("pdt_name", "description", "price", "image", "prodImg", "category", "status")
     list_display = ("pdt_name", "price", "prodImg", "category", "status")
     list_filter = (CatFilter, "status", "created_at")
-    search_fields = ("pdt_name__startswith", "category__startswith")
+    search_fields = ("pdt_name", "category")
     readonly_fields = ("prodImg",)
 
     def catagory(self, obj):
@@ -207,7 +212,7 @@ class DesignAdmin(admin.ModelAdmin):
     change_form_template = "admin/design_form.html"
     list_display = ('design_name', 'prodImg', "inserted_by", 'creator', 'status')
     list_filter = ('inserted_by', 'created_at', 'status')
-    search_fields = ("design_name",)
+    search_fields = ("design_name", "category")
 
     def creator(self, obj):
         if obj.inserted_by == 1:
@@ -218,7 +223,7 @@ class DesignAdmin(admin.ModelAdmin):
 
 class ContactAdmin(admin.ModelAdmin):
     list_display = ('name', 'email', 'message')
-    search_fields = ("name__startswith",)
+    search_fields = ("name__startswith", "email__startswith")
 
     def has_add_permission(self, request, obj=None):
         return False
