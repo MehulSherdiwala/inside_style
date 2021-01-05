@@ -177,3 +177,6 @@ def user_dashboard(request):
 
 def designs(request):
     return render(request, 'designs.html')
+
+def product_list(request):
+    return render(request, 'product_list.html')

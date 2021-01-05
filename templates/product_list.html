@@ -1,0 +1,3750 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block styles %}
+    <style>
+        .screen-reader-text {
+            clip: rect(1px, 1px, 1px, 1px);
+            clip-path: polygon(0px 0px, 0px 0px, 0px 0px, 0px 0px);
+            position: absolute !important;
+            white-space: nowrap;
+            height: 1px;
+            width: 1px;
+            overflow: hidden;
+        }
+
+        input[type="text"],
+        input[type="email"],
+        input[type="password"],
+        input[type="tel"],
+        input[type="search"],
+        input[type="url"],
+        textarea,
+        select {
+            border: 1px solid #eeeeee;
+            padding: 7px 20px;
+            max-width: 100%;
+            background: none;
+        }
+
+        input[type="text"],
+        input[type="email"],
+        input[type="password"],
+        input[type="tel"],
+        input[type="search"],
+        input[type="url"] {
+            height: 42px;
+            border-radius: 42px;
+        }
+
+        textarea {
+            line-height: 28px;
+            padding: 11px 26px;
+            height: auto;
+            width: 100%;
+            border-radius: 8px;
+        }
+
+        select {
+            font-size: 15px;
+            color: #000000;
+            padding: 0 21px;
+        }
+
+        option {
+            padding: 5px 21px;
+            height: 30px;
+            line-height: 30px;
+        }
+
+        .button, button, input[type="submit"] {
+            display: inline-block;
+            padding: 9px 20px;
+            color: #fff;
+            border: none;
+            text-align: center;
+            text-transform: uppercase;
+            font-size: 12px;
+            font-weight: 700;
+            -webkit-transition: all 0.4s ease 0s;
+            -moz-transition: all 0.4s ease 0s;
+            -o-transition: all 0.4s ease 0s;
+            transition: all 0.4s ease 0s;
+            border-radius: 40px;
+        }
+
+        input[type="text"]:focus,
+        input[type="number"]:focus,
+        input[type="search"]:focus,
+        input[type="email"]:focus,
+        input[type="password"]:focus,
+        input[type="tel"]:focus,
+        input[type="url"]:focus,
+        textarea:focus,
+        button:focus,
+        select:focus {
+            outline: none;
+            border-color: #e6e6e6 !important;
+        }
+
+        :focus {
+            outline: none;
+        }
+
+        ::-webkit-input-placeholder {
+            text-align: inherit;
+            color: inherit;
+            opacity: 1;
+            filter: alpha(opacity=100);
+        }
+
+        :-moz-placeholder {
+            /* Firefox 18- */
+            text-align: inherit;
+            color: inherit;
+            opacity: 1;
+            filter: alpha(opacity=100);
+        }
+
+        ::-moz-placeholder {
+            /* Firefox 19+ */
+            text-align: inherit;
+            color: inherit;
+            opacity: 1;
+            filter: alpha(opacity=100);
+        }
+
+        :-ms-input-placeholder {
+            text-align: inherit;
+            color: inherit;
+            opacity: 1;
+            filter: alpha(opacity=100);
+        }
+
+        .return-message {
+            line-height: 20px;
+            padding: 10px 30px;
+            margin-top: 15px;
+        }
+
+        /* ==========================================================================
+                                      1.2 TABLE
+        ============================================================================ */
+        table {
+            border: 1px solid #f3f3f3;
+            border-collapse: collapse;
+            border-spacing: 0;
+            table-layout: auto;
+            width: 100%;
+            margin-bottom: 20px;
+        }
+
+        table thead {
+            background-color: #f8f8f8;
+        }
+
+        th, td {
+            border: 1px solid #f3f3f3;
+            padding: 10px;
+            font-weight: normal;
+        }
+
+        table tr th:last-child,
+        table tr td:last-child {
+            border-right: 0;
+        }
+
+        table tr:last-child td, table tr:last-child th {
+            border-bottom: none;
+        }
+
+        /*----------------------------Auto Clear--------------------------------*/
+        @media (min-width: 1500px) {
+            .auto-clear .col-bg-1:nth-child(12n+1) {
+                clear: left;
+            }
+
+            .auto-clear .col-bg-2:nth-child(6n+1) {
+                clear: left;
+            }
+
+            .auto-clear .col-bg-15:nth-child(5n+1) {
+                clear: left;
+            }
+
+            .auto-clear .col-bg-3:nth-child(4n+1) {
+                clear: left;
+            }
+
+            .auto-clear .col-bg-4:nth-child(3n+1) {
+                clear: left;
+            }
+
+            .auto-clear .col-bg-6:nth-child(odd) {
+                clear: left;
+            }
+        }
+
+        @media (min-width: 1200px) and (max-width: 1499px) {
+            .auto-clear .col-lg-1:nth-child(12n+1) {
+                clear: left;
+            }
+
+            .auto-clear .col-lg-2:nth-child(6n+1) {
+                clear: left;
+            }
+
+            .auto-clear .col-lg-15:nth-child(5n+1) {
+                clear: left;
+            }
+
+            .auto-clear .col-lg-3:nth-child(4n+1) {
+                clear: left;
+            }
+
+            .auto-clear .col-lg-4:nth-child(3n+1) {
+                clear: left;
+            }
+
+            .auto-clear .col-lg-6:nth-child(odd) {
+                clear: left;
+            }
+        }
+
+        @media (min-width: 992px) and (max-width: 1199px) {
+            .auto-clear .col-md-1:nth-child(12n+1) {
+                clear: left;
+            }
+
+            .auto-clear .col-md-2:nth-child(6n+1) {
+                clear: left;
+            }
+
+            .auto-clear .col-md-15:nth-child(5n+1) {
+                clear: left;
+            }
+
+            .auto-clear .col-md-3:nth-child(4n+1) {
+                clear: left;
+            }
+
+            .auto-clear .col-md-4:nth-child(3n+1) {
+                clear: left;
+            }
+
+            .auto-clear .col-md-6:nth-child(odd) {
+                clear: left;
+            }
+        }
+
+        @media (min-width: 768px) and (max-width: 991px) {
+            .auto-clear .col-sm-1:nth-child(12n+1) {
+                clear: left;
+            }
+
+            .auto-clear .col-sm-2:nth-child(6n+1) {
+                clear: left;
+            }
+
+            .auto-clear .col-sm-15:nth-child(5n+1) {
+                clear: left;
+            }
+
+            .auto-clear .col-sm-3:nth-child(4n+1) {
+                clear: left;
+            }
+
+            .auto-clear .col-sm-4:nth-child(3n+1) {
+                clear: left;
+            }
+
+            .auto-clear .col-sm-6:nth-child(odd) {
+                clear: left;
+            }
+        }
+
+        @media (min-width: 480px) and (max-width: 767px) {
+            .auto-clear .col-xs-1:nth-child(12n+1) {
+                clear: left;
+            }
+
+            .auto-clear .col-xs-2:nth-child(6n+1) {
+                clear: left;
+            }
+
+            .auto-clear .col-xs-15:nth-child(5n+1) {
+                clear: left;
+            }
+
+            .auto-clear .col-xs-3:nth-child(4n+1) {
+                clear: left;
+            }
+
+            .auto-clear .col-xs-4:nth-child(3n+1) {
+                clear: left;
+            }
+
+            .auto-clear .col-xs-6:nth-child(odd) {
+                clear: left;
+            }
+        }
+
+        @media (max-width: 479px) {
+            .auto-clear .col-ts-1:nth-child(12n+1) {
+                clear: left;
+            }
+
+            .auto-clear .col-ts-2:nth-child(6n+1) {
+                clear: left;
+            }
+
+            .auto-clear .col-ts-15:nth-child(5n+1) {
+                clear: left;
+            }
+
+            .auto-clear .col-ts-3:nth-child(4n+1) {
+                clear: left;
+            }
+
+            .auto-clear .col-ts-4:nth-child(3n+1) {
+                clear: left;
+            }
+
+            .auto-clear .col-ts-6:nth-child(odd) {
+                clear: left;
+            }
+        }
+
+        /*-------------------Custom Bostrap Colum > 1500px---------------------*/
+        @media (min-width: 1500px) {
+            .col-bg-1,
+            .col-bg-10,
+            .col-bg-11,
+            .col-bg-12,
+            .col-bg-2,
+            .col-bg-3,
+            .col-bg-4,
+            .col-bg-5,
+            .col-bg-6,
+            .col-bg-7,
+            .col-bg-8,
+            .col-bg-9 {
+                position: relative;
+                min-height: 1px;
+                padding-right: 15px;
+                padding-left: 15px
+            }
+
+            .col-bg-1,
+            .col-bg-2,
+            .col-bg-3,
+            .col-bg-4,
+            .col-bg-5,
+            .col-bg-6,
+            .col-bg-7,
+            .col-bg-8,
+            .col-bg-9,
+            .col-bg-10,
+            .col-bg-11 {
+                float: left;
+            }
+
+            .col-bg-12 {
+                width: 100%;
+            }
+
+            .col-bg-11 {
+                width: 91.66666667%;
+            }
+
+            .col-bg-10 {
+                width: 83.33333333%;
+            }
+
+            .col-bg-9 {
+                width: 75%;
+            }
+
+            .col-bg-8 {
+                width: 66.66666667%;
+            }
+
+            .col-bg-7 {
+                width: 58.33333333%;
+            }
+
+            .col-bg-6 {
+                width: 50%;
+            }
+
+            .col-bg-5 {
+                width: 41.66666667%;
+            }
+
+            .col-bg-4 {
+                width: 33.33333333%;
+            }
+
+            .col-bg-3 {
+                width: 25%;
+            }
+
+            .col-bg-2 {
+                width: 16.66666667%;
+            }
+
+            .col-bg-1 {
+                width: 8.33333333%;
+            }
+        }
+
+        /*-------------------Custom Bostrap Colum < 480px----------------------*/
+        @media (max-width: 480px) {
+            .col-ts-1,
+            .col-ts-10,
+            .col-ts-11,
+            .col-ts-12,
+            .col-ts-2,
+            .col-ts-3,
+            .col-ts-4,
+            .col-ts-5,
+            .col-ts-6,
+            .col-ts-7,
+            .col-ts-8,
+            .col-ts-9 {
+                position: relative;
+                min-height: 1px;
+                padding-right: 15px;
+                padding-left: 15px;
+            }
+
+            .col-ts-1,
+            .col-ts-2,
+            .col-ts-3,
+            .col-ts-4,
+            .col-ts-5,
+            .col-ts-6,
+            .col-ts-7,
+            .col-ts-8,
+            .col-ts-9,
+            .col-ts-10,
+            .col-ts-11 {
+                float: left;
+            }
+
+            .col-ts-12 {
+                width: 100%;
+            }
+
+            .col-ts-11 {
+                width: 91.66666667%;
+            }
+
+            .col-ts-10 {
+                width: 83.33333333%;
+            }
+
+            .col-ts-9 {
+                width: 75%;
+            }
+
+            .col-ts-8 {
+                width: 66.66666667%;
+            }
+
+            .col-ts-7 {
+                width: 58.33333333%;
+            }
+
+            .col-ts-6 {
+                width: 50%;
+            }
+
+            .col-ts-5 {
+                width: 41.66666667%;
+            }
+
+            .col-ts-4 {
+                width: 33.33333333%;
+            }
+
+            .col-ts-3 {
+                width: 25%;
+            }
+
+            .col-ts-2 {
+                width: 16.66666667%;
+            }
+
+            .col-ts-1 {
+                width: 8.33333333%;
+            }
+
+            .col-ts-pull-12 {
+                right: 100%;
+            }
+
+            .col-ts-pull-11 {
+                right: 91.66666667%;
+            }
+
+            .col-ts-pull-10 {
+                right: 83.33333333%;
+            }
+
+            .col-ts-pull-9 {
+                right: 75%;
+            }
+
+            .col-ts-pull-8 {
+                right: 66.66666667%;
+            }
+
+            .col-ts-pull-7 {
+                right: 58.33333333%;
+            }
+
+            .col-ts-pull-6 {
+                right: 50%;
+            }
+
+            .col-ts-pull-5 {
+                right: 41.66666667%;
+            }
+
+            .col-ts-pull-4 {
+                right: 33.33333333%;
+            }
+
+            .col-ts-pull-3 {
+                right: 25%;
+            }
+
+            .col-ts-pull-2 {
+                right: 16.66666667%;
+            }
+
+            .col-ts-pull-1 {
+                right: 8.33333333%;
+            }
+
+            .col-ts-pull-0 {
+                right: auto;
+            }
+
+            .col-ts-push-12 {
+                left: 100%;
+            }
+
+            .col-ts-push-11 {
+                left: 91.66666667%;
+            }
+
+            .col-ts-push-10 {
+                left: 83.33333333%;
+            }
+
+            .col-ts-push-9 {
+                left: 75%;
+            }
+
+            .col-ts-push-8 {
+                left: 66.66666667%;
+            }
+
+            .col-ts-push-7 {
+                left: 58.33333333%;
+            }
+
+            .col-ts-push-6 {
+                left: 50%;
+            }
+
+            .col-ts-push-5 {
+                left: 41.66666667%;
+            }
+
+            .col-ts-push-4 {
+                left: 33.33333333%;
+            }
+
+            .col-ts-push-3 {
+                left: 25%;
+            }
+
+            .col-ts-push-2 {
+                left: 16.66666667%;
+            }
+
+            .col-ts-push-1 {
+                left: 8.33333333%;
+            }
+
+            .col-ts-push-0 {
+                left: auto;
+            }
+
+            .col-ts-offset-12 {
+                margin-left: 100%;
+            }
+
+            .col-ts-offset-11 {
+                margin-left: 91.66666667%;
+            }
+
+            .col-ts-offset-10 {
+                margin-left: 83.33333333%;
+            }
+
+            .col-ts-offset-9 {
+                margin-left: 75%;
+            }
+
+            .col-ts-offset-8 {
+                margin-left: 66.66666667%;
+            }
+
+            .col-ts-offset-7 {
+                margin-left: 58.33333333%;
+            }
+
+            .col-ts-offset-6 {
+                margin-left: 50%;
+            }
+
+            .col-ts-offset-5 {
+                margin-left: 41.66666667%;
+            }
+
+            .col-ts-offset-4 {
+                margin-left: 33.33333333%;
+            }
+
+            .col-ts-offset-3 {
+                margin-left: 25%;
+            }
+
+            .col-ts-offset-2 {
+                margin-left: 16.66666667%;
+            }
+
+            .col-ts-offset-1 {
+                margin-left: 8.33333333%;
+            }
+
+            .col-ts-offset-0 {
+                margin-left: 0;
+            }
+
+            .hidden-ts {
+                display: none;
+            }
+        }
+
+        /*---------------------Custom Bostrap 5 columns------------------------*/
+        .col-bg-15,
+        .col-bg-45,
+        .col-lg-15,
+        .col-lg-45,
+        .col-md-15,
+        .col-md-45,
+        .col-sm-15,
+        .col-sm-45,
+        .col-xs-15,
+        .col-xs-45,
+        .col-ts-15,
+        .col-ts-45 {
+            position: relative;
+            min-height: 1px;
+            padding-right: 15px;
+            padding-left: 15px
+        }
+
+        .col-ts-15,
+        .col-ts-45 {
+            float: left;
+        }
+
+        .col-ts-15 {
+            width: 20%;
+        }
+
+        .col-ts-45 {
+            width: 80%;
+        }
+
+        @media (min-width: 480px) {
+            .col-xs-15,
+            .col-xs-45 {
+                float: left;
+            }
+
+            .col-xs-15 {
+                width: 20%;
+            }
+
+            .col-xs-45 {
+                width: 80%;
+            }
+        }
+
+        @media (min-width: 768px) {
+            .col-sm-15,
+            .col-sm-45 {
+                float: left;
+            }
+
+            .col-sm-15 {
+                width: 20%;
+            }
+
+            .col-sm-45 {
+                width: 80%;
+            }
+        }
+
+        @media (min-width: 992px) {
+            .col-md-15,
+            .col-md-45 {
+                float: left;
+            }
+
+            .col-md-15 {
+                width: 20%;
+            }
+
+            .col-md-45 {
+                width: 80%;
+            }
+        }
+
+        @media (min-width: 1200px) {
+            .col-lg-15,
+            .col-lg-45 {
+                float: left;
+            }
+
+            .col-lg-15 {
+                width: 20%;
+            }
+
+            .col-lg-45 {
+                width: 80%;
+            }
+        }
+
+        @media (min-width: 1500px) {
+            .col-bg-15,
+            .col-bg-45 {
+                float: left;
+            }
+
+            .col-bg-15 {
+                width: 20%;
+            }
+
+            .col-bg-45 {
+                width: 80%;
+            }
+        }
+
+        /*rows-space*/
+        .rows-space-0 {
+            margin-bottom: 0;
+        }
+
+        .rows-space-5 {
+            margin-bottom: 5px;
+        }
+
+        .rows-space-10 {
+            margin-bottom: 10px;
+        }
+
+        .rows-space-15 {
+            margin-bottom: 15px;
+        }
+
+        .rows-space-20 {
+            margin-bottom: 20px;
+        }
+
+        .rows-space-25 {
+            margin-bottom: 25px;
+        }
+
+        .rows-space-30 {
+            margin-bottom: 30px;
+        }
+
+        .rows-space-35 {
+            margin-bottom: 35px;
+        }
+
+        .rows-space-40 {
+            margin-bottom: 40px;
+        }
+
+        .rows-space-45 {
+            margin-bottom: 45px;
+        }
+
+        .rows-space-50 {
+            margin-bottom: 50px;
+        }
+
+        .rows-space-55 {
+            margin-bottom: 55px;
+        }
+
+        .rows-space-60 {
+            margin-bottom: 60px;
+        }
+
+        .rows-space-65 {
+            margin-bottom: 65px;
+        }
+
+        .rows-space-70 {
+            margin-bottom: 70px;
+        }
+
+        .rows-space-75 {
+            margin-bottom: 75px;
+        }
+
+        .rows-space-80 {
+            margin-bottom: 80px;
+        }
+
+        .rows-space-85 {
+            margin-bottom: 85px;
+        }
+
+        .rows-space-90 {
+            margin-bottom: 90px;
+        }
+
+        .rows-space-85 {
+            margin-bottom: 85px;
+        }
+
+        .rows-space-100 {
+            margin-bottom: 100px;
+        }
+
+        .row10 {
+            margin-left: -10px;
+            margin-right: -10px;
+        }
+
+        .row10::before, .row10::after {
+            display: table;
+            content: "";
+        }
+
+        .row10::after {
+            clear: both;
+        }
+
+        .no-padding {
+            padding-left: 0 !important;
+            padding-right: 0 !important;
+        }
+
+        /*----------------------------AUTO CLEAR--------------------------------*/
+        @media (min-width: 1200px) {
+            .auto-clear .vc_col-lg-1:nth-child(12n+1),
+            .auto-clear .vc_col-lg-2:nth-child(6n+1),
+            .auto-clear .vc_col-lg-15:nth-child(5n+1),
+            .auto-clear .vc_col-lg-3:nth-child(4n+1),
+            .auto-clear .vc_col-lg-4:nth-child(3n+1),
+            .auto-clear .vc_col-lg-6:nth-child(odd) {
+                clear: both;
+            }
+        }
+
+        @media (min-width: 1500px) {
+            .auto-clear .col-bg-1:nth-child(12n+1),
+            .auto-clear .col-bg-2:nth-child(6n+1),
+            .auto-clear .col-bg-15:nth-child(5n+1),
+            .auto-clear .col-bg-3:nth-child(4n+1),
+            .auto-clear .col-bg-4:nth-child(3n+1),
+            .auto-clear .col-bg-6:nth-child(odd) {
+                clear: both;
+            }
+        }
+
+        @media (min-width: 1200px) and (max-width: 1499px) {
+            .auto-clear .col-lg-1:nth-child(12n+1),
+            .auto-clear .col-lg-2:nth-child(6n+1),
+            .auto-clear .col-lg-15:nth-child(5n+1),
+            .auto-clear .col-lg-3:nth-child(4n+1),
+            .auto-clear .col-lg-4:nth-child(3n+1),
+            .auto-clear .col-lg-6:nth-child(odd) {
+                clear: both;
+            }
+        }
+
+        @media (min-width: 992px) and (max-width: 1199px) {
+            .auto-clear .vc_col-md-1:nth-child(12n+1),
+            .auto-clear .vc_col-md-2:nth-child(6n+1),
+            .auto-clear .vc_col-md-15:nth-child(5n+1),
+            .auto-clear .vc_col-md-3:nth-child(4n+1),
+            .auto-clear .vc_col-md-4:nth-child(3n+1),
+            .auto-clear .vc_col-md-6:nth-child(odd),
+            .auto-clear .col-md-1:nth-child(12n+1),
+            .auto-clear .col-md-2:nth-child(6n+1),
+            .auto-clear .col-md-15:nth-child(5n+1),
+            .auto-clear .col-md-3:nth-child(4n+1),
+            .auto-clear .col-md-4:nth-child(3n+1),
+            .auto-clear .col-md-6:nth-child(odd) {
+                clear: both;
+            }
+        }
+
+        @media (min-width: 768px) and (max-width: 991px) {
+            .auto-clear .vc_col-sm-1:nth-child(12n+1),
+            .auto-clear .vc_col-sm-2:nth-child(6n+1),
+            .auto-clear .vc_col-sm-15:nth-child(5n+1),
+            .auto-clear .vc_col-sm-3:nth-child(4n+1),
+            .auto-clear .vc_col-sm-4:nth-child(3n+1),
+            .auto-clear .vc_col-sm-6:nth-child(odd),
+            .auto-clear .col-sm-1:nth-child(12n+1),
+            .auto-clear .col-sm-2:nth-child(6n+1),
+            .auto-clear .col-sm-15:nth-child(5n+1),
+            .auto-clear .col-sm-3:nth-child(4n+1),
+            .auto-clear .col-sm-4:nth-child(3n+1),
+            .auto-clear .col-sm-6:nth-child(odd) {
+                clear: both;
+            }
+        }
+
+        @media (min-width: 480px) and (max-width: 767px) {
+            .auto-clear .col-xs-1:nth-child(12n+1),
+            .auto-clear .col-xs-2:nth-child(6n+1),
+            .auto-clear .col-xs-15:nth-child(5n+1),
+            .auto-clear .col-xs-3:nth-child(4n+1),
+            .auto-clear .col-xs-4:nth-child(3n+1),
+            .auto-clear .col-xs-6:nth-child(odd) {
+                clear: both;
+            }
+        }
+
+        @media (max-width: 479px) {
+            .auto-clear .col-ts-1:nth-child(12n+1),
+            .auto-clear .col-ts-2:nth-child(6n+1),
+            .auto-clear .col-ts-15:nth-child(5n+1),
+            .auto-clear .col-ts-3:nth-child(4n+1),
+            .auto-clear .col-ts-4:nth-child(3n+1),
+            .auto-clear .col-ts-6:nth-child(odd) {
+                clear: both;
+            }
+        }
+
+        @media (max-width: 767px) {
+            .auto-clear .vc_col-xs-1:nth-child(12n+1),
+            .auto-clear .vc_col-xs-2:nth-child(6n+1),
+            .auto-clear .vc_col-xs-15:nth-child(5n+1),
+            .auto-clear .vc_col-xs-3:nth-child(4n+1),
+            .auto-clear .vc_col-xs-4:nth-child(3n+1),
+            .auto-clear .vc_col-xs-6:nth-child(odd) {
+                clear: both;
+            }
+        }
+
+        /*-----------------------CUSTOM COL > 1500---------------------------*/
+        @media (min-width: 1500px) {
+            .col-bg-1,
+            .col-bg-10,
+            .col-bg-11,
+            .col-bg-12,
+            .col-bg-2,
+            .col-bg-3,
+            .col-bg-4,
+            .col-bg-5,
+            .col-bg-6,
+            .col-bg-7,
+            .col-bg-8,
+            .col-bg-9 {
+                position: relative;
+                min-height: 1px;
+                padding-right: 15px;
+                padding-left: 15px
+            }
+
+            .col-bg-1,
+            .col-bg-2,
+            .col-bg-3,
+            .col-bg-4,
+            .col-bg-5,
+            .col-bg-6,
+            .col-bg-7,
+            .col-bg-8,
+            .col-bg-9,
+            .col-bg-10,
+            .col-bg-11 {
+                float: left;
+            }
+
+            .col-bg-12 {
+                width: 100%;
+            }
+
+            .col-bg-11 {
+                width: 91.66666667%;
+            }
+
+            .col-bg-10 {
+                width: 83.33333333%;
+            }
+
+            .col-bg-9 {
+                width: 75%;
+            }
+
+            .col-bg-8 {
+                width: 66.66666667%;
+            }
+
+            .col-bg-7 {
+                width: 58.33333333%;
+            }
+
+            .col-bg-6 {
+                width: 50%;
+            }
+
+            .col-bg-5 {
+                width: 41.66666667%;
+            }
+
+            .col-bg-4 {
+                width: 33.33333333%;
+            }
+
+            .col-bg-3 {
+                width: 25%;
+            }
+
+            .col-bg-2 {
+                width: 16.66666667%;
+            }
+
+            .col-bg-1 {
+                width: 8.33333333%;
+            }
+        }
+
+        /*-----------------------CUSTOM COL < 480---------------------------*/
+        @media (max-width: 479px) {
+            .col-ts-1,
+            .col-ts-10,
+            .col-ts-11,
+            .col-ts-12,
+            .col-ts-2,
+            .col-ts-3,
+            .col-ts-4,
+            .col-ts-5,
+            .col-ts-6,
+            .col-ts-7,
+            .col-ts-8,
+            .col-ts-9 {
+                position: relative;
+                min-height: 1px;
+                padding-right: 15px;
+                padding-left: 15px;
+            }
+
+            .col-ts-1,
+            .col-ts-2,
+            .col-ts-3,
+            .col-ts-4,
+            .col-ts-5,
+            .col-ts-6,
+            .col-ts-7,
+            .col-ts-8,
+            .col-ts-9,
+            .col-ts-10,
+            .col-ts-11 {
+                float: left;
+            }
+
+            .col-ts-12 {
+                width: 100%;
+            }
+
+            .col-ts-11 {
+                width: 91.66666667%;
+            }
+
+            .col-ts-10 {
+                width: 83.33333333%;
+            }
+
+            .col-ts-9 {
+                width: 75%;
+            }
+
+            .col-ts-8 {
+                width: 66.66666667%;
+            }
+
+            .col-ts-7 {
+                width: 58.33333333%;
+            }
+
+            .col-ts-6 {
+                width: 50%;
+            }
+
+            .col-ts-5 {
+                width: 41.66666667%;
+            }
+
+            .col-ts-4 {
+                width: 33.33333333%;
+            }
+
+            .col-ts-3 {
+                width: 25%;
+            }
+
+            .col-ts-2 {
+                width: 16.66666667%;
+            }
+
+            .col-ts-1 {
+                width: 8.33333333%;
+            }
+        }
+
+        /*-----------------------CUSTOM 5 COLUMNS---------------------------*/
+        .col-bg-15,
+        .col-bg-25,
+        .col-bg-35,
+        .col-bg-45,
+        .col-lg-15,
+        .col-lg-25,
+        .col-lg-35,
+        .col-lg-45,
+        .col-md-15,
+        .col-md-25,
+        .col-md-35,
+        .col-md-45,
+        .col-sm-15,
+        .col-sm-25,
+        .col-sm-35,
+        .col-sm-45,
+        .col-xs-15,
+        .col-xs-25,
+        .col-xs-35,
+        .col-xs-45,
+        .col-ts-15,
+        .col-ts-25,
+        .col-ts-35,
+        .col-ts-45 {
+            position: relative;
+            min-height: 1px;
+            padding-right: 15px;
+            padding-left: 15px
+        }
+
+        .col-ts-15,
+        .col-ts-25,
+        .col-ts-35,
+        .col-ts-45 {
+            float: left;
+        }
+
+        .col-ts-15 {
+            width: 20%;
+        }
+
+        .col-ts-25 {
+            width: 40%;
+        }
+
+        .col-ts-35 {
+            width: 60%;
+        }
+
+        .col-ts-45 {
+            width: 80%;
+        }
+
+        @media (min-width: 480px) {
+            .col-xs-15,
+            .col-xs-25,
+            .col-xs-35,
+            .col-xs-45 {
+                float: left;
+            }
+
+            .col-xs-15 {
+                width: 20%;
+            }
+
+            .col-xs-25 {
+                width: 40%;
+            }
+
+            .col-xs-35 {
+                width: 60%;
+            }
+
+            .col-xs-45 {
+                width: 80%;
+            }
+        }
+
+        @media (min-width: 768px) {
+            .col-sm-15,
+            .col-sm-25,
+            .col-sm-35,
+            .col-sm-45 {
+                float: left;
+            }
+
+            .col-sm-15 {
+                width: 20%;
+            }
+
+            .col-sm-25 {
+                width: 40%;
+            }
+
+            .col-sm-35 {
+                width: 60%;
+            }
+
+            .col-sm-45 {
+                width: 80%;
+            }
+        }
+
+        @media (min-width: 992px) {
+            .col-md-15,
+            .col-md-25,
+            .col-md-35,
+            .col-md-45 {
+                float: left;
+            }
+
+            .col-md-15 {
+                width: 20%;
+            }
+
+            .col-md-25 {
+                width: 40%;
+            }
+
+            .col-md-35 {
+                width: 60%;
+            }
+
+            .col-md-45 {
+                width: 80%;
+            }
+        }
+
+        @media (min-width: 1200px) {
+            .col-lg-15,
+            .col-lg-25,
+            .col-lg-35,
+            .col-lg-45 {
+                float: left;
+            }
+
+            .col-lg-15 {
+                width: 20%;
+            }
+
+            .col-lg-25 {
+                width: 40%;
+            }
+
+            .col-lg-35 {
+                width: 60%;
+            }
+
+            .col-lg-45 {
+                width: 80%;
+            }
+        }
+
+        @media (min-width: 1500px) {
+            .col-bg-15,
+            .col-bg-25,
+            .col-bg-35,
+            .col-bg-45 {
+                float: left;
+            }
+
+            .col-bg-15 {
+                width: 20%;
+            }
+
+            .col-bg-25 {
+                width: 40%;
+            }
+
+            .col-bg-35 {
+                width: 60%;
+            }
+
+            .col-bg-45 {
+                width: 80%;
+            }
+        }
+
+        /*---------------------------------CHOSEN------------------------------*/
+        .chosen-container {
+            vertical-align: top;
+            font-size: inherit;
+            line-height: inherit;
+            text-align: left;
+            width: auto !important;
+        }
+
+        .chosen-container-single .chosen-single {
+            padding: 8px 17px;
+            height: auto;
+            border: 1px solid #eee;
+            background: #f6f6f6;
+            box-shadow: none;
+            font-size: 14px;
+            line-height: 24px;
+            color: inherit;
+            border-radius: 14px;
+        }
+
+        .chosen-container-single .chosen-single div b {
+            position: relative;
+            background-image: none !important;
+        }
+
+        .chosen-container-single .chosen-single div b::after {
+            content: "\f107";
+            font-size: 14px;
+            font-weight: 600;
+            color: #aaaaaa;
+            font-family: 'FontAwesome';
+            position: absolute;
+            left: 50%;
+            top: 50%;
+            line-height: normal;
+            margin-left: -4px;
+            margin-top: -7px;
+        }
+
+        .chosen-container-single .chosen-single span {
+            vertical-align: top;
+            margin-right: 17px;
+        }
+
+        .chosen-container-active.chosen-with-drop .chosen-single {
+            border: 1px solid #eee;
+            background: #f6f6f6;
+            box-shadow: none;
+        }
+
+        .chosen-container-single .chosen-drop {
+            top: calc(100% + 1px);
+            left: -1px;
+            clip: auto;
+            border-radius: 0;
+            border: 1px solid #eee;
+            border-top: none;
+            box-shadow: none;
+            width: auto;
+            min-width: 100%;
+            white-space: nowrap;
+            margin: 0;
+            -webkit-transition: all 0.3s ease;
+            -moz-transition: all 0.3s ease;
+            -ms-transition: all 0.3s ease;
+            -o-transition: all 0.3s ease;
+            transition: all 0.3s ease;
+        }
+
+        .chosen-container:not(.chosen-with-drop) .chosen-drop {
+            visibility: hidden;
+            opacity: 0;
+            -webkit-transform: translateY(20px);
+            -moz-transform: translateY(20px);
+            -ms-transform: translateY(20px);
+            -o-transform: translateY(20px);
+            transform: translateY(20px);
+        }
+
+        .chosen-container-single .chosen-drop .chosen-search {
+            display: none;
+        }
+
+        .chosen-container-single .chosen-results {
+            color: #888;
+            padding: 0;
+            margin: 0;
+        }
+
+        .chosen-container .chosen-results li {
+            font-size: 15px;
+            line-height: 18px;
+            padding: 6px 20px;
+            text-transform: capitalize;
+        }
+
+        .chosen-container .chosen-results li.result-selected {
+            background-color: #f6f6f6;
+        }
+
+        .chosen-container .chosen-results li.highlighted {
+            background-image: none;
+            color: inherit;
+            background-color: #f6f6f6;
+        }
+
+        /* -------------------- */
+        /*   custom container   */
+        /* -------------------- */
+        @media (min-width: 1200px) {
+            .container {
+                width: 1200px;
+            }
+        }
+
+        /*border - style*/
+        .mega-menu .border-custom {
+            margin-top: 30px;
+        }
+
+        .border-custom span {
+            width: 100%;
+            border-bottom: 1px solid #e0e0e0;
+            display: inline-block;
+            float: left
+        }
+
+        .breadcrumb {
+            padding: 34px 0 30px;
+            background: #ffffff;
+            margin: 0;
+        }
+
+        .breadcrumb > li {
+            display: inline-block;
+            list-style: none;
+            font-weight: 600;
+            font-size: 14px;
+        }
+
+        .breadcrumb a {
+            color: #888888;
+
+        }
+
+        .breadcrumb > .active {
+            color: #222;
+        }
+
+        .breadcrumb > li + li:before {
+            padding: 0 8px;
+            content: "\f101";
+            font-family: 'FontAwesome';
+            font-weight: 400;
+        }
+
+        .left-sidebar .content-area {
+            float: right;
+        }
+
+        .content-blog .custom_blog_title {
+            margin-top: -8px;
+        }
+
+        .main-content-blog.right-sidebar .content-blog::after {
+            right: -15px;
+        }
+
+        .main-content-blog.left-sidebar .content-blog::after {
+            left: -15px;
+        }
+
+        .main-content-blog.no-sidebar .content-blog::after {
+            display: none;
+        }
+
+        .custom_blog_title {
+            font-size: 28px;
+            font-family: inherit;
+            letter-spacing: 0;
+            font-weight: 700;
+            color: #222;
+            margin-bottom: 40px;
+            text-transform: capitalize;
+        }
+
+        .blog-articles > .custom_blog_title,
+        .comments-area > .custom_blog_title {
+            font-size: 22px;
+        }
+
+        .widget {
+            margin-bottom: 40px;
+        }
+
+        .widget:last-child {
+            margin-bottom: 0;
+        }
+
+        .widget .widgettitle {
+            font-size: 16px;
+            text-transform: uppercase;
+            font-weight: 600;
+            padding-bottom: 10px;
+            margin-bottom: 30px;
+            position: relative;
+            margin-top: -3px;
+            z-index: 1;
+            border-bottom: 1px solid #e8e8e8;
+        }
+
+        .widget .widgettitle::before {
+            content: '';
+            position: absolute;
+            left: 0;
+            bottom: -2px;
+            width: 50px;
+            border-bottom: 1px solid #252531;
+        }
+
+        .widget ul, .widget ol {
+            padding: 0;
+            margin: 0;
+        }
+
+        .widget li {
+            list-style: none;
+            line-height: 28px;
+        }
+
+        .widget a {
+            color: #555555;
+        }
+
+        .sidebar input[type="checkbox"] {
+            display: none;
+        }
+
+        .sidebar .label-text {
+            cursor: pointer;
+            font-size: 14px;
+            color: #555;
+            margin: 0;
+            padding-left: 25px;
+            position: relative;
+            font-weight: normal;
+        }
+
+        .sidebar input[type="checkbox"] + label::after {
+            position: absolute;
+            z-index: 1;
+            content: "";
+            left: 0;
+            top: 7px;
+            width: 15px;
+            height: 14px;
+            border: solid 1px #eeeeee;
+        }
+
+        .sidebar input[type="checkbox"]:checked + label::before {
+            font-family: 'FontAwesome';
+            content: "\f00c";
+            display: inline-block;
+            top: 7px;
+            left: 0;
+            width: 15px;
+            height: 14px;
+            text-align: center;
+            font-size: 10px;
+            color: #222;
+            position: absolute;
+            z-index: 2;
+            padding: 0;
+            line-height: 14px;
+        }
+
+        .widget-socials .social-list {
+            overflow: hidden;
+        }
+
+        .widget-socials .social-list .social-item {
+            font-size: 23px;
+            color: #222;
+            display: inline-block;
+            float: left;
+            padding: 0 15px;
+        }
+
+        .widget-socials .social-list .social-item:first-child {
+            padding-left: 0;
+        }
+
+        .widget-socials .social-list .social-item:last-child {
+            padding-right: 0;
+        }
+
+        .widget-post .widget-post-item {
+            overflow: hidden;
+            margin-bottom: 20px;
+        }
+
+        .widget-post .widget-post-item:last-child {
+            margin-bottom: 0;
+        }
+
+        .widget-post .widget-post-item .thumb-blog {
+            width: 100px;
+            float: left;
+        }
+
+        .widget-post .widget-post-item .post-content {
+            overflow: hidden;
+            padding-left: 10px;
+        }
+
+        .widget-post .widget-post-item .cat {
+            font-size: 11px;
+            font-weight: 700;
+            text-transform: uppercase;
+            color: #aaaaaa;
+            line-height: normal;
+            margin-top: -3px;
+        }
+
+        .widget-post .widget-post-item .cat a:not(:hover) {
+            color: inherit;
+        }
+
+        .widget-post .widget-post-item .post-title {
+            font-size: 14px;
+            font-weight: 600;
+            margin-bottom: 0;
+            line-height: 20px;
+            margin-top: 6px;
+        }
+
+        .widget-post .widget-post-item .post-title a {
+            color: #333333;
+        }
+
+        .widget-post .widget-post-item .post-title span {
+            color: #aaaaaa;
+        }
+
+        .widget-tags .tagcloud {
+            overflow: hidden;
+            margin: 0;
+            padding: 0;
+            width: 100%;
+        }
+
+        .widget-tags .tag-cloud-link {
+            color: #888888;
+            margin-right: 10px;
+            margin-top: 5px;
+            margin-bottom: 5px;
+            float: left;
+            line-height: 24px;
+            text-transform: capitalize;
+        }
+
+        .widget-tags .tag-cloud-link a {
+            color: #888888;
+        }
+
+        .widget .view-all:not(:hover) {
+            color: #aaa;
+            text-decoration: underline;
+        }
+
+        .woof_Widget .widget:last-child {
+            border-bottom: 0;
+            margin-bottom: 0;
+            border-radius: 8px;
+        }
+
+        /*sidebar shop*/
+        .woof_Widget {
+            border: 1px solid #F1F1F1;
+            padding: 25px;
+            border-radius: 8px;
+        }
+
+        .widget_filter_price .ui-widget-content {
+            background: #ddd;
+            border-radius: 2px;
+            height: 4px;
+            border: none;
+        }
+
+        .widget_filter_price .ui-slider .ui-slider-range {
+            background: #252531;
+        }
+
+        .widget_filter_price .ui-slider .ui-slider-handle {
+            width: 16px;
+            height: 16px;
+            border: none;
+            top: -6px;
+            border-radius: 1em;
+            cursor: ew-resize;
+            margin-left: -0.5em;
+            outline: 0 none;
+            position: absolute;
+            z-index: 2;
+            background: #252531;
+        }
+
+        .widget_filter_price .price-slider-amount {
+            margin-top: 25px;
+            font-size: 13px;
+            color: #666666;
+            overflow: hidden;
+        }
+
+        .woof_Widget .price-slider-amount span {
+            display: inline-block;
+            font-size: 15px;
+            color: #222222;
+            border: 1px solid #eeeeee;
+            padding: 4px 10px;
+            font-weight: 600;
+        }
+
+        .woof_Widget .price-slider-amount span:first-child {
+            margin-right: 10px;
+        }
+
+        .widget_filter_size li {
+            display: inline-block;
+            min-width: 54px;
+            line-height: 26px;
+            height: 30px;
+            border: 1px solid #eeeeee;
+            text-align: center;
+            margin-right: 10px;
+            margin-bottom: 15px;
+            border-radius: 28px;
+        }
+
+        .widget_filter_size li a {
+            color: #222;
+            font-weight: 700;
+            text-transform: uppercase;
+        }
+
+        .widget_filter_size li.active a, .widget_filter_size li:hover a {
+            color: #fff;
+        }
+
+        .widget-color .list-color a {
+            display: inline-block;
+            height: 27px;
+            margin-bottom: 3px;
+            margin-right: 10px;
+            position: relative;
+            text-align: center;
+            width: 26px;
+            border-radius: 50%;
+            line-height: 27px;
+        }
+
+        .widget-color .list-color .color1 {
+            border: 1px solid #eeeeee;
+        }
+
+        .widget-color .list-color .color2 {
+            background: #222222;
+        }
+
+        .widget-color .list-color .color3 {
+            background: #4a5365;
+        }
+
+        .widget-color .list-color .color4 {
+            background: #84664d;
+        }
+
+        .widget-color .list-color .color5 {
+            background: #d27d53;
+        }
+
+        .widget-color .list-color .color6 {
+            background: #719271;
+        }
+
+        .widget-color .list-color .color7 {
+            background: #5f8ea9;
+        }
+
+        .list-color a.active::before, .list-color a:hover::before {
+            color: #fff;
+            content: "\f00c";
+            display: inline-block;
+            font-family: FontAwesome;
+            font-size: 12px;
+            left: 0;
+            position: absolute;
+            width: 100%;
+        }
+
+        .list-color .colo1.active::before, .list-color .colo1:hover::before {
+            color: #222222;
+        }
+
+        .tag-cloud-link a:hover, .tag-cloud-link.active a {
+            color: #111111;
+        }
+
+        /*---------FORM control shop--------------*/
+        .shop-top-control {
+            border: 1px solid #F1F1F1;
+            border-radius: 8px;
+            padding: 15px 0;
+            margin-bottom: 40px;
+            display: table;
+            width: 100%;
+            font-weight: 600;
+            color: #888888;
+            position: relative;
+        }
+
+        .shop-top-control .select-form, .shop-top-control .grid-view-mode {
+            padding: 0 15px;
+            border-right: 1px solid #F1F1F1;
+            display: table-cell;
+            vertical-align: middle;
+        }
+
+        .shop-top-control .select-form {
+            position: relative;
+            z-index: 999;
+            line-height: 28px;
+        }
+
+        .shop-top-control .chosen-container-single .chosen-single {
+            height: 28px;
+            line-height: 28px;
+            border: 1px solid #eeeeee;
+            padding: 0px 10px;
+            max-width: 100%;
+            background: none;
+            box-shadow: none;
+            width: 154px;
+            color: #222;
+        }
+
+        .shop-top-control .chosen-container-single .chosen-single span {
+            font-size: 14px;
+            line-height: 26px;
+            margin-right: 0;
+        }
+
+        .shop-top-control .chosen-container .chosen-results li.highlighted {
+            background-image: none;
+            background-color: #222222;
+        }
+
+        .shop-top-control .grid-view-mode {
+            border-right: none;
+            width: 125px;
+            padding: 0;
+        }
+
+        .grid-view-mode .inner {
+            display: table;
+            margin: 0 auto;
+        }
+
+        .grid-view-mode .modes-mode {
+            display: inline-block;
+            width: 20px;
+            padding: 6px 0;
+            overflow: hidden;
+            float: left;
+            margin: 0 5px;
+        }
+
+        .grid-view-mode .modes-mode span {
+            display: block;
+            height: 6px;
+            background-color: #a5a5a5;
+            border-radius: 6px;
+            margin-bottom: 4px;
+        }
+
+        .grid-view-mode .modes-mode.mode-grid span {
+            width: 7px;
+            margin-right: 3px;
+            float: left;
+            border-radius: 7px;
+            margin-bottom: 4px;
+        }
+
+        .grid-view-mode .modes-mode.active > span, .grid-view-mode .modes-mode:hover span {
+            background-color: #252531;
+        }
+
+        /*list-products*/
+        ul.list-products {
+            padding: 0;
+            margin-top: 0;
+            margin-bottom: 0;
+        }
+
+        /*product item*/
+        .product-item {
+            list-style: none;
+            margin-bottom: 30px;
+        }
+
+        .product-item .product-inner {
+            border: 1px solid #F1F1F1;
+            border-radius: 8px;
+            padding: 20px;
+            overflow: hidden;
+            position: relative;
+            padding-bottom: 30px;
+            background-color: #f8f8f8;
+            transition-duration: 0.7s;
+        }
+
+        .product-item:hover .product-inner {
+            z-index: 2;
+        }
+
+        .product-item:hover .product-info {
+            opacity: 0;
+        }
+
+        .product-item .product-top {
+            overflow: hidden;
+            z-index: 1;
+            position: absolute;
+            left: 20px;
+            top: 20px;
+            right: 20px;
+            padding: 7px;
+        }
+
+        .product-item .flash {
+            font-size: 12px;
+            font-weight: 700;
+            text-transform: uppercase;
+            display: inline-block;
+            float: left;
+            line-height: 16px;
+            height: 22px;
+            padding: 3px 10px;
+            background-color: #b19777;
+            color: #fff;
+            border-radius: 24px;
+        }
+
+        .product-item .yith-wcwl-add-to-wishlist {
+            display: inline-block;
+            float: right;
+            margin: 0;
+        }
+
+        .product-item .yith-wcwl-add-to-wishlist > div {
+            display: inline-block;
+            float: left;
+            margin: 0;
+            position: relative;
+            font-size: 0;
+            line-height: normal;
+        }
+
+        .product-item .yith-wcwl-add-to-wishlist > div a {
+            display: inline-block;
+            margin-right: 1px;
+        }
+
+        .product-item .yith-wcwl-add-to-wishlist > div a i {
+            font-size: 18px;
+            color: #cccccc;
+            line-height: normal;
+        }
+
+        .product-item .yith-wcwl-add-to-wishlist > div a:hover::before {
+        {#content: "\f004";#}
+        }
+
+        .product-item .product-thumb {
+            margin-bottom: 15px;
+            position: relative;
+            text-align: center;
+        }
+
+        .product-item .button.quick-wiew-button {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            width: 50px;
+            height: 50px;
+            line-height: 61px;
+            padding: 0;
+            font-size: 0;
+            background-color: rgba(255, 255, 255, 0.8);
+            color: #222;
+            border-radius: 100%;
+            z-index: 10;
+            font-weight: 400;
+            text-align: center;
+            opacity: 0;
+            visibility: hidden;
+            transform: translate(-50%, -50%);
+            -webkit-transition: all 0.4s ease 0s;
+            -moz-transition: all 0.4s ease 0s;
+            -o-transition: all 0.4s ease 0s;
+            transition: all 0.4s ease 0s;
+        }
+
+        .product-item:hover .button.quick-wiew-button {
+            opacity: 1;
+            visibility: visible;
+        }
+
+        .product-item .button.quick-wiew-button i {
+            font-size: 18px;
+        }
+
+        {#.product-item .button.quick-wiew-button:hover {#}
+        {#    color: #fff;#}
+        {
+        #}#}
+
+        .product-item .product-info {
+            text-align: center;
+            position: relative;
+        }
+
+        .product-item .product-name {
+            font-size: 16px;
+            margin: 0;
+            margin-bottom: 4px;
+            font-weight: 600;
+            letter-spacing: 0;
+            font-family: inherit;
+        }
+
+        .product-item .product-name a {
+            color: #333333;
+        }
+
+        .product-item .loop-form-add-to-cart {
+            position: absolute;
+            left: 0;
+            bottom: -200px;
+            width: 100%;
+            background-color: #f8f8f8;
+            opacity: 0;
+            visibility: hidden;
+            -webkit-transition: .35s;
+            -o-transition: .35s;
+            transition: .35s;
+            padding: 12px 20px 0 20px;
+            text-align: center;
+            z-index: 10;
+        }
+
+        .product-item:hover .loop-form-add-to-cart {
+            bottom: 15px;
+            opacity: 1;
+            visibility: visible;
+        }
+
+        .product-item .quantity {
+            vertical-align: middle;
+            margin-bottom: 20px;
+            margin-right: 8px;
+            display: none;
+        }
+
+        .product-item .loop-form-add-to-cart .button {
+            border: 1px solid #252531;
+            background-color: #fff;
+            color: #333333;
+            height: 42px;
+            line-height: 38px;
+            padding: 0 19px;
+            vertical-align: middle;
+            margin-bottom: 20px;
+            width: 100%;
+        }
+
+        .product-item .loop-form-add-to-cart .button:hover {
+            color: #fff;
+            background-color: #b19777;
+            border-color: #b19777;
+        }
+
+        .product-item .variations {
+            position: relative;
+            color: #aaaaaa;
+            font-size: 16px;
+            width: 100%;
+            display: none;
+            border-top: 1px #efefef solid;
+        }
+
+        .product-item.product-type-variable .variations {
+            display: none;
+        }
+
+        .product-item .variations .variation {
+            padding: 8px 0;
+            padding-bottom: 10px;
+            overflow: hidden;
+            display: table;
+            margin: 0 auto;
+        }
+
+        .product-item .variations .variation .variation-label,
+        .product-item .variations .variation .variation-value {
+            display: inline-block;
+            float: left;
+            margin: 0;
+            font-weight: normal;
+        }
+
+        .product-item .variations .variation .variation-value a {
+            color: #333;
+            margin-left: 10px;
+        }
+
+        .product-item .variations .variation .variation-value a.active {
+            font-weight: 700;
+        }
+
+        .product-item .variations .variation .variation-value a.over {
+            color: #aaaaaa;
+            text-decoration: line-through;
+        }
+
+        .shop-grid-content.full-width .shop-top-control .select-item {
+            width: 23.2%;
+        }
+
+        /*product item style2*/
+        .product-item.style2 .product-inner {
+            display: table;
+            padding-bottom: 20px;
+        }
+
+        .product-item.style2 .product-thumb {
+            width: 270px;
+            margin-bottom: 0;
+            display: table-cell;
+            vertical-align: middle
+        }
+
+        .product-item.style2 .product-top {
+            margin-bottom: 0;
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+        }
+
+        .product-item.style2 .yith-wcwl-add-to-wishlist {
+            display: none;
+        }
+
+        .product-item.style2 .product-info {
+            text-align: left;
+            padding-left: 20px;
+            display: table-cell;
+            vertical-align: middle;
+            opacity: 1;
+        }
+
+        .product-item.style2 .product-name {
+            font-size: 20px;
+            margin-bottom: 9px;
+        }
+
+        .product-item.style2 .product-name a {
+            color: #222222;
+        }
+
+        .product-item.style2 .stars-rating {
+            margin-bottom: 5px;
+        }
+
+        .product-item.style2 .desc {
+            font-size: 16px;
+            color: #555555;
+            margin-bottom: 15px;
+        }
+
+        .product-item.style2 .group-buttons .price, .product-item.style2 .group-buttons .added_to_cart {
+            vertical-align: middle;
+            color: #222222;
+        }
+
+        .product-item.style2 .group-buttons .price {
+            padding: 0 10px 15px 0;
+            border-right: 0;
+            font-size: 16px
+        }
+
+        .product-item.style2 .group-buttons .button {
+            background-color: #000;
+        }
+
+        .product-item.style-2 .group-buttons .added_to_cart {
+            background: transparent;
+            border: 1px solid #dddddd;
+            position: relative;
+            text-align: center;
+            text-transform: uppercase;
+        }
+
+        .product-item.style-2 .group-buttons .added_to_cart:hover {
+            color: #ffffff;
+        }
+
+        .slider-product .slick-slider > .slick-arrow {
+            width: 44px;
+            height: 44px;
+            text-align: center;
+            line-height: 42px;
+            border: 1px solid #eeeeee;
+            color: #aaaaaa;
+            right: -22px;
+            z-index: 33;
+            background: #ffffff;
+            border-radius: 50%;
+            opacity: 0;
+            visibility: hidden;
+        }
+
+        .slider-product:hover .slick-slider > .slick-arrow {
+            opacity: 1;
+            visibility: visible;
+        }
+
+        .slider-product .slick-slider > .slick-arrow:first-child {
+            left: -22px;
+        }
+
+        /*produc list*/
+        .product-item.style-list .product-top {
+            position: absolute;
+            z-index: 1;
+        }
+
+        .product-item.style-list .products-bottom-content {
+            display: table;
+            width: 100%
+        }
+
+        .product-item.style-list .product-inner {
+            padding: 30px 20px;
+        }
+
+        .product-item.style-list .product-thumb {
+            width: 250px;
+            padding-right: 20px;
+            border-right: 1px solid #eee;
+        }
+
+        .product-item.style-list .product-thumb .thumb-inner {
+            position: relative;
+        }
+
+        .product-item.style-list .product-thumb, .product-item.style-list .product-info-left, .product-item.style-list .product-info-right {
+            display: table-cell;
+            vertical-align: middle;
+        }
+
+        .product-item.style-list .product-info-left {
+            vertical-align: top;
+            padding: 0 30px;
+        }
+
+        .product-item.style-list .product-info-right {
+            padding-left: 30px;
+            border-left: 1px solid #eee;
+            width: 250px;
+        }
+
+        .product-item.style-list .yith-wcwl-add-to-wishlist {
+            width: 100%;
+            margin-bottom: 15px;
+        }
+
+        .product-item.style-list .stars-rating {
+            margin-bottom: 20px;
+        }
+
+        .product-item.style-list .product-info-left ul {
+            padding: 0;
+            margin: 0;
+        }
+
+        .product-item.style-list .product-info-left ul li {
+            font-size: 14px;
+            color: #222;
+            line-height: 30px;
+            display: inline-block;
+        }
+
+        .product-item.style-list .product-info-left .attributes-display li a {
+            color: #888888;
+        }
+
+        .product-item.style-list .product-info-left .attributes-display li a:after {
+            content: "/";
+            display: inline-block;
+            color: #888888;
+        }
+
+        .product-item.style-list .product-info-left .attributes-display li:last-child a:after {
+            display: none;
+        }
+
+        .product-item.style-list .price {
+            font-size: 28px;
+            margin-bottom: 15px;
+        }
+
+        .product-item.style-list .product-list-message {
+            font-size: 13px;
+            color: #252531;
+            font-weight: 700;
+            position: relative;
+            padding-bottom: 15px;
+            margin-bottom: 20px;
+            display: inline-block;
+        }
+
+        .product-item.style-list .product-list-message::after {
+            content: '';
+            height: 1px;
+            width: 36px;
+            bottom: 0;
+            left: 0;
+            background: #e7e7e7;
+            display: inline-block;
+            position: absolute;
+        }
+
+        .product-item.style-list .product-list-message .icon {
+            font-size: 20px;
+        }
+
+        .product-item.style-list .single_variation_wrap > .button {
+            background: transparent;
+            border: 1px solid #e9e9e9;
+            margin-bottom: 20px;
+            color: #333333;
+            font-weight: 700;
+            vertical-align: middle;
+            height: 43px;
+            padding: 0 20px;
+            line-height: 41px;
+        }
+
+        .product-item.style-list .single_variation_wrap > .button:hover {
+            color: #ffffff;
+        }
+
+        .full-width .product-item.style-list .product-info-right {
+            width: 270px;
+        }
+
+        /*quantity*/
+        .quantity .control {
+            display: table;
+            border: 1px solid #e9e9e9;
+
+            width: 100%;
+            padding: 0 10px;
+        }
+
+        .quantity .control {
+            display: table;
+            border: 1px solid #e9e9e9;
+            border-radius: 40px;
+            width: 100%;
+            padding: 0 10px;
+        }
+
+        .quantity .control .btn-number, .quantity .control .input-qty {
+            display: table-cell;
+            vertical-align: middle;
+        }
+
+        .quantity .control .btn-number {
+            font-size: 23px;
+            color: #d9d9d9;
+            font-weight: 700;
+        }
+
+        .quantity .control .input-qty {
+            border: none;
+            padding: 7px 0;
+            text-align: center;
+            font-size: 16px;
+            color: #333333;
+            font-weight: 700;
+            width: 34px;
+            height: inherit;
+        }
+
+        /*STARS-RATING*/
+        .star-rating {
+            font-size: 0;
+            position: relative;
+            display: inline-block;
+            overflow: hidden;
+        }
+
+        .star-rating i, .star-rating > i {
+            display: inline-block;
+            float: left;
+            font-size: 13px;
+            line-height: 13px;
+            color: #ffb933;
+            letter-spacing: 0.1em;
+        }
+
+        .star-rating > span {
+            display: inline-block;
+            position: absolute;
+            top: 0;
+            left: 0;
+            overflow: hidden;
+            line-height: 13px;
+        }
+
+
+        .count-star {
+            position: relative;
+            display: inline-block;
+            overflow: hidden;
+            line-height: 14px;
+        }
+
+        /*-----------------PRICE----------------------*/
+        .product-item .price {
+            display: block;
+            font-size: 16px;
+            color: #111;
+            font-weight: 600;
+            line-height: 100%;
+        }
+
+        .product-item .price del {
+            color: #aaa;
+            margin-right: 5px;
+            font-size: 14px;
+        }
+
+        .product-item .price ins {
+            text-decoration: none;
+        }
+
+        /*product related/ product upsells*/
+        .related, .up-sells {
+            position: relative;
+        }
+
+        .product-grid-title {
+            font-size: 28px;
+            color: #222222;
+            text-align: center;
+            font-style: normal;
+            margin-bottom: 40px;
+            position: relative;
+            padding-bottom: 20px;
+            font-family: inherit;
+            font-weight: 600;
+            letter-spacing: 0;
+            padding-top: 60px;
+        }
+
+        .product-grid-title::before {
+            position: absolute;
+            content: '';
+            width: 67px;
+            border-bottom: 1px solid #c7c7c7;
+            bottom: 0;
+            left: 50%;
+            -webkit-transform: translateX(-50%);
+            -moz-transform: translateX(-50%);
+            -ms-transform: translateX(-50%);
+            -o-transform: translateX(-50%);
+            transform: translateX(-50%);
+        }
+
+        .related .product-item, .up-sells .product-item {
+            margin-bottom: 0;
+        }
+
+        .related .slick-slider.nav-center > .slick-arrow,
+        .up-sells .slick-slider.nav-center > .slick-arrow {
+            color: #aaaaaa;
+            width: 35px;
+            height: 35px;
+            text-align: center;
+            line-height: 30px;
+            border: 1px solid #f3f3f3;
+            font-size: 20px;
+            opacity: 0;
+            right: 50px;
+            visibility: hidden;
+            background: #ffffff;
+            -moz-transition: all 0.45s ease;
+            -webkit-transition: all 0.45s ease;
+            -o-transition: all 0.45s ease;
+            -ms-transition: all 0.45s ease;
+        }
+
+        .related .slick-slider.nav-center > .slick-arrow:first-child,
+        .up-sells .slick-slider.nav-center > .slick-arrow:first-child {
+            left: 50px;
+        }
+
+        .related:hover .slick-slider.nav-center > .slick-arrow,
+        .up-sells:hover .slick-slider.nav-center > .slick-arrow {
+            opacity: 1;
+            visibility: visible;
+            right: -20px;
+        }
+
+        .related:hover .slick-slider.nav-center > .slick-arrow:first-child,
+        .up-sells:hover .slick-slider.nav-center > .slick-arrow:first-child {
+            left: -20px;
+        }
+
+        /*details full width*/
+        .full-width .details-thumd {
+            padding-right: 70px;
+        }
+
+        .full-width .details-thumd .product-preview {
+            padding: 0;
+        }
+
+        .full-width .details-thumd .owl-nav .owl-prev {
+            left: -17px;
+        }
+
+        .full-width .details-thumd .owl-nav .owl-next {
+            right: -17px;
+        }
+
+        .product-item:hover .product-inner {
+            border-color: #252531;
+            border-style: solid;
+        }
+        .breadcrumb .breadcrumb-item {
+            color: #252531;
+        }
+
+        .breadcrumb .breadcrumb-item.active {
+            color: #b19777;
+        }
+    </style>
+{% endblock %}
+
+{% block content %}
+    <header class="pages-header bg-img valign parallaxie" data-background="{% static 'img/pg1.jpg' %}"
+            data-overlay-dark="5" style="height: 42vh">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-12">
+                    <div class="cont text-center">
+                        <h1 style="margin-top: 50px;margin-bottom: 0;">Dashboard</h1>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </header>
+    <div class="main-content main-content-product left-sidebar">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-12">
+                    <div class="breadcrumb-bar">
+                        <div class="container-fluid">
+                            <div class="row align-items-center">
+                                <div class="col-md-12 col-12">
+                                    <nav aria-label="breadcrumb" class="page-breadcrumb">
+                                        <ol class="breadcrumb">
+                                            <li class="breadcrumb-item"><a href="index.html">Home</a></li>
+                                            <li class="breadcrumb-item active" aria-current="page">Profile</li>
+                                        </ol>
+                                    </nav>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="sidebar col-lg-3 col-md-3 col-sm-12 col-xs-12">
+                    <div class="wrapper-sidebar shop-sidebar">
+                        <div class="widget woof_Widget">
+                            <div class="widget widget-categories">
+                                <h3 class="widgettitle">Categories</h3>
+                                <ul class="list-categories">
+                                    <li>
+                                        <input type="checkbox" id="cb1">
+                                        <label for="cb1" class="label-text">
+                                            New Arrivals
+                                        </label>
+                                    </li>
+                                    <li>
+                                        <input type="checkbox" id="cb2">
+                                        <label for="cb2" class="label-text">
+                                            Lighting
+                                        </label>
+                                    </li>
+                                    <li>
+                                        <input type="checkbox" id="cb3">
+                                        <label for="cb3" class="label-text">
+                                            Tables
+                                        </label>
+                                    </li>
+                                    <li>
+                                        <input type="checkbox" id="cb4">
+                                        <label for="cb4" class="label-text">
+                                            Chairs
+                                        </label>
+                                    </li>
+                                    <li>
+                                        <input type="checkbox" id="cb5">
+                                        <label for="cb5" class="label-text">
+                                            Accessories
+                                        </label>
+                                    </li>
+                                    <li>
+                                        <input type="checkbox" id="cb6">
+                                        <label for="cb6" class="label-text">
+                                            Lamp
+                                        </label>
+                                    </li>
+                                </ul>
+                            </div>
+
+                        </div>
+                    </div>
+                </div>
+                <div class="content-area shop-grid-content no-banner col-lg-9 col-md-9 col-sm-12 col-xs-12">
+                    <div class="site-main">
+                        <h3 class="custom_blog_title">
+                            Grid Products Left Sidebar
+                        </h3>
+                        <ul class="row list-products auto-clear equal-container product-grid">
+                            <li class="product-item  col-lg-4 col-md-6 col-sm-6 col-xs-6 col-ts-12 style-1">
+                                <div class="product-inner equal-element">
+                                    <div class="product-top">
+                                        <div class="flash">
+											<span class="onnew">
+												<span class="text">
+													new
+												</span>
+											</span>
+                                        </div>
+                                        <div class="yith-wcwl-add-to-wishlist">
+                                            <div class="yith-wcwl-add-button">
+                                                <a href="#"><i class="far fa-heart"></i></a>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="product-thumb">
+                                        <div class="thumb-inner">
+                                            <a href="#">
+                                                <img src="{% static 'img/2.jpg' %}" alt="img">
+                                            </a>
+                                        </div>
+                                        <a href="#" class="button quick-wiew-button">
+                                            <i class="fas fa-search"></i>
+                                        </a>
+                                    </div>
+                                    <div class="product-info">
+                                        <h5 class="product-name product_title">
+                                            <a href="#">Plastic Dining Chair</a>
+                                        </h5>
+                                        <div class="group-info">
+                                            <div class="stars-rating">
+                                                <div class="star-rating">
+
+                                                    <i class="fas fa-star"></i>
+                                                    <i class="fas fa-star"></i>
+                                                    <i class="fas fa-star"></i>
+                                                    <i class="far fa-star"></i>
+                                                    <i class="far fa-star"></i>
+
+                                                </div>
+                                                <div class="count-star">
+                                                    (3)
+                                                </div>
+                                            </div>
+                                            <div class="price">
+                                                <del>
+                                                    €65
+                                                </del>
+                                                <ins>
+                                                    €45
+                                                </ins>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="loop-form-add-to-cart">
+                                        <form class="cart">
+                                            <div class="single_variation_wrap">
+                                                <div class="quantity">
+                                                    <div class="control">
+                                                        <a class="btn-number qtyminus quantity-minus" href="#">-</a>
+                                                        <input type="text" data-step="1" data-min="0" value="1"
+                                                               title="Qty" class="input-qty qty" size="4">
+                                                        <a href="#" class="btn-number qtyplus quantity-plus">+</a>
+                                                    </div>
+                                                </div>
+                                                <button class="single_add_to_cart_button button">Add to cart</button>
+                                            </div>
+                                            <div class="variations">
+                                                <div class="variation">
+                                                    <label class="variation-label">
+                                                        Capacity:
+                                                    </label>
+                                                    <div class="variation-value">
+                                                        <a href="#" class="change-value text">
+                                                            <span>10ml</span>
+                                                        </a>
+                                                        <a href="#" class="change-value text">
+                                                            <span>20ml</span>
+                                                        </a>
+                                                        <a href="#" class="change-value text">
+                                                            <span>50ml</span>
+                                                        </a>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </form>
+                                    </div>
+                                </div>
+                            </li>
+                            <li class="product-item product-type-variable col-lg-4 col-md-6 col-sm-6 col-xs-6 col-ts-12 style-1">
+                                <div class="product-inner equal-element">
+                                    <div class="product-top">
+                                        <div class="flash">
+											<span class="onnew">
+												<span class="text">
+													new
+												</span>
+											</span>
+                                        </div>
+                                        <div class="yith-wcwl-add-to-wishlist">
+                                            <div class="yith-wcwl-add-button">
+                                                <a href="#"><i class="far fa-heart"></i></a>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="product-thumb">
+                                        <div class="thumb-inner">
+                                            <a href="#">
+                                                <img src="{% static 'img/2.jpg' %}" alt="img">
+                                            </a>
+                                        </div>
+                                        <a href="#" class="button quick-wiew-button">
+                                            <i class="fas fa-search"></i>
+                                        </a>
+                                    </div>
+                                    <div class="product-info">
+                                        <h5 class="product-name product_title">
+                                            <a href="#">Plastic Dining Chair</a>
+                                        </h5>
+                                        <div class="group-info">
+                                            <div class="stars-rating">
+                                                <div class="star-rating">
+                                                    <i class="fas fa-star"></i>
+                                                    <i class="fas fa-star"></i>
+                                                    <i class="fas fa-star"></i>
+                                                    <i class="far fa-star"></i>
+                                                    <i class="far fa-star"></i>
+                                                </div>
+                                                <div class="count-star">
+                                                    (3)
+                                                </div>
+                                            </div>
+                                            <div class="price">
+                                                <del>
+                                                    €65
+                                                </del>
+                                                <ins>
+                                                    €45
+                                                </ins>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="loop-form-add-to-cart">
+                                        <form class="cart">
+                                            <div class="single_variation_wrap">
+                                                <div class="quantity">
+                                                    <div class="control">
+                                                        <a class="btn-number qtyminus quantity-minus" href="#">-</a>
+                                                        <input type="text" data-step="1" data-min="0" value="1"
+                                                               title="Qty" class="input-qty qty" size="4">
+                                                        <a href="#" class="btn-number qtyplus quantity-plus">+</a>
+                                                    </div>
+                                                </div>
+                                                <button class="single_add_to_cart_button button">Add to cart</button>
+                                            </div>
+                                            <div class="variations">
+                                                <div class="variation">
+                                                    <label class="variation-label">
+                                                        Capacity:
+                                                    </label>
+                                                    <div class="variation-value">
+                                                        <a href="#" class="change-value text">
+                                                            <span>10ml</span>
+                                                        </a>
+                                                        <a href="#" class="change-value text">
+                                                            <span>20ml</span>
+                                                        </a>
+                                                        <a href="#" class="change-value text">
+                                                            <span>50ml</span>
+                                                        </a>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </form>
+                                    </div>
+                                </div>
+                            </li>
+                            <li class="product-item product-type-variable col-lg-4 col-md-6 col-sm-6 col-xs-6 col-ts-12 style-1">
+                                <div class="product-inner equal-element">
+                                    <div class="product-top">
+                                        <div class="flash">
+											<span class="onnew">
+												<span class="text">
+													new
+												</span>
+											</span>
+                                        </div>
+                                        <div class="yith-wcwl-add-to-wishlist">
+                                            <div class="yith-wcwl-add-button">
+                                                <a href="#"><i class="far fa-heart"></i></a>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="product-thumb">
+                                        <div class="thumb-inner">
+                                            <a href="#">
+                                                <img src="{% static 'img/2.jpg' %}" alt="img">
+                                            </a>
+                                        </div>
+                                        <a href="#" class="button quick-wiew-button">
+                                            <i class="fas fa-search"></i>
+                                        </a>
+                                    </div>
+                                    <div class="product-info">
+                                        <h5 class="product-name product_title">
+                                            <a href="#">Plastic Dining Chair</a>
+                                        </h5>
+                                        <div class="group-info">
+                                            <div class="stars-rating">
+                                                <div class="star-rating">
+
+                                                    <i class="fas fa-star"></i>
+                                                    <i class="fas fa-star"></i>
+                                                    <i class="fas fa-star"></i>
+                                                    <i class="far fa-star"></i>
+                                                    <i class="far fa-star"></i>
+
+                                                </div>
+                                                <div class="count-star">
+                                                    (3)
+                                                </div>
+                                            </div>
+                                            <div class="price">
+                                                <del>
+                                                    €65
+                                                </del>
+                                                <ins>
+                                                    €45
+                                                </ins>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="loop-form-add-to-cart">
+                                        <form class="cart">
+                                            <div class="single_variation_wrap">
+                                                <div class="quantity">
+                                                    <div class="control">
+                                                        <a class="btn-number qtyminus quantity-minus" href="#">-</a>
+                                                        <input type="text" data-step="1" data-min="0" value="1"
+                                                               title="Qty" class="input-qty qty" size="4">
+                                                        <a href="#" class="btn-number qtyplus quantity-plus">+</a>
+                                                    </div>
+                                                </div>
+                                                <button class="single_add_to_cart_button button">Add to cart</button>
+                                            </div>
+                                            <div class="variations">
+                                                <div class="variation">
+                                                    <label class="variation-label">
+                                                        Capacity:
+                                                    </label>
+                                                    <div class="variation-value">
+                                                        <a href="#" class="change-value text">
+                                                            <span>10ml</span>
+                                                        </a>
+                                                        <a href="#" class="change-value text">
+                                                            <span>20ml</span>
+                                                        </a>
+                                                        <a href="#" class="change-value text">
+                                                            <span>50ml</span>
+                                                        </a>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </form>
+                                    </div>
+                                </div>
+                            </li>
+                            <li class="product-item product-type-variable col-lg-4 col-md-6 col-sm-6 col-xs-6 col-ts-12 style-1">
+                                <div class="product-inner equal-element">
+                                    <div class="product-top">
+                                        <div class="flash">
+											<span class="onnew">
+												<span class="text">
+													new
+												</span>
+											</span>
+                                        </div>
+                                        <div class="yith-wcwl-add-to-wishlist">
+                                            <div class="yith-wcwl-add-button">
+                                                <a href="#"><i class="far fa-heart"></i></a>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="product-thumb">
+                                        <div class="thumb-inner">
+                                            <a href="#">
+                                                <img src="{% static 'img/2.jpg' %}" alt="img">
+                                            </a>
+                                        </div>
+                                        <a href="#" class="button quick-wiew-button">
+                                            <i class="fas fa-search"></i>
+                                        </a>
+                                    </div>
+                                    <div class="product-info">
+                                        <h5 class="product-name product_title">
+                                            <a href="#">Plastic Dining Chair</a>
+                                        </h5>
+                                        <div class="group-info">
+                                            <div class="stars-rating">
+                                                <div class="star-rating">
+
+                                                    <i class="fas fa-star"></i>
+                                                    <i class="fas fa-star"></i>
+                                                    <i class="fas fa-star"></i>
+                                                    <i class="far fa-star"></i>
+                                                    <i class="far fa-star"></i>
+
+                                                </div>
+                                                <div class="count-star">
+                                                    (3)
+                                                </div>
+                                            </div>
+                                            <div class="price">
+                                                <del>
+                                                    €65
+                                                </del>
+                                                <ins>
+                                                    €45
+                                                </ins>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="loop-form-add-to-cart">
+                                        <form class="cart">
+                                            <div class="single_variation_wrap">
+                                                <div class="quantity">
+                                                    <div class="control">
+                                                        <a class="btn-number qtyminus quantity-minus" href="#">-</a>
+                                                        <input type="text" data-step="1" data-min="0" value="1"
+                                                               title="Qty" class="input-qty qty" size="4">
+                                                        <a href="#" class="btn-number qtyplus quantity-plus">+</a>
+                                                    </div>
+                                                </div>
+                                                <button class="single_add_to_cart_button button">Add to cart</button>
+                                            </div>
+                                            <div class="variations">
+                                                <div class="variation">
+                                                    <label class="variation-label">
+                                                        Capacity:
+                                                    </label>
+                                                    <div class="variation-value">
+                                                        <a href="#" class="change-value text">
+                                                            <span>10ml</span>
+                                                        </a>
+                                                        <a href="#" class="change-value text">
+                                                            <span>20ml</span>
+                                                        </a>
+                                                        <a href="#" class="change-value text">
+                                                            <span>50ml</span>
+                                                        </a>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </form>
+                                    </div>
+                                </div>
+                            </li>
+                            <li class="product-item  col-lg-4 col-md-6 col-sm-6 col-xs-6 col-ts-12 style-1">
+                                <div class="product-inner equal-element">
+                                    <div class="product-top">
+                                        <div class="flash">
+											<span class="onnew">
+												<span class="text">
+													new
+												</span>
+											</span>
+                                        </div>
+                                        <div class="yith-wcwl-add-to-wishlist">
+                                            <div class="yith-wcwl-add-button">
+                                                <a href="#"><i class="far fa-heart"></i></a>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="product-thumb">
+                                        <div class="thumb-inner">
+                                            <a href="#">
+                                                <img src="{% static 'img/2.jpg' %}" alt="img">
+                                            </a>
+                                        </div>
+                                        <a href="#" class="button quick-wiew-button">
+                                            <i class="fas fa-search"></i>
+                                        </a>
+                                    </div>
+                                    <div class="product-info">
+                                        <h5 class="product-name product_title">
+                                            <a href="#">Plastic Dining Chair</a>
+                                        </h5>
+                                        <div class="group-info">
+                                            <div class="stars-rating">
+                                                <div class="star-rating">
+
+                                                    <i class="fas fa-star"></i>
+                                                    <i class="fas fa-star"></i>
+                                                    <i class="fas fa-star"></i>
+                                                    <i class="far fa-star"></i>
+                                                    <i class="far fa-star"></i>
+
+                                                </div>
+                                                <div class="count-star">
+                                                    (3)
+                                                </div>
+                                            </div>
+                                            <div class="price">
+                                                <del>
+                                                    €65
+                                                </del>
+                                                <ins>
+                                                    €45
+                                                </ins>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="loop-form-add-to-cart">
+                                        <form class="cart">
+                                            <div class="single_variation_wrap">
+                                                <div class="quantity">
+                                                    <div class="control">
+                                                        <a class="btn-number qtyminus quantity-minus" href="#">-</a>
+                                                        <input type="text" data-step="1" data-min="0" value="1"
+                                                               title="Qty" class="input-qty qty" size="4">
+                                                        <a href="#" class="btn-number qtyplus quantity-plus">+</a>
+                                                    </div>
+                                                </div>
+                                                <button class="single_add_to_cart_button button">Add to cart</button>
+                                            </div>
+                                            <div class="variations">
+                                                <div class="variation">
+                                                    <label class="variation-label">
+                                                        Capacity:
+                                                    </label>
+                                                    <div class="variation-value">
+                                                        <a href="#" class="change-value text">
+                                                            <span>10ml</span>
+                                                        </a>
+                                                        <a href="#" class="change-value text">
+                                                            <span>20ml</span>
+                                                        </a>
+                                                        <a href="#" class="change-value text">
+                                                            <span>50ml</span>
+                                                        </a>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </form>
+                                    </div>
+                                </div>
+                            </li>
+                            <li class="product-item product-type-variable col-lg-4 col-md-6 col-sm-6 col-xs-6 col-ts-12 style-1">
+                                <div class="product-inner equal-element">
+                                    <div class="product-top">
+                                        <div class="flash">
+											<span class="onnew">
+												<span class="text">
+													new
+												</span>
+											</span>
+                                        </div>
+                                        <div class="yith-wcwl-add-to-wishlist">
+                                            <div class="yith-wcwl-add-button">
+                                                <a href="#"><i class="far fa-heart"></i></a>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="product-thumb">
+                                        <div class="thumb-inner">
+                                            <a href="#">
+                                                <img src="{% static 'img/2.jpg' %}" alt="img">
+                                            </a>
+                                        </div>
+                                        <a href="#" class="button quick-wiew-button">
+                                            <i class="fas fa-search"></i>
+                                        </a>
+                                    </div>
+                                    <div class="product-info">
+                                        <h5 class="product-name product_title">
+                                            <a href="#">Plastic Dining Chair</a>
+                                        </h5>
+                                        <div class="group-info">
+                                            <div class="stars-rating">
+                                                <div class="star-rating">
+
+                                                    <i class="fas fa-star"></i>
+                                                    <i class="fas fa-star"></i>
+                                                    <i class="fas fa-star"></i>
+                                                    <i class="far fa-star"></i>
+                                                    <i class="far fa-star"></i>
+
+                                                </div>
+                                                <div class="count-star">
+                                                    (3)
+                                                </div>
+                                            </div>
+                                            <div class="price">
+                                                <del>
+                                                    €65
+                                                </del>
+                                                <ins>
+                                                    €45
+                                                </ins>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="loop-form-add-to-cart">
+                                        <form class="cart">
+                                            <div class="single_variation_wrap">
+                                                <div class="quantity">
+                                                    <div class="control">
+                                                        <a class="btn-number qtyminus quantity-minus" href="#">-</a>
+                                                        <input type="text" data-step="1" data-min="0" value="1"
+                                                               title="Qty" class="input-qty qty" size="4">
+                                                        <a href="#" class="btn-number qtyplus quantity-plus">+</a>
+                                                    </div>
+                                                </div>
+                                                <button class="single_add_to_cart_button button">Add to cart</button>
+                                            </div>
+                                            <div class="variations">
+                                                <div class="variation">
+                                                    <label class="variation-label">
+                                                        Capacity:
+                                                    </label>
+                                                    <div class="variation-value">
+                                                        <a href="#" class="change-value text">
+                                                            <span>10ml</span>
+                                                        </a>
+                                                        <a href="#" class="change-value text">
+                                                            <span>20ml</span>
+                                                        </a>
+                                                        <a href="#" class="change-value text">
+                                                            <span>50ml</span>
+                                                        </a>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </form>
+                                    </div>
+                                </div>
+                            </li>
+                            <li class="product-item product-type-variable col-lg-4 col-md-6 col-sm-6 col-xs-6 col-ts-12 style-1">
+                                <div class="product-inner equal-element">
+                                    <div class="product-top">
+                                        <div class="flash">
+											<span class="onnew">
+												<span class="text">
+													new
+												</span>
+											</span>
+                                        </div>
+                                        <div class="yith-wcwl-add-to-wishlist">
+                                            <div class="yith-wcwl-add-button">
+                                                <a href="#"><i class="far fa-heart"></i></a>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="product-thumb">
+                                        <div class="thumb-inner">
+                                            <a href="#">
+                                                <img src="{% static 'img/2.jpg' %}" alt="img">
+                                            </a>
+                                        </div>
+                                        <a href="#" class="button quick-wiew-button">
+                                            <i class="fas fa-search"></i>
+                                        </a>
+                                    </div>
+                                    <div class="product-info">
+                                        <h5 class="product-name product_title">
+                                            <a href="#">Plastic Dining Chair</a>
+                                        </h5>
+                                        <div class="group-info">
+                                            <div class="stars-rating">
+                                                <div class="star-rating">
+
+                                                    <i class="fas fa-star"></i>
+                                                    <i class="fas fa-star"></i>
+                                                    <i class="fas fa-star"></i>
+                                                    <i class="far fa-star"></i>
+                                                    <i class="far fa-star"></i>
+
+                                                </div>
+                                                <div class="count-star">
+                                                    (3)
+                                                </div>
+                                            </div>
+                                            <div class="price">
+                                                <del>
+                                                    €65
+                                                </del>
+                                                <ins>
+                                                    €45
+                                                </ins>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="loop-form-add-to-cart">
+                                        <form class="cart">
+                                            <div class="single_variation_wrap">
+                                                <div class="quantity">
+                                                    <div class="control">
+                                                        <a class="btn-number qtyminus quantity-minus" href="#">-</a>
+                                                        <input type="text" data-step="1" data-min="0" value="1"
+                                                               title="Qty" class="input-qty qty" size="4">
+                                                        <a href="#" class="btn-number qtyplus quantity-plus">+</a>
+                                                    </div>
+                                                </div>
+                                                <button class="single_add_to_cart_button button">Add to cart</button>
+                                            </div>
+                                            <div class="variations">
+                                                <div class="variation">
+                                                    <label class="variation-label">
+                                                        Capacity:
+                                                    </label>
+                                                    <div class="variation-value">
+                                                        <a href="#" class="change-value text">
+                                                            <span>10ml</span>
+                                                        </a>
+                                                        <a href="#" class="change-value text">
+                                                            <span>20ml</span>
+                                                        </a>
+                                                        <a href="#" class="change-value text">
+                                                            <span>50ml</span>
+                                                        </a>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </form>
+                                    </div>
+                                </div>
+                            </li>
+                            <li class="product-item  col-lg-4 col-md-6 col-sm-6 col-xs-6 col-ts-12 style-1">
+                                <div class="product-inner equal-element">
+                                    <div class="product-top">
+                                        <div class="flash">
+											<span class="onnew">
+												<span class="text">
+													new
+												</span>
+											</span>
+                                        </div>
+                                        <div class="yith-wcwl-add-to-wishlist">
+                                            <div class="yith-wcwl-add-button">
+                                                <a href="#"><i class="far fa-heart"></i></a>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="product-thumb">
+                                        <div class="thumb-inner">
+                                            <a href="#">
+                                                <img src="{% static 'img/2.jpg' %}" alt="img">
+                                            </a>
+                                        </div>
+                                        <a href="#" class="button quick-wiew-button">
+                                            <i class="fas fa-search"></i>
+                                        </a>
+                                    </div>
+                                    <div class="product-info">
+                                        <h5 class="product-name product_title">
+                                            <a href="#">Plastic Dining Chair</a>
+                                        </h5>
+                                        <div class="group-info">
+                                            <div class="stars-rating">
+                                                <div class="star-rating">
+
+                                                    <i class="fas fa-star"></i>
+                                                    <i class="fas fa-star"></i>
+                                                    <i class="fas fa-star"></i>
+                                                    <i class="far fa-star"></i>
+                                                    <i class="far fa-star"></i>
+
+                                                </div>
+                                                <div class="count-star">
+                                                    (3)
+                                                </div>
+                                            </div>
+                                            <div class="price">
+                                                <del>
+                                                    €65
+                                                </del>
+                                                <ins>
+                                                    €45
+                                                </ins>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="loop-form-add-to-cart">
+                                        <form class="cart">
+                                            <div class="single_variation_wrap">
+                                                <div class="quantity">
+                                                    <div class="control">
+                                                        <a class="btn-number qtyminus quantity-minus" href="#">-</a>
+                                                        <input type="text" data-step="1" data-min="0" value="1"
+                                                               title="Qty" class="input-qty qty" size="4">
+                                                        <a href="#" class="btn-number qtyplus quantity-plus">+</a>
+                                                    </div>
+                                                </div>
+                                                <button class="single_add_to_cart_button button">Add to cart</button>
+                                            </div>
+                                            <div class="variations">
+                                                <div class="variation">
+                                                    <label class="variation-label">
+                                                        Capacity:
+                                                    </label>
+                                                    <div class="variation-value">
+                                                        <a href="#" class="change-value text">
+                                                            <span>10ml</span>
+                                                        </a>
+                                                        <a href="#" class="change-value text">
+                                                            <span>20ml</span>
+                                                        </a>
+                                                        <a href="#" class="change-value text">
+                                                            <span>50ml</span>
+                                                        </a>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </form>
+                                    </div>
+                                </div>
+                            </li>
+                            <li class="product-item product-type-variable col-lg-4 col-md-6 col-sm-6 col-xs-6 col-ts-12 style-1">
+                                <div class="product-inner equal-element">
+                                    <div class="product-top">
+                                        <div class="flash">
+											<span class="onnew">
+												<span class="text">
+													new
+												</span>
+											</span>
+                                        </div>
+                                        <div class="yith-wcwl-add-to-wishlist">
+                                            <div class="yith-wcwl-add-button">
+                                                <a href="#"><i class="far fa-heart"></i></a>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="product-thumb">
+                                        <div class="thumb-inner">
+                                            <a href="#">
+                                                <img src="{% static 'img/2.jpg' %}" alt="img">
+                                            </a>
+                                        </div>
+                                        <a href="#" class="button quick-wiew-button">
+                                            <i class="fas fa-search"></i>
+                                        </a>
+                                    </div>
+                                    <div class="product-info">
+                                        <h5 class="product-name product_title">
+                                            <a href="#">Plastic Dining Chair</a>
+                                        </h5>
+                                        <div class="group-info">
+                                            <div class="stars-rating">
+                                                <div class="star-rating">
+
+                                                    <i class="fas fa-star"></i>
+                                                    <i class="fas fa-star"></i>
+                                                    <i class="fas fa-star"></i>
+                                                    <i class="far fa-star"></i>
+                                                    <i class="far fa-star"></i>
+
+                                                </div>
+                                                <div class="count-star">
+                                                    (3)
+                                                </div>
+                                            </div>
+                                            <div class="price">
+                                                <del>
+                                                    €65
+                                                </del>
+                                                <ins>
+                                                    €45
+                                                </ins>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="loop-form-add-to-cart">
+                                        <form class="cart">
+                                            <div class="single_variation_wrap">
+                                                <div class="quantity">
+                                                    <div class="control">
+                                                        <a class="btn-number qtyminus quantity-minus" href="#">-</a>
+                                                        <input type="text" data-step="1" data-min="0" value="1"
+                                                               title="Qty" class="input-qty qty" size="4">
+                                                        <a href="#" class="btn-number qtyplus quantity-plus">+</a>
+                                                    </div>
+                                                </div>
+                                                <button class="single_add_to_cart_button button">Add to cart</button>
+                                            </div>
+                                            <div class="variations">
+                                                <div class="variation">
+                                                    <label class="variation-label">
+                                                        Capacity:
+                                                    </label>
+                                                    <div class="variation-value">
+                                                        <a href="#" class="change-value text">
+                                                            <span>10ml</span>
+                                                        </a>
+                                                        <a href="#" class="change-value text">
+                                                            <span>20ml</span>
+                                                        </a>
+                                                        <a href="#" class="change-value text">
+                                                            <span>50ml</span>
+                                                        </a>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </form>
+                                    </div>
+                                </div>
+                            </li>
+                            <li class="product-item product-type-variable col-lg-4 col-md-6 col-sm-6 col-xs-6 col-ts-12 style-1">
+                                <div class="product-inner equal-element">
+                                    <div class="product-top">
+                                        <div class="flash">
+											<span class="onnew">
+												<span class="text">
+													new
+												</span>
+											</span>
+                                        </div>
+                                        <div class="yith-wcwl-add-to-wishlist">
+                                            <div class="yith-wcwl-add-button">
+                                                <a href="#"><i class="far fa-heart"></i></a>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="product-thumb">
+                                        <div class="thumb-inner">
+                                            <a href="#">
+                                                <img src="{% static 'img/2.jpg' %}" alt="img">
+                                            </a>
+                                        </div>
+                                        <a href="#" class="button quick-wiew-button">
+                                            <i class="fas fa-search"></i>
+                                        </a>
+                                    </div>
+                                    <div class="product-info">
+                                        <h5 class="product-name product_title">
+                                            <a href="#">Plastic Dining Chair</a>
+                                        </h5>
+                                        <div class="group-info">
+                                            <div class="stars-rating">
+                                                <div class="star-rating">
+
+                                                    <i class="fas fa-star"></i>
+                                                    <i class="fas fa-star"></i>
+                                                    <i class="fas fa-star"></i>
+                                                    <i class="far fa-star"></i>
+                                                    <i class="far fa-star"></i>
+
+                                                </div>
+                                                <div class="count-star">
+                                                    (3)
+                                                </div>
+                                            </div>
+                                            <div class="price">
+                                                <del>
+                                                    €65
+                                                </del>
+                                                <ins>
+                                                    €45
+                                                </ins>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="loop-form-add-to-cart">
+                                        <form class="cart">
+                                            <div class="single_variation_wrap">
+                                                <div class="quantity">
+                                                    <div class="control">
+                                                        <a class="btn-number qtyminus quantity-minus" href="#">-</a>
+                                                        <input type="text" data-step="1" data-min="0" value="1"
+                                                               title="Qty" class="input-qty qty" size="4">
+                                                        <a href="#" class="btn-number qtyplus quantity-plus">+</a>
+                                                    </div>
+                                                </div>
+                                                <button class="single_add_to_cart_button button">Add to cart</button>
+                                            </div>
+                                            <div class="variations">
+                                                <div class="variation">
+                                                    <label class="variation-label">
+                                                        Capacity:
+                                                    </label>
+                                                    <div class="variation-value">
+                                                        <a href="#" class="change-value text">
+                                                            <span>10ml</span>
+                                                        </a>
+                                                        <a href="#" class="change-value text">
+                                                            <span>20ml</span>
+                                                        </a>
+                                                        <a href="#" class="change-value text">
+                                                            <span>50ml</span>
+                                                        </a>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </form>
+                                    </div>
+                                </div>
+                            </li>
+                            <li class="product-item product-type-variable col-lg-4 col-md-6 col-sm-6 col-xs-6 col-ts-12 style-1">
+                                <div class="product-inner equal-element">
+                                    <div class="product-top">
+                                        <div class="flash">
+											<span class="onnew">
+												<span class="text">
+													new
+												</span>
+											</span>
+                                        </div>
+                                        <div class="yith-wcwl-add-to-wishlist">
+                                            <div class="yith-wcwl-add-button">
+                                                <a href="#"><i class="far fa-heart"></i></a>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="product-thumb">
+                                        <div class="thumb-inner">
+                                            <a href="#">
+                                                <img src="{% static 'img/2.jpg' %}" alt="img">
+                                            </a>
+                                        </div>
+                                        <a href="#" class="button quick-wiew-button">
+                                            <i class="fas fa-search"></i>
+                                        </a>
+                                    </div>
+                                    <div class="product-info">
+                                        <h5 class="product-name product_title">
+                                            <a href="#">Plastic Dining Chair</a>
+                                        </h5>
+                                        <div class="group-info">
+                                            <div class="stars-rating">
+                                                <div class="star-rating">
+
+                                                    <i class="fas fa-star"></i>
+                                                    <i class="fas fa-star"></i>
+                                                    <i class="fas fa-star"></i>
+                                                    <i class="far fa-star"></i>
+                                                    <i class="far fa-star"></i>
+
+                                                </div>
+                                                <div class="count-star">
+                                                    (3)
+                                                </div>
+                                            </div>
+                                            <div class="price">
+                                                <del>
+                                                    €65
+                                                </del>
+                                                <ins>
+                                                    €45
+                                                </ins>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="loop-form-add-to-cart">
+                                        <form class="cart">
+                                            <div class="single_variation_wrap">
+                                                <div class="quantity">
+                                                    <div class="control">
+                                                        <a class="btn-number qtyminus quantity-minus" href="#">-</a>
+                                                        <input type="text" data-step="1" data-min="0" value="1"
+                                                               title="Qty" class="input-qty qty" size="4">
+                                                        <a href="#" class="btn-number qtyplus quantity-plus">+</a>
+                                                    </div>
+                                                </div>
+                                                <button class="single_add_to_cart_button button">Add to cart</button>
+                                            </div>
+                                            <div class="variations">
+                                                <div class="variation">
+                                                    <label class="variation-label">
+                                                        Capacity:
+                                                    </label>
+                                                    <div class="variation-value">
+                                                        <a href="#" class="change-value text">
+                                                            <span>10ml</span>
+                                                        </a>
+                                                        <a href="#" class="change-value text">
+                                                            <span>20ml</span>
+                                                        </a>
+                                                        <a href="#" class="change-value text">
+                                                            <span>50ml</span>
+                                                        </a>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </form>
+                                    </div>
+                                </div>
+                            </li>
+                            <li class="product-item product-type-variable col-lg-4 col-md-6 col-sm-6 col-xs-6 col-ts-12 style-1">
+                                <div class="product-inner equal-element">
+                                    <div class="product-top">
+                                        <div class="flash">
+											<span class="onnew">
+												<span class="text">
+													new
+												</span>
+											</span>
+                                        </div>
+                                        <div class="yith-wcwl-add-to-wishlist">
+                                            <div class="yith-wcwl-add-button">
+                                                <a href="#"><i class="far fa-heart"></i></a>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="product-thumb">
+                                        <div class="thumb-inner">
+                                            <a href="#">
+                                                <img src="{% static 'img/2.jpg' %}" alt="img">
+                                            </a>
+                                        </div>
+                                        <a href="#" class="button quick-wiew-button">
+                                            <i class="fas fa-search"></i>
+                                        </a>
+                                    </div>
+                                    <div class="product-info">
+                                        <h5 class="product-name product_title">
+                                            <a href="#">Plastic Dining Chair</a>
+                                        </h5>
+                                        <div class="group-info">
+                                            <div class="stars-rating">
+                                                <div class="star-rating">
+
+                                                    <i class="fas fa-star"></i>
+                                                    <i class="fas fa-star"></i>
+                                                    <i class="fas fa-star"></i>
+                                                    <i class="far fa-star"></i>
+                                                    <i class="far fa-star"></i>
+
+                                                </div>
+                                                <div class="count-star">
+                                                    (3)
+                                                </div>
+                                            </div>
+                                            <div class="price">
+                                                <del>
+                                                    €65
+                                                </del>
+                                                <ins>
+                                                    €45
+                                                </ins>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="loop-form-add-to-cart">
+                                        <form class="cart">
+                                            <div class="single_variation_wrap">
+                                                <div class="quantity">
+                                                    <div class="control">
+                                                        <a class="btn-number qtyminus quantity-minus" href="#">-</a>
+                                                        <input type="text" data-step="1" data-min="0" value="1"
+                                                               title="Qty" class="input-qty qty" size="4">
+                                                        <a href="#" class="btn-number qtyplus quantity-plus">+</a>
+                                                    </div>
+                                                </div>
+                                                <button class="single_add_to_cart_button button">Add to cart</button>
+                                            </div>
+                                            <div class="variations">
+                                                <div class="variation">
+                                                    <label class="variation-label">
+                                                        Capacity:
+                                                    </label>
+                                                    <div class="variation-value">
+                                                        <a href="#" class="change-value text">
+                                                            <span>10ml</span>
+                                                        </a>
+                                                        <a href="#" class="change-value text">
+                                                            <span>20ml</span>
+                                                        </a>
+                                                        <a href="#" class="change-value text">
+                                                            <span>50ml</span>
+                                                        </a>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </form>
+                                    </div>
+                                </div>
+                            </li>
+                        </ul>
+                        <div class="pagination clearfix style3">
+                            <div class="nav-link">
+                                <a href="#" class="page-numbers"><i class="icon fa fa-angle-left"
+                                                                    aria-hidden="true"></i></a>
+                                <a href="#" class="page-numbers">1</a>
+                                <a href="#" class="page-numbers">2</a>
+                                <a href="#" class="page-numbers current">3</a>
+                                <a href="#" class="page-numbers"><i class="icon fa fa-angle-right"
+                                                                    aria-hidden="true"></i></a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock %}
