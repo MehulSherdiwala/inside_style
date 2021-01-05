@@ -173,3 +173,7 @@ def user_dashboard(request):
             return render(request, "user_dashboard.html", data)
     else:
         return redirect('login')
+
+
+def designs(request):
+    return render(request, 'designs.html')

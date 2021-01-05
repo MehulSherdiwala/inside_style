@@ -14,5 +14,6 @@ urlpatterns = [
     path('ajax/load-state', views.load_state, name="load_state"),
     path('ajax/load-creator/<ins_by>', views.load_creator, name="load_creator"),
     path('contact/', views.contact, name="contact"),
+    path('designs/', views.designs, name="designs"),
     path('user_dashboard/', views.user_dashboard, name="user_dashboard")
 ]
