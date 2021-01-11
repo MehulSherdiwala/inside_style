@@ -218,3 +218,9 @@ def fetch_pdt(request):
         'cat': serializers.serialize('json', Category.objects.filter(pk=pdt[0].category_id))
     }
     return JsonResponse(d)
+
+def product(request):
+    return render(request, 'product.html')
+
+def cart(request):
+    return render(request, 'cart.html')
