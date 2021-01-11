@@ -15,5 +15,7 @@ urlpatterns = [
     path('ajax/load-creator/<ins_by>', views.load_creator, name="load_creator"),
     path('contact/', views.contact, name="contact"),
     path('user_dashboard/', views.user_dashboard, name="user_dashboard"),
-    path('product_list/', views.product_list, name="product_list")
+    path('product_list/', views.product_list, name="product_list"),
+    path('product/', views.product, name="product"),
+    path('cart/', views.cart, name="cart")
 ]
