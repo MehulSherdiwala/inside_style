@@ -137,3 +137,15 @@ class Contact(models.Model):
 
     def __str__(self):
         return self.name
+
+
+class DesignElement(models.Model):
+    pos_X = models.FloatField()
+    pos_Y = models.FloatField()
+    width = models.FloatField()
+    height = models.FloatField()
+    pdt_id = models.ForeignKey(Product, on_delete=models.CASCADE)
+    design_id = models.ForeignKey(Design, on_delete=models.CASCADE)
+
+    def __str__(self):
+        return self.design_id.design_name

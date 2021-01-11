@@ -2554,6 +2554,7 @@
             border-color: #252531;
             border-style: solid;
         }
+
         .breadcrumb .breadcrumb-item {
             color: #252531;
         }
@@ -2561,6 +2562,65 @@
         .breadcrumb .breadcrumb-item.active {
             color: #b19777;
         }
+
+        .pagination {
+            display: block;
+            margin: 50px 0 0;
+            padding: 0;
+        }
+
+        .pagination .page-numbers {
+            display: inline-block;
+            width: 42px;
+            height: 42px;
+            line-height: 38px;
+            text-align: center;
+            border: 1px solid #aaa;
+            font-size: 16px;
+            color: #888;
+            font-weight: 600;
+            margin-left: 5px;
+            border-radius: 50%;
+        }
+
+        .pagination .page-numbers:first-child {
+            margin-left: 0;
+        }
+
+        .pagination .page-numbers.current, .pagination .page-numbers:hover {
+            color: #fff;
+            border-color: transparent;
+            background-color: #85B839;
+        }
+
+        .pagination .page-numbers .icon {
+            font-weight: 600;
+        }
+
+        .pagination.style1 {
+            text-align: right;
+        }
+
+        .pagination.style2 {
+            text-align: center;
+        }
+
+        .shop-grid-content .pagination {
+            margin-top: 10px;
+            margin-bottom: 30px;
+            display: flex;
+            justify-content: center;
+        }
+
+        .content-inlookbook .pagination {
+            margin-top: 10px;
+            margin-bottom: 60px
+        }
+
+        .main-content-blog.mansory .pagination {
+            margin-top: 10px;
+        }
+
     </style>
 {% endblock %}
 
@@ -2571,7 +2631,7 @@
             <div class="row">
                 <div class="col-lg-12">
                     <div class="cont text-center">
-                        <h1 style="margin-top: 50px;margin-bottom: 0;">Dashboard</h1>
+                        <h1 style="margin-top: 50px;margin-bottom: 0;">Products </h1>
                     </div>
                 </div>
             </div>
@@ -2588,7 +2648,7 @@
                                     <nav aria-label="breadcrumb" class="page-breadcrumb">
                                         <ol class="breadcrumb">
                                             <li class="breadcrumb-item"><a href="index.html">Home</a></li>
-                                            <li class="breadcrumb-item active" aria-current="page">Profile</li>
+                                            <li class="breadcrumb-item active" aria-current="page">Products</li>
                                         </ol>
                                     </nav>
                                 </div>
@@ -2648,1098 +2708,106 @@
                 </div>
                 <div class="content-area shop-grid-content no-banner col-lg-9 col-md-9 col-sm-12 col-xs-12">
                     <div class="site-main">
-                        <h3 class="custom_blog_title">
-                            Grid Products Left Sidebar
-                        </h3>
+                        {% comment %}<h3 class="custom_blog_title">
+
+                        </h3>{% endcomment %}
                         <ul class="row list-products auto-clear equal-container product-grid">
-                            <li class="product-item  col-lg-4 col-md-6 col-sm-6 col-xs-6 col-ts-12 style-1">
-                                <div class="product-inner equal-element">
-                                    <div class="product-top">
-                                        <div class="flash">
+
+                            {% for p in pdt %}
+                                <li class="product-item  col-lg-4 col-md-6 col-sm-6 col-xs-6 col-ts-12 style-1">
+                                    <div class="product-inner equal-element">
+                                        <div class="product-top">
+                                            <div class="flash">
 											<span class="onnew">
 												<span class="text">
 													new
 												</span>
 											</span>
-                                        </div>
-                                        <div class="yith-wcwl-add-to-wishlist">
-                                            <div class="yith-wcwl-add-button">
-                                                <a href="#"><i class="far fa-heart"></i></a>
+                                            </div>
+                                            <div class="yith-wcwl-add-to-wishlist">
+                                                <div class="yith-wcwl-add-button">
+                                                    <a href="#"><i class="far fa-heart"></i></a>
+                                                </div>
                                             </div>
                                         </div>
-                                    </div>
-                                    <div class="product-thumb">
-                                        <div class="thumb-inner">
-                                            <a href="#">
-                                                <img src="{% static 'img/2.jpg' %}" alt="img">
+                                        <div class="product-thumb">
+                                            <div class="thumb-inner">
+                                                <a href="#">
+                                                    <img src="{{ p.image.url }}" alt="img">
+                                                </a>
+                                            </div>
+                                            <a href="#" class="button quick-wiew-button">
+                                                <i class="fas fa-search"></i>
                                             </a>
                                         </div>
-                                        <a href="#" class="button quick-wiew-button">
-                                            <i class="fas fa-search"></i>
-                                        </a>
-                                    </div>
-                                    <div class="product-info">
-                                        <h5 class="product-name product_title">
-                                            <a href="#">Plastic Dining Chair</a>
-                                        </h5>
-                                        <div class="group-info">
-                                            <div class="stars-rating">
-                                                <div class="star-rating">
+                                        <div class="product-info">
+                                            <h5 class="product-name product_title">
+                                                <a href="#">{{ p.pdt_name }} </a>
+                                            </h5>
+                                            <div class="group-info">
+                                                <div class="stars-rating">
+                                                    <div class="star-rating">
 
-                                                    <i class="fas fa-star"></i>
-                                                    <i class="fas fa-star"></i>
-                                                    <i class="fas fa-star"></i>
-                                                    <i class="far fa-star"></i>
-                                                    <i class="far fa-star"></i>
+                                                        <i class="fas fa-star"></i>
+                                                        <i class="fas fa-star"></i>
+                                                        <i class="fas fa-star"></i>
+                                                        <i class="far fa-star"></i>
+                                                        <i class="far fa-star"></i>
 
+                                                    </div>
+                                                    <div class="count-star">
+                                                        (3)
+                                                    </div>
                                                 </div>
-                                                <div class="count-star">
-                                                    (3)
-                                                </div>
-                                            </div>
-                                            <div class="price">
-                                                <del>
+                                                <div class="price">
+                                                    {% comment %}<del>
                                                     €65
-                                                </del>
-                                                <ins>
-                                                    €45
-                                                </ins>
+                                                </del>{% endcomment %}
+                                                    <ins>
+                                                        {{ p.price }}
+                                                    </ins>
+                                                </div>
                                             </div>
                                         </div>
-                                    </div>
-                                    <div class="loop-form-add-to-cart">
-                                        <form class="cart">
-                                            <div class="single_variation_wrap">
-                                                <div class="quantity">
-                                                    <div class="control">
-                                                        <a class="btn-number qtyminus quantity-minus" href="#">-</a>
-                                                        <input type="text" data-step="1" data-min="0" value="1"
-                                                               title="Qty" class="input-qty qty" size="4">
-                                                        <a href="#" class="btn-number qtyplus quantity-plus">+</a>
+                                        <div class="loop-form-add-to-cart">
+                                            <form class="cart">
+                                                <div class="single_variation_wrap">
+                                                    <div class="quantity">
+                                                        <div class="control">
+                                                            <a class="btn-number qtyminus quantity-minus" href="#">-</a>
+                                                            <input type="text" data-step="1" data-min="0" value="1"
+                                                                   title="Qty" class="input-qty qty" size="4">
+                                                            <a href="#" class="btn-number qtyplus quantity-plus">+</a>
+                                                        </div>
                                                     </div>
+                                                    <a href="{% url 'product_list' %}{{ p.id }}"
+                                                       class="single_add_to_cart_button button">Add to cart
+                                                    </a>
                                                 </div>
-                                                <button class="single_add_to_cart_button button">Add to cart</button>
-                                            </div>
-                                            <div class="variations">
-                                                <div class="variation">
-                                                    <label class="variation-label">
-                                                        Capacity:
-                                                    </label>
-                                                    <div class="variation-value">
-                                                        <a href="#" class="change-value text">
-                                                            <span>10ml</span>
-                                                        </a>
-                                                        <a href="#" class="change-value text">
-                                                            <span>20ml</span>
-                                                        </a>
-                                                        <a href="#" class="change-value text">
-                                                            <span>50ml</span>
-                                                        </a>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </form>
-                                    </div>
-                                </div>
-                            </li>
-                            <li class="product-item product-type-variable col-lg-4 col-md-6 col-sm-6 col-xs-6 col-ts-12 style-1">
-                                <div class="product-inner equal-element">
-                                    <div class="product-top">
-                                        <div class="flash">
-											<span class="onnew">
-												<span class="text">
-													new
-												</span>
-											</span>
-                                        </div>
-                                        <div class="yith-wcwl-add-to-wishlist">
-                                            <div class="yith-wcwl-add-button">
-                                                <a href="#"><i class="far fa-heart"></i></a>
-                                            </div>
+                                            </form>
                                         </div>
                                     </div>
-                                    <div class="product-thumb">
-                                        <div class="thumb-inner">
-                                            <a href="#">
-                                                <img src="{% static 'img/2.jpg' %}" alt="img">
-                                            </a>
-                                        </div>
-                                        <a href="#" class="button quick-wiew-button">
-                                            <i class="fas fa-search"></i>
-                                        </a>
-                                    </div>
-                                    <div class="product-info">
-                                        <h5 class="product-name product_title">
-                                            <a href="#">Plastic Dining Chair</a>
-                                        </h5>
-                                        <div class="group-info">
-                                            <div class="stars-rating">
-                                                <div class="star-rating">
-                                                    <i class="fas fa-star"></i>
-                                                    <i class="fas fa-star"></i>
-                                                    <i class="fas fa-star"></i>
-                                                    <i class="far fa-star"></i>
-                                                    <i class="far fa-star"></i>
-                                                </div>
-                                                <div class="count-star">
-                                                    (3)
-                                                </div>
-                                            </div>
-                                            <div class="price">
-                                                <del>
-                                                    €65
-                                                </del>
-                                                <ins>
-                                                    €45
-                                                </ins>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="loop-form-add-to-cart">
-                                        <form class="cart">
-                                            <div class="single_variation_wrap">
-                                                <div class="quantity">
-                                                    <div class="control">
-                                                        <a class="btn-number qtyminus quantity-minus" href="#">-</a>
-                                                        <input type="text" data-step="1" data-min="0" value="1"
-                                                               title="Qty" class="input-qty qty" size="4">
-                                                        <a href="#" class="btn-number qtyplus quantity-plus">+</a>
-                                                    </div>
-                                                </div>
-                                                <button class="single_add_to_cart_button button">Add to cart</button>
-                                            </div>
-                                            <div class="variations">
-                                                <div class="variation">
-                                                    <label class="variation-label">
-                                                        Capacity:
-                                                    </label>
-                                                    <div class="variation-value">
-                                                        <a href="#" class="change-value text">
-                                                            <span>10ml</span>
-                                                        </a>
-                                                        <a href="#" class="change-value text">
-                                                            <span>20ml</span>
-                                                        </a>
-                                                        <a href="#" class="change-value text">
-                                                            <span>50ml</span>
-                                                        </a>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </form>
-                                    </div>
-                                </div>
-                            </li>
-                            <li class="product-item product-type-variable col-lg-4 col-md-6 col-sm-6 col-xs-6 col-ts-12 style-1">
-                                <div class="product-inner equal-element">
-                                    <div class="product-top">
-                                        <div class="flash">
-											<span class="onnew">
-												<span class="text">
-													new
-												</span>
-											</span>
-                                        </div>
-                                        <div class="yith-wcwl-add-to-wishlist">
-                                            <div class="yith-wcwl-add-button">
-                                                <a href="#"><i class="far fa-heart"></i></a>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="product-thumb">
-                                        <div class="thumb-inner">
-                                            <a href="#">
-                                                <img src="{% static 'img/2.jpg' %}" alt="img">
-                                            </a>
-                                        </div>
-                                        <a href="#" class="button quick-wiew-button">
-                                            <i class="fas fa-search"></i>
-                                        </a>
-                                    </div>
-                                    <div class="product-info">
-                                        <h5 class="product-name product_title">
-                                            <a href="#">Plastic Dining Chair</a>
-                                        </h5>
-                                        <div class="group-info">
-                                            <div class="stars-rating">
-                                                <div class="star-rating">
+                                </li>
+                            {% endfor %}
 
-                                                    <i class="fas fa-star"></i>
-                                                    <i class="fas fa-star"></i>
-                                                    <i class="fas fa-star"></i>
-                                                    <i class="far fa-star"></i>
-                                                    <i class="far fa-star"></i>
-
-                                                </div>
-                                                <div class="count-star">
-                                                    (3)
-                                                </div>
-                                            </div>
-                                            <div class="price">
-                                                <del>
-                                                    €65
-                                                </del>
-                                                <ins>
-                                                    €45
-                                                </ins>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="loop-form-add-to-cart">
-                                        <form class="cart">
-                                            <div class="single_variation_wrap">
-                                                <div class="quantity">
-                                                    <div class="control">
-                                                        <a class="btn-number qtyminus quantity-minus" href="#">-</a>
-                                                        <input type="text" data-step="1" data-min="0" value="1"
-                                                               title="Qty" class="input-qty qty" size="4">
-                                                        <a href="#" class="btn-number qtyplus quantity-plus">+</a>
-                                                    </div>
-                                                </div>
-                                                <button class="single_add_to_cart_button button">Add to cart</button>
-                                            </div>
-                                            <div class="variations">
-                                                <div class="variation">
-                                                    <label class="variation-label">
-                                                        Capacity:
-                                                    </label>
-                                                    <div class="variation-value">
-                                                        <a href="#" class="change-value text">
-                                                            <span>10ml</span>
-                                                        </a>
-                                                        <a href="#" class="change-value text">
-                                                            <span>20ml</span>
-                                                        </a>
-                                                        <a href="#" class="change-value text">
-                                                            <span>50ml</span>
-                                                        </a>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </form>
-                                    </div>
-                                </div>
-                            </li>
-                            <li class="product-item product-type-variable col-lg-4 col-md-6 col-sm-6 col-xs-6 col-ts-12 style-1">
-                                <div class="product-inner equal-element">
-                                    <div class="product-top">
-                                        <div class="flash">
-											<span class="onnew">
-												<span class="text">
-													new
-												</span>
-											</span>
-                                        </div>
-                                        <div class="yith-wcwl-add-to-wishlist">
-                                            <div class="yith-wcwl-add-button">
-                                                <a href="#"><i class="far fa-heart"></i></a>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="product-thumb">
-                                        <div class="thumb-inner">
-                                            <a href="#">
-                                                <img src="{% static 'img/2.jpg' %}" alt="img">
-                                            </a>
-                                        </div>
-                                        <a href="#" class="button quick-wiew-button">
-                                            <i class="fas fa-search"></i>
-                                        </a>
-                                    </div>
-                                    <div class="product-info">
-                                        <h5 class="product-name product_title">
-                                            <a href="#">Plastic Dining Chair</a>
-                                        </h5>
-                                        <div class="group-info">
-                                            <div class="stars-rating">
-                                                <div class="star-rating">
-
-                                                    <i class="fas fa-star"></i>
-                                                    <i class="fas fa-star"></i>
-                                                    <i class="fas fa-star"></i>
-                                                    <i class="far fa-star"></i>
-                                                    <i class="far fa-star"></i>
-
-                                                </div>
-                                                <div class="count-star">
-                                                    (3)
-                                                </div>
-                                            </div>
-                                            <div class="price">
-                                                <del>
-                                                    €65
-                                                </del>
-                                                <ins>
-                                                    €45
-                                                </ins>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="loop-form-add-to-cart">
-                                        <form class="cart">
-                                            <div class="single_variation_wrap">
-                                                <div class="quantity">
-                                                    <div class="control">
-                                                        <a class="btn-number qtyminus quantity-minus" href="#">-</a>
-                                                        <input type="text" data-step="1" data-min="0" value="1"
-                                                               title="Qty" class="input-qty qty" size="4">
-                                                        <a href="#" class="btn-number qtyplus quantity-plus">+</a>
-                                                    </div>
-                                                </div>
-                                                <button class="single_add_to_cart_button button">Add to cart</button>
-                                            </div>
-                                            <div class="variations">
-                                                <div class="variation">
-                                                    <label class="variation-label">
-                                                        Capacity:
-                                                    </label>
-                                                    <div class="variation-value">
-                                                        <a href="#" class="change-value text">
-                                                            <span>10ml</span>
-                                                        </a>
-                                                        <a href="#" class="change-value text">
-                                                            <span>20ml</span>
-                                                        </a>
-                                                        <a href="#" class="change-value text">
-                                                            <span>50ml</span>
-                                                        </a>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </form>
-                                    </div>
-                                </div>
-                            </li>
-                            <li class="product-item  col-lg-4 col-md-6 col-sm-6 col-xs-6 col-ts-12 style-1">
-                                <div class="product-inner equal-element">
-                                    <div class="product-top">
-                                        <div class="flash">
-											<span class="onnew">
-												<span class="text">
-													new
-												</span>
-											</span>
-                                        </div>
-                                        <div class="yith-wcwl-add-to-wishlist">
-                                            <div class="yith-wcwl-add-button">
-                                                <a href="#"><i class="far fa-heart"></i></a>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="product-thumb">
-                                        <div class="thumb-inner">
-                                            <a href="#">
-                                                <img src="{% static 'img/2.jpg' %}" alt="img">
-                                            </a>
-                                        </div>
-                                        <a href="#" class="button quick-wiew-button">
-                                            <i class="fas fa-search"></i>
-                                        </a>
-                                    </div>
-                                    <div class="product-info">
-                                        <h5 class="product-name product_title">
-                                            <a href="#">Plastic Dining Chair</a>
-                                        </h5>
-                                        <div class="group-info">
-                                            <div class="stars-rating">
-                                                <div class="star-rating">
-
-                                                    <i class="fas fa-star"></i>
-                                                    <i class="fas fa-star"></i>
-                                                    <i class="fas fa-star"></i>
-                                                    <i class="far fa-star"></i>
-                                                    <i class="far fa-star"></i>
-
-                                                </div>
-                                                <div class="count-star">
-                                                    (3)
-                                                </div>
-                                            </div>
-                                            <div class="price">
-                                                <del>
-                                                    €65
-                                                </del>
-                                                <ins>
-                                                    €45
-                                                </ins>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="loop-form-add-to-cart">
-                                        <form class="cart">
-                                            <div class="single_variation_wrap">
-                                                <div class="quantity">
-                                                    <div class="control">
-                                                        <a class="btn-number qtyminus quantity-minus" href="#">-</a>
-                                                        <input type="text" data-step="1" data-min="0" value="1"
-                                                               title="Qty" class="input-qty qty" size="4">
-                                                        <a href="#" class="btn-number qtyplus quantity-plus">+</a>
-                                                    </div>
-                                                </div>
-                                                <button class="single_add_to_cart_button button">Add to cart</button>
-                                            </div>
-                                            <div class="variations">
-                                                <div class="variation">
-                                                    <label class="variation-label">
-                                                        Capacity:
-                                                    </label>
-                                                    <div class="variation-value">
-                                                        <a href="#" class="change-value text">
-                                                            <span>10ml</span>
-                                                        </a>
-                                                        <a href="#" class="change-value text">
-                                                            <span>20ml</span>
-                                                        </a>
-                                                        <a href="#" class="change-value text">
-                                                            <span>50ml</span>
-                                                        </a>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </form>
-                                    </div>
-                                </div>
-                            </li>
-                            <li class="product-item product-type-variable col-lg-4 col-md-6 col-sm-6 col-xs-6 col-ts-12 style-1">
-                                <div class="product-inner equal-element">
-                                    <div class="product-top">
-                                        <div class="flash">
-											<span class="onnew">
-												<span class="text">
-													new
-												</span>
-											</span>
-                                        </div>
-                                        <div class="yith-wcwl-add-to-wishlist">
-                                            <div class="yith-wcwl-add-button">
-                                                <a href="#"><i class="far fa-heart"></i></a>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="product-thumb">
-                                        <div class="thumb-inner">
-                                            <a href="#">
-                                                <img src="{% static 'img/2.jpg' %}" alt="img">
-                                            </a>
-                                        </div>
-                                        <a href="#" class="button quick-wiew-button">
-                                            <i class="fas fa-search"></i>
-                                        </a>
-                                    </div>
-                                    <div class="product-info">
-                                        <h5 class="product-name product_title">
-                                            <a href="#">Plastic Dining Chair</a>
-                                        </h5>
-                                        <div class="group-info">
-                                            <div class="stars-rating">
-                                                <div class="star-rating">
-
-                                                    <i class="fas fa-star"></i>
-                                                    <i class="fas fa-star"></i>
-                                                    <i class="fas fa-star"></i>
-                                                    <i class="far fa-star"></i>
-                                                    <i class="far fa-star"></i>
-
-                                                </div>
-                                                <div class="count-star">
-                                                    (3)
-                                                </div>
-                                            </div>
-                                            <div class="price">
-                                                <del>
-                                                    €65
-                                                </del>
-                                                <ins>
-                                                    €45
-                                                </ins>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="loop-form-add-to-cart">
-                                        <form class="cart">
-                                            <div class="single_variation_wrap">
-                                                <div class="quantity">
-                                                    <div class="control">
-                                                        <a class="btn-number qtyminus quantity-minus" href="#">-</a>
-                                                        <input type="text" data-step="1" data-min="0" value="1"
-                                                               title="Qty" class="input-qty qty" size="4">
-                                                        <a href="#" class="btn-number qtyplus quantity-plus">+</a>
-                                                    </div>
-                                                </div>
-                                                <button class="single_add_to_cart_button button">Add to cart</button>
-                                            </div>
-                                            <div class="variations">
-                                                <div class="variation">
-                                                    <label class="variation-label">
-                                                        Capacity:
-                                                    </label>
-                                                    <div class="variation-value">
-                                                        <a href="#" class="change-value text">
-                                                            <span>10ml</span>
-                                                        </a>
-                                                        <a href="#" class="change-value text">
-                                                            <span>20ml</span>
-                                                        </a>
-                                                        <a href="#" class="change-value text">
-                                                            <span>50ml</span>
-                                                        </a>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </form>
-                                    </div>
-                                </div>
-                            </li>
-                            <li class="product-item product-type-variable col-lg-4 col-md-6 col-sm-6 col-xs-6 col-ts-12 style-1">
-                                <div class="product-inner equal-element">
-                                    <div class="product-top">
-                                        <div class="flash">
-											<span class="onnew">
-												<span class="text">
-													new
-												</span>
-											</span>
-                                        </div>
-                                        <div class="yith-wcwl-add-to-wishlist">
-                                            <div class="yith-wcwl-add-button">
-                                                <a href="#"><i class="far fa-heart"></i></a>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="product-thumb">
-                                        <div class="thumb-inner">
-                                            <a href="#">
-                                                <img src="{% static 'img/2.jpg' %}" alt="img">
-                                            </a>
-                                        </div>
-                                        <a href="#" class="button quick-wiew-button">
-                                            <i class="fas fa-search"></i>
-                                        </a>
-                                    </div>
-                                    <div class="product-info">
-                                        <h5 class="product-name product_title">
-                                            <a href="#">Plastic Dining Chair</a>
-                                        </h5>
-                                        <div class="group-info">
-                                            <div class="stars-rating">
-                                                <div class="star-rating">
-
-                                                    <i class="fas fa-star"></i>
-                                                    <i class="fas fa-star"></i>
-                                                    <i class="fas fa-star"></i>
-                                                    <i class="far fa-star"></i>
-                                                    <i class="far fa-star"></i>
-
-                                                </div>
-                                                <div class="count-star">
-                                                    (3)
-                                                </div>
-                                            </div>
-                                            <div class="price">
-                                                <del>
-                                                    €65
-                                                </del>
-                                                <ins>
-                                                    €45
-                                                </ins>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="loop-form-add-to-cart">
-                                        <form class="cart">
-                                            <div class="single_variation_wrap">
-                                                <div class="quantity">
-                                                    <div class="control">
-                                                        <a class="btn-number qtyminus quantity-minus" href="#">-</a>
-                                                        <input type="text" data-step="1" data-min="0" value="1"
-                                                               title="Qty" class="input-qty qty" size="4">
-                                                        <a href="#" class="btn-number qtyplus quantity-plus">+</a>
-                                                    </div>
-                                                </div>
-                                                <button class="single_add_to_cart_button button">Add to cart</button>
-                                            </div>
-                                            <div class="variations">
-                                                <div class="variation">
-                                                    <label class="variation-label">
-                                                        Capacity:
-                                                    </label>
-                                                    <div class="variation-value">
-                                                        <a href="#" class="change-value text">
-                                                            <span>10ml</span>
-                                                        </a>
-                                                        <a href="#" class="change-value text">
-                                                            <span>20ml</span>
-                                                        </a>
-                                                        <a href="#" class="change-value text">
-                                                            <span>50ml</span>
-                                                        </a>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </form>
-                                    </div>
-                                </div>
-                            </li>
-                            <li class="product-item  col-lg-4 col-md-6 col-sm-6 col-xs-6 col-ts-12 style-1">
-                                <div class="product-inner equal-element">
-                                    <div class="product-top">
-                                        <div class="flash">
-											<span class="onnew">
-												<span class="text">
-													new
-												</span>
-											</span>
-                                        </div>
-                                        <div class="yith-wcwl-add-to-wishlist">
-                                            <div class="yith-wcwl-add-button">
-                                                <a href="#"><i class="far fa-heart"></i></a>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="product-thumb">
-                                        <div class="thumb-inner">
-                                            <a href="#">
-                                                <img src="{% static 'img/2.jpg' %}" alt="img">
-                                            </a>
-                                        </div>
-                                        <a href="#" class="button quick-wiew-button">
-                                            <i class="fas fa-search"></i>
-                                        </a>
-                                    </div>
-                                    <div class="product-info">
-                                        <h5 class="product-name product_title">
-                                            <a href="#">Plastic Dining Chair</a>
-                                        </h5>
-                                        <div class="group-info">
-                                            <div class="stars-rating">
-                                                <div class="star-rating">
-
-                                                    <i class="fas fa-star"></i>
-                                                    <i class="fas fa-star"></i>
-                                                    <i class="fas fa-star"></i>
-                                                    <i class="far fa-star"></i>
-                                                    <i class="far fa-star"></i>
-
-                                                </div>
-                                                <div class="count-star">
-                                                    (3)
-                                                </div>
-                                            </div>
-                                            <div class="price">
-                                                <del>
-                                                    €65
-                                                </del>
-                                                <ins>
-                                                    €45
-                                                </ins>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="loop-form-add-to-cart">
-                                        <form class="cart">
-                                            <div class="single_variation_wrap">
-                                                <div class="quantity">
-                                                    <div class="control">
-                                                        <a class="btn-number qtyminus quantity-minus" href="#">-</a>
-                                                        <input type="text" data-step="1" data-min="0" value="1"
-                                                               title="Qty" class="input-qty qty" size="4">
-                                                        <a href="#" class="btn-number qtyplus quantity-plus">+</a>
-                                                    </div>
-                                                </div>
-                                                <button class="single_add_to_cart_button button">Add to cart</button>
-                                            </div>
-                                            <div class="variations">
-                                                <div class="variation">
-                                                    <label class="variation-label">
-                                                        Capacity:
-                                                    </label>
-                                                    <div class="variation-value">
-                                                        <a href="#" class="change-value text">
-                                                            <span>10ml</span>
-                                                        </a>
-                                                        <a href="#" class="change-value text">
-                                                            <span>20ml</span>
-                                                        </a>
-                                                        <a href="#" class="change-value text">
-                                                            <span>50ml</span>
-                                                        </a>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </form>
-                                    </div>
-                                </div>
-                            </li>
-                            <li class="product-item product-type-variable col-lg-4 col-md-6 col-sm-6 col-xs-6 col-ts-12 style-1">
-                                <div class="product-inner equal-element">
-                                    <div class="product-top">
-                                        <div class="flash">
-											<span class="onnew">
-												<span class="text">
-													new
-												</span>
-											</span>
-                                        </div>
-                                        <div class="yith-wcwl-add-to-wishlist">
-                                            <div class="yith-wcwl-add-button">
-                                                <a href="#"><i class="far fa-heart"></i></a>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="product-thumb">
-                                        <div class="thumb-inner">
-                                            <a href="#">
-                                                <img src="{% static 'img/2.jpg' %}" alt="img">
-                                            </a>
-                                        </div>
-                                        <a href="#" class="button quick-wiew-button">
-                                            <i class="fas fa-search"></i>
-                                        </a>
-                                    </div>
-                                    <div class="product-info">
-                                        <h5 class="product-name product_title">
-                                            <a href="#">Plastic Dining Chair</a>
-                                        </h5>
-                                        <div class="group-info">
-                                            <div class="stars-rating">
-                                                <div class="star-rating">
-
-                                                    <i class="fas fa-star"></i>
-                                                    <i class="fas fa-star"></i>
-                                                    <i class="fas fa-star"></i>
-                                                    <i class="far fa-star"></i>
-                                                    <i class="far fa-star"></i>
-
-                                                </div>
-                                                <div class="count-star">
-                                                    (3)
-                                                </div>
-                                            </div>
-                                            <div class="price">
-                                                <del>
-                                                    €65
-                                                </del>
-                                                <ins>
-                                                    €45
-                                                </ins>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="loop-form-add-to-cart">
-                                        <form class="cart">
-                                            <div class="single_variation_wrap">
-                                                <div class="quantity">
-                                                    <div class="control">
-                                                        <a class="btn-number qtyminus quantity-minus" href="#">-</a>
-                                                        <input type="text" data-step="1" data-min="0" value="1"
-                                                               title="Qty" class="input-qty qty" size="4">
-                                                        <a href="#" class="btn-number qtyplus quantity-plus">+</a>
-                                                    </div>
-                                                </div>
-                                                <button class="single_add_to_cart_button button">Add to cart</button>
-                                            </div>
-                                            <div class="variations">
-                                                <div class="variation">
-                                                    <label class="variation-label">
-                                                        Capacity:
-                                                    </label>
-                                                    <div class="variation-value">
-                                                        <a href="#" class="change-value text">
-                                                            <span>10ml</span>
-                                                        </a>
-                                                        <a href="#" class="change-value text">
-                                                            <span>20ml</span>
-                                                        </a>
-                                                        <a href="#" class="change-value text">
-                                                            <span>50ml</span>
-                                                        </a>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </form>
-                                    </div>
-                                </div>
-                            </li>
-                            <li class="product-item product-type-variable col-lg-4 col-md-6 col-sm-6 col-xs-6 col-ts-12 style-1">
-                                <div class="product-inner equal-element">
-                                    <div class="product-top">
-                                        <div class="flash">
-											<span class="onnew">
-												<span class="text">
-													new
-												</span>
-											</span>
-                                        </div>
-                                        <div class="yith-wcwl-add-to-wishlist">
-                                            <div class="yith-wcwl-add-button">
-                                                <a href="#"><i class="far fa-heart"></i></a>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="product-thumb">
-                                        <div class="thumb-inner">
-                                            <a href="#">
-                                                <img src="{% static 'img/2.jpg' %}" alt="img">
-                                            </a>
-                                        </div>
-                                        <a href="#" class="button quick-wiew-button">
-                                            <i class="fas fa-search"></i>
-                                        </a>
-                                    </div>
-                                    <div class="product-info">
-                                        <h5 class="product-name product_title">
-                                            <a href="#">Plastic Dining Chair</a>
-                                        </h5>
-                                        <div class="group-info">
-                                            <div class="stars-rating">
-                                                <div class="star-rating">
-
-                                                    <i class="fas fa-star"></i>
-                                                    <i class="fas fa-star"></i>
-                                                    <i class="fas fa-star"></i>
-                                                    <i class="far fa-star"></i>
-                                                    <i class="far fa-star"></i>
-
-                                                </div>
-                                                <div class="count-star">
-                                                    (3)
-                                                </div>
-                                            </div>
-                                            <div class="price">
-                                                <del>
-                                                    €65
-                                                </del>
-                                                <ins>
-                                                    €45
-                                                </ins>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="loop-form-add-to-cart">
-                                        <form class="cart">
-                                            <div class="single_variation_wrap">
-                                                <div class="quantity">
-                                                    <div class="control">
-                                                        <a class="btn-number qtyminus quantity-minus" href="#">-</a>
-                                                        <input type="text" data-step="1" data-min="0" value="1"
-                                                               title="Qty" class="input-qty qty" size="4">
-                                                        <a href="#" class="btn-number qtyplus quantity-plus">+</a>
-                                                    </div>
-                                                </div>
-                                                <button class="single_add_to_cart_button button">Add to cart</button>
-                                            </div>
-                                            <div class="variations">
-                                                <div class="variation">
-                                                    <label class="variation-label">
-                                                        Capacity:
-                                                    </label>
-                                                    <div class="variation-value">
-                                                        <a href="#" class="change-value text">
-                                                            <span>10ml</span>
-                                                        </a>
-                                                        <a href="#" class="change-value text">
-                                                            <span>20ml</span>
-                                                        </a>
-                                                        <a href="#" class="change-value text">
-                                                            <span>50ml</span>
-                                                        </a>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </form>
-                                    </div>
-                                </div>
-                            </li>
-                            <li class="product-item product-type-variable col-lg-4 col-md-6 col-sm-6 col-xs-6 col-ts-12 style-1">
-                                <div class="product-inner equal-element">
-                                    <div class="product-top">
-                                        <div class="flash">
-											<span class="onnew">
-												<span class="text">
-													new
-												</span>
-											</span>
-                                        </div>
-                                        <div class="yith-wcwl-add-to-wishlist">
-                                            <div class="yith-wcwl-add-button">
-                                                <a href="#"><i class="far fa-heart"></i></a>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="product-thumb">
-                                        <div class="thumb-inner">
-                                            <a href="#">
-                                                <img src="{% static 'img/2.jpg' %}" alt="img">
-                                            </a>
-                                        </div>
-                                        <a href="#" class="button quick-wiew-button">
-                                            <i class="fas fa-search"></i>
-                                        </a>
-                                    </div>
-                                    <div class="product-info">
-                                        <h5 class="product-name product_title">
-                                            <a href="#">Plastic Dining Chair</a>
-                                        </h5>
-                                        <div class="group-info">
-                                            <div class="stars-rating">
-                                                <div class="star-rating">
-
-                                                    <i class="fas fa-star"></i>
-                                                    <i class="fas fa-star"></i>
-                                                    <i class="fas fa-star"></i>
-                                                    <i class="far fa-star"></i>
-                                                    <i class="far fa-star"></i>
-
-                                                </div>
-                                                <div class="count-star">
-                                                    (3)
-                                                </div>
-                                            </div>
-                                            <div class="price">
-                                                <del>
-                                                    €65
-                                                </del>
-                                                <ins>
-                                                    €45
-                                                </ins>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="loop-form-add-to-cart">
-                                        <form class="cart">
-                                            <div class="single_variation_wrap">
-                                                <div class="quantity">
-                                                    <div class="control">
-                                                        <a class="btn-number qtyminus quantity-minus" href="#">-</a>
-                                                        <input type="text" data-step="1" data-min="0" value="1"
-                                                               title="Qty" class="input-qty qty" size="4">
-                                                        <a href="#" class="btn-number qtyplus quantity-plus">+</a>
-                                                    </div>
-                                                </div>
-                                                <button class="single_add_to_cart_button button">Add to cart</button>
-                                            </div>
-                                            <div class="variations">
-                                                <div class="variation">
-                                                    <label class="variation-label">
-                                                        Capacity:
-                                                    </label>
-                                                    <div class="variation-value">
-                                                        <a href="#" class="change-value text">
-                                                            <span>10ml</span>
-                                                        </a>
-                                                        <a href="#" class="change-value text">
-                                                            <span>20ml</span>
-                                                        </a>
-                                                        <a href="#" class="change-value text">
-                                                            <span>50ml</span>
-                                                        </a>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </form>
-                                    </div>
-                                </div>
-                            </li>
-                            <li class="product-item product-type-variable col-lg-4 col-md-6 col-sm-6 col-xs-6 col-ts-12 style-1">
-                                <div class="product-inner equal-element">
-                                    <div class="product-top">
-                                        <div class="flash">
-											<span class="onnew">
-												<span class="text">
-													new
-												</span>
-											</span>
-                                        </div>
-                                        <div class="yith-wcwl-add-to-wishlist">
-                                            <div class="yith-wcwl-add-button">
-                                                <a href="#"><i class="far fa-heart"></i></a>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="product-thumb">
-                                        <div class="thumb-inner">
-                                            <a href="#">
-                                                <img src="{% static 'img/2.jpg' %}" alt="img">
-                                            </a>
-                                        </div>
-                                        <a href="#" class="button quick-wiew-button">
-                                            <i class="fas fa-search"></i>
-                                        </a>
-                                    </div>
-                                    <div class="product-info">
-                                        <h5 class="product-name product_title">
-                                            <a href="#">Plastic Dining Chair</a>
-                                        </h5>
-                                        <div class="group-info">
-                                            <div class="stars-rating">
-                                                <div class="star-rating">
-
-                                                    <i class="fas fa-star"></i>
-                                                    <i class="fas fa-star"></i>
-                                                    <i class="fas fa-star"></i>
-                                                    <i class="far fa-star"></i>
-                                                    <i class="far fa-star"></i>
-
-                                                </div>
-                                                <div class="count-star">
-                                                    (3)
-                                                </div>
-                                            </div>
-                                            <div class="price">
-                                                <del>
-                                                    €65
-                                                </del>
-                                                <ins>
-                                                    €45
-                                                </ins>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="loop-form-add-to-cart">
-                                        <form class="cart">
-                                            <div class="single_variation_wrap">
-                                                <div class="quantity">
-                                                    <div class="control">
-                                                        <a class="btn-number qtyminus quantity-minus" href="#">-</a>
-                                                        <input type="text" data-step="1" data-min="0" value="1"
-                                                               title="Qty" class="input-qty qty" size="4">
-                                                        <a href="#" class="btn-number qtyplus quantity-plus">+</a>
-                                                    </div>
-                                                </div>
-                                                <button class="single_add_to_cart_button button">Add to cart</button>
-                                            </div>
-                                            <div class="variations">
-                                                <div class="variation">
-                                                    <label class="variation-label">
-                                                        Capacity:
-                                                    </label>
-                                                    <div class="variation-value">
-                                                        <a href="#" class="change-value text">
-                                                            <span>10ml</span>
-                                                        </a>
-                                                        <a href="#" class="change-value text">
-                                                            <span>20ml</span>
-                                                        </a>
-                                                        <a href="#" class="change-value text">
-                                                            <span>50ml</span>
-                                                        </a>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </form>
-                                    </div>
-                                </div>
-                            </li>
                         </ul>
                         <div class="pagination clearfix style3">
                             <div class="nav-link">
-                                <a href="#" class="page-numbers"><i class="icon fa fa-angle-left"
-                                                                    aria-hidden="true"></i></a>
-                                <a href="#" class="page-numbers">1</a>
-                                <a href="#" class="page-numbers">2</a>
-                                <a href="#" class="page-numbers current">3</a>
-                                <a href="#" class="page-numbers"><i class="icon fa fa-angle-right"
-                                                                    aria-hidden="true"></i></a>
+                                {% if pdt.has_previous %}
+                                    <a href="?page={{ pdt.previous_page_number }}" class="page-numbers"><i
+                                            class="icon fa fa-angle-left" aria-hidden="true"></i></a>
+                                {% endif %}
+                                {% for pg in pdt.paginator.page_range %}
+                                    {% if pdt.number == pg %}
+                                        <a href="?page={{ pg }}" class="page-numbers current">{{ pg }}</a>
+                                    {% else %}
+                                        <a href="?page={{ pg }}" class="page-numbers">{{ pg }}</a>
+                                    {% endif %}
+                                {% endfor %}
+                                {% if pdt.has_next %}
+                                    <a href="?page={{ pdt.next_page_number }}" class="page-numbers"><i
+                                            class="icon fa fa-angle-right" aria-hidden="true"></i></a>
+                                {% endif %}
                             </div>
                         </div>
                     </div>
