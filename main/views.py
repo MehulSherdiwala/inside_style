@@ -1,3 +1,4 @@
+from django.contrib.admin.views.decorators import staff_member_required
 from django.core import serializers
 from django.contrib import messages
 from django.http import HttpResponse, JsonResponse
@@ -7,7 +8,7 @@ from django.core.paginator import Paginator, EmptyPage, InvalidPage
 # Create your views here.
 from django.template import RequestContext
 
-from main.models import City, State, User, Designer, Address, Contact, Product, Category
+from main.models import City, State, User, Designer, Address, Contact, Product, Category, Cart
 
 
 def home(request):
@@ -216,6 +217,80 @@ def fetch_pdt(request):
         'pdt': serializers.serialize('json', pdt),
         'cat': serializers.serialize('json', Category.objects.filter(pk=pdt[0].category_id))
     }
+    return JsonResponse(d)
+
+
+def product(request, pdt_id):
+    pdt = Product.objects.filter(pk=pdt_id)
+    return render(request, 'product.html', {'pdt': pdt[0]})
+
+
+def cart(request):
+    if 'id' in request.session:
+        user_id = request.session['id']
+        cart = Cart.objects.filter(user=user_id)
+
+        data = {}
+        i = 0
+        for c in cart:
+            pdt = Product.objects.filter(pk=c.product.id)[0]
+            data.update({i: {
+                'pdt': pdt,
+                'cart': c,
+                'price': pdt.price * c.qty
+            }})
+            i += 1
+        return render(request, 'cart.html', {'data': data})
+    else:
+        return redirect('/login')
+
+
+def addtocart(request):
+    if 'id' in request.session:
+        pdt_id = request.GET['pdt_id']
+        type = request.GET['type']
+        qty = int(request.GET['qty'])
+
+        cart_count = Cart.objects.filter(product=pdt_id, user=request.session['id']).count()
+
+        if cart_count > 0:
+            cart_item = Cart.objects.get(product=pdt_id, user=request.session['id'])
+            cart_item.qty += qty
+            cart_item.save()
+        else:
+            pdt = Product.objects.filter(pk=pdt_id)
+            user = User.objects.filter(pk=request.session['id'])
+            c = Cart.objects.create(qty=qty, type=type, product=pdt[0], user=user[0])
+            c.save()
+        d = {
+            'status': 'done'
+        }
+    else:
+        d = {'redirect': 'login'}
+    return JsonResponse(d)
+
+
+def update_addtocart(request):
+    type = request.GET['type']
+
+    if type == 'update':
+        cart_id = request.GET['cart_id']
+        qty = request.GET['qty']
+
+        cart_item = Cart.objects.get(pk=cart_id)
+        cart_item.qty = qty
+        cart_item.save()
+        d = {
+            'status': 'done'
+        }
+    else:
+        cart_id = request.GET['cart_id']
+
+        cart_item = Cart.objects.get(pk=cart_id)
+        cart_item.delete()
+        d = {
+            'status': 'done'
+        }
     return JsonResponse(d)
 
     return render(request, 'product_list.html')

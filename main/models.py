@@ -149,3 +149,14 @@ class DesignElement(models.Model):
 
     def __str__(self):
         return self.design_id.design_name
+
+
+class Cart(models.Model):
+    qty = models.IntegerField()
+    datetime = models.DateField(default=datetime.date.today)
+    type = models.IntegerField()
+    product = models.ForeignKey(Product, on_delete=models.CASCADE)
+    user = models.ForeignKey(User, on_delete=models.CASCADE)
+
+    def __str__(self):
+        return self.product.pdt_name

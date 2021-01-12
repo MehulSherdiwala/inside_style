@@ -2590,7 +2590,7 @@
         .pagination .page-numbers.current, .pagination .page-numbers:hover {
             color: #fff;
             border-color: transparent;
-            background-color: #85B839;
+            background-color: #b19777;
         }
 
         .pagination .page-numbers .icon {
@@ -2625,6 +2625,11 @@
 {% endblock %}
 
 {% block content %}
+    <div id='loaderNew'
+         style="top: 50%;left: 50%;position: fixed;width: 100%;height: 100%;display: none;background: #00000075;transform: translate(-50%,-50%);z-index: 1111">
+        <img src="{% static '/img/loader.gif' %}"
+             style="top: 50%;left: 50%;position: absolute;width: 122px;transform: translate(-50%,-50%);">
+    </div>
     <header class="pages-header bg-img valign parallaxie" data-background="{% static 'img/pg1.jpg' %}"
             data-overlay-dark="5" style="height: 42vh">
         <div class="container">
@@ -2717,13 +2722,13 @@
                                 <li class="product-item  col-lg-4 col-md-6 col-sm-6 col-xs-6 col-ts-12 style-1">
                                     <div class="product-inner equal-element">
                                         <div class="product-top">
-                                            <div class="flash">
-											<span class="onnew">
-												<span class="text">
-													new
-												</span>
-											</span>
-                                            </div>
+{#                                            <div class="flash">#}
+{#											<span class="onnew">#}
+{#												<span class="text">#}
+{#													new#}
+{#												</span>#}
+{#											</span>#}
+{#                                            </div>#}
                                             <div class="yith-wcwl-add-to-wishlist">
                                                 <div class="yith-wcwl-add-button">
                                                     <a href="#"><i class="far fa-heart"></i></a>
@@ -2732,17 +2737,17 @@
                                         </div>
                                         <div class="product-thumb">
                                             <div class="thumb-inner">
-                                                <a href="#">
+                                                <a href="{% url 'product' pdt_id=p.id %}">
                                                     <img src="{{ p.image.url }}" alt="img">
                                                 </a>
                                             </div>
-                                            <a href="#" class="button quick-wiew-button">
+                                            <a href="{% url 'product' pdt_id=p.id %}" class="button quick-wiew-button">
                                                 <i class="fas fa-search"></i>
                                             </a>
                                         </div>
                                         <div class="product-info">
                                             <h5 class="product-name product_title">
-                                                <a href="#">{{ p.pdt_name }} </a>
+                                                <a href="{% url 'product' pdt_id=p.id %}">{{ p.pdt_name }} </a>
                                             </h5>
                                             <div class="group-info">
                                                 <div class="stars-rating">
@@ -2780,9 +2785,9 @@
                                                             <a href="#" class="btn-number qtyplus quantity-plus">+</a>
                                                         </div>
                                                     </div>
-                                                    <a href="{% url 'product_list' %}{{ p.id }}"
-                                                       class="single_add_to_cart_button button">Add to cart
-                                                    </a>
+                                                    <button type="button" class="single_add_to_cart_button button" onclick="addToCart({{ p.id }})">
+                                                        Add to cart
+                                                    </button>
                                                 </div>
                                             </form>
                                         </div>
@@ -2815,4 +2820,33 @@
             </div>
         </div>
     </div>
+{% endblock %}
+
+{% block script %}
+    <script>
+        function addToCart(pdt_id){
+            $.ajax({
+                url: '/ajax/addtocart',
+                method: 'get',
+                data: {
+                    pdt_id: pdt_id,
+                    type: 1,
+                    qty: 1
+                },
+                    beforeSend: function () {
+                        $("#loaderNew").fadeIn();
+                    },
+                success:function (res){
+                    if (res.redirect != '' && typeof res.redirect != "undefined"){
+                        window.location = "{% url 'login' %}";
+                    } else {
+                        alert("Product added to cart successfully.....");
+                    }
+                },
+                    complete: function () {
+                        $("#loaderNew").fadeOut();
+                    }
+            })
+        }
+    </script>
 {% endblock %}
