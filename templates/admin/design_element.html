@@ -73,7 +73,7 @@
         <img src="{% static '/img/loader.gif' %}"
              style="top: 50%;left: 50%;position: absolute;width: 122px;transform: translate(-50%,-50%);">
     </div>
-    <h1 class="h1">Add branch</h1>
+    <h1 class="h1">Add Design Element</h1>
     <div id="content-main">
         <ul class="object-tools">
             <li>
@@ -151,6 +151,7 @@
         let count = 0;
         $(".select2").select2();
 
+        {# Calling Map Product #}
         $(".addlink").on('click', function () {
             let img = $('#img-container');
             $("#previewImg").css({
@@ -161,7 +162,7 @@
                 width: width
             });
         });
-
+        {# Mapping Product #}
         $("#map").on('click', function () {
             let pdt_id = $("#pdt_id").val();
             let html = "";
@@ -203,7 +204,7 @@
                 alert("Please Select Product First");
             }
         })
-
+        {# Crop Defination #}
         let d = $.selectAreas('#img-container', {
             onChanged: debugQtyAreas,
             areas: [
