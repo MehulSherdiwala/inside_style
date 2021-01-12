@@ -3,10 +3,11 @@ from django.contrib import messages
 from django.http import HttpResponse, JsonResponse
 from django.shortcuts import render, redirect
 from django.contrib.auth.models import User as adminUser
+from django.core.paginator import Paginator, EmptyPage, InvalidPage
 # Create your views here.
 from django.template import RequestContext
 
-from main.models import City, State, User, Designer, Address, Contact
+from main.models import City, State, User, Designer, Address, Contact, Product, Category
 
 
 def home(request):
@@ -175,7 +176,48 @@ def user_dashboard(request):
         return redirect('login')
 
 
+def designs(request):
+    return render(request, 'designs.html')
+
+
 def product_list(request):
+    pdt = Product.objects.all()
+
+    page_data = Paginator(pdt, 9)
+
+    try:
+        page = int(request.GET.get('page', '1'))
+    except:
+        page = 1
+
+    try:
+        pdt_list = page_data.page(page)
+    except(EmptyPage, InvalidPage):
+        pdt_list = page_data.page(page_data.num_pages)
+    data = {
+        'pdt': pdt_list
+    }
+    print(data)
+    return render(request, 'product_list.html', data)
+
+
+@staff_member_required
+def design_element(request):
+    return render(request, 'admin/design_element.html')
+
+
+def fetch_pdt(request):
+    pdt_id = request.GET['pdt_id']
+    # pdt = Category.objects.all().product_set.all()
+    pdt = Product.objects.filter(pk=pdt_id)
+    print(pdt)
+    data = serializers.serialize('json', pdt)
+    d = {
+        'pdt': serializers.serialize('json', pdt),
+        'cat': serializers.serialize('json', Category.objects.filter(pk=pdt[0].category_id))
+    }
+    return JsonResponse(d)
+
     return render(request, 'product_list.html')
 
 def product(request):

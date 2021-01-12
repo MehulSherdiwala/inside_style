@@ -1,12 +1,18 @@
+from django.conf.urls import url
 from django.contrib import admin
 
 # Register your models here.
 from django.contrib.admin import AdminSite, SimpleListFilter
 from django import forms
 from django.contrib.auth.models import User as adminUser
+from django.http import HttpResponse
+from django.template.response import TemplateResponse
+from django.urls import path
+from djongo import models
 
-from main.models import State, City, Designer, User, Branch, Category, Product, Design, Contact, Address
+from main.models import State, City, Designer, User, Branch, Category, Product, Design, Contact, Address, DesignElement
 
+from . import views
 # Headers
 from main.views import contact
 
@@ -246,3 +252,50 @@ class ContactAdmin(admin.ModelAdmin):
 
 
 admin.site.register(Contact, ContactAdmin)
+
+
+# my dummy model
+class DesignEle(models.Model):
+    class Meta:
+        verbose_name_plural = 'Design Element'
+        app_label = 'main'
+
+
+def my_custom_view(request):
+    return HttpResponse(request, '<h1>hello</h1>')
+
+
+# class DesignEleAdmin(admin.ModelAdmin):
+#     model = DesignEle
+#
+#     def get_urls(self):
+#         view_name = '{}_{}_changelist'.format(
+#             self.model._meta.app_label, self.model._meta.model_name)
+#         return [
+#             path('my_admin_path/', my_custom_view, name=view_name),
+#         ]
+
+
+# admin.site.register(DesignEle, DesignEleAdmin)
+
+
+class DesignEleAdmin(admin.ModelAdmin):
+    def get_urls(self):
+        urls = super().get_urls()
+        my_urls = [
+            path('add/', self.map_product, name="map_product"),
+        ]
+        return my_urls + urls
+
+    def map_product(self, request):
+        pdt = Product.objects.filter(status=True)
+
+        context = dict(
+            self.admin_site.each_context(request),
+            pdt=pdt
+        )
+
+        return TemplateResponse(request, "admin/design_element.html", context)
+
+
+admin.site.register(DesignEle, DesignEleAdmin)
