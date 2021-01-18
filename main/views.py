@@ -224,6 +224,14 @@ def product(request, pdt_id):
     pdt = Product.objects.filter(pk=pdt_id)
     return render(request, 'product.html', {'pdt': pdt[0]})
 
+    # return render(request, 'product_list.html')
+
+
+# def product(request):
+#   return render(request, 'product.html')
+
+
+# cart
 
 def cart(request):
     if 'id' in request.session:
@@ -293,10 +301,14 @@ def update_addtocart(request):
         }
     return JsonResponse(d)
 
-    return render(request, 'product_list.html')
 
-def product(request):
-    return render(request, 'product.html')
+def checkout(request):
+    return render(request, "checkout.html")
 
-def cart(request):
-    return render(request, 'cart.html')
+
+def order_test(request):
+    return render(request, "order_test.html")
+
+
+def order(request):
+    return render(request, "order.html")

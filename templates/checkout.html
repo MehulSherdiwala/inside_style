@@ -1,0 +1,2132 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block styles %}
+
+    <style>
+
+body {
+	font-family: 'Open Sans', sans-serif;
+	font-size: 14px;
+	line-height: 24px;
+	color: #888;
+	overflow-x: hidden;
+}
+label {
+	font-weight: normal;
+}
+a {
+	color: inherit;
+	text-decoration: none;
+}
+a:hover, a:focus, a:active {
+	text-decoration: none;
+	outline: none;
+	color: #222222;
+}
+img {
+	max-width: 100%;
+	height: auto;
+}
+ul, ol {
+	margin: 0;
+	padding-left: 17px;
+}
+ul ul,
+ul ol,
+ol ol,
+ol ul {
+	padding-left: 17px;
+}
+h1, h2, h3, h4, h5, h6 {
+	line-height: 1.428;
+	font-weight: normal;
+	color: #000000;
+	margin-top: 0;
+}
+h1 {
+	font-size: 36px;
+}
+h2 {
+	font-size: 30px;
+}
+h3 {
+	font-size: 24px;
+}
+h4 {
+	font-size: 20px;
+}
+h5 {
+	font-size: 18px;
+}
+h6 {
+	font-size: 16px;
+}
+p {
+	margin-bottom: 20px;
+}
+blockquote, q {
+	font-weight: 600;
+	display: inline-block;
+	border-left: none;
+	color: #333;
+	font-size: 16px;
+	line-height: 26px;
+	border-bottom: 1px solid #f2f2f2;
+	border-top: 1px solid #f2f2f2;
+	padding: 20px 0;
+	margin-top: 10px;
+	margin-bottom: 38px;
+}
+blockquote p, q p {
+	font-style: italic;
+	font-size: 14px;
+}
+blockquote::before {
+	content: url('../images/quote-item.png');
+	display: block;
+}
+/* ==========================================================================
+  1.1 FORM
+============================================================================ */
+.screen-reader-text {
+	clip: rect(1px, 1px, 1px, 1px);
+	clip-path: polygon(0px 0px, 0px 0px, 0px 0px, 0px 0px);
+	position: absolute !important;
+	white-space: nowrap;
+	height: 1px;
+	width: 1px;
+	overflow: hidden;
+}
+input[type="text"],
+input[type="email"],
+input[type="password"],
+input[type="tel"],
+input[type="search"],
+input[type="url"],
+textarea,
+select {
+	border: 1px solid #eeeeee;
+	padding: 7px 20px;
+	max-width: 100%;
+	background: none;
+}
+input[type="text"],
+input[type="email"],
+input[type="password"],
+input[type="tel"],
+input[type="search"],
+input[type="url"] {
+	height: 42px;
+	border-radius: 42px;
+}
+textarea {
+	line-height: 28px;
+	padding: 11px 26px;
+	height: auto;
+	width: 100%;
+	border-radius: 8px;
+}
+select {
+	font-size: 15px;
+	color: #000000;
+	padding: 0 21px;
+}
+option {
+	padding: 5px 21px;
+	height: 30px;
+	line-height: 30px;
+}
+.button, button, input[type="submit"] {
+	display: inline-block;
+	padding: 9px 20px;
+	color: #fff;
+	border: none;
+	text-align: center;
+	text-transform: uppercase;
+	font-size: 12px;
+	font-weight: 700;
+	-webkit-transition: all 0.4s ease 0s;
+	-moz-transition: all 0.4s ease 0s;
+	-o-transition: all 0.4s ease 0s;
+	transition: all 0.4s ease 0s;
+	border-radius: 40px;
+}
+input[type="text"]:focus,
+input[type="number"]:focus,
+input[type="search"]:focus,
+input[type="email"]:focus,
+input[type="password"]:focus,
+input[type="tel"]:focus,
+input[type="url"]:focus,
+textarea:focus,
+button:focus,
+select:focus {
+	outline: none;
+	border-color: #e6e6e6 !important;
+}
+:focus {
+	outline: none;
+}
+::-webkit-input-placeholder {
+	text-align: inherit;
+	color: inherit;
+	opacity: 1;
+	filter: alpha(opacity=100);
+}
+:-moz-placeholder {
+	/* Firefox 18- */
+	text-align: inherit;
+	color: inherit;
+	opacity: 1;
+	filter: alpha(opacity=100);
+}
+::-moz-placeholder {
+	/* Firefox 19+ */
+	text-align: inherit;
+	color: inherit;
+	opacity: 1;
+	filter: alpha(opacity=100);
+}
+:-ms-input-placeholder {
+	text-align: inherit;
+	color: inherit;
+	opacity: 1;
+	filter: alpha(opacity=100);
+}
+.return-message {
+	line-height: 20px;
+	padding: 10px 30px;
+	margin-top: 15px;
+}
+
+/*----------------------------Auto Clear--------------------------------*/
+@media (min-width: 1500px) {
+	.auto-clear .col-bg-1:nth-child(12n+1) {
+		clear: left;
+	}
+	.auto-clear .col-bg-2:nth-child(6n+1) {
+		clear: left;
+	}
+	.auto-clear .col-bg-15:nth-child(5n+1) {
+		clear: left;
+	}
+	.auto-clear .col-bg-3:nth-child(4n+1) {
+		clear: left;
+	}
+	.auto-clear .col-bg-4:nth-child(3n+1) {
+		clear: left;
+	}
+	.auto-clear .col-bg-6:nth-child(odd) {
+		clear: left;
+	}
+}
+@media (min-width: 1200px) and (max-width: 1499px) {
+	.auto-clear .col-lg-1:nth-child(12n+1) {
+		clear: left;
+	}
+	.auto-clear .col-lg-2:nth-child(6n+1) {
+		clear: left;
+	}
+	.auto-clear .col-lg-15:nth-child(5n+1) {
+		clear: left;
+	}
+	.auto-clear .col-lg-3:nth-child(4n+1) {
+		clear: left;
+	}
+	.auto-clear .col-lg-4:nth-child(3n+1) {
+		clear: left;
+	}
+	.auto-clear .col-lg-6:nth-child(odd) {
+		clear: left;
+	}
+}
+@media (min-width: 992px) and (max-width: 1199px) {
+	.auto-clear .col-md-1:nth-child(12n+1) {
+		clear: left;
+	}
+	.auto-clear .col-md-2:nth-child(6n+1) {
+		clear: left;
+	}
+	.auto-clear .col-md-15:nth-child(5n+1) {
+		clear: left;
+	}
+	.auto-clear .col-md-3:nth-child(4n+1) {
+		clear: left;
+	}
+	.auto-clear .col-md-4:nth-child(3n+1) {
+		clear: left;
+	}
+	.auto-clear .col-md-6:nth-child(odd) {
+		clear: left;
+	}
+}
+@media (min-width: 768px) and (max-width: 991px) {
+	.auto-clear .col-sm-1:nth-child(12n+1) {
+		clear: left;
+	}
+	.auto-clear .col-sm-2:nth-child(6n+1) {
+		clear: left;
+	}
+	.auto-clear .col-sm-15:nth-child(5n+1) {
+		clear: left;
+	}
+	.auto-clear .col-sm-3:nth-child(4n+1) {
+		clear: left;
+	}
+	.auto-clear .col-sm-4:nth-child(3n+1) {
+		clear: left;
+	}
+	.auto-clear .col-sm-6:nth-child(odd) {
+		clear: left;
+	}
+}
+@media (min-width: 480px) and (max-width: 767px) {
+	.auto-clear .col-xs-1:nth-child(12n+1) {
+		clear: left;
+	}
+	.auto-clear .col-xs-2:nth-child(6n+1) {
+		clear: left;
+	}
+	.auto-clear .col-xs-15:nth-child(5n+1) {
+		clear: left;
+	}
+	.auto-clear .col-xs-3:nth-child(4n+1) {
+		clear: left;
+	}
+	.auto-clear .col-xs-4:nth-child(3n+1) {
+		clear: left;
+	}
+	.auto-clear .col-xs-6:nth-child(odd) {
+		clear: left;
+	}
+}
+@media (max-width: 479px) {
+	.auto-clear .col-ts-1:nth-child(12n+1) {
+		clear: left;
+	}
+	.auto-clear .col-ts-2:nth-child(6n+1) {
+		clear: left;
+	}
+	.auto-clear .col-ts-15:nth-child(5n+1) {
+		clear: left;
+	}
+	.auto-clear .col-ts-3:nth-child(4n+1) {
+		clear: left;
+	}
+	.auto-clear .col-ts-4:nth-child(3n+1) {
+		clear: left;
+	}
+	.auto-clear .col-ts-6:nth-child(odd) {
+		clear: left;
+	}
+}
+/*-------------------Custom Bostrap Colum > 1500px---------------------*/
+@media (min-width: 1500px) {
+	.col-bg-1,
+	.col-bg-10,
+	.col-bg-11,
+	.col-bg-12,
+	.col-bg-2,
+	.col-bg-3,
+	.col-bg-4,
+	.col-bg-5,
+	.col-bg-6,
+	.col-bg-7,
+	.col-bg-8,
+	.col-bg-9 {
+		position: relative;
+		min-height: 1px;
+		padding-right: 15px;
+		padding-left: 15px
+	}
+	.col-bg-1,
+	.col-bg-2,
+	.col-bg-3,
+	.col-bg-4,
+	.col-bg-5,
+	.col-bg-6,
+	.col-bg-7,
+	.col-bg-8,
+	.col-bg-9,
+	.col-bg-10,
+	.col-bg-11 {
+		float: left;
+	}
+	.col-bg-12 {
+		width: 100%;
+	}
+	.col-bg-11 {
+		width: 91.66666667%;
+	}
+	.col-bg-10 {
+		width: 83.33333333%;
+	}
+	.col-bg-9 {
+		width: 75%;
+	}
+	.col-bg-8 {
+		width: 66.66666667%;
+	}
+	.col-bg-7 {
+		width: 58.33333333%;
+	}
+	.col-bg-6 {
+		width: 50%;
+	}
+	.col-bg-5 {
+		width: 41.66666667%;
+	}
+	.col-bg-4 {
+		width: 33.33333333%;
+	}
+	.col-bg-3 {
+		width: 25%;
+	}
+	.col-bg-2 {
+		width: 16.66666667%;
+	}
+	.col-bg-1 {
+		width: 8.33333333%;
+	}
+}
+/*-------------------Custom Bostrap Colum < 480px----------------------*/
+@media (max-width: 480px) {
+	.col-ts-1,
+	.col-ts-10,
+	.col-ts-11,
+	.col-ts-12,
+	.col-ts-2,
+	.col-ts-3,
+	.col-ts-4,
+	.col-ts-5,
+	.col-ts-6,
+	.col-ts-7,
+	.col-ts-8,
+	.col-ts-9 {
+		position: relative;
+		min-height: 1px;
+		padding-right: 15px;
+		padding-left: 15px;
+	}
+	.col-ts-1,
+	.col-ts-2,
+	.col-ts-3,
+	.col-ts-4,
+	.col-ts-5,
+	.col-ts-6,
+	.col-ts-7,
+	.col-ts-8,
+	.col-ts-9,
+	.col-ts-10,
+	.col-ts-11 {
+		float: left;
+	}
+	.col-ts-12 {
+		width: 100%;
+	}
+	.col-ts-11 {
+		width: 91.66666667%;
+	}
+	.col-ts-10 {
+		width: 83.33333333%;
+	}
+	.col-ts-9 {
+		width: 75%;
+	}
+	.col-ts-8 {
+		width: 66.66666667%;
+	}
+	.col-ts-7 {
+		width: 58.33333333%;
+	}
+	.col-ts-6 {
+		width: 50%;
+	}
+	.col-ts-5 {
+		width: 41.66666667%;
+	}
+	.col-ts-4 {
+		width: 33.33333333%;
+	}
+	.col-ts-3 {
+		width: 25%;
+	}
+	.col-ts-2 {
+		width: 16.66666667%;
+	}
+	.col-ts-1 {
+		width: 8.33333333%;
+	}
+	.col-ts-pull-12 {
+		right: 100%;
+	}
+	.col-ts-pull-11 {
+		right: 91.66666667%;
+	}
+	.col-ts-pull-10 {
+		right: 83.33333333%;
+	}
+	.col-ts-pull-9 {
+		right: 75%;
+	}
+	.col-ts-pull-8 {
+		right: 66.66666667%;
+	}
+	.col-ts-pull-7 {
+		right: 58.33333333%;
+	}
+	.col-ts-pull-6 {
+		right: 50%;
+	}
+	.col-ts-pull-5 {
+		right: 41.66666667%;
+	}
+	.col-ts-pull-4 {
+		right: 33.33333333%;
+	}
+	.col-ts-pull-3 {
+		right: 25%;
+	}
+	.col-ts-pull-2 {
+		right: 16.66666667%;
+	}
+	.col-ts-pull-1 {
+		right: 8.33333333%;
+	}
+	.col-ts-pull-0 {
+		right: auto;
+	}
+	.col-ts-push-12 {
+		left: 100%;
+	}
+	.col-ts-push-11 {
+		left: 91.66666667%;
+	}
+	.col-ts-push-10 {
+		left: 83.33333333%;
+	}
+	.col-ts-push-9 {
+		left: 75%;
+	}
+	.col-ts-push-8 {
+		left: 66.66666667%;
+	}
+	.col-ts-push-7 {
+		left: 58.33333333%;
+	}
+	.col-ts-push-6 {
+		left: 50%;
+	}
+	.col-ts-push-5 {
+		left: 41.66666667%;
+	}
+	.col-ts-push-4 {
+		left: 33.33333333%;
+	}
+	.col-ts-push-3 {
+		left: 25%;
+	}
+	.col-ts-push-2 {
+		left: 16.66666667%;
+	}
+	.col-ts-push-1 {
+		left: 8.33333333%;
+	}
+	.col-ts-push-0 {
+		left: auto;
+	}
+	.col-ts-offset-12 {
+		margin-left: 100%;
+	}
+	.col-ts-offset-11 {
+		margin-left: 91.66666667%;
+	}
+	.col-ts-offset-10 {
+		margin-left: 83.33333333%;
+	}
+	.col-ts-offset-9 {
+		margin-left: 75%;
+	}
+	.col-ts-offset-8 {
+		margin-left: 66.66666667%;
+	}
+	.col-ts-offset-7 {
+		margin-left: 58.33333333%;
+	}
+	.col-ts-offset-6 {
+		margin-left: 50%;
+	}
+	.col-ts-offset-5 {
+		margin-left: 41.66666667%;
+	}
+	.col-ts-offset-4 {
+		margin-left: 33.33333333%;
+	}
+	.col-ts-offset-3 {
+		margin-left: 25%;
+	}
+	.col-ts-offset-2 {
+		margin-left: 16.66666667%;
+	}
+	.col-ts-offset-1 {
+		margin-left: 8.33333333%;
+	}
+	.col-ts-offset-0 {
+		margin-left: 0;
+	}
+	.hidden-ts {
+		display: none;
+	}
+}
+/*---------------------Custom Bostrap 5 columns------------------------*/
+.col-bg-15,
+.col-bg-45,
+.col-lg-15,
+.col-lg-45,
+.col-md-15,
+.col-md-45,
+.col-sm-15,
+.col-sm-45,
+.col-xs-15,
+.col-xs-45,
+.col-ts-15,
+.col-ts-45 {
+	position: relative;
+	min-height: 1px;
+	padding-right: 15px;
+	padding-left: 15px
+}
+.col-ts-15,
+.col-ts-45 {
+	float: left;
+}
+.col-ts-15 {
+	width: 20%;
+}
+.col-ts-45 {
+	width: 80%;
+}
+@media (min-width: 480px) {
+	.col-xs-15,
+	.col-xs-45 {
+		float: left;
+	}
+	.col-xs-15 {
+		width: 20%;
+	}
+	.col-xs-45 {
+		width: 80%;
+	}
+}
+@media (min-width: 768px) {
+	.col-sm-15,
+	.col-sm-45 {
+		float: left;
+	}
+	.col-sm-15 {
+		width: 20%;
+	}
+	.col-sm-45 {
+		width: 80%;
+	}
+}
+@media (min-width: 992px) {
+	.col-md-15,
+	.col-md-45 {
+		float: left;
+	}
+	.col-md-15 {
+		width: 20%;
+	}
+	.col-md-45 {
+		width: 80%;
+	}
+}
+@media (min-width: 1200px) {
+	.col-lg-15,
+	.col-lg-45 {
+		float: left;
+	}
+	.col-lg-15 {
+		width: 20%;
+	}
+	.col-lg-45 {
+		width: 80%;
+	}
+}
+@media (min-width: 1500px) {
+	.col-bg-15,
+	.col-bg-45 {
+		float: left;
+	}
+	.col-bg-15 {
+		width: 20%;
+	}
+	.col-bg-45 {
+		width: 80%;
+	}
+}
+/*rows-space*/
+.rows-space-0 {
+	margin-bottom: 0;
+}
+.rows-space-5 {
+	margin-bottom: 5px;
+}
+.rows-space-10 {
+	margin-bottom: 10px;
+}
+.rows-space-15 {
+	margin-bottom: 15px;
+}
+.rows-space-20 {
+	margin-bottom: 20px;
+}
+.rows-space-25 {
+	margin-bottom: 25px;
+}
+.rows-space-30 {
+	margin-bottom: 30px;
+}
+.rows-space-35 {
+	margin-bottom: 35px;
+}
+.rows-space-40 {
+	margin-bottom: 40px;
+}
+.rows-space-45 {
+	margin-bottom: 45px;
+}
+.rows-space-50 {
+	margin-bottom: 50px;
+}
+.rows-space-55 {
+	margin-bottom: 55px;
+}
+.rows-space-60 {
+	margin-bottom: 60px;
+}
+.rows-space-65 {
+	margin-bottom: 65px;
+}
+.rows-space-70 {
+	margin-bottom: 70px;
+}
+.rows-space-75 {
+	margin-bottom: 75px;
+}
+.rows-space-80 {
+	margin-bottom: 80px;
+}
+.rows-space-85 {
+	margin-bottom: 85px;
+}
+.rows-space-90 {
+	margin-bottom: 90px;
+}
+.rows-space-85 {
+	margin-bottom: 85px;
+}
+.rows-space-100 {
+	margin-bottom: 100px;
+}
+.row10 {
+	margin-left: -10px;
+	margin-right: -10px;
+}
+.row10::before, .row10::after {
+	display: table;
+	content: "";
+}
+.row10::after {
+	clear: both;
+}
+.no-padding {
+	padding-left: 0 !important;
+	padding-right: 0 !important;
+}
+/*----------------------------AUTO CLEAR--------------------------------*/
+@media (min-width: 1200px) {
+	.auto-clear .vc_col-lg-1:nth-child(12n+1),
+	.auto-clear .vc_col-lg-2:nth-child(6n+1),
+	.auto-clear .vc_col-lg-15:nth-child(5n+1),
+	.auto-clear .vc_col-lg-3:nth-child(4n+1),
+	.auto-clear .vc_col-lg-4:nth-child(3n+1),
+	.auto-clear .vc_col-lg-6:nth-child(odd) {
+		clear: both;
+	}
+}
+@media (min-width: 1500px) {
+	.auto-clear .col-bg-1:nth-child(12n+1),
+	.auto-clear .col-bg-2:nth-child(6n+1),
+	.auto-clear .col-bg-15:nth-child(5n+1),
+	.auto-clear .col-bg-3:nth-child(4n+1),
+	.auto-clear .col-bg-4:nth-child(3n+1),
+	.auto-clear .col-bg-6:nth-child(odd) {
+		clear: both;
+	}
+}
+@media (min-width: 1200px) and (max-width: 1499px) {
+	.auto-clear .col-lg-1:nth-child(12n+1),
+	.auto-clear .col-lg-2:nth-child(6n+1),
+	.auto-clear .col-lg-15:nth-child(5n+1),
+	.auto-clear .col-lg-3:nth-child(4n+1),
+	.auto-clear .col-lg-4:nth-child(3n+1),
+	.auto-clear .col-lg-6:nth-child(odd) {
+		clear: both;
+	}
+}
+@media (min-width: 992px) and (max-width: 1199px) {
+	.auto-clear .vc_col-md-1:nth-child(12n+1),
+	.auto-clear .vc_col-md-2:nth-child(6n+1),
+	.auto-clear .vc_col-md-15:nth-child(5n+1),
+	.auto-clear .vc_col-md-3:nth-child(4n+1),
+	.auto-clear .vc_col-md-4:nth-child(3n+1),
+	.auto-clear .vc_col-md-6:nth-child(odd),
+	.auto-clear .col-md-1:nth-child(12n+1),
+	.auto-clear .col-md-2:nth-child(6n+1),
+	.auto-clear .col-md-15:nth-child(5n+1),
+	.auto-clear .col-md-3:nth-child(4n+1),
+	.auto-clear .col-md-4:nth-child(3n+1),
+	.auto-clear .col-md-6:nth-child(odd) {
+		clear: both;
+	}
+}
+@media (min-width: 768px) and (max-width: 991px) {
+	.auto-clear .vc_col-sm-1:nth-child(12n+1),
+	.auto-clear .vc_col-sm-2:nth-child(6n+1),
+	.auto-clear .vc_col-sm-15:nth-child(5n+1),
+	.auto-clear .vc_col-sm-3:nth-child(4n+1),
+	.auto-clear .vc_col-sm-4:nth-child(3n+1),
+	.auto-clear .vc_col-sm-6:nth-child(odd),
+	.auto-clear .col-sm-1:nth-child(12n+1),
+	.auto-clear .col-sm-2:nth-child(6n+1),
+	.auto-clear .col-sm-15:nth-child(5n+1),
+	.auto-clear .col-sm-3:nth-child(4n+1),
+	.auto-clear .col-sm-4:nth-child(3n+1),
+	.auto-clear .col-sm-6:nth-child(odd) {
+		clear: both;
+	}
+}
+@media (min-width: 480px) and (max-width: 767px) {
+	.auto-clear .col-xs-1:nth-child(12n+1),
+	.auto-clear .col-xs-2:nth-child(6n+1),
+	.auto-clear .col-xs-15:nth-child(5n+1),
+	.auto-clear .col-xs-3:nth-child(4n+1),
+	.auto-clear .col-xs-4:nth-child(3n+1),
+	.auto-clear .col-xs-6:nth-child(odd) {
+		clear: both;
+	}
+}
+@media (max-width: 479px) {
+	.auto-clear .col-ts-1:nth-child(12n+1),
+	.auto-clear .col-ts-2:nth-child(6n+1),
+	.auto-clear .col-ts-15:nth-child(5n+1),
+	.auto-clear .col-ts-3:nth-child(4n+1),
+	.auto-clear .col-ts-4:nth-child(3n+1),
+	.auto-clear .col-ts-6:nth-child(odd) {
+		clear: both;
+	}
+}
+@media (max-width: 767px) {
+	.auto-clear .vc_col-xs-1:nth-child(12n+1),
+	.auto-clear .vc_col-xs-2:nth-child(6n+1),
+	.auto-clear .vc_col-xs-15:nth-child(5n+1),
+	.auto-clear .vc_col-xs-3:nth-child(4n+1),
+	.auto-clear .vc_col-xs-4:nth-child(3n+1),
+	.auto-clear .vc_col-xs-6:nth-child(odd) {
+		clear: both;
+	}
+}
+/*-----------------------CUSTOM COL > 1500---------------------------*/
+@media (min-width: 1500px) {
+	.col-bg-1,
+	.col-bg-10,
+	.col-bg-11,
+	.col-bg-12,
+	.col-bg-2,
+	.col-bg-3,
+	.col-bg-4,
+	.col-bg-5,
+	.col-bg-6,
+	.col-bg-7,
+	.col-bg-8,
+	.col-bg-9 {
+		position: relative;
+		min-height: 1px;
+		padding-right: 15px;
+		padding-left: 15px
+	}
+	.col-bg-1,
+	.col-bg-2,
+	.col-bg-3,
+	.col-bg-4,
+	.col-bg-5,
+	.col-bg-6,
+	.col-bg-7,
+	.col-bg-8,
+	.col-bg-9,
+	.col-bg-10,
+	.col-bg-11 {
+		float: left;
+	}
+	.col-bg-12 {
+		width: 100%;
+	}
+	.col-bg-11 {
+		width: 91.66666667%;
+	}
+	.col-bg-10 {
+		width: 83.33333333%;
+	}
+	.col-bg-9 {
+		width: 75%;
+	}
+	.col-bg-8 {
+		width: 66.66666667%;
+	}
+	.col-bg-7 {
+		width: 58.33333333%;
+	}
+	.col-bg-6 {
+		width: 50%;
+	}
+	.col-bg-5 {
+		width: 41.66666667%;
+	}
+	.col-bg-4 {
+		width: 33.33333333%;
+	}
+	.col-bg-3 {
+		width: 25%;
+	}
+	.col-bg-2 {
+		width: 16.66666667%;
+	}
+	.col-bg-1 {
+		width: 8.33333333%;
+	}
+}
+/*-----------------------CUSTOM COL < 480---------------------------*/
+@media (max-width: 479px) {
+	.col-ts-1,
+	.col-ts-10,
+	.col-ts-11,
+	.col-ts-12,
+	.col-ts-2,
+	.col-ts-3,
+	.col-ts-4,
+	.col-ts-5,
+	.col-ts-6,
+	.col-ts-7,
+	.col-ts-8,
+	.col-ts-9 {
+		position: relative;
+		min-height: 1px;
+		padding-right: 15px;
+		padding-left: 15px;
+	}
+	.col-ts-1,
+	.col-ts-2,
+	.col-ts-3,
+	.col-ts-4,
+	.col-ts-5,
+	.col-ts-6,
+	.col-ts-7,
+	.col-ts-8,
+	.col-ts-9,
+	.col-ts-10,
+	.col-ts-11 {
+		float: left;
+	}
+	.col-ts-12 {
+		width: 100%;
+	}
+	.col-ts-11 {
+		width: 91.66666667%;
+	}
+	.col-ts-10 {
+		width: 83.33333333%;
+	}
+	.col-ts-9 {
+		width: 75%;
+	}
+	.col-ts-8 {
+		width: 66.66666667%;
+	}
+	.col-ts-7 {
+		width: 58.33333333%;
+	}
+	.col-ts-6 {
+		width: 50%;
+	}
+	.col-ts-5 {
+		width: 41.66666667%;
+	}
+	.col-ts-4 {
+		width: 33.33333333%;
+	}
+	.col-ts-3 {
+		width: 25%;
+	}
+	.col-ts-2 {
+		width: 16.66666667%;
+	}
+	.col-ts-1 {
+		width: 8.33333333%;
+	}
+}
+/*-----------------------CUSTOM 5 COLUMNS---------------------------*/
+.col-bg-15,
+.col-bg-25,
+.col-bg-35,
+.col-bg-45,
+.col-lg-15,
+.col-lg-25,
+.col-lg-35,
+.col-lg-45,
+.col-md-15,
+.col-md-25,
+.col-md-35,
+.col-md-45,
+.col-sm-15,
+.col-sm-25,
+.col-sm-35,
+.col-sm-45,
+.col-xs-15,
+.col-xs-25,
+.col-xs-35,
+.col-xs-45,
+.col-ts-15,
+.col-ts-25,
+.col-ts-35,
+.col-ts-45 {
+	position: relative;
+	min-height: 1px;
+	padding-right: 15px;
+	padding-left: 15px
+}
+.col-ts-15,
+.col-ts-25,
+.col-ts-35,
+.col-ts-45 {
+	float: left;
+}
+.col-ts-15 {
+	width: 20%;
+}
+.col-ts-25 {
+	width: 40%;
+}
+.col-ts-35 {
+	width: 60%;
+}
+.col-ts-45 {
+	width: 80%;
+}
+@media (min-width: 480px) {
+	.col-xs-15,
+	.col-xs-25,
+	.col-xs-35,
+	.col-xs-45 {
+		float: left;
+	}
+	.col-xs-15 {
+		width: 20%;
+	}
+	.col-xs-25 {
+		width: 40%;
+	}
+	.col-xs-35 {
+		width: 60%;
+	}
+	.col-xs-45 {
+		width: 80%;
+	}
+}
+@media (min-width: 768px) {
+	.col-sm-15,
+	.col-sm-25,
+	.col-sm-35,
+	.col-sm-45 {
+		float: left;
+	}
+	.col-sm-15 {
+		width: 20%;
+	}
+	.col-sm-25 {
+		width: 40%;
+	}
+	.col-sm-35 {
+		width: 60%;
+	}
+	.col-sm-45 {
+		width: 80%;
+	}
+}
+@media (min-width: 992px) {
+	.col-md-15,
+	.col-md-25,
+	.col-md-35,
+	.col-md-45 {
+		float: left;
+	}
+	.col-md-15 {
+		width: 20%;
+	}
+	.col-md-25 {
+		width: 40%;
+	}
+	.col-md-35 {
+		width: 60%;
+	}
+	.col-md-45 {
+		width: 80%;
+	}
+}
+@media (min-width: 1200px) {
+	.col-lg-15,
+	.col-lg-25,
+	.col-lg-35,
+	.col-lg-45 {
+		float: left;
+	}
+	.col-lg-15 {
+		width: 20%;
+	}
+	.col-lg-25 {
+		width: 40%;
+	}
+	.col-lg-35 {
+		width: 60%;
+	}
+	.col-lg-45 {
+		width: 80%;
+	}
+}
+@media (min-width: 1500px) {
+	.col-bg-15,
+	.col-bg-25,
+	.col-bg-35,
+	.col-bg-45 {
+		float: left;
+	}
+	.col-bg-15 {
+		width: 20%;
+	}
+	.col-bg-25 {
+		width: 40%;
+	}
+	.col-bg-35 {
+		width: 60%;
+	}
+	.col-bg-45 {
+		width: 80%;
+	}
+}
+
+/*---------------------------------CHOSEN------------------------------*/
+
+/* -------------------- */
+/*   custom container   */
+/* -------------------- */
+
+/* -------------------- */
+/*      MAIN         */
+/* -------------------- */
+.main-content {
+	padding-bottom: 65px;
+}
+.main-content.main-content-inlookbook {
+	padding-bottom: 0;
+}
+.main-content.mansory {
+	padding-bottom: 120px;
+}
+.home-01 .main-content {
+	padding-bottom: 0;
+}
+
+
+
+/* -------------------- */
+/*      LOOKBOOK        */
+/* -------------------- */
+
+
+
+
+/*---------BREADCRUMB-----------*/
+.breadcrumb {
+	padding: 34px 0 30px;
+	background: #ffffff;
+	margin: 0;
+}
+.breadcrumb > li {
+	display: inline-block;
+	list-style: none;
+	font-weight: 600;
+	font-size: 14px;
+}
+.breadcrumb a {
+	color: #888888;
+
+}
+.breadcrumb > .active {
+	color: #222;
+}
+.breadcrumb > li + li:before {
+	padding: 0 8px;
+	content: "\f101";
+	font-family: 'FontAwesome';
+	font-weight: 400;
+}
+/*--------PAGINATION--------------*/
+.pagination {
+	display: block;
+	margin: 50px 0 0;
+	padding: 0;
+}
+.pagination .page-numbers {
+	display: inline-block;
+	width: 42px;
+	height: 42px;
+	line-height: 38px;
+	text-align: center;
+	border: 1px solid #aaa;
+	font-size: 16px;
+	color: #888;
+	font-weight: 600;
+	margin-left: 5px;
+	border-radius: 50%;
+}
+.pagination .page-numbers:first-child {
+	margin-left: 0;
+}
+.pagination .page-numbers.current, .pagination .page-numbers:hover {
+	color: #fff;
+	border-color: transparent;
+	background-color: #85B839;
+}
+.pagination .page-numbers .icon {
+	font-weight: 600;
+}
+.pagination.style1 {
+	text-align: right;
+}
+.pagination.style2 {
+	text-align: center;
+}
+.shop-grid-content .pagination {
+	margin-top: 10px;
+}
+.content-inlookbook .pagination {
+	margin-top: 10px;
+	margin-bottom: 60px
+}
+.main-content-blog.mansory .pagination {
+	margin-top: 10px;
+}
+
+/*check out*/
+.checkout-form {
+	display: inline-block;
+	padding: 40px 30px;
+	border: 1px solid #f3f3f3;
+	margin-bottom: 25px;
+	width: 100%;
+	border-radius: 8px;
+}
+.checkout-wrapp .row-col {
+	display: inline-block;
+	float: left;
+}
+.checkout-wrapp .row-col-1 {
+	width: 57.264957%;
+	padding-right: 15px;
+}
+.checkout-wrapp .row-col-2 {
+	width: 42.735043%;
+	padding-left: 135px;
+}
+.title-form {
+	font-size: 20px;
+	font-weight: 600;
+	color: #222222;
+	margin-bottom: 25px;
+	padding-bottom: 10px;
+	position: relative;
+}
+.title-form::before {
+	content: '';
+	position: absolute;
+	left: 0;
+	bottom: 0;
+	border-bottom: 1px solid #85B839;
+	width: 30px;
+}
+.shipping-address .form-row:not(.form-row-last) {
+	clear: left;
+}
+.shipping-address .form-row.form-row-first, .shipping-address .form-row.form-row-last {
+	display: inline-block;
+	width: calc(50% - 10px);
+	overflow: visible;
+}
+.shipping-address .form-row.form-row-last {
+	float: right;
+}
+.shipping-address .form-row .text {
+	display: block;
+	font-weight: 600;
+	font-size: 14px;
+	color: #888888;
+	text-transform: capitalize;
+}
+.checkout-wrapp .form-row .input-text {
+	width: 100%;
+}
+.checkout-wrapp .forn-row-col {
+	width: 33%;
+	display: inline-block;
+	padding: 0 8px;
+}
+.checkout-wrapp .forn-row-col.forn-row-col-1 {
+	padding-left: 0
+}
+.checkout-wrapp .forn-row-col.forn-row-col-3 {
+	padding-right: 0;
+	float: right;
+}
+.checkout-wrapp .chosen-container {
+	width: 100% !important;
+}
+.checkout-wrapp .chosen-container-single .chosen-single {
+	background: transparent;
+	color: #444444;
+	font-weight: 600;
+	text-transform: capitalize;
+}
+.checkout-wrapp .chosen-container-single .chosen-single div {
+	right: 10px;
+}
+.your-order .title-form {
+	margin-bottom: 35px;
+	position: relative;
+	padding-bottom: 10px;
+}
+.list-product-order {
+	padding: 0;
+	margin: 0;
+}
+.list-product-order li {
+	list-style: none;
+	overflow: hidden;
+	padding-bottom: 30px;
+	margin-bottom: 30px;
+	border-bottom: 1px solid #f3f3f3
+}
+.list-product-order li:last-child {
+	padding-bottom: 0;
+	border-bottom: 0;
+	margin-bottom: 35px;
+}
+.list-product-order .product-thumb {
+	float: left;
+	width: 100px;
+	margin-right: 30px;
+}
+.list-product-order .product-order-inner {
+	overflow: hidden;
+}
+.list-product-order .product-name {
+	font-size: 16px;
+	color: #333333;
+	margin-bottom: 5px;
+	margin-top: 5px;
+	position: relative;
+}
+.list-product-order .attributes-select {
+	font-size: 14px;
+	color: #888888;
+	text-transform: capitalize;
+	cursor: pointer;
+	margin-bottom: 5px;
+	display: inline-block;
+}
+.list-product-order .attributes-size {
+	text-transform: uppercase;
+}
+.list-product-order .price {
+	font-size: 16px;
+	color: #111111;
+	font-weight: 600;
+}
+.list-product-order .price .count {
+	color: #888881;
+}
+.your-order .order-total {
+	color: #333333;
+	font-weight: 600;
+}
+.your-order .order-total .title {
+	font-size: 16px;
+	text-transform: capitalize;
+}
+.your-order .order-total .total-price {
+	font-size: 20px;
+}
+.checkout-wrapp .button {
+	min-width: 110px;
+	background: transparent;
+	color: #333333;
+	border: 1px solid #e9e9e9;
+	margin-bottom: 50px;
+}
+.checkout-wrapp .button-payment {
+	float: right;
+	min-width: 135px;
+}
+.checkout-wrapp .button-payment::after {
+	content: "\f061";
+	font-family: "FontAwesome";
+	font-size: 13px;
+	color: #aaaaaa;
+	margin-left: 10px;
+}
+.checkout-wrapp .button:hover, .checkout-wrapp .button:hover:after, .button-control .btn-back-to-shipping:hover::before {
+	color: #ffffff;
+}
+.payment-method-wrapp .button-control {
+	float: right;
+}
+.payment-method .title-form {
+	margin-bottom: 35px;
+}
+.checkout-wrapp .group-button-payment .button {
+	margin-bottom: 20px;
+	margin-right: 15px;
+}
+.checkout-wrapp .group-button-payment .btn-credit-card {
+	min-width: 155px;
+	color: #ffffff;
+}
+.payment-method .form-row-card-number {
+	max-width: 360px;
+}
+.form-row-card-number .input-text {
+	text-align: center;
+}
+.payment-method-wrapp .button-control .button {
+	margin-left: 15px;
+}
+.payment-method-wrapp .button-control .btn-pay-now {
+	color: #ffffff;
+}
+.button-control .btn-back-to-shipping::before {
+	content: "\f060";
+	font-family: "FontAwesome";
+	font-size: 13px;
+	color: #aaaaaa;
+	margin-right: 10px;
+}
+.end-checkout {
+	text-align: center;
+	padding: 50px 30px;
+	margin-bottom: 0;
+}
+.end-checkout .icon {
+	display: inline-block;
+	width: 98px;
+	height: 98px;
+	border: 3px solid #555555;
+	border-radius: 50%;
+	line-height: 102px;
+	text-align: center;
+	margin-bottom: 25px;
+}
+.end-checkout .icon::before {
+	content: url("../images/icon-checkout.png");
+}
+.end-checkout .title-checkend {
+	font-size: 18px;
+	color: #222222;
+}
+.end-checkout .sub-title {
+	font-size: 14px;
+	color: #555555;
+	margin: 0 auto 40px;
+	max-width: 570px;
+}
+.end-checkout .button {
+	min-width: 200px;
+	margin-bottom: 0;
+	color: #ffffff;
+}
+.end-checkout .button:hover, .payment-method-wrapp .button-control .btn-pay-now:hover, .checkout-wrapp .group-button-payment .btn-credit-card:hover {
+	background: #ffffff !important;
+	color: #333333 !important;
+}
+
+/*-------------------------
+----------HOME 01----------
+--------------------------*/
+
+/* -------------------- */
+/*   RESPONSIVE      */
+/* -------------------- */
+@media (max-width: 1199px) {
+
+	/*checkout page*/
+	.checkout-wrapp .row-col-2 {
+		padding-left: 15px;
+	}
+
+	/*====================home 01==============*/
+	.product-item.style2 .product-thumb, .product-item.style2 .product-info {
+		display: block;
+		text-align: center;
+		padding: 0;
+		width: 100%
+	}
+	.product-item.style2 .product-thumb .thumb-inner img, .product-item.style2 .group-buttons {
+		margin: 0 auto;
+	}
+	.vereesa-tabs .tab-link li {
+		padding: 10px 0;
+	}
+	.slider-item.style1 .slider-inner .slider-infor, .slider-item.style3 .slider-inner .slider-infor, .slider-item.style2 .slider-inner .slider-infor,
+	.slider-item.style4 .slider-inner .slider-infor, .slider-item.style5 .slider-inner .slider-infor, .slider-item.style6 .slider-inner .slider-infor,
+	.slider-item.style7 .slider-inner .slider-infor, .slider-item.style8 .slider-inner .slider-infor, .slider-item.style9 .slider-inner .slider-infor,
+	.slider-item.style10 .slider-inner .slider-infor, .slider-item.style11 .slider-inner .slider-infor, .slider-item.style12 .slider-inner .slider-infor,
+	.slider-item.style13 .slider-inner .slider-infor, .slider-item.style14 .slider-inner .slider-infor, .slider-item.style15 .slider-inner .slider-infor,
+	.slider-item.style19 .slider-inner .slider-infor, .slider-item.style20 .slider-inner .slider-infor, .slider-item.style21 .slider-inner .slider-infor,
+	.slider-item.style22 .slider-inner .slider-infor, .slider-item.style23 .slider-inner .slider-infor, .slider-item.style24 .slider-inner .slider-infor,
+	.slider-item.style25 .slider-inner .slider-infor, .slider-item.style26 .slider-inner .slider-infor, .slider-item.style27 .slider-inner .slider-infor {
+		padding-right: 30px;
+		padding-left: 30px;
+	}
+	.item-banner.style3 .banner-content {
+		padding-left: 30px;
+	}
+	/*====================home 04==============*/
+	.vertical-style .mega-menu .vereesa-custommenu .widgettitle, .vertical-style .mega-menu .vereesa-custommenu ul li a {
+		color: #222222;
+	}
+	/*====================home 05==============*/
+	.vereesa-newsletter.style3 .submit-newsletter {
+		margin-left: 0;
+	}
+	.vereesa-newsletter.style3 .newsletter-head {
+		margin: 0;
+	}
+	/*====================home 06==============*/
+	.header-vertical .header {
+		left: -100%;
+	}
+	.header-vertical {
+		padding-left: 0;
+	}
+	/*====================home 07==============*/
+	.product-item.style-3 .product-thumb {
+		float: none;
+		max-width: 100%;
+		margin: 0;
+	}
+	.owl-products .product-item.style-3 .product-thumb img {
+		margin: 0 auto;
+	}
+	.product-item.style-3 .product-info {
+		text-align: center;
+	}
+	.product-item.style-3 .group-buttons {
+		display: none;
+	}
+	/*====================home 08==============*/
+	.vereesa-product.layout1 .head {
+		width: 100%;
+		padding-top: 0;
+		margin-bottom: 30px;
+		margin-right: 0;
+		padding-bottom: 70px;
+	}
+	.vereesa-product.layout1 .product-list-owl {
+		width: 100%;
+	}
+	.slick-slider.nav-center-left .slick-arrow {
+		top: 85px;
+		left: auto;
+		right: calc(50% - 80px);
+		transform: translateX(-50%);
+	}
+	.slick-slider.nav-center-left .slick-arrow:first-child {
+		left: calc(50% - 25px);
+	}
+	.vereesa-testimonials.default .testimonial-item {
+		padding-left: 15px;
+		padding-right: 15px;
+	}
+	/*====================home 09==============*/
+	.vereesa-countdown .box-count {
+		margin: 0 3px;
+		margin-bottom: 5px;
+	}
+	/*====================home 10==============*/
+	.product-item.style-6.product-type-variable .product-inner {
+		padding-bottom: 30px;
+	}
+	.vereesa-iconbox.default {
+		margin-bottom: 20px;
+		border: none;
+	}
+	.slider-item .title-big {
+		font-size: 26px;
+	}
+	.vereesa-contact-info .title {
+		margin-bottom: 20px;
+		font-size: 18px;
+	}
+	.banner-wrapp.rows-space-30 {
+		margin-bottom: 47px;
+	}
+	.main-content {
+		padding-bottom: 50px;
+	}
+	.vereesa-newsletter.style1 .title, .vereesa-newsletter.style2 .title,
+	.footer .widgettitle {
+		margin-top: 5px;
+	}
+}
+@media (max-width: 480px) {
+	.slider-item .title-big {
+		max-width: 100%;
+	}
+	.vereesa-blog-item.style2 .post-thumb {
+		float: none;
+		width: auto;
+	}
+	.vereesa-blog-item.style2 .blog-title {
+		margin-bottom: 30px;
+	}
+	.vereesa-blog-item.style2 .blog-info {
+		width: 100%;
+		padding: 0;
+		overflow: visible;
+	}
+	.coppyright {
+		font-size: 13px;
+	}
+	.product-item .product-inner {
+		text-align: center;
+	}
+	.product-list-owl .product-item .thumb-inner img {
+		margin: 0 auto;
+	}
+	/*footer*/
+	.vereesa-newsletter.style1 .newsletter-form-wrap .submit-newsletter {
+		padding-left: 10px;
+		padding-right: 10px;
+	}
+	/*single blog*/
+	.view-share .author-view, .view-share .share {
+		display: block;
+		float: none;
+	}
+	.comment-form .form-submit .controll {
+		float: none;
+		text-align: center;
+	}
+	/*short code*/
+	.pagination.style1 {
+		text-align: center;
+	}
+	/*login*/
+	.customer_login .login, .customer_login .register {
+		padding: 20px 15px 10px;
+	}
+	.customer_login .title-login {
+		padding: 15px;
+	}
+	/*contact page*/
+	.form-message, .form-contact-information {
+		padding: 20px 15px
+	}
+	.vereesa-contact-info .socials {
+		padding-top: 0;
+	}
+	.vereesa-contact-info .item {
+		margin-bottom: 20px;
+	}
+	/*shop page*/
+	.shop-top-control .select-form, .shop-top-control .grid-view-mode, .shop-top-control {
+		display: block;
+		width: 100%;
+		border: none;
+	}
+	.shop-top-control {
+		padding: 0;
+		margin-bottom: 10px;
+	}
+	.shop-top-control .grid-view-mode {
+		margin-bottom: 0;
+	}
+	/*lookbook*/
+	.sevice-box-content {
+		padding-left: 15px;
+		padding-right: 15px;
+	}
+	/*checkout page*/
+	.shipping-address .form-row.form-row-first, .shipping-address .form-row.form-row-last {
+		width: 100%;
+	}
+	.shipping-address .form-row.form-row-last {
+		float: none;
+	}
+	.checkout-wrapp .forn-row-col {
+		width: 100%;
+		padding: 0;
+	}
+	.payment-method .form-row-card-number {
+		max-width: 100%;
+	}
+	.list-product-order .product-thumb {
+		float: none;
+		width: auto;
+		margin-bottom: 20px;
+		margin-right: 0;
+	}
+
+
+}
+.button, button, input[type="submit"], .block-minicart .shopcart-icon .count, .load-more a:hover,
+.vereesa-newsletter.style1 .newsletter-form-wrap .submit-newsletter:hover, .product-item .button:hover, .customer_login input[type="submit"],
+.sevice-box-content .sevice-button:hover, .footer-device-mobile-item.device-cart .count-icon, .widget_filter_size li.active, .widget_filter_size li:hover,
+.product-item.style-list .single_variation_wrap > .button:hover, .shoppingcart-content .control-cart .button:hover, .checkout-wrapp .button:hover,
+.product-item .button.quick-wiew-button:hover, .checkout-wrapp .group-button-payment .btn-credit-card, .payment-method-wrapp .button-control .btn-pay-now, .end-checkout .button, .btn-zoom.open_qv:hover,
+.attribute_size .list-size a.active, .attribute_size .list-size a:hover, .tab-details-product .tab-link li a::after,
+.product-item.style2 .group-buttons .button:hover, .product-item.style-2 .group-buttons .added_to_cart:hover, .kt-popup-newsletter.style-2 .mfp-close,
+.shopcart-description .actions .button-viewcart:hover, .kt-popup-quickview .mfp-close, .vereesa-newsletter.style2 .newsletter-form-wrap .submit-newsletter:hover,
+.product-item.style-6 .loop-form-add-to-cart .button, .pinmap-buttom, .header-nav-wapper .vertical-wapper,
+.slider-item .slider-infor .button:hover, .product-item .loop-form-add-to-cart .button:hover, .list-category .category-item:hover {
+	background-color: #b19777;
+
+}
+.product-item .button:hover,
+input[type="text"]:focus,
+input[type="number"]:focus,
+input[type="search"]:focus,
+input[type="email"]:focus,
+input[type="password"]:focus,
+input[type="tel"]:focus,
+input[type="url"]:focus,
+textarea:focus,
+button:focus,
+select:focus, .sevice-box-content .sevice-button:hover, .widget_filter_size li.active, .widget_filter_size li:hover,
+.shoppingcart-content .control-cart .button:hover, .shipping-address .chosen-container.chosen-with-drop .chosen-single, .checkout-wrapp .button:hover,
+.checkout-wrapp .group-button-payment .btn-credit-card, .payment-method-wrapp .button-control .btn-pay-now, .end-checkout .button, .btn-zoom.open_qv:hover,
+.details-thumd .thumbnails_carousel .owl-item .active img, .attribute_size .list-size a.active, .attribute_size .list-size a:hover, .shopcart-description .actions .button-viewcart:hover,
+.vereesa-tabs .tab-link li.active a, .product-item.style-6 .loop-form-add-to-cart .button, .product-item .loop-form-add-to-cart .button:hover,
+.slider-item .slider-infor .button:hover, .product-item:hover .product-inner {
+
+	border-color: #b19777 !important;
+
+}
+a:hover, a:focus, a:active,
+.product-item.style-2 ul li a:hover, .quantity .btn-number:hover, .header-user-form-tabs .tab-link li.active,
+.review .view:hover, .review .s-comments:hover, .product-item.style-list .product-info-left .attributes-display li a:hover, .cart-form .product-remove:hover a:before,
+.cart-form .shop_table .product-name .attributes-select:hover, .cart-form .coupon .button:hover, .slick-slider.slider-lookbook.nav-center > .slick-arrow:hover, .slider-lookbook-item .view-the-look:hover,
+.list-product-order .attributes-select:hover, .header-language .vereesa-submenu > li > a:hover, .sidebar input[type="checkbox"]:checked + label::before,
+.product-item .yith-wcwl-add-to-wishlist > div a:hover::before, .main-menu .submenu > li:hover > a, .main-menu .submenu > li.active > a, .block-minicart .no-product .text span,
+.header-account .login .lost_password, .details-thumd .owl-nav div:hover, .details-infor .availability a,
+.details-infor .group-button .yith-wcwl-add-to-wishlist div a:hover::before, .details-infor .group-button .size-chart-wrapp .btn-size-chart a:hover::before,
+.tab-details-product .tab-link li.active a, .review_form .comment-form-review .stars a.active, .review_form .comment-form-review .stars a:hover,
+.related .slick-slider.nav-center > .slick-arrow:hover, .up-sells .slick-slider.nav-center > .slick-arrow:hover, .slider-item .button:hover, .slick-slider.nav-center > .slick-arrow:hover,
+.vereesa-iconbox.default .icon {
+	color: #b19777;
+
+}
+@media (min-width: 1367px) {
+	.banner-wrapp.rows-space-35 {
+		margin-bottom: 55px;
+	}
+	.vereesa-tabs.default.rows-space-40 {
+		margin-bottom: 60px;
+	}
+	.banner-wrapp.rows-space-60 {
+		margin-bottom: 80px;
+	}
+	.banner-wrapp.rows-space-30 {
+		margin-bottom: 47px;
+	}
+	.main-content {
+		padding-bottom: 85px;
+	}
+	.instagram-wrapp .custommenu-title-blog {
+		margin-top: 80px;
+	}
+	.home-slider-banner.rows-space-40 {
+		margin-bottom: 60px;
+	}
+	.vereesa-product.produc-featured.rows-space-65 {
+		margin-bottom: 82px;
+	}
+	.banner-wrapp.rows-space-65 {
+		margin-bottom: 85px;
+	}
+	.newsletter-wrapp.rows-space-70 {
+		margin-bottom: 90px;
+	}
+	.vereesa-blog-wraap.default {
+		padding-top: 78px;
+		padding-bottom: 83px;
+	}
+	.home-slider.fullwidth.rows-space-60 {
+		margin-bottom: 80px;
+	}
+	.vereesa-product.produc-featured.rows-space-40 {
+		margin-bottom: 60px;
+	}
+	.banner-pinmap-wrapp.rows-space-70 {
+		margin-bottom: 90px;
+	}
+	.banner-video-wrapp.rows-space-40.type2 {
+		margin-bottom: 60px;
+	}
+	.vereesa-product.layout1 {
+		padding: 90px 0 52px;
+	}
+}
+
+    </style>
+
+{% endblock %}
+
+{% block content %}
+
+     <header class="pages-header bg-img valign parallaxie" data-background="{% static 'img/pg1.jpg' %}"
+            data-overlay-dark="5" style="height: 42vh">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-12">
+                    <div class="cont text-center">
+                        <h1 style="margin-top: 50px;margin-bottom: 0;">Checkout</h1>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </header>
+
+<div class="main-content main-content-checkout">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-12">
+                <div class="breadcrumb-trail breadcrumbs">
+                    <ul class="trail-items breadcrumb">
+                        <li class="trail-item trail-begin">
+                            <a href="index.html">Home</a>
+                        </li>
+                        <li class="trail-item trail-end active">
+                            Checkout
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+        <h3 class="custom_blog_title">
+            Checkout
+        </h3>
+        <div class="checkout-wrapp">
+            <div class="shipping-address-form-wrapp">
+                <div class="shipping-address-form  checkout-form">
+                    <div class="row-col-1 row-col">
+                        <div class="shipping-address">
+                            <h3 class="title-form">
+                                Shipping Address
+                            </h3>
+                            <p class="form-row form-row-first">
+                                <label class="text">First name</label>
+                                <input title="first" type="text" class="input-text">
+                            </p>
+                            <p class="form-row form-row-last">
+                                <label class="text">Last name</label>
+                                <input title="last" type="text" class="input-text">
+                            </p>
+                            <p class="form-row forn-row-col forn-row-col-1">
+                                <label class="text">Country</label>
+                                <select title="country" data-placeholder="United Kingdom" class="chosen-select"
+                                        tabindex="1">
+                                    <option value="United States">United States</option>
+                                    <option value="United Kingdom">United Kingdom</option>
+                                    <option value="Afghanistan">Afghanistan</option>
+                                    <option value="Aland Islands">Aland Islands</option>
+                                    <option value="Albania">Albania</option>
+                                    <option value="Algeria">Algeria</option>
+                                    <option value="American Samoa">American Samoa</option>
+                                    <option value="Andorra">Andorra</option>
+                                    <option value="Angola">Angola</option>
+                                    <option value="Anguilla">Anguilla</option>
+                                    <option value="Antarctica">Antarctica</option>
+                                    <option value="Antigua and Barbuda">Antigua and Barbuda</option>
+                                    <option value="Argentina">Argentina</option>
+                                    <option value="Armenia">Armenia</option>
+                                    <option value="Aruba">Aruba</option>
+                                    <option value="Australia">Australia</option>
+                                    <option value="Austria">Austria</option>
+                                    <option value="Azerbaijan">Azerbaijan</option>
+                                    <option value="Bahamas">Bahamas</option>
+                                    <option value="Bahrain">Bahrain</option>
+                                    <option value="Bangladesh">Bangladesh</option>
+                                    <option value="Barbados">Barbados</option>
+                                    <option value="Belarus">Belarus</option>
+                                    <option value="Belgium">Belgium</option>
+                                    <option value="Belize">Belize</option>
+                                    <option value="Benin">Benin</option>
+                                    <option value="Bermuda">Bermuda</option>
+                                    <option value="Bhutan">Bhutan</option>
+                                </select>
+                            </p>
+                            <p class="form-row forn-row-col forn-row-col-2">
+                                <label class="text">State</label>
+                                <select title="state" data-placeholder="London" class="chosen-select" tabindex="1">
+                                    <option value="United States">London</option>
+                                    <option value="United Kingdom">tokyo</option>
+                                    <option value="Afghanistan">Seoul</option>
+                                    <option value="Aland Islands">Mexico city</option>
+                                    <option value="Albania">Mumbai</option>
+                                    <option value="Algeria">Delhi</option>
+                                    <option value="American Samoa">New York</option>
+                                    <option value="Andorra">Jakarta</option>
+                                    <option value="Angola">Sao Paulo</option>
+                                    <option value="Anguilla">Osaka</option>
+                                    <option value="Antarctica">Karachi</option>
+                                    <option value="Antigua and Barbuda">Matx-cơ-va</option>
+                                    <option value="Argentina">Toronto</option>
+                                    <option value="Armenia">Boston</option>
+                                </select>
+                            </p>
+                            <p class="form-row forn-row-col forn-row-col-3">
+                                <label class="text">City</label>
+                                <select title="city" data-placeholder="London" class="chosen-select" tabindex="1">
+                                    <option value="United States">London</option>
+                                    <option value="United Kingdom">tokyo</option>
+                                    <option value="Afghanistan">Seoul</option>
+                                    <option value="Aland Islands">Mexico city</option>
+                                    <option value="Albania">Mumbai</option>
+                                    <option value="Algeria">Delhi</option>
+                                    <option value="American Samoa">New York</option>
+                                    <option value="Andorra">Jakarta</option>
+                                    <option value="Angola">Sao Paulo</option>
+                                    <option value="Anguilla">Osaka</option>
+                                    <option value="Antarctica">Karachi</option>
+                                    <option value="Antigua and Barbuda">Matx-cơ-va</option>
+                                    <option value="Argentina">Toronto</option>
+                                    <option value="Armenia">Boston</option>
+                                </select>
+                            </p>
+                            <p class="form-row form-row-first">
+                                <label class="text">Zip code</label>
+                                <input title="zip" type="text" class="input-text">
+                            </p>
+                            <p class="form-row form-row-last">
+                                <label class="text">Address</label>
+                                <input title="address" type="text" class="input-text">
+                            </p>
+                        </div>
+                    </div>
+                    <div class="row-col-2 row-col">
+                        <div class="your-order">
+                            <h3 class="title-form">
+                                Your Order
+                            </h3>
+                            <ul class="list-product-order">
+                                <li class="product-item-order">
+                                    <div class="product-thumb">
+                                        <a href="#">
+                                            <img src="{% static 'img/2.jpg' %}" alt="img">
+                                        </a>
+                                    </div>
+                                    <div class="product-order-inner">
+                                        <h5 class="product-name">
+                                            <a href="#">3D Dining Chair</a>
+                                        </h5>
+                                        <span class="attributes-select attributes-color">Black,</span>
+                                        <span class="attributes-select attributes-size">XXL</span>
+                                        <div class="price">
+                                            €45
+                                            <span class="count">x1</span>
+                                        </div>
+                                    </div>
+                                </li>
+                                <li class="product-item-order">
+                                    <div class="product-thumb">
+                                        <a href="#">
+                                            <img src="{% static 'img/2.jpg' %}" alt="img">
+                                        </a>
+                                    </div>
+                                    <div class="product-order-inner">
+                                        <h5 class="product-name">
+                                            <a href="#">3D Dining Chair</a>
+                                        </h5>
+                                        <span class="attributes-select attributes-color">Black,</span>
+                                        <span class="attributes-select attributes-size">XXL</span>
+                                        <div class="price">
+                                            €45
+                                            <span class="count">x1</span>
+                                        </div>
+                                    </div>
+                                </li>
+                            </ul>
+                            <div class="order-total">
+									<span class="title">
+										Total Price:
+									</span>
+                                <span class="total-price">
+										€95
+									</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <a href="#" class="button button-payment">PAYMENT</a>
+            </div>
+            <div class="payment-method-wrapp">
+                <div class="payment-method-form checkout-form">
+                    <div class="row-col-1 row-col">
+                        <div class="payment-method">
+                            <h3 class="title-form">
+                                Payment Method
+                            </h3>
+                            <div class="group-button-payment">
+                                <a href="#" class="button btn-credit-card">CREDIT CARD</a>
+                                <a href="#" class="button btn-paypal">paypal</a>
+                            </div>
+                            <p class="form-row form-row-card-number">
+                                <label class="text">Card number</label>
+                                <input type="text" class="input-text" placeholder="xxx - xxx - xxx - xxx">
+                            </p>
+                            <p class="form-row forn-row-col forn-row-col-1">
+                                <label class="text">Month</label>
+                                <select title="month" data-placeholder="01" class="chosen-select" tabindex="1">
+                                    <option value="thang01">01</option>
+                                    <option value="thang02">02</option>
+                                    <option value="thang03">03</option>
+                                    <option value="thang04">04</option>
+                                    <option value="thang05">05</option>
+                                    <option value="thang06">06</option>
+                                    <option value="thang07">07</option>
+                                    <option value="thang08">08</option>
+                                    <option value="thang09">09</option>
+                                    <option value="thang10">10</option>
+                                    <option value="thang11">11</option>
+                                    <option value="thang12">12</option>
+                                </select>
+                            </p>
+                            <p class="form-row forn-row-col forn-row-col-2">
+                                <label class="text">Year</label>
+                                <select title="Year" data-placeholder="2017" class="chosen-select" tabindex="1">
+                                    <option value="nam2010">2010</option>
+                                    <option value="nam2011">2011</option>
+                                    <option value="nam2012">2012</option>
+                                    <option value="nam2013">2013</option>
+                                    <option value="nam2014">2014</option>
+                                    <option value="nam2015">2015</option>
+                                    <option value="nam2016">2016</option>
+                                    <option value="nam2017">2017</option>
+                                    <option value="nam2018">2018</option>
+                                    <option value="nam2019">2019</option>
+                                </select>
+                            </p>
+                            <p class="form-row forn-row-col forn-row-col-3">
+                                <label class="text">CVV</label>
+                                <select title="CVV" data-placeholder="238" class="chosen-select" tabindex="1">
+                                    <option value="cvv1">238</option>
+                                    <option value="cvv2">354</option>
+                                    <option value="cvv3">681</option>
+                                    <option value="cvv4">254</option>
+                                    <option value="cvv5">687</option>
+                                    <option value="cvv6">123</option>
+                                    <option value="cvv7">951</option>
+                                    <option value="cvv8">852</option>
+                                    <option value="cvv9">753</option>
+                                    <option value="vcc10">963</option>
+                                </select>
+                            </p>
+                        </div>
+                    </div>
+                    <div class="row-col-2 row-col">
+                        <div class="your-order">
+                            <h3 class="title-form">
+                                Your Order
+                            </h3>
+                            <ul class="list-product-order">
+                                <li class="product-item-order">
+                                    <div class="product-thumb">
+                                        <a href="#">
+                                            <img src="{% static 'img/2.jpg' %}" alt="img">
+                                        </a>
+                                    </div>
+                                    <div class="product-order-inner">
+                                        <h5 class="product-name">
+                                            <a href="#">3D Dining Chair</a>
+                                        </h5>
+                                        <span class="attributes-select attributes-color">Black,</span>
+                                        <span class="attributes-select attributes-size">XXL</span>
+                                        <div class="price">
+                                            €45
+                                            <span class="count">x1</span>
+                                        </div>
+                                    </div>
+                                </li>
+                                <li class="product-item-order">
+                                    <div class="product-thumb">
+                                        <a href="#">
+                                            <img src="{% static 'img/2.jpg' %}" alt="img">
+                                        </a>
+                                    </div>
+                                    <div class="product-order-inner">
+                                        <h5 class="product-name">
+                                            <a href="#">3D Dining Chair</a>
+                                        </h5>
+                                        <span class="attributes-select attributes-color">Black,</span>
+                                        <span class="attributes-select attributes-size">XXL</span>
+                                        <div class="price">
+                                            €45
+                                            <span class="count">x1</span>
+                                        </div>
+                                    </div>
+                                </li>
+                            </ul>
+                            <div class="order-total">
+									<span class="title">
+										Total Price:
+									</span>
+                                <span class="total-price">
+										€95
+									</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="button-control">
+                    <a href="#" class="button btn-back-to-shipping">BACK TO SHIPPING</a>
+                    <a href="#" class="button btn-pay-now">PAY NOW</a>
+                </div>
+            </div>
+            <div class="end-checkout-wrapp">
+                <div class="end-checkout checkout-form">
+                    <div class="icon">
+                    </div>
+                    <h3 class="title-checkend">
+                        Congratulation! Your order has been processed.
+                    </h3>
+                    <br>
+                    <a href="#" class="button btn-return">Return to Store</a>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+{% endblock %}
+
