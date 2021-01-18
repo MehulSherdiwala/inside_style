@@ -16,14 +16,15 @@
 
         .img-size {
             width: 100%;
-            height: auto;
+            height: 100%;
         }
 
         .right-side {
             width: 100%;
-            height: auto;
+            height: 570px;
             background-color: #dbdbdb;
             border-radius: 5px;
+            overflow: auto;
         }
 
         .product-list {
@@ -64,6 +65,50 @@
             height: 100px;
             width: 100px;
         }
+
+        .object-tools-submit {
+            font-size: 10px;
+            font-weight: bold;
+            padding-left: 0;
+            float: right;
+            position: relative;
+            margin-top: 10px;
+        }
+
+        .object-tools-submit li {
+            display: block;
+            float: left;
+            margin-left: 5px;
+            height: 16px;
+        }
+
+        .object-tools-submit button {
+            border-radius: 15px;
+        }
+
+        .object-tools-submit button {
+            display: block;
+            float: left;
+            padding: 3px 12px;
+            background: #999;
+            font-weight: 400;
+            font-size: 11px;
+            text-transform: uppercase;
+            color: #fff;
+            border: none;
+            height: 30px;
+            letter-spacing: 2px;
+        }
+
+        .object-tools-submit button:focus,
+        .object-tools-submit button:hover {
+            background-color: #417690;
+        }
+
+        .object-tools-submit button:focus {
+            text-decoration: none;
+        }
+
     </style>
 {% endblock %}
 
@@ -81,14 +126,22 @@
                     Map Product
                 </a>
             </li>
+            <li>
+                <a href="javascript:void(0);" class="addlink" data-toggle="modal" data-target="#selectImagModal">
+                    Select Image
+                </a>
+            </li>
         </ul>
-        <div class="row">
-            <div class="col-8">
-                <img src="{% static 'img/portfolio/project1/1.jpg' %}" alt="" class="img-size" id="img-container">
-            </div>
-            <div class="col-4 right-side">
-                <ul class="product-list">
-                    {% comment %}<li>
+        <form action="" method="post">
+            {% csrf_token %}
+            <div class="row">
+                <div class="col-8">
+                    <img src="{% static 'img/portfolio/project1/1.jpg' %}" alt="" class="img-size" id="img-container">
+                    <input type="hidden" name="image" id="hidden-img-container">
+                </div>
+                <div class="col-4 right-side">
+                    <ul class="product-list">
+                        {% comment %}<li>
                         <img src="{% static 'img/portfolio/project1/1.jpg' %}" alt="" class="inner-img">
                         <h3>Sofa</h3>
                         <span>Category</span>
@@ -96,9 +149,13 @@
                         <span>12000</span>
                         <i class="fa fa-times delete"></i>
                     </li>{% endcomment %}
-                </ul>
+                    </ul>
+                </div>
             </div>
-        </div>
+            <div class="object-tools-submit">
+                <button type="submit">Save</button>
+            </div>
+        </form>
     </div>
     <div class="modal fade" id="mapProductModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
          aria-hidden="true">
@@ -131,6 +188,38 @@
             </div>
         </div>
     </div>
+    <div class="modal fade" id="selectImagModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+         aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLabel">Select Image</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <div class="form-group">
+                        <label>Product Name</label>
+                        <select id="design" class="form-control select2" style="width: 100%">
+                            <option value="0">Select</option>
+                            {% for d in design %}
+                                <option value="{{ d.image }}">{{ d.design_name }}</option>
+                            {% endfor %}
+                        </select>
+                    </div>
+                    <div class="form-group" style="overflow: hidden;">
+                        <img src="" id="selectImgPreview" style="height: 200px;">
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancel</button>
+                    <button type="button" class="btn btn-primary" data-dismiss="modal" id="saveImage">Save Image
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
 {% endblock %}
 
 {% block footer %}
@@ -149,6 +238,7 @@
         let height = 60;
         let width = 100;
         let count = 0;
+        let img = '';
         $(".select2").select2();
 
         {# Calling Map Product #}
@@ -187,6 +277,11 @@
                             "&nbsp;|&nbsp;" +
                             "<span>" + pdt_obj[0].fields.price + "</span>" +
                             "<i class='fa fa-times delete'></i>" +
+                            "<input type='hidden' name='pdt_id' value='" + pdt_obj[0].pk + "'>" +
+                            "<input type='hidden' name='x' value='" + x + "'>" +
+                            "<input type='hidden' name='y' value='" + y + "'>" +
+                            "<input type='hidden' name='height' value='" + height + "'>" +
+                            "<input type='hidden' name='width' value='" + width + "'>" +
                             "</li>";
 
                         $(".product-list").append(html);
@@ -227,6 +322,16 @@
             console.log(areas[id]);
             console.log(x);
         };
+
+        $("#design").on('change', function () {
+            $("#selectImgPreview").attr('src', '/media/' + $(this).val());
+        });
+
+        $("#saveImage").on('click', function () {
+            img = $("#design").val();
+            $("#img-container").attr('src', '/media/' + img);
+            $("#hidden-img-container").val(img);
+        });
     </script>
 
 

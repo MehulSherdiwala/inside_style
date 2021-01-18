@@ -5,7 +5,9 @@ from django.contrib import admin
 from django.contrib.admin import AdminSite, SimpleListFilter
 from django import forms
 from django.contrib.auth.models import User as adminUser
+from django.db.models import Count
 from django.http import HttpResponse
+from django.shortcuts import redirect
 from django.template.response import TemplateResponse
 from django.urls import path
 from djongo import models
@@ -256,14 +258,16 @@ admin.site.register(Contact, ContactAdmin)
 
 # my dummy model
 class DesignEle(models.Model):
+    pos = models.CharField(max_length=100)
+
     class Meta:
+        # model = DesignElement
         verbose_name_plural = 'Design Element'
         app_label = 'main'
 
 
-def my_custom_view(request):
-    return HttpResponse(request, '<h1>hello</h1>')
-
+# def my_custom_view(request):
+#     return HttpResponse(request, '<h1>hello</h1>')
 
 # class DesignEleAdmin(admin.ModelAdmin):
 #     model = DesignEle
@@ -280,22 +284,73 @@ def my_custom_view(request):
 
 
 class DesignEleAdmin(admin.ModelAdmin):
+
     def get_urls(self):
         urls = super().get_urls()
         my_urls = [
+            path('', self.display_list, name="display_list"),
             path('add/', self.map_product, name="map_product"),
         ]
         return my_urls + urls
 
-    def map_product(self, request):
-        pdt = Product.objects.filter(status=True)
+    def display_list(self, request):
+
+        dEle = DesignElement.objects.values('design_id').annotate(dcount=Count('design_id'))
+
+        data = {}
+        i = 0
+
+        for d in dEle:
+            design = Design.objects.filter(pk=d['design_id'])[0]
+            data.update({i: {
+                'design': design,
+                'count': d['dcount'],
+            }})
+            print(data)
+            i += 1
 
         context = dict(
             self.admin_site.each_context(request),
-            pdt=pdt
+            data=data
         )
 
-        return TemplateResponse(request, "admin/design_element.html", context)
+        return TemplateResponse(request, "admin/design_element_list.html", context)
+
+    def map_product(self, request):
+        if request.method == 'POST':
+            print(request.POST)
+            i = 0
+            image = request.POST.get('image')
+            pdt_id = request.POST.getlist('pdt_id')
+            x = request.POST.getlist('x')
+            y = request.POST.getlist('y')
+            height = request.POST.getlist('height')
+            width = request.POST.getlist('width')
+
+            design = Design.objects.filter(image=image)[0]
+
+            # print(x)
+            # print(request.POST['x'])
+            for p in pdt_id:
+                pdt = Product.objects.filter(pk=p)
+                dEle = DesignElement.objects.create(pos_X=x[i], pos_Y=y[i], width=width[i], height=height[i],
+                                                    pdt_id=pdt[0], design_id=design)
+                dEle.save()
+                i += 1
+
+            return redirect('/admin/main/designele/')
+
+        else:
+            pdt = Product.objects.filter(status=True)
+            design = Design.objects.filter(status=True)
+
+            context = dict(
+                self.admin_site.each_context(request),
+                pdt=pdt,
+                design=design
+            )
+
+            return TemplateResponse(request, "admin/design_element.html", context)
 
 
 admin.site.register(DesignEle, DesignEleAdmin)

@@ -3282,7 +3282,7 @@
                                                     </a>
                                                 </td>
                                                 <td class="product-name" data-title="Product">
-                                                    <a href="#" class="title">{{ value.pdt.pdt_name }}</a>
+                                                    <a href="{% url 'product' pdt_id=value.pdt.id %}" class="title">{{ value.pdt.pdt_name }}</a>
 
                                                 </td>
                                                 <td class="product-quantity" data-title="Quantity">
