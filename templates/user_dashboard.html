@@ -146,6 +146,11 @@
         .breadcrumb .breadcrumb-item.active {
             color: #b19777;
         }
+
+        .btn-success{
+            background-color: #b19777;
+            border-color: #b19777;
+        }
     </style>
 {% endblock %}
 {% block content %}
@@ -190,19 +195,19 @@
                             <nav class="dashboard-menu">
                                 <ul>
                                     <li class="active">
-                                        <a href="patient-dashboard.html">
+                                        <a href="{% url 'user_dashboard' %}">
                                             <i class="fas fa-user"></i>
                                             <span>Profile</span>
                                         </a>
                                     </li>
                                     <li>
-                                        <a href="favourites.html">
+                                        <a href="{% url 'order' %}">
                                             <i class="fas fa-cart-arrow-down"></i>
                                             <span>Order</span>
                                         </a>
                                     </li>
                                     <li>
-                                        <a href="change-password.html">
+                                        <a href="{% url 'cart' %}">
                                             <i class="fas fa-shopping-cart"></i>
                                             <span>Cart</span>
                                         </a>
@@ -305,6 +310,7 @@
                                         </div>
                                     </div>
                                 </div>
+                            <br>
                                 <div class="row">
                                     <div class="col-md-2 offset-5">
                                         <div class="form-group">
