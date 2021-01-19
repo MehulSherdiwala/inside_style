@@ -3242,7 +3242,8 @@
                     <nav aria-label="breadcrumb" class="page-breadcrumb">
                         <ol class="breadcrumb">
                             <li class="breadcrumb-item"><a href="{% url 'index' %}">Home</a></li>
-                            <li class="breadcrumb-item active" aria-current="page">Cart</li>
+                            <li class="breadcrumb-item"><a href="{% url 'cart' %}">Cart</a></li>
+                            <li class="breadcrumb-item active" aria-current="page">Checkout</li>
                         </ol>
                     </nav>
                 </div>
@@ -3329,12 +3330,12 @@
                                     </table>
                                 </form>
                                 <div class="control-cart">
-                                    <button class="button btn-continue-shopping">
+                                    <a href="{% url 'product_list' %}" class="button btn-continue-shopping">
                                         CONTINUE SHOPPING
-                                    </button>
-                                    <button class="button btn-cart-to-checkout">
+                                    </a>
+                                    <a href="{% url 'checkout' %}" class="button btn-cart-to-checkout">
                                         CHECK OUT
-                                    </button>
+                                    </a>
                                 </div>
                             </div>
                         </div>

@@ -28,6 +28,8 @@ urlpatterns = [
     path('product_list/', views.product_list, name="product_list"),
     path('admin/design_element/', views.design_element, name="design_element"),
     path('checkout/', views.checkout, name="checkout"),
-    path('order_test/', views.order_test, name="order"),
-    path('order/', views.order, name="order")
+    path('order/', views.order, name="order"),
+    path('addAddress/', views.addAddress, name="addAddress"),
+    path('placeOrder/', views.placeOrder, name="placeOrder"),
+    path('designProduct/<design_id>', views.designProduct, name="designProduct"),
 ]

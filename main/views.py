@@ -8,7 +8,8 @@ from django.core.paginator import Paginator, EmptyPage, InvalidPage
 # Create your views here.
 from django.template import RequestContext
 
-from main.models import City, State, User, Designer, Address, Contact, Product, Category, Cart
+from main.models import City, State, User, Designer, Address, Contact, Product, Category, Cart, Order, OrderItemPdt, \
+    Payment
 
 
 def home(request):
@@ -141,6 +142,7 @@ def user_dashboard(request):
             else:
                 addr = Address.objects.create(addr=request.POST['addr'], phone=request.POST['phone'],
                                               pincode=request.POST['pincode'],
+                                              name=user.username,
                                               city=City.objects.filter(pk=request.POST['city'])[0],
                                               user=user)
 
@@ -303,12 +305,77 @@ def update_addtocart(request):
 
 
 def checkout(request):
-    return render(request, "checkout.html")
+    if 'id' in request.session:
+        addr = Address.objects.filter(user=request.session['id'])
+        state = State.objects.all()
+        cart = Cart.objects.filter(user=request.session['id'])
 
-
-def order_test(request):
-    return render(request, "order_test.html")
+        data = {
+            'addr': addr,
+            'state': state,
+            'cart': cart,
+            'total': 0
+        }
+        return render(request, "checkout.html", data)
+    else:
+        return redirect('/login')
 
 
 def order(request):
-    return render(request, "order.html")
+    if 'id' in request.session:
+        user = User.objects.filter(pk=request.session['id'])[0]
+
+        order = OrderItemPdt.objects.select_related()
+        # order = OrderItemPdt.objects.filter(order__user=user)
+
+        data = {
+            'order': order,
+        }
+
+        return render(request, "order.html", data)
+
+    else:
+        return redirect('/login')
+
+
+def addAddress(request):
+    if request.method == 'POST':
+        user_id = request.session['id']
+        user = User.objects.filter(pk=user_id)[0]
+        addr = Address.objects.create(addr=request.POST['addr'], phone=request.POST['phone'],
+                                      pincode=request.POST['pincode'],
+                                      name=request.POST['name'],
+                                      city=City.objects.filter(pk=request.POST['city'])[0],
+                                      user=user)
+        addr.save()
+    return redirect('/checkout')
+
+
+def placeOrder(request):
+    if request.method == 'POST':
+        print(request.POST)
+        user = User.objects.filter(pk=request.session['id'])[0]
+        addr = Address.objects.filter(pk=request.POST['address'])[0]
+
+        order = Order.objects.create(addr=addr, user=user)
+        order.save()
+        print(order.id)
+
+        for c in request.POST.getlist('cart'):
+            cart = Cart.objects.get(pk=c)
+            orderItem = OrderItemPdt.objects.create(qty=cart.qty, price=cart.product.price, product=cart.product,
+                                                    order=order)
+            orderItem.save()
+            cart.delete()
+            print(orderItem)
+
+        pay = Payment.objects.create(amount=request.POST['amount'], payment_method=request.POST['payment_method'],
+                                     order=order)
+        pay.save()
+
+    return redirect('/order')
+
+
+def designProduct(request, design_id):
+
+    return None

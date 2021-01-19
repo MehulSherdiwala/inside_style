@@ -104,190 +104,512 @@
 
         /* Css for Order History===========================*/
 
-        h1, h2, h3, h4, h5, h6 { font-family: HelveticaNeue, Arial, Helvetica, sans-serif; font-weight: 300; margin-top: 20px; color: #212224; }
+        h1, h2, h3, h4, h5, h6 {
+            font-family: HelveticaNeue, Arial, Helvetica, sans-serif;
+            font-weight: 300;
+            margin-top: 20px;
+            color: #212224;
+        }
 
-h1, h2 { line-height: 28px; }
+        h1, h2 {
+            line-height: 28px;
+        }
 
-h3, h4 { line-height: 24px; }
+        h3, h4 {
+            line-height: 24px;
+        }
 
-h5, h6 { line-height: 20px; }
+        h5, h6 {
+            line-height: 20px;
+        }
 
-h1 { font-size: 28px; }
+        h1 {
+            font-size: 28px;
+        }
 
-h2 { font-size: 26px; }
+        h2 {
+            font-size: 26px;
+        }
 
-h3 { font-size: 24px; }
+        h3 {
+            font-size: 24px;
+        }
 
-h4 { font-size: 22px; }
+        h4 {
+            font-size: 22px;
+        }
 
-h5 { font-size: 20px; }
+        h5 {
+            font-size: 20px;
+        }
 
-h6 { font-size: 18px; }
+        h6 {
+            font-size: 18px;
+        }
 
-a { color: #737880; transition: .2s; -moz-transition: .2s; -webkit-transition: .2s; -o-transition: .2s; outline: none !important; cursor: pointer; }
+        a {
+            color: #737880;
+            transition: .2s;
+            -moz-transition: .2s;
+            -webkit-transition: .2s;
+            -o-transition: .2s;
+            outline: none !important;
+            cursor: pointer;
+        }
 
-a:hover { color: #dccc99; text-decoration: none; transition: .2s; -moz-transition: .2s; -webkit-transition: .2s; -o-transition: .2s; }
+        a:hover {
+            color: #dccc99;
+            text-decoration: none;
+            transition: .2s;
+            -moz-transition: .2s;
+            -webkit-transition: .2s;
+            -o-transition: .2s;
+        }
 
-a:focus { text-decoration: none; }
+        a:focus {
+            text-decoration: none;
+        }
 
-input:focus, a:focus, :focus { outline: none; }
+        input:focus, a:focus, :focus {
+            outline: none;
+        }
 
-input[disabled] { background: #f0f0f1; }
+        input[disabled] {
+            background: #f0f0f1;
+        }
 
-.huge-title { font-size: 38px; font-weight: 300; }
+        .huge-title {
+            font-size: 38px;
+            font-weight: 300;
+        }
 
-h3 .underline { width: 100%; height: 2px; border-left: solid 100px #02b8fa; clear: both; display: block; margin-top: 8px; }
-
-
-/*===========================================================================*\
-\*===========================================================================*/
-.clrfix:after, .clrfix:before { content: ""; display: block; clear: both; height: 0; }
-
-h6.account-table-head { margin-top: 0; border-bottom: 1px solid #d7d9db; padding-bottom: 10px; margin-bottom: 25px; text-transform: uppercase; }
-
-#order-detail-content { margin-bottom: 100px; }
-#order-detail-content .table.table-bordered { border-color: #ebebeb; }
-#order-detail-content .table tbody > tr > td { vertical-align: top; padding-top: 20px; text-align: center; position: relative; }
-#order-detail-content .table tbody > tr > td:before { font: 14px HelveticaNeue, Arial, Helvetica, sans-serif; }
-#order-detail-content .table tbody > tr { position: relative; }
-#order-detail-content .table tbody > tr a.close-btn.ddr { display: inline-block; position: absolute; top: 15px; right: 12px; margin: 0; }
-@media all and (max-width: 767px) { #order-detail-content .table tbody > tr a.close-btn.ddr { top: auto; bottom: 20px; } }
-#order-detail-content .subtotal { padding-left: 20px; padding-right: 60px; text-align: left; }
-@media all and (max-width: 767px) { #order-detail-content .subtotal { padding: 0; }  #order-detail-content .subtotal p { text-align: center; } }
-#order-detail-content .subtotal p { font-size: 14px; font-family: HelveticaNeue, Arial, Helvetica, sans-serif; }
-#order-detail-content .subtotal.no-cls-btn { padding-left: 0; padding-right: 0; text-align: center; width: 120px; }
-#order-detail-content .table tbody > tr > td.default { width: 100px; }
-#order-detail-content .table tbody > tr > td.default span { font-family: HelveticaNeue, Arial, Helvetica, sans-serif; font-size: 14px; }
-#order-detail-content .table tbody > tr > td.date { width: 130px; }
-#order-detail-content .table tbody > tr > td.date span { font-family: HelveticaNeue, Arial, Helvetica, sans-serif; font-size: 14px; }
-#order-detail-content .table tbody > tr > td.cart_quantity { text-align: center; width: 140px; vertical-align: top; padding-top: 20px; }
-#order-detail-content .table tbody > tr > td.cart_quantity .cart_quantity_button { white-space: nowrap; vertical-align: middle; display: inline-block; clear: both; }
-#order-detail-content .table tbody > tr > td.cart_quantity .cart_quantity_button a { float: left; display: block; margin: 0; height: 30px; line-height: 25px; vertical-align: middle; padding: 0; width: 30px; font-size: 20px; border: 1px solid #d7d9db; color: #8c929b; text-align: center; }
-#order-detail-content .table tbody > tr > td.cart_quantity .cart_quantity_button a:hover { color: #212224; }
-#order-detail-content .table tbody > tr > td.cart_quantity .cart_quantity_button a:focus:not(:hover) { background: none; }
-#order-detail-content #cart_summary tbody td.cart_product { padding: 10px; width: 131px; text-align: center; vertical-align: middle; }
-#order-detail-content #cart_summary tbody td.cart_product img { border: none; vertical-align: middle; }
-#order-detail-content #cart_summary tbody td.cart_unit { text-align: center; vertical-align: top; padding-top: 20px; width: 120px; font-size: 14px; font-family: HelveticaNeue, Arial, Helvetica, sans-serif; }
-#order-detail-content #cart_summary tbody td.cart_unit .old-price { text-decoration: line-through; color: #a3a3a3; }
-#order-detail-content #cart_summary tbody td.cart_description small { display: block; padding: 0; color: #36383b; font-family: "Open Sans", sans-serif; font-size: 13px; }
-#order-detail-content #cart_summary tbody td.cart_description small span { color: #9198a1; }
-#order-detail-content #cart_summary tbody td.cart_description { vertical-align: top; text-align: left; }
-#order-detail-content #cart_summary tfoot td.text-right { color: #333333; font-weight: bold; }
-#order-detail-content #cart_summary tfoot td.price { text-align: right; }
-#order-detail-content #cart_summary tfoot td.total_price_container span { color: #555454; font: 600 18px/22px "Open Sans",sans-serif; text-transform: uppercase; }
-#order-detail-content #cart_summary tfoot td#total_price_container { background: none repeat scroll 0 0 white; color: #333333; font: 600 21px/25px "Open Sans",sans-serif; }
-#order-detail-content .table > tbody > tr > td.cart_description { padding: 20px; }
-#order-detail-content tfoot.dd-list-empty tr td { border: none; }
-#order-detail-content #cart_summary { margin-bottom: 0; }
-#order-detail-content .info { border: 1px solid #d7d9db; margin-bottom: 0; border-top: none; font: 14px/50px HelveticaNeue, Arial, Helvetica, sans-serif; color: black; height: 50px; vertical-align: middle; font-weight: 600; white-space: nowrap; }
-#order-detail-content .info.total span { color: #212224; }
-#order-detail-content .info.total span + span { color: #b19777; }
-@media (max-width: 767px) { #order-detail-content { border-bottom: none; }
-  #order-detail-content .info { border-left: none; border-right: none; }
-#order-detail-content .table { border-bottom: none; } }
-#order-detail-content .table > thead > tr > th { background: none repeat scroll 0 0 #ebebeb; border-bottom-width: 1px; border-color: #ebebeb; vertical-align: middle; color: #212224; font-size: 13px; font-family: HelveticaNeue, Arial, Helvetica, sans-serif; text-transform: uppercase; text-align: center; height: 46px; line-height: 46px; padding: 0; -moz-box-sizing: border-box; -webkit-box-sizing: border-box; box-sizing: border-box; }
-#order-detail-content .product-name { color: #212224; font-size: 14px; font-weight: 600; line-height: 23px; margin-bottom: 0; height: 35px; margin-bottom: 15px; }
-#order-detail-content .product-name a { color: #212224; line-height: 23px; }
-#order-detail-content .product-name a:hover { color: #b19777; }
-#order-detail-content .table .price, #order-detail-content .subtotal p { color: #000; font-weight: 600; white-space: nowrap; }
-
-
-
-
-#order-detail-content span.count { color: #b19777; font: 16px "Open Sans", sans-serif; }
-#order-detail-content .subtotal p { text-align: center; }
-#order-detail-content .subtotal .close-btn + p { text-align: left; }
-@media all and (max-width: 767px) { #order-detail-content .subtotal .close-btn + p { text-align: center; } }
+        h3 .underline {
+            width: 100%;
+            height: 2px;
+            border-left: solid 100px #02b8fa;
+            clear: both;
+            display: block;
+            margin-top: 8px;
+        }
 
 
-#order-detail-content #cart_summary.compare-table tbody td.cart_unit { width: auto; }
+        /*===========================================================================*\
+        \*===========================================================================*/
+        .clrfix:after, .clrfix:before {
+            content: "";
+            display: block;
+            clear: both;
+            height: 0;
+        }
 
-#order-detail-content #cart_summary.compare-table td:not(:last-child) { border-right: 1px solid #b19777; }
+        h6.account-table-head {
+            margin-top: 0;
+            border-bottom: 1px solid #d7d9db;
+            padding-bottom: 10px;
+            margin-bottom: 25px;
+            text-transform: uppercase;
+        }
+
+        #order-detail-content {
+            margin-bottom: 100px;
+        }
+
+        #order-detail-content .table.table-bordered {
+            border-color: #ebebeb;
+        }
+
+        #order-detail-content .table tbody > tr > td {
+            vertical-align: top;
+            padding-top: 20px;
+            text-align: center;
+            position: relative;
+        }
+
+        #order-detail-content .table tbody > tr > td:before {
+            font: 14px HelveticaNeue, Arial, Helvetica, sans-serif;
+        }
+
+        #order-detail-content .table tbody > tr {
+            position: relative;
+        }
+
+        #order-detail-content .table tbody > tr a.close-btn.ddr {
+            display: inline-block;
+            position: absolute;
+            top: 15px;
+            right: 12px;
+            margin: 0;
+        }
+
+        @media all and (max-width: 767px) {
+            #order-detail-content .table tbody > tr a.close-btn.ddr {
+                top: auto;
+                bottom: 20px;
+            }
+        }
+
+        #order-detail-content .subtotal {
+            padding-left: 20px;
+            padding-right: 60px;
+            text-align: left;
+        }
+
+        @media all and (max-width: 767px) {
+            #order-detail-content .subtotal {
+                padding: 0;
+            }
+
+            #order-detail-content .subtotal p {
+                text-align: center;
+            }
+        }
+
+        #order-detail-content .subtotal p {
+            font-size: 14px;
+            font-family: HelveticaNeue, Arial, Helvetica, sans-serif;
+        }
+
+        #order-detail-content .subtotal.no-cls-btn {
+            padding-left: 0;
+            padding-right: 0;
+            text-align: center;
+            width: 120px;
+        }
+
+        #order-detail-content .table tbody > tr > td.default {
+            width: 100px;
+        }
+
+        #order-detail-content .table tbody > tr > td.default span {
+            font-family: HelveticaNeue, Arial, Helvetica, sans-serif;
+            font-size: 14px;
+        }
+
+        #order-detail-content .table tbody > tr > td.date {
+            width: 130px;
+        }
+
+        #order-detail-content .table tbody > tr > td.date span {
+            font-family: HelveticaNeue, Arial, Helvetica, sans-serif;
+            font-size: 14px;
+        }
+
+        #order-detail-content .table tbody > tr > td.cart_quantity {
+            text-align: center;
+            width: 140px;
+            vertical-align: top;
+            padding-top: 20px;
+        }
+
+        #order-detail-content .table tbody > tr > td.cart_quantity .cart_quantity_button {
+            white-space: nowrap;
+            vertical-align: middle;
+            display: inline-block;
+            clear: both;
+        }
+
+        #order-detail-content .table tbody > tr > td.cart_quantity .cart_quantity_button a {
+            float: left;
+            display: block;
+            margin: 0;
+            height: 30px;
+            line-height: 25px;
+            vertical-align: middle;
+            padding: 0;
+            width: 30px;
+            font-size: 20px;
+            border: 1px solid #d7d9db;
+            color: #8c929b;
+            text-align: center;
+        }
+
+        #order-detail-content .table tbody > tr > td.cart_quantity .cart_quantity_button a:hover {
+            color: #212224;
+        }
+
+        #order-detail-content .table tbody > tr > td.cart_quantity .cart_quantity_button a:focus:not(:hover) {
+            background: none;
+        }
+
+        #order-detail-content #cart_summary tbody td.cart_product {
+            padding: 10px;
+            width: 131px;
+            text-align: center;
+            vertical-align: middle;
+        }
+
+        #order-detail-content #cart_summary tbody td.cart_product img {
+            border: none;
+            vertical-align: middle;
+        }
+
+        #order-detail-content #cart_summary tbody td.cart_unit {
+            text-align: center;
+            vertical-align: top;
+            padding-top: 20px;
+            width: 120px;
+            font-size: 14px;
+            font-family: HelveticaNeue, Arial, Helvetica, sans-serif;
+        }
+
+        #order-detail-content #cart_summary tbody td.cart_unit .old-price {
+            text-decoration: line-through;
+            color: #a3a3a3;
+        }
+
+        #order-detail-content #cart_summary tbody td.cart_description small {
+            display: block;
+            padding: 0;
+            color: #36383b;
+            font-family: "Open Sans", sans-serif;
+            font-size: 13px;
+        }
+
+        #order-detail-content #cart_summary tbody td.cart_description small span {
+            color: #9198a1;
+        }
+
+        #order-detail-content #cart_summary tbody td.cart_description {
+            vertical-align: top;
+            text-align: left;
+        }
+
+        #order-detail-content #cart_summary tfoot td.text-right {
+            color: #333333;
+            font-weight: bold;
+        }
+
+        #order-detail-content #cart_summary tfoot td.price {
+            text-align: right;
+        }
+
+        #order-detail-content #cart_summary tfoot td.total_price_container span {
+            color: #555454;
+            font: 600 18px/22px "Open Sans", sans-serif;
+            text-transform: uppercase;
+        }
+
+        #order-detail-content #cart_summary tfoot td#total_price_container {
+            background: none repeat scroll 0 0 white;
+            color: #333333;
+            font: 600 21px/25px "Open Sans", sans-serif;
+        }
+
+        #order-detail-content .table > tbody > tr > td.cart_description {
+            padding: 20px;
+        }
+
+        #order-detail-content tfoot.dd-list-empty tr td {
+            border: none;
+        }
+
+        #order-detail-content #cart_summary {
+            margin-bottom: 0;
+        }
+
+        #order-detail-content .info {
+            border: 1px solid #d7d9db;
+            margin-bottom: 0;
+            border-top: none;
+            font: 14px/50px HelveticaNeue, Arial, Helvetica, sans-serif;
+            color: black;
+            height: 50px;
+            vertical-align: middle;
+            font-weight: 600;
+            white-space: nowrap;
+        }
+
+        #order-detail-content .info.total span {
+            color: #212224;
+        }
+
+        #order-detail-content .info.total span + span {
+            color: #b19777;
+        }
+
+        @media (max-width: 767px) {
+            #order-detail-content {
+                border-bottom: none;
+            }
+
+            #order-detail-content .info {
+                border-left: none;
+                border-right: none;
+            }
+
+            #order-detail-content .table {
+                border-bottom: none;
+            }
+        }
+
+        #order-detail-content .table > thead > tr > th {
+            background: none repeat scroll 0 0 #ebebeb;
+            border-bottom-width: 1px;
+            border-color: #ebebeb;
+            vertical-align: middle;
+            color: #212224;
+            font-size: 13px;
+            font-family: HelveticaNeue, Arial, Helvetica, sans-serif;
+            text-transform: uppercase;
+            text-align: center;
+            height: 46px;
+            line-height: 46px;
+            padding: 0;
+            -moz-box-sizing: border-box;
+            -webkit-box-sizing: border-box;
+            box-sizing: border-box;
+        }
+
+        #order-detail-content .product-name {
+            color: #212224;
+            font-size: 14px;
+            font-weight: 600;
+            line-height: 23px;
+            margin-bottom: 0;
+            height: 35px;
+            margin-bottom: 15px;
+        }
+
+        #order-detail-content .product-name a {
+            color: #212224;
+            line-height: 23px;
+        }
+
+        #order-detail-content .product-name a:hover {
+            color: #b19777;
+        }
+
+        #order-detail-content .table .price, #order-detail-content .subtotal p {
+            color: #000;
+            font-weight: 600;
+            white-space: nowrap;
+        }
 
 
-#shopping-cart-wrapper .s-bag-2::after, .arrow-btn::after { content: "\2192"; }
+        #order-detail-content span.count {
+            color: #b19777;
+            font: 16px "Open Sans", sans-serif;
+        }
+
+        #order-detail-content .subtotal p {
+            text-align: center;
+        }
+
+        #order-detail-content .subtotal .close-btn + p {
+            text-align: left;
+        }
+
+        @media all and (max-width: 767px) {
+            #order-detail-content .subtotal .close-btn + p {
+                text-align: center;
+            }
+        }
 
 
+        #order-detail-content #cart_summary.compare-table tbody td.cart_unit {
+            width: auto;
+        }
 
-#shopping-cart-wrapper .s-bag-2::after, .arrow-btn::after { content: "\2192"; }
-
-
-.user-info .wellcome {
-    border-left: 1px solid #d7d9db;
-    border-bottom: 1px solid #d7d9db;
-    padding-top: 37px;
-    padding-bottom: 40px;
-}
-.col-xs-12 {
-    width: 100%;
-}
-.col-xs-1, .col-xs-2, .col-xs-3, .col-xs-4, .col-xs-5, .col-xs-6, .col-xs-7, .col-xs-8, .col-xs-9, .col-xs-10, .col-xs-11, .col-xs-12 {
-    float: left;
-}
-.col-xs-1, .col-sm-1, .col-md-1, .col-lg-1, .col-xs-2, .col-sm-2, .col-md-2, .col-lg-2, .col-xs-3, .col-sm-3, .col-md-3, .col-lg-3, .col-xs-4, .col-sm-4, .col-md-4, .col-lg-4, .col-xs-5, .col-sm-5, .col-md-5, .col-lg-5, .col-xs-6, .col-sm-6, .col-md-6, .col-lg-6, .col-xs-7, .col-sm-7, .col-md-7, .col-lg-7, .col-xs-8, .col-sm-8, .col-md-8, .col-lg-8, .col-xs-9, .col-sm-9, .col-md-9, .col-lg-9, .col-xs-10, .col-sm-10, .col-md-10, .col-lg-10, .col-xs-11, .col-sm-11, .col-md-11, .col-lg-11, .col-xs-12, .col-sm-12, .col-md-12, .col-lg-12 {
-    position: relative;
-    min-height: 1px;
-    padding-left: 15px;
-    padding-right: 15px;
-}
-
-@media (min-width: 992px)
-.col-md-10 {
-    width: 83.33333%;
-}
-
-@media (min-width: 992px)
-.col-md-1, .col-md-2, .col-md-3, .col-md-4, .col-md-5, .col-md-6, .col-md-7, .col-md-8, .col-md-9, .col-md-10, .col-md-11, .col-md-12 {
-    float: left;
-}
-@media (min-width: 768px)
-.col-sm-12 {
-    width: 100%;
-}
-@media (min-width: 768px)
-.col-sm-1, .col-sm-2, .col-sm-3, .col-sm-4, .col-sm-5, .col-sm-6, .col-sm-7, .col-sm-8, .col-sm-9, .col-sm-10, .col-sm-11, .col-sm-12 {
-    float: left;
-}
-.col-xs-12 {
-    width: 100%;
-}
-.col-xs-1, .col-xs-2, .col-xs-3, .col-xs-4, .col-xs-5, .col-xs-6, .col-xs-7, .col-xs-8, .col-xs-9, .col-xs-10, .col-xs-11, .col-xs-12 {
-    float: left;
-}
-.col-xs-1, .col-sm-1, .col-md-1, .col-lg-1, .col-xs-2, .col-sm-2, .col-md-2, .col-lg-2, .col-xs-3, .col-sm-3, .col-md-3, .col-lg-3, .col-xs-4, .col-sm-4, .col-md-4, .col-lg-4, .col-xs-5, .col-sm-5, .col-md-5, .col-lg-5, .col-xs-6, .col-sm-6, .col-md-6, .col-lg-6, .col-xs-7, .col-sm-7, .col-md-7, .col-lg-7, .col-xs-8, .col-sm-8, .col-md-8, .col-lg-8, .col-xs-9, .col-sm-9, .col-md-9, .col-lg-9, .col-xs-10, .col-sm-10, .col-md-10, .col-lg-10, .col-xs-11, .col-sm-11, .col-md-11, .col-lg-11, .col-xs-12, .col-sm-12, .col-md-12, .col-lg-12 {
-    position: relative;
-    min-height: 1px;
-    padding-left: 15px;
-    padding-right: 15px;
-}
+        #order-detail-content #cart_summary.compare-table td:not(:last-child) {
+            border-right: 1px solid #b19777;
+        }
 
 
-div {
-    display: block;
-}
-body {
-    padding: 0;
-    margin: 0;
-    font-family: "Open Sans", sans-serif;
-    font-weight: 300;
-    font-size: 13px;
-    background: #fff;
-    color: #4A4A4A;
-    line-height: 1.7;
-}
+        #shopping-cart-wrapper .s-bag-2::after, .arrow-btn::after {
+            content: "\2192";
+        }
 
 
-*:before, *:after {
-    -webkit-box-sizing: border-box;
-    -moz-box-sizing: border-box;
-    box-sizing: border-box;
-}
+        #shopping-cart-wrapper .s-bag-2::after, .arrow-btn::after {
+            content: "\2192";
+        }
+
+
+        .user-info .wellcome {
+            border-left: 1px solid #d7d9db;
+            border-bottom: 1px solid #d7d9db;
+            padding-top: 37px;
+            padding-bottom: 40px;
+        }
+
+        .col-xs-12 {
+            width: 100%;
+        }
+
+        .col-xs-1, .col-xs-2, .col-xs-3, .col-xs-4, .col-xs-5, .col-xs-6, .col-xs-7, .col-xs-8, .col-xs-9, .col-xs-10, .col-xs-11, .col-xs-12 {
+            float: left;
+        }
+
+        .col-xs-1, .col-sm-1, .col-md-1, .col-lg-1, .col-xs-2, .col-sm-2, .col-md-2, .col-lg-2, .col-xs-3, .col-sm-3, .col-md-3, .col-lg-3, .col-xs-4, .col-sm-4, .col-md-4, .col-lg-4, .col-xs-5, .col-sm-5, .col-md-5, .col-lg-5, .col-xs-6, .col-sm-6, .col-md-6, .col-lg-6, .col-xs-7, .col-sm-7, .col-md-7, .col-lg-7, .col-xs-8, .col-sm-8, .col-md-8, .col-lg-8, .col-xs-9, .col-sm-9, .col-md-9, .col-lg-9, .col-xs-10, .col-sm-10, .col-md-10, .col-lg-10, .col-xs-11, .col-sm-11, .col-md-11, .col-lg-11, .col-xs-12, .col-sm-12, .col-md-12, .col-lg-12 {
+            position: relative;
+            min-height: 1px;
+            padding-left: 15px;
+            padding-right: 15px;
+        }
+
+        @media (min-width: 992px)
+            .col-md-10 {
+                width: 83.33333%;
+            }
+
+            @media (min-width: 992px)
+                .col-md-1, .col-md-2, .col-md-3, .col-md-4, .col-md-5, .col-md-6, .col-md-7, .col-md-8, .col-md-9, .col-md-10, .col-md-11, .col-md-12 {
+                    float: left;
+                }
+
+                @media (min-width: 768px)
+                    .col-sm-12 {
+                        width: 100%;
+                    }
+
+                    @media (min-width: 768px)
+                        .col-sm-1, .col-sm-2, .col-sm-3, .col-sm-4, .col-sm-5, .col-sm-6, .col-sm-7, .col-sm-8, .col-sm-9, .col-sm-10, .col-sm-11, .col-sm-12 {
+                            float: left;
+                        }
+
+                        .col-xs-12 {
+                            width: 100%;
+                        }
+
+                        .col-xs-1, .col-xs-2, .col-xs-3, .col-xs-4, .col-xs-5, .col-xs-6, .col-xs-7, .col-xs-8, .col-xs-9, .col-xs-10, .col-xs-11, .col-xs-12 {
+                            float: left;
+                        }
+
+                        .col-xs-1, .col-sm-1, .col-md-1, .col-lg-1, .col-xs-2, .col-sm-2, .col-md-2, .col-lg-2, .col-xs-3, .col-sm-3, .col-md-3, .col-lg-3, .col-xs-4, .col-sm-4, .col-md-4, .col-lg-4, .col-xs-5, .col-sm-5, .col-md-5, .col-lg-5, .col-xs-6, .col-sm-6, .col-md-6, .col-lg-6, .col-xs-7, .col-sm-7, .col-md-7, .col-lg-7, .col-xs-8, .col-sm-8, .col-md-8, .col-lg-8, .col-xs-9, .col-sm-9, .col-md-9, .col-lg-9, .col-xs-10, .col-sm-10, .col-md-10, .col-lg-10, .col-xs-11, .col-sm-11, .col-md-11, .col-lg-11, .col-xs-12, .col-sm-12, .col-md-12, .col-lg-12 {
+                            position: relative;
+                            min-height: 1px;
+                            padding-left: 15px;
+                            padding-right: 15px;
+                        }
+
+
+                        div {
+                            display: block;
+                        }
+
+                        body {
+                            padding: 0;
+                            margin: 0;
+                            font-family: "Open Sans", sans-serif;
+                            font-weight: 300;
+                            font-size: 13px;
+                            background: #fff;
+                            color: #4A4A4A;
+                            line-height: 1.7;
+                        }
+
+
+                        *:before, *:after {
+                            -webkit-box-sizing: border-box;
+                            -moz-box-sizing: border-box;
+                            box-sizing: border-box;
+                        }
 
     </style>
 {% endblock %}
 {% block content %}
-{#    <header class="" style="background-color: #252531; height: 11vh"></header>#}
-<header class="pages-header bg-img valign parallaxie" data-background="{% static 'img/pg1.jpg' %}"
+    {#    <header class="" style="background-color: #252531; height: 11vh"></header>#}
+    <header class="pages-header bg-img valign parallaxie" data-background="{% static 'img/pg1.jpg' %}"
             data-overlay-dark="5" style="height: 42vh">
         <div class="container">
             <div class="row">
@@ -326,7 +648,7 @@ body {
                         <div class="dashboard-widget">
                             <nav class="dashboard-menu">
                                 <ul>
-                                    <li >
+                                    <li>
                                         <a href="{% url 'user_dashboard' %}">
                                             <i class="fas fa-user"></i>
                                             <span>Profile</span>
@@ -351,7 +673,7 @@ body {
                                         </a>
                                     </li>
                                     <li>
-                                        <a href="index.html">
+                                        <a href="{% url 'logout' %}">
                                             <i class="fas fa-sign-out-alt"></i>
                                             <span>Logout</span>
                                         </a>
@@ -370,122 +692,63 @@ body {
 
                             <div class="row">
 
-            <div class="col-xs-12">
-               <h6 class="account-table-head">Order History</h6>
+                                <div class="col-xs-12">
+                                    <h6 class="account-table-head">Order History</h6>
 
-               <div class="table_block table-responsive clearfix" id="order-detail-content">
-                  <table class="table table-bordered" id="cart_summary">
-                     <thead>
-                        <tr>
-                           <th colspan="2" class="cart_product first_item">Product name</th>
-                           <th>ORDER NO</th>
-                           <th>ORDER DATE</th>
-                           <th>STATUS</th>
-                           <th>SHIP DATE</th>
-                           <th class="cart_unit item">PRICE</th>
-                        </tr>
-                     </thead>
-                     <tbody class="dropdown-product-list">
-                        <tr class="cart_item first_item address_0 odd dd-product-group">
-                           <td class="cart_product">
-                              <a href="product-page.html">
-                                 <img alt="Faded Short Sleeve T-shirts" src="{% static 'img/2.jpg' %}">
-                              </a>
-                           </td>
-                           <td class="cart_description">
-                              <p class="product-name">
-                                 <a href="product-page.html">Majestic Beecroft Sweater For Him</a>
-                              </p>
-                              <small>Size: <span>XL</span></small>
-                              <small>Color: <span>Red</span></small>
-                              <small>Product Code: <span>12658472</span></small>
-                           </td>
-                           <td data-title="ORDER NO" class="default">
-                              <span>#456783</span>
-                           </td>
-                           <td data-title="ORDER DATE" class="date">
-                              <span>20/06/2016</span>
-                           </td>
-                           <td data-title="STATUS" class="default">
-                              <span>Open</span>
-                           </td>
-                           <td data-title="SHIP DATE" class="date">
-                              <span>20/06/2016</span>
-                           </td>
-                           <td data-title="PRICE" class="cart_unit">
-                              <span class="old-price">$ 1400.00</span>
-                              <span class="price">$ 1200.00</span>
-                           </td>
-                        </tr>
-                        <tr class="cart_item first_item address_0 odd dd-product-group">
-                           <td class="cart_product">
-                              <a href="product-page.html">
-                                 <img alt="Faded Short Sleeve T-shirts" src="{% static 'img/2.jpg' %}">
-                              </a>
-                           </td>
-                           <td class="cart_description">
-                              <p class="product-name">
-                                 <a href="product-page.html">Majestic Beecroft Sweater For Him</a>
-                              </p>
-                              <small>Size: <span>XL</span></small>
-                              <small>Color: <span>Red</span></small>
-                              <small>Product Code: <span>12658472</span></small>
-                           </td>
-                           <td data-title="ORDER NO" class="default">
-                              <span>#456783</span>
-                           </td>
-                           <td data-title="ORDER DATE" class="date">
-                              <span>20/06/2016</span>
-                           </td>
-                           <td data-title="STATUS" class="default">
-                              <span>Open</span>
-                           </td>
-                           <td data-title="SHIP DATE" class="date">
-                              <span>20/06/2016</span>
-                           </td>
-                           <td data-title="PRICE" class="cart_unit">
-                              <span class="price">$ 800.00</span>
-                           </td>
-                        </tr>
-                        <tr class="cart_item first_item address_0 odd dd-product-group">
-                           <td class="cart_product">
-                              <a href="product-page.html">
-                                 <img alt="Faded Short Sleeve T-shirts" src="{% static 'img/2.jpg' %}">
-                              </a>
-                           </td>
-                           <td class="cart_description">
-                              <p class="product-name">
-                                 <a href="product-page.html#">Majestic Beecroft Sweater For Him</a>
-                              </p>
-                              <small>Size: <span>XL</span></small>
-                              <small>Color: <span>Red</span></small>
-                              <small>Product Code: <span>12658472</span></small>
-                           </td>
-                           <td data-title="ORDER NO" class="default">
-                              <span>#456783</span>
-                           </td>
-                           <td data-title="ORDER DATE" class="date">
-                              <span>20/06/2016</span>
-                           </td>
-                           <td data-title="STATUS" class="default">
-                              <span>Open</span>
-                           </td>
-                           <td data-title="SHIP DATE" class="date">
-                              <span>20/06/2016</span>
-                           </td>
-                           <td data-title="PRICE" class="cart_unit">
-                              <span class="price">$ 800.00</span>
-                           </td>
-                        </tr>
-                     </tbody>
-                  </table>
-                  <div class="container col-xs-12 tfoot">
-                     <p class="row info"><span class="pull-left col-xs-6">Shipment Free</span><span class="pull-right col-xs-6 text-right">$10.00</span></p>
-                     <p class="row info total"><span class="pull-left col-xs-6">Total Amount</span><span class="col-xs-6 pull-right text-right">$2400.00</span></p>
-                  </div>
-               </div>
-            </div>
+                                    <div class="table_block table-responsive clearfix" id="order-detail-content">
+                                        <table class="table table-bordered" id="cart_summary">
+                                            <thead>
+                                            <tr>
+                                                <th colspan="2" class="cart_product first_item">Product name</th>
+                                                <th>ORDER NO</th>
+                                                <th>ORDER DATE</th>
+                                                <th>STATUS</th>
+                                                <th class="cart_unit item">PRICE</th>
+                                            </tr>
+                                            </thead>
+                                            <tbody class="dropdown-product-list">
+                                            {% for o in order %}
+                                                <tr class="cart_item first_item address_0 odd dd-product-group">
+                                                    <td class="cart_product">
+                                                        <a href="product-page.html">
+                                                            <img alt="Faded Short Sleeve T-shirts"
+                                                                 src="/media/{{ o.product.image }}">
+                                                        </a>
+                                                    </td>
+                                                    <td class="cart_description">
+                                                        <p class="product-name">
+                                                            <a href="product-page.html">{{ o.product.pdt_name }}</a>
+                                                        </p>
+                                                    </td>
+                                                    <td data-title="ORDER NO" class="default">
+                                                        <span>#{{ o.order.id }}</span>
+                                                    </td>
+                                                    <td data-title="ORDER DATE" class="date">
+                                                        <span>{{ o.order.datetime }}</span>
+                                                    </td>
+                                                    <td data-title="STATUS" class="default">
+                                                    <span>{% if o.order.status == 0 %}
+                                                        Processing
+                                                    {% elif o.order.status == 1 %}
+                                                        Out for Delivery
+                                                    {% elif o.order.status == 2 %}
+                                                        Delivered
+                                                    {% endif %}</span>
+                                                    </td>
+                                                    <td data-title="PRICE" class="cart_unit">
+                                                    <span class="price">
+                                                        {{ o.price }}
+                                                    </span>
+                                                    </td>
+                                                </tr>
 
+                                            {% endfor %}
+                                            </tbody>
+                                        </table>
+                                    </div>
+                                </div>
+
+                            </div>
                         </div>
                     </div>
                 </div>
@@ -495,7 +758,7 @@ body {
 {% endblock %}
 
 {% block script %}
-<script type="text/javascript">
+    <script type="text/javascript">
 
 
         $("#state").on('change', function () {

@@ -258,7 +258,6 @@ admin.site.register(Contact, ContactAdmin)
 
 # my dummy model
 class DesignEle(models.Model):
-    pos = models.CharField(max_length=100)
 
     class Meta:
         # model = DesignElement

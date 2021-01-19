@@ -160,3 +160,31 @@ class Cart(models.Model):
 
     def __str__(self):
         return self.product.pdt_name
+
+
+class Order(models.Model):
+    datetime = models.DateField(default=datetime.date.today)
+    status = models.IntegerField(default=0)
+    addr = models.ForeignKey(Address, on_delete=models.CASCADE)
+    user = models.ForeignKey(User, on_delete=models.CASCADE)
+
+
+class OrderItemPdt(models.Model):
+    qty = models.IntegerField()
+    price = models.FloatField()
+    product = models.ForeignKey(Product, on_delete=models.CASCADE)
+    order = models.ForeignKey(Order, on_delete=models.CASCADE)
+
+
+class OrderItemDesign(models.Model):
+    price = models.FloatField()
+    design = models.ForeignKey(Design, on_delete=models.CASCADE)
+    order = models.ForeignKey(Order, on_delete=models.CASCADE)
+
+
+class Payment(models.Model):
+    amount = models.FloatField()
+    payment_method = models.CharField(max_length=50)
+    datetime = models.DateField(default=datetime.date.today)
+    status = models.IntegerField(default=0)
+    order = models.ForeignKey(Order, on_delete=models.CASCADE)
