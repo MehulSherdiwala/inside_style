@@ -29,5 +29,7 @@ urlpatterns = [
     path('admin/design_element/', views.design_element, name="design_element"),
     path('checkout/', views.checkout, name="checkout"),
     path('order_test/', views.order_test, name="order"),
-    path('order/', views.order, name="order")
+    path('order/', views.order, name="order"),
+    path('chat/', views.chat, name="chat")
+
 ]

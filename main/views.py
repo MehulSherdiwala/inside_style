@@ -312,3 +312,9 @@ def order_test(request):
 
 def order(request):
     return render(request, "order.html")
+
+
+def chat(request):
+    return render(request, "chat.html")
+
+

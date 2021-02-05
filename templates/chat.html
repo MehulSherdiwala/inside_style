@@ -1,0 +1,655 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block styles %}
+    <link rel="stylesheet" href="{% static 'css/plugins/all.min.css' %}">
+
+    <style>
+.user-details-nav{
+    width: 100%;
+}
+.pull-left{
+    float: left;
+}
+.pull-right{
+    float: right;
+}
+   .chat-search-form {
+	background: #f9f9f9 none repeat scroll 0 0;
+	padding: 20px;
+}
+
+.chat-search-form>form {
+	border: 1px solid #ddd;
+	height: 40px;
+	position: relative;
+	width: 100%;
+}
+
+.chat-search-form form input {
+	border: medium none;
+	color: #b19777;
+	height: 100%;
+	left: 0;
+	padding: 5px 65px 5px 10px;
+	position: absolute;
+	width: 100%;
+}
+
+.chat-search-form form button {
+	background: transparent none repeat scroll 0 0;
+	border: medium none;
+	height: 100%;
+	position: absolute;
+	right: 0;
+	width: 20%;
+    color: #b19777;
+}
+
+.chat-list-body ul.chat-list li a {
+	padding: 10px;
+	border-bottom: 1px solid rgba(97, 106, 120, 0.07);
+	display: block
+}
+
+.chat-list-body ul.chat-list li a:hover {
+	background: #efefef none repeat scroll 0 0
+}
+
+.chat-avatar-img {
+	float: left;
+	margin-right: 10px;
+	width: 50px;
+}
+
+.chat-avatar-img>img {
+	border-radius: 50%;
+	width: 100%;
+}
+
+.chat-about {
+	margin-top: 10px;
+	overflow: hidden;
+}
+
+.chat-about>h4 {
+	color: #333;
+	font-size: 14px;
+	text-transform: capitalize;
+}
+
+.chat-list-body ul {
+	height: 450px;
+	margin-top: 20px;
+}
+
+.chat-list {
+	position: relative;
+    overflow: auto;
+    height: 550px;
+
+}
+
+.chat-about small {
+	text-transform: capitalize
+}
+
+.online {
+	color: #16d39a
+}
+
+.away {
+	color: #faa64b
+}
+
+.busy {
+	color: #ef5350
+}
+
+.chat-board-right {
+	background-color: #F2F7FB;
+	display: table;
+	height: 450px;
+	table-layout: fixed;
+	width: 100%;
+}
+
+.chat-board-header {
+	background-color: #fff;
+	border: 1px solid #eaeaea;
+	padding: 10px 15px;
+    height: 80px;
+}
+
+.user-img {
+	display: inline-block;
+	position: relative;
+}
+
+.chat-user-img {
+	width: 50px;
+	margin-right: 10px
+}
+
+.chat-user-img img {
+	border-radius: 50%;
+	width: 100%;
+}
+
+.user-info h4 {
+	color: #0a0a0a;
+	font-size: 15px;
+	text-transform: capitalize;
+}
+
+.user-info small {
+	text-transform: capitalize;
+    color: #b19777;
+}
+
+.user-info {
+	margin-top: 7px
+}
+
+
+.chat-board-right .navbar-custom {
+	margin-bottom: 0;
+    height: 450px;
+}
+
+.nav.navbar-nav-custom.pull-right.custom-menu>li>a:hover,
+.nav.navbar-nav-custom.pull-right.custom-menu>li>a:focus {
+	background: transparent !important
+}
+
+.nav.navbar-nav-custom.pull-right.custom-menu>li>a {
+	font-size: 18px;
+	color: #4a5365;
+}
+
+.nav.navbar-nav-custom.pull-right.custom-menu>li>ul {
+	left: auto;
+	right: 0
+}
+
+.chat-box-inner .chat-list {
+	padding: 20px;
+    height: 400px;
+}
+
+.chat-box-inner .chat-list li {
+	list-style: outside none none;
+	margin-top: 30px;
+}
+
+.chat-img {
+	display: inline-block;
+	vertical-align: top;
+	width: 45px;
+}
+
+.chat-img img {
+	border-radius: 50%;
+	width: 100%;
+}
+
+.chat-content {
+	display: inline-block;
+	padding-left: 15px;
+	width: auto;
+}
+
+.chat-text {
+	background: #fff none repeat scroll 0 0;
+	color: #333;
+	padding: 10px;
+	border-radius: 10px;
+    min-width: min-content;
+}
+
+.chat-time {
+	text-align: center;
+    padding-left: 30px;
+    padding-top: 5px;
+    font-size: small;
+    color: #4a5365;
+}
+
+.chat-time-right {
+	text-align: center;
+    padding-left: 30px;
+    padding-top: 5px;
+    font-size: small;
+    color: #fff;
+}
+
+.chat-action{
+    font-size: 15px;
+    color: #4a5365;
+}
+.chat-box-inner .chat-list li.chat-list-right {
+	text-align: right;
+}
+
+.chat-list-right .chat-text {
+	text-align: left;
+	background: #b19777 none repeat scroll 0 0;
+	color: #fff;
+}
+
+.chat-box-inner>ul {
+	height: 320px
+}
+
+.attach-icon {
+	display: table-cell;
+	overflow: hidden;
+	position: relative;
+	text-align: right;
+	vertical-align: middle;
+	width: 30px;
+
+}
+
+.attach-icon p i {
+	margin-right: 5px;
+	font-size: 22px;
+	margin-top: 7px;
+    color: #b19777;
+}
+
+.attach-icon>input[type="file"] {
+	cursor: pointer;
+	height: 100%;
+	left: 0;
+	opacity: 0;
+	-ms-filter: "progid:DXImageTransform.Microsoft.Alpha(Opacity=0)";
+	position: absolute;
+	top: 0;
+	width: 100%;
+}
+
+.chat-footer {
+	background-color: #fff;
+	border: 1px solid #eaeaea;
+	padding: 10px;
+}
+
+.message-bar {
+	display: table;
+	height: 44px;
+	position: relative;
+	width: 100%;
+}
+
+.message-bar .message-bar-inner {
+	display: table-row;
+	height: 100%;
+	padding: 0 8px;
+	width: 100%;
+}
+
+.message-bar .message-text-area {
+	display: table-cell;
+}
+
+.message-text-area form {
+	border-collapse: separate;
+	display: table;
+	height: 44px;
+	position: relative;
+	width: 100%;
+}
+
+.message-text-area form textarea {
+	background-color: #fff;
+	box-shadow: none;
+	color: #b19777;
+	border: medium none;
+	display: block;
+	height: 100%;
+	margin: 0;
+	padding: 6px 12px;
+	position: absolute;
+	resize: none;
+	width: 93%;
+}
+
+.message-text-area button {
+	color: #b19777;
+	background: transparent none repeat scroll 0 0;
+	border: medium none;
+	font-size: 19px;
+	height: 100%;
+	position: absolute;
+	right: 0;
+	width: 7%;
+}
+
+.chat-board-header .nav.navbar-nav-custom.pull-right.custom-menu>li>a[aria-expanded="false"]:before,
+.chat-board-header .nav.navbar-nav-custom.pull-right.custom-menu>li>a[aria-expanded="true"]:before {
+	display: none
+}
+
+/*================================================
+06. Breadcromb
+==================================================*/
+
+.breadcromb-area {
+	background: #fff none repeat scroll 0 0;
+	box-shadow: 1px 0 3px rgba(0, 0, 0, 0.1);
+	padding: 10px;
+}
+
+.seipkon-breadcromb-left>h3 {
+	color: #333;
+	font-size: 20px;
+	font-weight: 500;
+	text-transform: capitalize;
+}
+
+.seipkon-breadcromb-right {
+	text-align: right
+}
+
+.seipkon-breadcromb-right li {
+	color: #99a0aa;
+	display: inline-block;
+	text-transform: capitalize;
+	position: relative
+}
+
+.seipkon-breadcromb-right ul>li+li:before {
+	color: #99a0aa;
+	content: "/ ";
+	padding: 0 5px;
+}
+
+.seipkon-breadcromb-right li a {
+	color: #333;
+	font-weight: 500
+}
+
+.seipkon-breadcromb-right li a:hover {
+	color: #99a0aa;
+}
+
+
+#content>.page-content {
+	min-height: 100vh;
+	padding: 30px 15px
+}
+
+#content.active {
+	width: 100%;
+}
+
+    </style>
+
+{% endblock %}
+
+{% block content %}
+
+    <header class="pages-header bg-img valign parallaxie" data-background="{% static 'img/pg1.jpg' %}"
+            data-overlay-dark="5" style="height: 42vh">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-12">
+                    <div class="cont text-center">
+                        <h1 style="margin-top: 50px;margin-bottom: 0;">Chat</h1>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <!-- Right Side Content Start -->
+         <section id="content" class="seipkon-content-wrapper">
+            <div class="page-content">
+               <div class="container-fluid">
+
+                  <!-- Breadcromb Row Start -->
+                  <div class="row">
+                     <div class="col-md-12">
+                        <div class="breadcromb-area">
+                           <div class="row">
+                              <div class="col-md-6 col-sm-6">
+                                 <div class="seipkon-breadcromb-left">
+                                    <h3>Chatting</h3>
+                                 </div>
+                              </div>
+                              <div class="col-md-6 col-sm-6">
+                                 <div class="seipkon-breadcromb-right">
+                                    <ul>
+                                       <li><a href="index.html">home</a></li>
+                                       <li>advance apps</li>
+                                       <li>Chatting</li>
+                                    </ul>
+                                 </div>
+                              </div>
+                           </div>
+                        </div>
+                     </div>
+                  </div>
+                  <!-- End Breadcromb Row -->
+
+                  <!-- Chatting Row Start -->
+                  <div class="row">
+                     <div class="col-md-12">
+                        <div class="page-box">
+                           <div class="row">
+                              <div class="col-md-4 col-sm-5">
+                                 <div class="chat-list-left">
+                                    <div class="chat-search-form">
+                                       <form>
+                                          <input type="search" placeholder="Search Contact" >
+                                          <button type="submit" ><i class="fa fa-search"></i></button>
+                                       </form>
+                                    </div>
+                                    <div class="chat-list-body">
+                                       <ul class="chat-list">
+                                          <li class="clearfix">
+                                             <a href="chatting.html#">
+                                                <div class="chat-avatar-img">
+                                                   <img src="{% static 'img/2.jpg' %}" alt="avatar" />
+                                                </div>
+                                                <div class="chat-about">
+                                                   <h4>David Johnson</h4>
+                                                   <small class="online">Online</small>
+                                                </div>
+                                             </a>
+                                          </li>
+                                          <li class="clearfix active">
+                                             <a href="chatting.html#">
+                                                <div class="chat-avatar-img">
+                                                   <img src="{% static 'img/2.jpg' %}" alt="avatar" />
+                                                </div>
+                                                <div class="chat-about">
+                                                   <h4>Aiden Chavez</h4>
+                                                   <small class="away">Away</small>
+                                                </div>
+                                             </a>
+                                          </li>
+                                          <li class="clearfix">
+                                             <a href="chatting.html#">
+                                                <div class="chat-avatar-img">
+                                                   <img src="{% static 'img/2.jpg' %}" alt="avatar" />
+                                                </div>
+                                                <div class="chat-about">
+                                                   <h4>Margaret Govan</h4>
+                                                   <small class="busy">busy</small>
+                                                </div>
+                                             </a>
+                                          </li>
+                                          <li class="clearfix">
+                                             <a href="chatting.html#">
+                                                <div class="chat-avatar-img">
+                                                   <img src="{% static 'img/2.jpg' %}" alt="avatar" />
+                                                </div>
+                                                <div class="chat-about">
+                                                   <h4>Emanual Doe</h4>
+                                                   <small class="online">online</small>
+                                                </div>
+                                             </a>
+                                          </li>
+                                          <li class="clearfix">
+                                             <a href="chatting.html#">
+                                                <div class="chat-avatar-img">
+                                                   <img src="{% static 'img/2.jpg' %}" alt="avatar" />
+                                                </div>
+                                                <div class="chat-about">
+                                                   <h4>Eric Alsobrook</h4>
+                                                   <small class="online">online</small>
+                                                </div>
+                                             </a>
+                                          </li>
+                                          <li class="clearfix">
+                                             <a href="chatting.html#">
+                                                <div class="chat-avatar-img">
+                                                   <img src="{% static 'img/2.jpg' %}" alt="avatar" />
+                                                </div>
+                                                <div class="chat-about">
+                                                   <h4>Christian Kelly</h4>
+                                                   <small class="away">away</small>
+                                                </div>
+                                             </a>
+                                          </li>
+                                          <li class="clearfix">
+                                             <a href="chatting.html#">
+                                                <div class="chat-avatar-img">
+                                                   <img src="{% static 'img/2.jpg' %}" alt="avatar" />
+                                                </div>
+                                                <div class="chat-about">
+                                                   <h4>David Johnson</h4>
+                                                   <small class="online">Online</small>
+                                                </div>
+                                             </a>
+                                          </li>
+                                          <li class="clearfix active">
+                                             <a href="chatting.html#">
+                                                <div class="chat-avatar-img">
+                                                   <img src="{% static 'img/2.jpg' %}" alt="avatar" />
+                                                </div>
+                                                <div class="chat-about">
+                                                   <h4>Aiden Chavez</h4>
+                                                   <small class="away">Away</small>
+                                                </div>
+                                             </a>
+                                          </li>
+                                          <li class="clearfix">
+                                             <a href="chatting.html#">
+                                                <div class="chat-avatar-img">
+                                                   <img src="{% static 'img/2.jpg' %}" alt="avatar" />
+                                                </div>
+                                                <div class="chat-about">
+                                                   <h4>Margaret Govan</h4>
+                                                   <small class="busy">busy</small>
+                                                </div>
+                                             </a>
+                                          </li>
+                                       </ul>
+                                    </div>
+                                 </div>
+                              </div>
+                              <div class="col-md-8 col-sm-7">
+                                 <div class="chat-board-right">
+                                    <div class="chat-board-header">
+                                       <div class="navbar-custom">
+                                          <div class="user-details-nav">
+                                             <div class="chat-user-details">
+                                                <div class="pull-left chat-user-img">
+                                                   <a href="chatting.html#">
+                                                   <img src="{% static 'img/2.jpg' %}" alt="">
+                                                   </a>
+                                                </div>
+                                             </div>
+                                             <div class="user-info pull-left">
+                                                <a href="chatting.html#" title="Mike Litorus">
+                                                   <h4>Mike Litorus</h4>
+                                                </a><br>
+                                                <small class="online">online</small>
+                                             </div>
+                                          </div>
+                                       </div>
+                                    </div>
+                                    <div class="chat-board-content">
+                                       <div class="chat-box-wrapper">
+                                          <div class="chat-box-inner">
+                                             <ul class="chat-list">
+                                                <li>
+                                                   <div class="chat-content">
+                                                      <div class="chat-text">
+                                                         It’s Great opportunity to work.
+                                                          <div class="chat-time pull-right">10:57 am</div>
+                                                      </div>
+
+                                                   </div>
+                                                </li>
+                                                <li class="chat-list-right">
+                                                   <div class="chat-content">
+                                                      <div class="chat-text">
+                                                         simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's
+                                                          <div class="chat-time-right pull-right">10:57 am</div>
+                                                      </div>
+                                                      <div class="chat-action">seen</div>
+                                                   </div>
+                                                </li>
+                                                 <li>
+                                                   <div class="chat-content">
+                                                      <div class="chat-text">
+                                                         It’s Great opportunity to work.
+                                                          <div class="chat-time pull-right">10:57 am</div>
+                                                      </div>
+
+                                                   </div>
+                                                </li>
+                                                <li class="chat-list-right">
+                                                   <div class="chat-content">
+                                                      <div class="chat-text">
+                                                         It was popularised in the 1960s
+                                                          <div class="chat-time-right pull-right">10:57 am</div>
+                                                      </div>
+                                                      <div class="chat-action">seen</div>
+                                                   </div>
+                                                </li>
+                                                <li>
+                                                   <div class="chat-img">
+                                                      <a href="chatting.html#">
+{#                                                      <img src="{% static 'img/2.jpg' %}" alt="user">#}
+                                                      </a>
+                                                   </div>
+
+                                             </ul>
+                                          </div>
+                                       </div>
+                                    </div>
+                                    <div class="chat-footer">
+                                       <div class="message-bar">
+                                          <div class="message-bar-inner">
+                                             <div class="attach-icon">
+                                                <p>
+                                                   <i class="fa fa-paperclip"></i>
+                                                </p>
+                                                <input type="file">
+                                             </div>
+                                             <div class="message-text-area">
+                                                <form>
+                                                   <textarea placeholder="Type message..."></textarea>
+                                                   <button type="submit" ><i class="far fa-paper-plane"></i></button>
+                                                </form>
+                                             </div>
+                                          </div>
+                                       </div>
+                                    </div>
+                                 </div>
+                              </div>
+                           </div>
+                        </div>
+                     </div>
+                  </div>
+                  <!-- End Chatting Row -->
+
+               </div>
+            </div>
+
+{% endblock %}
