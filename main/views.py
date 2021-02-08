@@ -142,7 +142,6 @@ def user_dashboard(request):
             else:
                 addr = Address.objects.create(addr=request.POST['addr'], phone=request.POST['phone'],
                                               pincode=request.POST['pincode'],
-                                              name=user.username,
                                               city=City.objects.filter(pk=request.POST['city'])[0],
                                               user=user)
 
@@ -398,3 +397,11 @@ def designProduct(request, design_id):
     data.update({'design': {'d': design[0]}})
 
     return render(request, 'designProduct.html', {'data': data})
+
+    # return render(request, "order.html")
+
+
+def chat(request):
+    return render(request, "chat.html")
+
+
