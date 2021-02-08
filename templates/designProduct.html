@@ -1,0 +1,154 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block styles %}
+
+    <style>
+        .h1 {
+            margin: 0 0 20px;
+            font-weight: 300;
+            font-size: 20px;
+            color: #666;
+        }
+
+        .img-size {
+            width: 950px;
+            height: 570px;
+        }
+
+        .img-inner-size {
+            width: 100px;
+            height: 100px;
+            float: left;
+        }
+
+        .col-10 {
+            padding: 0
+        }
+
+        .inner::-webkit-scrollbar {
+            width: 10px;
+            border-radius: 5px;
+        }
+
+        /* Track */
+        .inner::-webkit-scrollbar-track {
+            background: #f1f1f1;
+        }
+
+        /* Handle */
+        .inner::-webkit-scrollbar-thumb {
+            background: #888;
+        }
+
+        /* Handle on hover */
+        .inner::-webkit-scrollbar-thumb:hover {
+            background: #555;
+        }
+
+        {% for d, value in data.items %}
+            {% if d != 'design' %}
+                #img{{ d }} {
+                    position: absolute;
+                    top: {{ value.pos_Y }}px;
+                    left: {{ value.pos_X }}px;
+                    width: {{ value.width }}px;
+                    height: {{ value.height }}px;
+                    box-shadow: 0 0 15px #202020e6;
+                    border-radius: 5px;
+                }
+                #img{{ d }} .inner {
+                    visibility: hidden;
+                    position: absolute;
+                    opacity: 0;
+                    left: calc({{ value.width }}px - 300px);
+                    width: 300px;
+                    max-height: 300px;
+                    overflow: auto;
+                    padding: 15px;
+                    color: #c5c5c5;
+                    text-align: justify
+                }
+                #img{{ d }} span {
+                    margin-left: 10px;
+                    line-height: 30px;
+                }
+                #img{{ d }}:before {
+                    content: '';
+                    position: absolute;
+                    background-color: #252531f2;
+                    left: calc({{ value.width }}px - 300px);
+                    width: 300px;
+                    height: 0;
+                    overflow: auto;
+                    transition: 0.5s cubic-bezier(0.02, 0.51, 1, 0.18);
+                }
+                #img{{ d }}:hover:before {
+                    height: 300px;
+                    border-radius: 5px;
+                }
+                #img{{ d }}:hover .inner {
+                    visibility: visible;
+                    opacity: 1;
+                    transition: 0.5s linear 0.5s;
+                }
+            {% endif %}
+        {% endfor %}
+    </style>
+{% endblock %}
+
+{% block content %}
+
+
+    <body class="inblog-page">
+
+    <header class="pages-header bg-img valign parallaxie" data-background="{% static 'img/pg1.jpg' %}"
+            data-overlay-dark="5" style="height: 42vh">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-12">
+                    <div class="cont text-center">
+                        <h1 style="margin-top: 50px;margin-bottom: 0;">Design Product</h1>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <div class="container py-4">
+        {% comment %}{% for d, value in data.items %}
+            {{ value }}
+        {% endfor %}{% endcomment %}
+        <div class="row">
+            <div class="col-10 offset-1">
+                <img src="/media/{{ data.design.d.image }}" class="img-size" id="img">
+
+                {% for d, value in data.items %}
+                    {% if d != 'design' %}
+                        <div id="img{{ d }}">
+                            <div class="inner">
+                                <div>
+                                    <img src="/media/{{ value.pdt.image }}" class="img-inner-size" id="img">
+                                    <span><a href="{% url 'product' pdt_id=value.pdt.id %}">{{ value.pdt.pdt_name }}</a> <br> <i
+                                            class="fa fa-rupee-sign"></i> {{ value.pdt.price }} <br> {{ value.pdt.category }}</span>
+                                </div>
+                                <br>
+                                <div>{{ value.pdt.description }}</div>
+                                <div>
+                                    <a href="{% url 'product' pdt_id=value.pdt.id %}"></a>
+                                </div>
+                            </div>
+                        </div>
+                    {% endif %}
+                {% endfor %}
+            </div>
+        </div>
+    </div>
+
+{% endblock %}
+
+{% block script %}
+    <script>
+
+    </script>
+{% endblock %}

@@ -115,6 +115,7 @@ class Design(models.Model):
     design_name = models.CharField(max_length=100, verbose_name="Design Name")
     description = models.TextField()
     image = models.ImageField(upload_to='img')
+    price = models.IntegerField()
     status = models.BooleanField(default=True)
     inserted_by = models.PositiveIntegerField(choices=ins_choice, default=1)
     creator_id = models.IntegerField(verbose_name="Creator Name")

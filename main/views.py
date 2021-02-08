@@ -9,7 +9,7 @@ from django.core.paginator import Paginator, EmptyPage, InvalidPage
 from django.template import RequestContext
 
 from main.models import City, State, User, Designer, Address, Contact, Product, Category, Cart, Order, OrderItemPdt, \
-    Payment
+    Payment, DesignElement, Design
 
 
 def home(request):
@@ -180,7 +180,9 @@ def user_dashboard(request):
 
 
 def designs(request):
-    return render(request, 'designs.html')
+    des = Design.objects.all()
+
+    return render(request, 'designs.html', {'design': des})
 
 
 def product_list(request):
@@ -377,5 +379,22 @@ def placeOrder(request):
 
 
 def designProduct(request, design_id):
+    desEle = DesignElement.objects.filter(design_id=design_id)
 
-    return None
+    design = Design.objects.filter(pk=design_id)
+
+    data = {}
+    i = 0
+    for d in desEle:
+        data.update({i: {
+            'pos_X': d.pos_X,
+            'pos_Y': d.pos_Y,
+            'width': d.width,
+            'height': d.height,
+            'pdt': Product.objects.filter(pk=d.pdt_id.id)[0],
+        }})
+        i += 1
+
+    data.update({'design': {'d': design[0]}})
+
+    return render(request, 'designProduct.html', {'data': data})

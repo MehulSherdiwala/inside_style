@@ -201,7 +201,7 @@ def get_creator(user):
 class DesignForm(forms.ModelForm):
     class Meta:
         model = Design
-        fields = ('design_name', 'description', 'image', 'inserted_by', 'creator_id', 'status')
+        fields = ('design_name', 'description', 'image','price', 'inserted_by', 'creator_id', 'status')
 
         # readonly_fields = ("prodImg",)
 
