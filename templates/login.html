@@ -574,10 +574,10 @@
     <div class="container">
         <div class="booking-content">
             <div class="booking-image">
-                <img class="booking-img" src="../static/img/img2.jpg" alt="Booking Image">
+                <img class="booking-img" src="{% static 'img/img2.jpg' %}" alt="Booking Image">
             </div>
             <div class="booking-form">
-                <form id="booking-form" action="{% url 'login' %}" method="post">
+                <form id="booking-form" action="{{ redirect }}" method="post">
                     {% csrf_token %}
                     <h2>LOGIN NOW!</h2>
                     <div class="form-group form-input">

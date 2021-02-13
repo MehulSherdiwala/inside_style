@@ -86,7 +86,7 @@
                         <div class="d-flex justify-content-between">
                             <a href="{% url 'designProduct' design_id=d.id %}" class="btn btn-secondary">View Products</a>
                             <span><i class="fa fa-rupee-sign"></i> {{ d.price }}</span>
-                            <a href="#" class="btn btn-secondary">Buy Now</a>
+                            <a href="javascript:void(0);" class="btn btn-secondary" onclick="addToCart({{ d.id }})">Add To Cart</a>
                         </div>
                     </div>
                 </div>
@@ -133,4 +133,35 @@
 
     <!-- ==================== End call-to-action ==================== -->
 
+{% endblock %}
+
+
+{% block script %}
+    <script>
+
+        function addToCart(id){
+            $.ajax({
+                url: '/ajax/addtocart',
+                method: 'get',
+                data: {
+                    id: id,
+                    type: 2,
+                    qty: 1
+                },
+                beforeSend: function () {
+                    $("#loaderNew").fadeIn();
+                },
+                success:function (res){
+                    if (res.redirect != '' && typeof res.redirect != "undefined"){
+                        window.location = "{% url 'login' %}";
+                    } else {
+                        alert("Product added to cart successfully.....");
+                    }
+                },
+                complete: function () {
+                    $("#loaderNew").fadeOut();
+                }
+            })
+        }
+    </script>
 {% endblock %}

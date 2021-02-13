@@ -3270,7 +3270,7 @@
 
                                         {% for d, value in data.items %}
                                             <tr class="cart_item" data-id="{{ value.cart.id }}"
-                                                data-price="{{ value.pdt.price }}">
+                                                data-price="{{ value.item.price }}">
                                                 <td class="product-remove">
                                                     <a href="javascript:void(0);" class="remove">
                                                         <i class="far fa-trash-alt"></i>
@@ -3278,14 +3278,21 @@
                                                 </td>
                                                 <td class="product-thumbnail">
                                                     <a href="#">
-                                                        <img src="/media/{{ value.pdt.image }}" alt="img"
+                                                        <img src="/media/{{ value.item.image }}" alt="img"
                                                              class="attachment-shop_thumbnail size-shop_thumbnail wp-post-image">
                                                     </a>
                                                 </td>
-                                                <td class="product-name" data-title="Product">
-                                                    <a href="{% url 'product' pdt_id=value.pdt.id %}" class="title">{{ value.pdt.pdt_name }}</a>
+                                                {% if value.type == "Product" %}
+                                                    <td class="product-name" data-title="Product" style="width:25%">
+                                                        <a href="{% url 'product' pdt_id=value.item.id %}" class="title">{{ value.item.pdt_name }}</a>
 
-                                                </td>
+                                                    </td>
+                                                {% else %}
+                                                     <td class="product-name" data-title="Product" style="width:25%">
+                                                        <a href="{% url 'designProduct' design_id=value.item.id %}" class="title">{{ value.item.design_name }}</a>
+
+                                                    </td>
+                                                {% endif %}
                                                 <td class="product-quantity" data-title="Quantity">
                                                     <div class="quantity">
                                                         <div class="control">
@@ -3307,6 +3314,9 @@
 {#                                                            {% value.pdt.price * value.pdt.price %}#}
                                                             <span class="price">{{ value.price }}</span>
                                                         </span>
+                                                </td>
+                                                <td class="product-name" data-title="Category" style="width:10%">
+                                                    <b>{{ value.type }}</b>
                                                 </td>
                                             </tr>
                                         {% endfor %}

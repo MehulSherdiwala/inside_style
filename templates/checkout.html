@@ -2427,27 +2427,55 @@
                                     </h3>
                                     <ul class="list-product-order">
                                         {% for c in cart %}
+                                            {% if c.type == 1 %}
 
-                                            <li class="product-item-order" data-price="{{ c.product.price }}">
-                                                <input type="hidden" name="cart" value="{{ c.id }}">
-                                                <div class="product-thumb">
-                                                    <a href="#">
-                                                        <img src="/media/{{ c.product.image }}" alt="img">
-                                                    </a>
-                                                </div>
-                                                <div class="product-order-inner">
-                                                    <h5 class="product-name">
-                                                        <a href="#">{{ c.product.pdt_name }}</a>
-                                                    </h5>
-                                                    <div class="price">
-                                                        <i class="fa fa-rupee-sign"></i>{{ c.product.price }}
-                                                        <span class="count">x{{ c.qty }}</span>
+                                                <li class="product-item-order" data-price="{{ c.product.price }}" data-qty="{{ c.qty }}">
+                                                    <input type="hidden" name="cart" value="{{ c.id }}">
+                                                    <div class="product-thumb">
+                                                        <a href="#">
+                                                            <img src="/media/{{ c.product.image }}" alt="img">
+                                                        </a>
                                                     </div>
-                                                </div>
-                                                <div class="trash">
-                                                    <i class="fa fa-times"></i>
-                                                </div>
-                                            </li>
+                                                    <div class="product-order-inner">
+                                                        <h5 class="product-name">
+                                                            <a href="#"><b>{{ c.product.pdt_name }}</b></a>
+                                                            <br>
+                                                            <span>Product</span>
+                                                        </h5>
+                                                        <div class="price">
+                                                            <i class="fa fa-rupee-sign"></i>{{ c.product.price }}
+                                                            <span class="count">x{{ c.qty }}</span>
+                                                        </div>
+                                                    </div>
+                                                    <div class="trash">
+                                                        <i class="fa fa-times"></i>
+                                                    </div>
+                                                </li>
+                                            {% else %}
+
+                                                <li class="product-item-order" data-price="{{ c.design.price }}" data-qty="{{ c.qty }}">
+                                                    <input type="hidden" name="cart" value="{{ c.id }}">
+                                                    <div class="product-thumb">
+                                                        <a href="#">
+                                                            <img src="/media/{{ c.design.image }}" alt="img">
+                                                        </a>
+                                                    </div>
+                                                    <div class="product-order-inner">
+                                                        <h5 class="product-name">
+                                                            <a href="#"><b>{{ c.design.design_name }}</b></a>
+                                                            <br>
+                                                            <span>Design</span>
+                                                        </h5>
+                                                        <div class="price">
+                                                            <i class="fa fa-rupee-sign"></i>{{ c.design.price }}
+                                                            <span class="count">x{{ c.qty }}</span>
+                                                        </div>
+                                                    </div>
+                                                    <div class="trash">
+                                                        <i class="fa fa-times"></i>
+                                                    </div>
+                                                </li>
+                                            {% endif %}
                                         {% endfor %}
                                     </ul>
                                     <div class="order-total">
@@ -2533,7 +2561,7 @@
             let total = 0;
 
             elements.each(function () {
-                total += $(this).data('price');
+                total += ($(this).data('price') * $(this).data('qty'));
             });
             $(".total").text(total);
             $("#total").val(total);

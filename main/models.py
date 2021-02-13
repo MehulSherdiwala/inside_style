@@ -1,6 +1,7 @@
 import datetime
 
 from django.contrib.auth.models import User as admin
+from django.utils import timezone
 from django.utils.safestring import mark_safe
 from djongo import models
 
@@ -157,6 +158,7 @@ class Cart(models.Model):
     datetime = models.DateField(default=datetime.date.today)
     type = models.IntegerField()
     product = models.ForeignKey(Product, on_delete=models.CASCADE)
+    design = models.ForeignKey(Design, on_delete=models.CASCADE)
     user = models.ForeignKey(User, on_delete=models.CASCADE)
 
     def __str__(self):
@@ -189,3 +191,22 @@ class Payment(models.Model):
     datetime = models.DateField(default=datetime.date.today)
     status = models.IntegerField(default=0)
     order = models.ForeignKey(Order, on_delete=models.CASCADE)
+
+#
+# class Message(models.Model):
+#     message = models.TextField()
+#     datetime = models.DateField(default=datetime.date.today)
+#     sender = models.IntegerField(1)
+#     type = models.IntegerField(1)
+#     user = models.ForeignKey(User, on_delete=models.CASCADE)
+#     designer = models.ForeignKey(Designer, on_delete=models.CASCADE)
+
+
+class ChatMessage(models.Model):
+    msg = models.TextField()
+    datetime = models.DateTimeField(default=timezone.now)
+    sender = models.IntegerField(2)
+    type = models.IntegerField(2)
+    status = models.IntegerField(2)
+    user = models.ForeignKey(User, on_delete=models.CASCADE)
+    designer = models.ForeignKey(Designer, on_delete=models.CASCADE)

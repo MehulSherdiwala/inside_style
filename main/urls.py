@@ -32,6 +32,14 @@ urlpatterns = [
     path('addAddress/', views.addAddress, name="addAddress"),
     path('placeOrder/', views.placeOrder, name="placeOrder"),
     path('designProduct/<design_id>', views.designProduct, name="designProduct"),
-    path('order_test/', views.order_test, name="order"),
-    path('chat/', views.chat, name="chat")
+    # path('order_test/', views.order_test, name="order"),
+    path('designer/login/', views.designer_login, name="designer_login"),
+    path('chat/', views.chat, name="chat"),
+    path('designer/chat/', views.designer_chat, name="designer_chat"),
+    path('ajax/chat/getMsgs/<user_id>', views.getMsgs, name="getMsgs"),
+    path('ajax/chat/getChatList/', views.getChatList, name="getChatList"),
+    path('ajax/chat/send_msg/', views.send_msg, name="send_msg"),
+    path('ajax/chat/getUnseenMsg/', views.getUnseenMsg, name="getUnseenMsg"),
+    path('ajax/chat/unseenCnt/', views.unseenCnt, name="unseenCnt"),
+    path('ajax/chat/sendAttach/', views.sendAttach, name="sendAttach"),
 ]

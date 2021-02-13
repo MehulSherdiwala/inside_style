@@ -1,6 +1,8 @@
 from django.contrib.admin.views.decorators import staff_member_required
 from django.core import serializers
 from django.contrib import messages
+from django.core.files.storage import FileSystemStorage
+from django.db.models import Count
 from django.http import HttpResponse, JsonResponse
 from django.shortcuts import render, redirect
 from django.contrib.auth.models import User as adminUser
@@ -9,7 +11,7 @@ from django.core.paginator import Paginator, EmptyPage, InvalidPage
 from django.template import RequestContext
 
 from main.models import City, State, User, Designer, Address, Contact, Product, Category, Cart, Order, OrderItemPdt, \
-    Payment, DesignElement, Design
+    Payment, DesignElement, Design, ChatMessage, OrderItemDesign
 
 
 def home(request):
@@ -52,6 +54,7 @@ def registration(request):
             user = User.objects.create(username=username, email=email, password=password)
             user.save()
             request.session['email'] = user.email
+            request.session['type'] = 0
             request.session['username'] = user.username
             request.session['id'] = user.id
 
@@ -74,6 +77,7 @@ def login(request):
 
         if user.exists():
             request.session['email'] = user[0].email
+            request.session['type'] = 0
             request.session['username'] = user[0].username
             request.session['id'] = user[0].id
             return redirect('/')
@@ -86,7 +90,7 @@ def login(request):
         if 'username' in request.session:
             return redirect('/')
         else:
-            return render(request, 'login.html')
+            return render(request, 'login.html', {'redirect': '/login/'})
 
 
 def logout(request):
@@ -244,11 +248,16 @@ def cart(request):
         data = {}
         i = 0
         for c in cart:
-            pdt = Product.objects.filter(pk=c.product.id)[0]
+            if c.type == 1:
+                item = Product.objects.filter(pk=c.product.id)[0]
+            else:
+                item = Design.objects.filter(pk=c.design.id)[0]
+
             data.update({i: {
-                'pdt': pdt,
+                'item': item,
                 'cart': c,
-                'price': pdt.price * c.qty
+                'price': item.price * c.qty,
+                'type': 'Product' if c.type == 1 else 'Design'
             }})
             i += 1
         return render(request, 'cart.html', {'data': data})
@@ -258,21 +267,37 @@ def cart(request):
 
 def addtocart(request):
     if 'id' in request.session:
-        pdt_id = request.GET['pdt_id']
+        pdt_id = request.GET['id']
         type = request.GET['type']
         qty = int(request.GET['qty'])
 
-        cart_count = Cart.objects.filter(product=pdt_id, user=request.session['id']).count()
+        if type == 1:
 
-        if cart_count > 0:
-            cart_item = Cart.objects.get(product=pdt_id, user=request.session['id'])
-            cart_item.qty += qty
-            cart_item.save()
+            cart_count = Cart.objects.filter(product=pdt_id, user=request.session['id']).count()
+
+            if cart_count > 0:
+                cart_item = Cart.objects.get(product=pdt_id, user=request.session['id'])
+                cart_item.qty += qty
+                cart_item.save()
+            else:
+                pdt = Product.objects.filter(pk=pdt_id)
+                user = User.objects.filter(pk=request.session['id'])
+                c = Cart.objects.create(qty=qty, type=type, product=pdt[0], user=user[0])
+                c.save()
+
         else:
-            pdt = Product.objects.filter(pk=pdt_id)
-            user = User.objects.filter(pk=request.session['id'])
-            c = Cart.objects.create(qty=qty, type=type, product=pdt[0], user=user[0])
-            c.save()
+            cart_count = Cart.objects.filter(design=pdt_id, user=request.session['id']).count()
+
+            if cart_count > 0:
+                cart_item = Cart.objects.get(design=pdt_id, user=request.session['id'])
+                cart_item.qty += qty
+                cart_item.save()
+            else:
+                design = Design.objects.filter(pk=pdt_id)
+                user = User.objects.filter(pk=request.session['id'])
+                c = Cart.objects.create(qty=qty, type=type, design=design[0], user=user[0])
+                c.save()
+
         d = {
             'status': 'done'
         }
@@ -326,14 +351,46 @@ def order(request):
     if 'id' in request.session:
         user = User.objects.filter(pk=request.session['id'])[0]
 
-        order = OrderItemPdt.objects.select_related()
+        # order = OrderItemPdt.objects.select_related()
         # order = OrderItemPdt.objects.filter(order__user=user)
 
-        data = {
-            'order': order,
-        }
+        order = Order.objects.filter(user=user)
+        data = {}
+        i = 0
+        for o in order:
+            oi = OrderItemPdt.objects.filter(order=o)
+            if oi.count() > 0:
+                for item in oi:
+                    data.update({i: {
+                        'image': item.product.image,
+                        'name': item.product.pdt_name,
+                        'price': item.product.price,
+                        'status': o.status,
+                        'order_no': o.id,
+                        'datetime': o.datetime,
+                        'category': 'Product',
+                    }})
+                    i += 1
 
-        return render(request, "order.html", data)
+            oi = OrderItemDesign.objects.filter(order=o)
+            if oi.count() > 0:
+                for item in oi:
+                    data.update({i: {
+                        'image': item.design.image,
+                        'name': item.design.design_name,
+                        'price': item.design.price,
+                        'status': o.status,
+                        'order_no': o.id,
+                        'datetime': o.datetime,
+                        'category': 'Design',
+                    }})
+                    i += 1
+
+        # data = {
+        #     'order': order,
+        # }
+
+        return render(request, "order.html", {'data': data})
 
     else:
         return redirect('/login')
@@ -364,9 +421,13 @@ def placeOrder(request):
 
         for c in request.POST.getlist('cart'):
             cart = Cart.objects.get(pk=c)
-            orderItem = OrderItemPdt.objects.create(qty=cart.qty, price=cart.product.price, product=cart.product,
-                                                    order=order)
-            orderItem.save()
+            if cart.type == 1:
+                orderItem = OrderItemPdt.objects.create(qty=cart.qty, price=cart.product.price, product=cart.product,
+                                                        order=order)
+                orderItem.save()
+            else:
+                orderItem = OrderItemDesign.objects.create(price=cart.design.price, design=cart.design, order=order)
+                orderItem.save()
             cart.delete()
             print(orderItem)
 
@@ -402,6 +463,175 @@ def designProduct(request, design_id):
 
 
 def chat(request):
-    return render(request, "chat.html")
+    if 'type' in request.session:
+        if request.session['type'] == 1:
+            return redirect("login")
+        else:
+            return render(request, "chat.html")
+    else:
+        return redirect("login")
 
 
+def getMsgs(request, user_id):
+    if request.session['type'] == 0:
+        user = User.objects.filter(pk=request.session['id'])[0]
+        msgs = ChatMessage.objects.filter(designer=user_id, user=user)
+        chatUser = Designer.objects.filter(pk=user_id)[0].designer_name
+    else:
+        designer = Designer.objects.filter(pk=request.session['id'])[0]
+        msgs = ChatMessage.objects.filter(designer=designer, user=user_id)
+        chatUser = User.objects.filter(pk=user_id)[0].username
+
+    data = {
+        'msg': serializers.serialize('json', msgs),
+        'chatUser': chatUser
+    }
+    msgs.update(status=1)
+
+    return JsonResponse(data)
+
+
+def getChatList(request):
+    data = {}
+
+    if request.session['type'] == 0:
+        user = User.objects.filter(pk=request.session['id'])[0]
+        msgs = ChatMessage.objects.filter(user=user).values('designer').annotate(dcount=Count('designer'))
+        for m in msgs:
+            data.update({m['designer']: {
+                'username': Designer.objects.filter(pk=m['designer'])[0].designer_name
+            }})
+    else:
+        designer = Designer.objects.filter(pk=request.session['id'])[0]
+        msgs = ChatMessage.objects.filter(designer=designer).values('user').annotate(dcount=Count('user'))
+        for m in msgs:
+            data.update({m['user']: {
+                'username': User.objects.filter(pk=m['user'])[0].username
+            }})
+
+    return JsonResponse(data)
+
+
+def send_msg(request):
+    msg = request.GET['msg']
+    sender = request.session['type']
+    if request.session['type'] == 0:
+        designer = Designer.objects.filter(pk=request.GET['user_id'])[0]
+        user = User.objects.filter(pk=request.session['id'])[0]
+    else:
+        designer = Designer.objects.filter(pk=request.session['id'])[0]
+        user = User.objects.filter(pk=request.GET['user_id'])[0]
+
+    chat = ChatMessage.objects.create(msg=msg, sender=sender, type=0, status=0,
+                                      user=user,
+                                      designer=designer)
+    chat.save()
+
+    return JsonResponse({})
+
+
+def getUnseenMsg(request):
+    if request.session['type'] == 0:
+        user_id = request.session['id']
+        designer_id = request.GET['user_id']
+    else:
+        user_id = request.GET['user_id']
+        designer_id = request.session['id']
+
+    user = User.objects.filter(pk=user_id)[0]
+    designer = Designer.objects.filter(pk=designer_id)[0]
+
+    msgs = ChatMessage.objects.filter(user=user, designer=designer, status=0,
+                                      sender=(0 if request.session['type'] == 1 else 1))
+
+    data = serializers.serialize('json', msgs)
+    msgs.update(status=1)
+
+    return HttpResponse(data, content_type="application/json")
+
+
+def unseenCnt(request):
+    if request.session['type'] == 0:
+        user = User.objects.filter(pk=request.session['id'])[0]
+        msgs = ChatMessage.objects.filter(user=user, sender=1, status=0,
+                                          designer__in=request.POST.getlist('from[]')).values('designer').annotate(
+            count=Count('designer'))
+    else:
+        designer = Designer.objects.filter(pk=request.session['id'])[0]
+        msgs = ChatMessage.objects.filter(designer=designer, sender=0, status=0,
+                                          user__in=request.POST.getlist('from[]')).values('user').annotate(
+            count=Count('user'))
+
+    data = {}
+    for m in msgs:
+        if 'designer' in m:
+            data.update({m['designer']: {
+                'count': m['count']
+            }})
+        else:
+            data.update({m['user']: {
+                'count': m['count']
+            }})
+
+    return JsonResponse(data)
+
+
+def designer_login(request):
+    if request.method == 'POST':
+        email = request.POST['email']
+        password = request.POST['password']
+
+        designer = Designer.objects.filter(email=email, password=password)
+
+        if designer.exists():
+            request.session['email'] = designer[0].email
+            request.session['type'] = 1
+            request.session['username'] = designer[0].designer_name
+            request.session['id'] = designer[0].id
+            return redirect('/')
+
+        else:
+            messages.info(request, "Invalid Email or Password")
+            return redirect('login')
+
+    else:
+        if 'username' in request.session:
+            return redirect('/')
+        else:
+            return render(request, 'login.html', {'redirect': '/designer/login/'})
+
+
+def designer_chat(request):
+    if 'type' in request.session:
+        if request.session['type'] == 0:
+            return redirect("login")
+        else:
+            return render(request, "chat.html")
+
+    return redirect("login")
+
+
+def sendAttach(request):
+    myfile = request.FILES['file']
+    fs = FileSystemStorage()
+    filename = fs.save(myfile.name, myfile)
+
+    msg = fs.url(filename)
+    sender = request.session['type']
+    if request.session['type'] == 0:
+        designer = Designer.objects.filter(pk=request.POST['user_id'])[0]
+        user = User.objects.filter(pk=request.session['id'])[0]
+    else:
+        designer = Designer.objects.filter(pk=request.session['id'])[0]
+        user = User.objects.filter(pk=request.POST['user_id'])[0]
+
+    chat = ChatMessage.objects.create(msg=msg, sender=sender, type=1, status=0,
+                                      user=user,
+                                      designer=designer)
+    chat.save()
+
+    data = {
+        'url': msg,
+        'ext': 2
+    }
+    return JsonResponse(data)

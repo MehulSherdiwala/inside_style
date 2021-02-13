@@ -699,7 +699,8 @@
                                         <table class="table table-bordered" id="cart_summary">
                                             <thead>
                                             <tr>
-                                                <th colspan="2" class="cart_product first_item">Product name</th>
+                                                <th colspan="2" class="cart_product first_item">Name</th>
+                                                <th>CATEGORY</th>
                                                 <th>ORDER NO</th>
                                                 <th>ORDER DATE</th>
                                                 <th>STATUS</th>
@@ -707,31 +708,34 @@
                                             </tr>
                                             </thead>
                                             <tbody class="dropdown-product-list">
-                                            {% for o in order %}
+                                            {% for key, o in data.items %}
                                                 <tr class="cart_item first_item address_0 odd dd-product-group">
                                                     <td class="cart_product">
                                                         <a href="product-page.html">
                                                             <img alt="Faded Short Sleeve T-shirts"
-                                                                 src="/media/{{ o.product.image }}">
+                                                                 src="/media/{{ o.image }}">
                                                         </a>
                                                     </td>
                                                     <td class="cart_description">
                                                         <p class="product-name">
-                                                            <a href="product-page.html">{{ o.product.pdt_name }}</a>
+                                                            <a href="product-page.html">{{ o.name }}</a>
                                                         </p>
                                                     </td>
                                                     <td data-title="ORDER NO" class="default">
-                                                        <span>#{{ o.order.id }}</span>
+                                                        <span>{{ o.category }}</span>
+                                                    </td>
+                                                    <td data-title="ORDER NO" class="default">
+                                                        <span>#{{ o.order_no }}</span>
                                                     </td>
                                                     <td data-title="ORDER DATE" class="date">
-                                                        <span>{{ o.order.datetime }}</span>
+                                                        <span>{{ o.datetime }}</span>
                                                     </td>
                                                     <td data-title="STATUS" class="default">
-                                                    <span>{% if o.order.status == 0 %}
+                                                    <span>{% if o.status == 0 %}
                                                         Processing
-                                                    {% elif o.order.status == 1 %}
+                                                    {% elif o.status == 1 %}
                                                         Out for Delivery
-                                                    {% elif o.order.status == 2 %}
+                                                    {% elif o.status == 2 %}
                                                         Delivered
                                                     {% endif %}</span>
                                                     </td>

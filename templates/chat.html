@@ -5,385 +5,498 @@
     <link rel="stylesheet" href="{% static 'css/plugins/all.min.css' %}">
 
     <style>
-.user-details-nav{
-    width: 100%;
-}
-.pull-left{
-    float: left;
-}
-.pull-right{
-    float: right;
-}
-   .chat-search-form {
-	background: #f9f9f9 none repeat scroll 0 0;
-	padding: 20px;
-}
-
-.chat-search-form>form {
-	border: 1px solid #ddd;
-	height: 40px;
-	position: relative;
-	width: 100%;
-}
-
-.chat-search-form form input {
-	border: medium none;
-	color: #b19777;
-	height: 100%;
-	left: 0;
-	padding: 5px 65px 5px 10px;
-	position: absolute;
-	width: 100%;
-}
-
-.chat-search-form form button {
-	background: transparent none repeat scroll 0 0;
-	border: medium none;
-	height: 100%;
-	position: absolute;
-	right: 0;
-	width: 20%;
-    color: #b19777;
-}
-
-.chat-list-body ul.chat-list li a {
-	padding: 10px;
-	border-bottom: 1px solid rgba(97, 106, 120, 0.07);
-	display: block
-}
-
-.chat-list-body ul.chat-list li a:hover {
-	background: #efefef none repeat scroll 0 0
-}
-
-.chat-avatar-img {
-	float: left;
-	margin-right: 10px;
-	width: 50px;
-}
-
-.chat-avatar-img>img {
-	border-radius: 50%;
-	width: 100%;
-}
-
-.chat-about {
-	margin-top: 10px;
-	overflow: hidden;
-}
-
-.chat-about>h4 {
-	color: #333;
-	font-size: 14px;
-	text-transform: capitalize;
-}
-
-.chat-list-body ul {
-	height: 450px;
-	margin-top: 20px;
-}
-
-.chat-list {
-	position: relative;
-    overflow: auto;
-    height: 550px;
-
-}
-
-.chat-about small {
-	text-transform: capitalize
-}
-
-.online {
-	color: #16d39a
-}
-
-.away {
-	color: #faa64b
-}
-
-.busy {
-	color: #ef5350
-}
-
-.chat-board-right {
-	background-color: #F2F7FB;
-	display: table;
-	height: 450px;
-	table-layout: fixed;
-	width: 100%;
-}
-
-.chat-board-header {
-	background-color: #fff;
-	border: 1px solid #eaeaea;
-	padding: 10px 15px;
-    height: 80px;
-}
-
-.user-img {
-	display: inline-block;
-	position: relative;
-}
-
-.chat-user-img {
-	width: 50px;
-	margin-right: 10px
-}
-
-.chat-user-img img {
-	border-radius: 50%;
-	width: 100%;
-}
-
-.user-info h4 {
-	color: #0a0a0a;
-	font-size: 15px;
-	text-transform: capitalize;
-}
-
-.user-info small {
-	text-transform: capitalize;
-    color: #b19777;
-}
-
-.user-info {
-	margin-top: 7px
-}
-
-
-.chat-board-right .navbar-custom {
-	margin-bottom: 0;
-    height: 450px;
-}
-
-.nav.navbar-nav-custom.pull-right.custom-menu>li>a:hover,
-.nav.navbar-nav-custom.pull-right.custom-menu>li>a:focus {
-	background: transparent !important
-}
-
-.nav.navbar-nav-custom.pull-right.custom-menu>li>a {
-	font-size: 18px;
-	color: #4a5365;
-}
-
-.nav.navbar-nav-custom.pull-right.custom-menu>li>ul {
-	left: auto;
-	right: 0
-}
-
-.chat-box-inner .chat-list {
-	padding: 20px;
-    height: 400px;
-}
-
-.chat-box-inner .chat-list li {
-	list-style: outside none none;
-	margin-top: 30px;
-}
-
-.chat-img {
-	display: inline-block;
-	vertical-align: top;
-	width: 45px;
-}
-
-.chat-img img {
-	border-radius: 50%;
-	width: 100%;
-}
-
-.chat-content {
-	display: inline-block;
-	padding-left: 15px;
-	width: auto;
-}
-
-.chat-text {
-	background: #fff none repeat scroll 0 0;
-	color: #333;
-	padding: 10px;
-	border-radius: 10px;
-    min-width: min-content;
-}
-
-.chat-time {
-	text-align: center;
-    padding-left: 30px;
-    padding-top: 5px;
-    font-size: small;
-    color: #4a5365;
-}
-
-.chat-time-right {
-	text-align: center;
-    padding-left: 30px;
-    padding-top: 5px;
-    font-size: small;
-    color: #fff;
-}
-
-.chat-action{
-    font-size: 15px;
-    color: #4a5365;
-}
-.chat-box-inner .chat-list li.chat-list-right {
-	text-align: right;
-}
-
-.chat-list-right .chat-text {
-	text-align: left;
-	background: #b19777 none repeat scroll 0 0;
-	color: #fff;
-}
-
-.chat-box-inner>ul {
-	height: 320px
-}
-
-.attach-icon {
-	display: table-cell;
-	overflow: hidden;
-	position: relative;
-	text-align: right;
-	vertical-align: middle;
-	width: 30px;
-
-}
-
-.attach-icon p i {
-	margin-right: 5px;
-	font-size: 22px;
-	margin-top: 7px;
-    color: #b19777;
-}
-
-.attach-icon>input[type="file"] {
-	cursor: pointer;
-	height: 100%;
-	left: 0;
-	opacity: 0;
-	-ms-filter: "progid:DXImageTransform.Microsoft.Alpha(Opacity=0)";
-	position: absolute;
-	top: 0;
-	width: 100%;
-}
-
-.chat-footer {
-	background-color: #fff;
-	border: 1px solid #eaeaea;
-	padding: 10px;
-}
-
-.message-bar {
-	display: table;
-	height: 44px;
-	position: relative;
-	width: 100%;
-}
-
-.message-bar .message-bar-inner {
-	display: table-row;
-	height: 100%;
-	padding: 0 8px;
-	width: 100%;
-}
-
-.message-bar .message-text-area {
-	display: table-cell;
-}
-
-.message-text-area form {
-	border-collapse: separate;
-	display: table;
-	height: 44px;
-	position: relative;
-	width: 100%;
-}
-
-.message-text-area form textarea {
-	background-color: #fff;
-	box-shadow: none;
-	color: #b19777;
-	border: medium none;
-	display: block;
-	height: 100%;
-	margin: 0;
-	padding: 6px 12px;
-	position: absolute;
-	resize: none;
-	width: 93%;
-}
-
-.message-text-area button {
-	color: #b19777;
-	background: transparent none repeat scroll 0 0;
-	border: medium none;
-	font-size: 19px;
-	height: 100%;
-	position: absolute;
-	right: 0;
-	width: 7%;
-}
-
-.chat-board-header .nav.navbar-nav-custom.pull-right.custom-menu>li>a[aria-expanded="false"]:before,
-.chat-board-header .nav.navbar-nav-custom.pull-right.custom-menu>li>a[aria-expanded="true"]:before {
-	display: none
-}
-
-/*================================================
-06. Breadcromb
-==================================================*/
-
-.breadcromb-area {
-	background: #fff none repeat scroll 0 0;
-	box-shadow: 1px 0 3px rgba(0, 0, 0, 0.1);
-	padding: 10px;
-}
-
-.seipkon-breadcromb-left>h3 {
-	color: #333;
-	font-size: 20px;
-	font-weight: 500;
-	text-transform: capitalize;
-}
-
-.seipkon-breadcromb-right {
-	text-align: right
-}
-
-.seipkon-breadcromb-right li {
-	color: #99a0aa;
-	display: inline-block;
-	text-transform: capitalize;
-	position: relative
-}
-
-.seipkon-breadcromb-right ul>li+li:before {
-	color: #99a0aa;
-	content: "/ ";
-	padding: 0 5px;
-}
-
-.seipkon-breadcromb-right li a {
-	color: #333;
-	font-weight: 500
-}
-
-.seipkon-breadcromb-right li a:hover {
-	color: #99a0aa;
-}
-
-
-#content>.page-content {
-	min-height: 100vh;
-	padding: 30px 15px
-}
-
-#content.active {
-	width: 100%;
-}
-
+        .user-details-nav {
+            width: 100%;
+        }
+
+        .pull-left {
+            float: left;
+        }
+
+        .pull-right {
+            float: right;
+        }
+
+        .chat-search-form {
+            background: #f9f9f9 none repeat scroll 0 0;
+            padding: 20px;
+        }
+
+        .chat-search-form > form {
+            border: 1px solid #ddd;
+            height: 40px;
+            position: relative;
+            width: 100%;
+        }
+
+        .chat-search-form form input {
+            border: medium none;
+            color: #b19777;
+            height: 100%;
+            left: 0;
+            padding: 5px 65px 5px 10px;
+            position: absolute;
+            width: 100%;
+        }
+
+        .chat-search-form form button {
+            background: transparent none repeat scroll 0 0;
+            border: medium none;
+            height: 100%;
+            position: absolute;
+            right: 0;
+            width: 20%;
+            color: #b19777;
+        }
+
+        .chat-list-body ul.chat-list li a {
+            padding: 10px;
+            border-bottom: 1px solid rgba(97, 106, 120, 0.07);
+            display: block;
+            overflow: hidden;
+        }
+
+        .chat-list-body ul.chat-list li a:hover {
+            background: #efefef none repeat scroll 0 0
+        }
+
+        .chat-avatar-img {
+            float: left;
+            margin-right: 10px;
+            width: 50px;
+        }
+
+        .chat-avatar-img > img {
+            border-radius: 50%;
+            width: 100%;
+        }
+
+        .chat-about {
+            margin-top: 10px;
+            overflow: hidden;
+        }
+
+        .chat-about > h4 {
+            color: #333;
+            font-size: 14px;
+            text-transform: capitalize;
+        }
+
+        .chat-list-body ul {
+            height: 450px;
+            margin-top: 20px;
+        }
+
+        .chat-list {
+            position: relative;
+            overflow: auto;
+            height: 550px;
+
+        }
+
+        .chat-about small {
+            text-transform: capitalize
+        }
+
+        .online {
+            color: #16d39a
+        }
+
+        .away {
+            color: #faa64b
+        }
+
+        .busy {
+            color: #ef5350
+        }
+
+        .chat-board-right {
+            background-color: #F2F7FB;
+            display: table;
+            height: 450px;
+            table-layout: fixed;
+            width: 100%;
+        }
+
+        .chat-board-header {
+            background-color: #fff;
+            border: 1px solid #eaeaea;
+            padding: 10px 15px;
+            height: 80px;
+        }
+
+        .user-img {
+            display: inline-block;
+            position: relative;
+        }
+
+        .chat-user-img {
+            width: 50px;
+            margin-right: 10px
+        }
+
+        .chat-user-img img {
+            border-radius: 50%;
+            width: 100%;
+        }
+
+        .user-info h4 {
+            color: #0a0a0a;
+            font-size: 15px;
+            text-transform: capitalize;
+        }
+
+        .user-info small {
+            text-transform: capitalize;
+            color: #b19777;
+        }
+
+        .user-info {
+            margin-top: 7px
+        }
+
+
+        .chat-board-right .navbar-custom {
+            margin-bottom: 0;
+            height: 450px;
+        }
+
+        .nav.navbar-nav-custom.pull-right.custom-menu > li > a:hover,
+        .nav.navbar-nav-custom.pull-right.custom-menu > li > a:focus {
+            background: transparent !important
+        }
+
+        .nav.navbar-nav-custom.pull-right.custom-menu > li > a {
+            font-size: 18px;
+            color: #4a5365;
+        }
+
+        .nav.navbar-nav-custom.pull-right.custom-menu > li > ul {
+            left: auto;
+            right: 0
+        }
+
+        .chat-box-inner .chat-list {
+            padding: 20px;
+            height: 400px;
+        }
+
+        .chat-box-inner .chat-list li {
+            list-style: outside none none;
+            margin-top: 30px;
+        }
+
+        .chat-img {
+            display: inline-block;
+            vertical-align: top;
+            width: 45px;
+        }
+
+        .chat-img img {
+            border-radius: 50%;
+            width: 100%;
+        }
+
+        .chat-content {
+            display: inline-block;
+            padding-left: 15px;
+            width: auto;
+        }
+
+        .chat-text {
+            background: #fff none repeat scroll 0 0;
+            color: #333;
+            padding: 10px;
+            border-radius: 10px;
+            min-width: min-content;
+        }
+
+        .chat-time {
+            text-align: center;
+            padding-left: 30px;
+            padding-top: 5px;
+            font-size: small;
+            color: #4a5365;
+        }
+
+        .chat-time-right {
+            text-align: center;
+            padding-left: 30px;
+            padding-top: 5px;
+            font-size: small;
+            color: #fff;
+        }
+
+        .chat-action {
+            font-size: 15px;
+            color: #4a5365;
+        }
+
+        .chat-box-inner .chat-list li.chat-list-right {
+            text-align: right;
+        }
+
+        .chat-list-right .chat-text {
+            text-align: left;
+            background: #b19777 none repeat scroll 0 0;
+            color: #fff;
+        }
+
+        .chat-box-inner > ul {
+            height: 320px
+        }
+
+        .attach-icon {
+            display: table-cell;
+            overflow: hidden;
+            position: relative;
+            text-align: right;
+            vertical-align: middle;
+            width: 30px;
+
+        }
+
+        .attach-icon p i {
+            margin-right: 5px;
+            font-size: 22px;
+            margin-top: 7px;
+            color: #b19777;
+        }
+
+        .attach-icon > input[type="file"] {
+            cursor: pointer;
+            height: 100%;
+            left: 0;
+            opacity: 0;
+            -ms-filter: "progid:DXImageTransform.Microsoft.Alpha(Opacity=0)";
+            position: absolute;
+            top: 0;
+            width: 100%;
+        }
+
+        .chat-footer {
+            background-color: #fff;
+            border: 1px solid #eaeaea;
+            padding: 10px;
+        }
+
+        .message-bar {
+            display: table;
+            height: 44px;
+            position: relative;
+            width: 100%;
+        }
+
+        .message-bar .message-bar-inner {
+            display: table-row;
+            height: 100%;
+            padding: 0 8px;
+            width: 100%;
+        }
+
+        .message-bar .message-text-area {
+            display: table-cell;
+        }
+
+        .message-text-area form {
+            border-collapse: separate;
+            display: table;
+            height: 44px;
+            position: relative;
+            width: 100%;
+        }
+
+        .message-text-area form textarea {
+            background-color: #fff;
+            box-shadow: none;
+            color: #b19777;
+            border: medium none;
+            display: block;
+            height: 100%;
+            margin: 0;
+            padding: 6px 12px;
+            position: absolute;
+            resize: none;
+            width: 93%;
+        }
+
+        .message-text-area button {
+            color: #b19777;
+            background: transparent none repeat scroll 0 0;
+            border: medium none;
+            font-size: 19px;
+            height: 100%;
+            position: absolute;
+            right: 0;
+            width: 7%;
+        }
+
+        .chat-board-header .nav.navbar-nav-custom.pull-right.custom-menu > li > a[aria-expanded="false"]:before,
+        .chat-board-header .nav.navbar-nav-custom.pull-right.custom-menu > li > a[aria-expanded="true"]:before {
+            display: none
+        }
+
+        /*================================================
+        06. Breadcromb
+        ==================================================*/
+
+        .breadcromb-area {
+            background: #fff none repeat scroll 0 0;
+            box-shadow: 1px 0 3px rgba(0, 0, 0, 0.1);
+            padding: 10px;
+        }
+
+        .seipkon-breadcromb-left > h3 {
+            color: #333;
+            font-size: 20px;
+            font-weight: 500;
+            text-transform: capitalize;
+        }
+
+        .seipkon-breadcromb-right {
+            text-align: right
+        }
+
+        .seipkon-breadcromb-right li {
+            color: #99a0aa;
+            display: inline-block;
+            text-transform: capitalize;
+            position: relative
+        }
+
+        .seipkon-breadcromb-right ul > li + li:before {
+            color: #99a0aa;
+            content: "/ ";
+            padding: 0 5px;
+        }
+
+        .seipkon-breadcromb-right li a {
+            color: #333;
+            font-weight: 500
+        }
+
+        .seipkon-breadcromb-right li a:hover {
+            color: #99a0aa;
+        }
+
+
+        #content > .page-content {
+            min-height: 100vh;
+            padding: 30px 15px
+        }
+
+        #content.active {
+            width: 100%;
+        }
+
+        .msg-time {
+            float: right;
+            margin-top: 5px;
+            padding-left: 10px;
+            color: rgba(97, 97, 97, 0.75);
+        }
+
+        .chat-list-right .msg-time {
+            float: right;
+            margin-top: 5px;
+            padding-left: 10px;
+            color: rgba(255, 255, 255, 0.76);
+        }
+
+        .chat-time {
+            text-align: center;
+        }
+
+        .chat-time span {
+            background-color: #c0cdda;
+            padding: 6px;
+            border-radius: 5px;
+            color: #000;
+        }
+
+        .pace {
+            display: none !important;
+        }
+
+        #preloader {
+            display: none !important;
+        }
+
+        .badge {
+            background-color: #252531cf;
+            border-radius: 50%;
+            color: #fff;
+            padding: 0.35em 0.5em;
+            float: right;
+        }
+
+        .chat-msg-attachments {
+            padding: 4px 0;
+        {#display: -webkit-box;#}{#display: -ms-flexbox;#}{#display: flex;#} display: inline-block;
+            width: 100%;
+            margin: 0 -1px;
+        }
+
+        .chat-attach-download {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            opacity: 0;
+            transition: all .4s;
+            color: #fff;
+            width: 90px;
+            line-height: 32px;
+            background: rgba(255, 255, 255, 0.2);
+            text-align: center;
+            padding: 10px;
+        }
+
+        .chat-attachment img {
+            max-width: 100%;
+        }
+
+        .chat-attachment {
+            position: relative;
+            max-width: 300px;
+            overflow: hidden;
+        }
+
+        .chat-attachment {
+            border-radius: .25rem;
+        }
+
+        .chat-attachment:hover .chat-attach-download {
+            opacity: 1;
+        }
+
+        .chat-attach-download:hover {
+            color: #495463;
+            background: #fff;
+        }
+
+        .chat-attach-download:hover a {
+            color: #495463;
+        }
+
+        .chat-attachment:before {
+            position: absolute;
+            top: 0;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            background: #000;
+            content: "";
+            opacity: 0.4;
+            transition: all .4s;
+        }
+
+        .chat-attachment:hover:before {
+            opacity: 0.6;
+        }
+        .chat-text{
+            display: inline-block;
+        }
     </style>
 
 {% endblock %}
@@ -404,252 +517,570 @@
     </header>
 
     <!-- Right Side Content Start -->
-         <section id="content" class="seipkon-content-wrapper">
-            <div class="page-content">
-               <div class="container-fluid">
+    <section id="content" class="seipkon-content-wrapper">
+    <div class="page-content">
+        <div class="container-fluid">
 
-                  <!-- Breadcromb Row Start -->
-                  <div class="row">
-                     <div class="col-md-12">
-                        <div class="breadcromb-area">
-                           <div class="row">
-                              <div class="col-md-6 col-sm-6">
-                                 <div class="seipkon-breadcromb-left">
+            <!-- Breadcromb Row Start -->
+            <div class="row">
+                <div class="col-md-12">
+                    <div class="breadcromb-area">
+                        <div class="row">
+                            <div class="col-md-6 col-sm-6">
+                                <div class="seipkon-breadcromb-left">
                                     <h3>Chatting</h3>
-                                 </div>
-                              </div>
-                              <div class="col-md-6 col-sm-6">
-                                 <div class="seipkon-breadcromb-right">
+                                </div>
+                            </div>
+                            <div class="col-md-6 col-sm-6">
+                                <div class="seipkon-breadcromb-right">
                                     <ul>
-                                       <li><a href="index.html">home</a></li>
-                                       <li>advance apps</li>
-                                       <li>Chatting</li>
+                                        <li><a href="index.html">home</a></li>
+                                        <li>advance apps</li>
+                                        <li>Chatting</li>
                                     </ul>
-                                 </div>
-                              </div>
-                           </div>
+                                </div>
+                            </div>
                         </div>
-                     </div>
-                  </div>
-                  <!-- End Breadcromb Row -->
+                    </div>
+                </div>
+            </div>
+            <!-- End Breadcromb Row -->
 
-                  <!-- Chatting Row Start -->
-                  <div class="row">
-                     <div class="col-md-12">
-                        <div class="page-box">
-                           <div class="row">
-                              <div class="col-md-4 col-sm-5">
-                                 <div class="chat-list-left">
+            <!-- Chatting Row Start -->
+            <div class="row">
+                <div class="col-md-12">
+                    <div class="page-box">
+                        <div class="row">
+                            <div class="col-md-4 col-sm-5">
+                                <div class="chat-list-left">
                                     <div class="chat-search-form">
-                                       <form>
-                                          <input type="search" placeholder="Search Contact" >
-                                          <button type="submit" ><i class="fa fa-search"></i></button>
-                                       </form>
+                                        <form>
+                                            <input type="search" placeholder="Search Contact">
+                                            <button type="submit"><i class="fa fa-search"></i></button>
+                                        </form>
                                     </div>
                                     <div class="chat-list-body">
-                                       <ul class="chat-list">
-                                          <li class="clearfix">
-                                             <a href="chatting.html#">
-                                                <div class="chat-avatar-img">
-                                                   <img src="{% static 'img/2.jpg' %}" alt="avatar" />
-                                                </div>
-                                                <div class="chat-about">
-                                                   <h4>David Johnson</h4>
-                                                   <small class="online">Online</small>
-                                                </div>
-                                             </a>
-                                          </li>
-                                          <li class="clearfix active">
-                                             <a href="chatting.html#">
-                                                <div class="chat-avatar-img">
-                                                   <img src="{% static 'img/2.jpg' %}" alt="avatar" />
-                                                </div>
-                                                <div class="chat-about">
-                                                   <h4>Aiden Chavez</h4>
-                                                   <small class="away">Away</small>
-                                                </div>
-                                             </a>
-                                          </li>
-                                          <li class="clearfix">
-                                             <a href="chatting.html#">
-                                                <div class="chat-avatar-img">
-                                                   <img src="{% static 'img/2.jpg' %}" alt="avatar" />
-                                                </div>
-                                                <div class="chat-about">
-                                                   <h4>Margaret Govan</h4>
-                                                   <small class="busy">busy</small>
-                                                </div>
-                                             </a>
-                                          </li>
-                                          <li class="clearfix">
-                                             <a href="chatting.html#">
-                                                <div class="chat-avatar-img">
-                                                   <img src="{% static 'img/2.jpg' %}" alt="avatar" />
-                                                </div>
-                                                <div class="chat-about">
-                                                   <h4>Emanual Doe</h4>
-                                                   <small class="online">online</small>
-                                                </div>
-                                             </a>
-                                          </li>
-                                          <li class="clearfix">
-                                             <a href="chatting.html#">
-                                                <div class="chat-avatar-img">
-                                                   <img src="{% static 'img/2.jpg' %}" alt="avatar" />
-                                                </div>
-                                                <div class="chat-about">
-                                                   <h4>Eric Alsobrook</h4>
-                                                   <small class="online">online</small>
-                                                </div>
-                                             </a>
-                                          </li>
-                                          <li class="clearfix">
-                                             <a href="chatting.html#">
-                                                <div class="chat-avatar-img">
-                                                   <img src="{% static 'img/2.jpg' %}" alt="avatar" />
-                                                </div>
-                                                <div class="chat-about">
-                                                   <h4>Christian Kelly</h4>
-                                                   <small class="away">away</small>
-                                                </div>
-                                             </a>
-                                          </li>
-                                          <li class="clearfix">
-                                             <a href="chatting.html#">
-                                                <div class="chat-avatar-img">
-                                                   <img src="{% static 'img/2.jpg' %}" alt="avatar" />
-                                                </div>
-                                                <div class="chat-about">
-                                                   <h4>David Johnson</h4>
-                                                   <small class="online">Online</small>
-                                                </div>
-                                             </a>
-                                          </li>
-                                          <li class="clearfix active">
-                                             <a href="chatting.html#">
-                                                <div class="chat-avatar-img">
-                                                   <img src="{% static 'img/2.jpg' %}" alt="avatar" />
-                                                </div>
-                                                <div class="chat-about">
-                                                   <h4>Aiden Chavez</h4>
-                                                   <small class="away">Away</small>
-                                                </div>
-                                             </a>
-                                          </li>
-                                          <li class="clearfix">
-                                             <a href="chatting.html#">
-                                                <div class="chat-avatar-img">
-                                                   <img src="{% static 'img/2.jpg' %}" alt="avatar" />
-                                                </div>
-                                                <div class="chat-about">
-                                                   <h4>Margaret Govan</h4>
-                                                   <small class="busy">busy</small>
-                                                </div>
-                                             </a>
-                                          </li>
-                                       </ul>
+                                        <ul class="chat-list" id="chat-user-list">
+
+                                        </ul>
                                     </div>
-                                 </div>
-                              </div>
-                              <div class="col-md-8 col-sm-7">
-                                 <div class="chat-board-right">
+                                </div>
+                            </div>
+                            <div class="col-md-8 col-sm-7">
+                                <div class="chat-board-right">
                                     <div class="chat-board-header">
-                                       <div class="navbar-custom">
-                                          <div class="user-details-nav">
-                                             <div class="chat-user-details">
-                                                <div class="pull-left chat-user-img">
-                                                   <a href="chatting.html#">
-                                                   <img src="{% static 'img/2.jpg' %}" alt="">
-                                                   </a>
+                                        <div class="navbar-custom">
+                                            <div class="user-details-nav">
+                                                <div class="chat-user-details">
+                                                    <div class="pull-left chat-user-img">
+                                                        <a href="javascript:void(0);">
+                                                            <img src="{% static 'img/default.jpg' %}" alt="">
+                                                        </a>
+                                                    </div>
                                                 </div>
-                                             </div>
-                                             <div class="user-info pull-left">
-                                                <a href="chatting.html#" title="Mike Litorus">
-                                                   <h4>Mike Litorus</h4>
-                                                </a><br>
-                                                <small class="online">online</small>
-                                             </div>
-                                          </div>
-                                       </div>
+                                                <div class="user-info pull-left">
+                                                    <a href="javascript:void(0);" title="Mike Litorus">
+                                                        <h4 id="username"></h4>
+                                                    </a><br>
+                                                    <small class="online status"></small>
+                                                </div>
+                                            </div>
+                                        </div>
                                     </div>
                                     <div class="chat-board-content">
-                                       <div class="chat-box-wrapper">
-                                          <div class="chat-box-inner">
-                                             <ul class="chat-list">
-                                                <li>
-                                                   <div class="chat-content">
-                                                      <div class="chat-text">
-                                                         It’s Great opportunity to work.
-                                                          <div class="chat-time pull-right">10:57 am</div>
-                                                      </div>
-
-                                                   </div>
-                                                </li>
-                                                <li class="chat-list-right">
-                                                   <div class="chat-content">
-                                                      <div class="chat-text">
-                                                         simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's
-                                                          <div class="chat-time-right pull-right">10:57 am</div>
-                                                      </div>
-                                                      <div class="chat-action">seen</div>
-                                                   </div>
-                                                </li>
-                                                 <li>
-                                                   <div class="chat-content">
-                                                      <div class="chat-text">
-                                                         It’s Great opportunity to work.
-                                                          <div class="chat-time pull-right">10:57 am</div>
-                                                      </div>
-
-                                                   </div>
-                                                </li>
-                                                <li class="chat-list-right">
-                                                   <div class="chat-content">
-                                                      <div class="chat-text">
-                                                         It was popularised in the 1960s
-                                                          <div class="chat-time-right pull-right">10:57 am</div>
-                                                      </div>
-                                                      <div class="chat-action">seen</div>
-                                                   </div>
-                                                </li>
-                                                <li>
-                                                   <div class="chat-img">
-                                                      <a href="chatting.html#">
-{#                                                      <img src="{% static 'img/2.jpg' %}" alt="user">#}
-                                                      </a>
-                                                   </div>
-
-                                             </ul>
-                                          </div>
-                                       </div>
+                                        <div class="chat-box-wrapper">
+                                            <div class="chat-box-inner">
+                                                <ul class="chat-list" id="chats">
+                                                </ul>
+                                            </div>
+                                        </div>
                                     </div>
                                     <div class="chat-footer">
-                                       <div class="message-bar">
-                                          <div class="message-bar-inner">
-                                             <div class="attach-icon">
-                                                <p>
-                                                   <i class="fa fa-paperclip"></i>
-                                                </p>
-                                                <input type="file">
-                                             </div>
-                                             <div class="message-text-area">
-                                                <form>
-                                                   <textarea placeholder="Type message..."></textarea>
-                                                   <button type="submit" ><i class="far fa-paper-plane"></i></button>
-                                                </form>
-                                             </div>
-                                          </div>
-                                       </div>
+                                        <div class="message-bar">
+                                            <div class="message-bar-inner">
+                                                <div class="attach-icon">
+                                                    <p>
+                                                        <i class="fa fa-paperclip"></i>
+                                                    </p>
+                                                    <input type="file" id="attachment">
+                                                </div>
+                                                <div class="message-text-area">
+                                                    <form>
+                                                        <input type="hidden" id="chat_date">
+                                                        <input type="hidden" id="user_id" value="0">
+                                                        {% csrf_token %}
+                                                        <textarea placeholder="Type message..." id="msg"></textarea>
+                                                        <button type="button" id="send"><i
+                                                                class="far fa-paper-plane"></i>
+                                                        </button>
+                                                    </form>
+                                                </div>
+                                            </div>
+                                        </div>
                                     </div>
-                                 </div>
-                              </div>
-                           </div>
+                                </div>
+                            </div>
                         </div>
-                     </div>
-                  </div>
-                  <!-- End Chatting Row -->
-
-               </div>
+                    </div>
+                </div>
             </div>
+            <!-- End Chatting Row -->
 
+        </div>
+    </div>
+
+{% endblock %}
+
+{% block script %}
+    <script>
+
+        $("#send").on('click', function () {
+            let msg = $("#msg").val();
+            $("#msg").val('');
+            let user_id = $("#user_id").val();
+
+            if (msg != '') {
+
+                let today = new Date();
+                let hour = today.getHours();
+                let minute = today.getMinutes();
+                let prepand = (hour >= 12) ? " PM " : " AM ";
+                hour = (hour >= 12) ? hour - 12 : hour;
+                if (hour === 0 && prepand === ' PM ') {
+                    hour = 12;
+                    prepand = ' PM';
+                }
+                if (hour === 0 && prepand === ' AM ') {
+                    hour = 12;
+                    prepand = ' AM';
+                }
+                let html = '';
+
+                html += '<li class="chat-list-right">';
+                if ($("#chat_date").val() != "Today") {
+                    html += '<div class="chat-time"><span>Today</span></div>';
+                    $("#chat_date").val("Today");
+                }
+                html += '<div class="chat-content">';
+                html += '<div class="chat-text">';
+                html += msg;
+                html += '<span class="msg-time">';
+                html += hour + ':' + minute + prepand;
+                html += '</span>';
+                html += '</div>';
+                html += '<div class="chat-action">seen</div>';
+                html += '</div>';
+                html += '</li>';
+
+                $("#chats").append(html);
+                $("#chats").animate({scrollTop: $('#chats').prop("scrollHeight")}, 1000);
+                $.ajax({
+                    url: '/ajax/chat/send_msg/',
+                    method: 'get',
+                    data: {
+                        user_id: user_id,
+                        msg: msg,
+                    }
+                })
+            }
+        });
+
+        {#getChats();#}
+
+        function getChats() {
+            let user_id = $("#user_id").val();
+            let chat_date = '';
+
+            $.ajax({
+                url: '/ajax/chat/getMsgs/' + user_id,
+                success: function (res) {
+                    if (res != '') {
+                        let html = '';
+                        $("#username").text(res['chatUser']);
+
+                        let obj = JSON.parse(res['msg']);
+                        for (k in obj) {
+                            let d = new Date(obj[k]['fields'].datetime);
+                            let timestamp = d.getHours() + ":" + d.getMinutes();
+                            let date = d.getDate() + '-' + d.getMonth() + '-' + d.getFullYear();
+                            let today = new Date();
+                            if ((today.getDate() + '-' + today.getMonth() + '-' + today.getFullYear()) == date) {
+                                date = "Today";
+                            } else {
+                                today.setDate(today.getDate() - 1);
+                                if (today.getDate() + '-' + today.getMonth() + '-' + today.getFullYear() == date) {
+                                    date = "Yesterday";
+                                }
+                            }
+
+                            if (obj[k]['fields'].type == 0) {
+
+                                if (obj[k]['fields'].sender == {{ request.session.type }}) {
+
+                                    html += '<li class="chat-list-right">';
+                                    if (chat_date !== date) {
+                                        html += '<div class="chat-time"><span>' + date + '</span></div>';
+                                        chat_date = date;
+                                    }
+                                    html += '<div class="chat-content">';
+                                    html += '<div class="chat-text">';
+                                    html += obj[k]['fields'].msg;
+                                    html += '<span class="msg-time">';
+                                    html += timestamp;
+                                    html += '</span>';
+                                    html += '</div>';
+                                    html += '</div>';
+                                    html += '</li>';
+                                } else {
+
+                                    html += '<li>';
+                                    if (chat_date !== date) {
+                                        html += '<div class="chat-time"><span>' + date + '</span></div>';
+                                        chat_date = date;
+                                    }
+                                    html += '<div class="chat-content">';
+                                    html += '<div class="chat-text">';
+                                    html += obj[k]['fields'].msg;
+                                    html += '<span class="msg-time">';
+                                    html += timestamp;
+                                    html += '</span>';
+                                    html += '</div>';
+                                    html += '</div>';
+                                    html += '</li>';
+                                }
+                            } else {
+                                let ext = obj[k]['fields'].msg.substr((obj[k]['fields'].msg.lastIndexOf('.') + 1));
+                                console.log(ext);
+                                if (ext == 'jpg' || ext == 'png' || ext == 'jpeg' || ext == 'gif') {
+
+                                    if (obj[k]['fields'].sender == {{ request.session.type }}) {
+                                        html += '<li class="chat-list-right">';
+                                    } else {
+                                        html += '<li>';
+                                    }
+                                    if (chat_date !== date) {
+                                        html += '<div class="chat-time"><span>' + date + '</span></div>';
+                                        chat_date = date;
+                                    }
+                                    html += '<div class="chat-content">';
+                                    html += '<div class="chat-text">';
+                                    html += '<div>' +
+                                        '<div class="chat-msg-attachments">\n' +
+                                        '<div class="chat-attachment">\n' +
+                                        '<img src="' + obj[k]['fields'].msg + '" alt="Attachment">\n' +
+                                        '<div class="chat-attach-download d-flex justify-content-between">' +
+                                        '<a href="' + obj[k]['fields'].msg + '" download="' + obj[k]['fields'].msg + '" >\n' +
+                                        '<i class="fas fa-download"></i>\n' +
+                                        '</a>\n' +
+                                        '<a href="' + obj[k]['fields'].msg + '" target="_blank"><i class="fas fa-external-link-alt"></i></a>' +
+                                        '</div>' +
+                                        '</div>\n';
+                                    html += '<span class="msg-time">';
+                                    html += timestamp;
+                                    html += '</span>' +
+                                        '</div>' +
+                                        '</div>';
+
+                                    html += '</div>';
+                                    html += '</div>';
+                                    html += '</li>';
+
+                                    {% comment %}html +=
+                                        '<li class="media sent">' +
+                                        '<div class="media-body">' +
+                                        '<div class="msg-box">' +
+                                        '<div>' +
+                                        '<div class="chat-msg-attachments">\n' +
+                                        '<div class="chat-attachment">\n' +
+                                        '<img src="' + obj[k]['fields'].msg + '" alt="Attachment">\n' +
+                                        '<div class="chat-attach-download d-flex justify-content-between">' +
+                                        '<a href="' + obj[k]['fields'].msg + '" download="' + obj[k]['fields'].msg + '" >\n' +
+                                        '<i class="fas fa-download"></i>\n' +
+                                        '</a>\n' +
+                                        '<a href="' + obj[k]['fields'].msg + '" target="_blank"><i class="fas fa-external-link-alt"></i></a>' +
+                                        '</div>' +
+                                        '</div>\n' +
+                                        '</div>' +
+                                        '<ul class="chat-msg-info">' +
+                                        '<li>' +
+                                        '<div class="chat-time">' +
+                                        '<span>' + timestamp + '</span>' +
+                                        '</div>' +
+                                        '</li>' +
+                                        '</ul>' +
+                                        '</div>' +
+                                        '</div>' +
+                                        '</div>' +
+                                        '</li>';{% endcomment %}
+                                } else {
+                                    if (obj[k]['fields'].sender == {{ request.session.type }}) {
+                                        html += '<li class="chat-list-right">';
+                                    } else {
+                                        html += '<li>';
+                                    }
+                                    if (chat_date !== date) {
+                                        html += '<div class="chat-time"><span>' + date + '</span></div>';
+                                        chat_date = date;
+                                    }
+                                    html += '<div class="chat-content">';
+                                    html += '<div class="chat-text">' +
+                                    '<div>' +
+                                    '<p><a href="' + obj[k]['fields'].msg + '" class="mr-2" target="_blank">' + obj[k]['fields'].msg + ' </a><i class="fas fa-external-link-alt"></i></p>';
+                                    html += '<span class="msg-time">';
+                                    html += timestamp;
+                                    html += '</span>';
+                                    html += '</div>';
+                                    html += '</div>';
+                                    html += '</li>';
+
+                                }
+                            }
+
+                        }
+                        $("#chats").html(html);
+                        $("#chats").animate({scrollTop: $('#chats').prop("scrollHeight")}, 0);
+                        $("#chat_date").val(chat_date);
+                    }
+                }
+            });
+
+        }
+
+        getChatList();
+
+        function getChatList() {
+            $.ajax({
+                url: '/ajax/chat/getChatList',
+                success: function (res) {
+                    {#console.log(res);#}
+                    let html = '';
+                    for (k in res) {
+                        html += ' <li class="clearfix">' +
+                            '<a href="javascript:void(0)" class="user" data-user="' + k + '">' +
+                            '<div class="chat-avatar-img">' +
+                            '<img src="{% static 'img/default.jpg' %}" alt="avatar"/>' +
+                            '</div>' +
+                            '<div class="chat-about">' +
+                            '<h4>' + res[k].username + ' <span class="badge"></span></h4>' +
+                            '</div>' +
+                            '</a>' +
+                            '</li>';
+                    }
+
+                    $("#chat-user-list").html(html);
+                    $(".user").on('click', function () {
+                        let id = $(this).data('user');
+                        $("[data-user='" + id + "'] .badge").text('');
+                        $("#user_id").val(id);
+                        getChats();
+                    })
+                }
+            })
+        }
+
+        $('#msg').keydown(function (e) {
+
+            if (e.ctrlKey && e.keyCode == 13) {
+                $("#send").trigger('click');
+            }
+        });
+
+        {#getMsgs();#}
+
+        function getMsgs(resolve) {
+            let user_id = $("#user_id").val();
+            let chat_date = $("#chat_date").val();
+
+            if (user_id != 0) {
+
+                $.ajax({
+                    url: '/ajax/chat/getUnseenMsg',
+                    method: 'GET',
+                    data: {
+                        user_id: user_id
+                    },
+                    success: function (res) {
+                        {#console.log(res);#}
+                        if (res != "") {
+                            let html = '';
+
+                            for (k in res) {
+                                let d = new Date(res[k]['fields'].datetime);
+                                let timestamp = d.getHours() + ":" + d.getMinutes();
+                                let date = d.getDate() + '-' + d.getMonth() + '-' + d.getFullYear();
+                                let today = new Date();
+                                if ((today.getDate() + '-' + today.getMonth() + '-' + today.getFullYear()) == date) {
+                                    date = "Today";
+                                } else {
+                                    today.setDate(today.getDate() - 1);
+                                    if (today.getDate() + '-' + today.getMonth() + '-' + today.getFullYear() == date) {
+                                        date = "Yesterday";
+                                    }
+                                }
+                                html += '<li>';
+                                if (chat_date !== date) {
+                                    html += '<div class="chat-time"><span>' + date + '</span></div>';
+                                    chat_date = date;
+                                }
+                                html += '<div class="chat-content">';
+                                html += '<div class="chat-text">';
+                                html += res[k].fields.msg;
+                                html += '<span class="msg-time">';
+                                html += timestamp;
+                                html += '</span>';
+                                html += '</div>';
+                                html += '</div>';
+                                html += '</li>';
+                            }
+                            $("#chats").append(html);
+                            $("#chats").animate({scrollTop: $('#chats').prop("scrollHeight")}, 1000);
+                            $("#chat_date").val(chat_date);
+                        }
+                        resolve(true);
+
+                    }
+                })
+            } else {
+                resolve(true);
+            }
+        }
+
+        function unseen(resolve) {
+            let user_id = $("#user_id").val();
+            let csrf = $("input[name='csrfmiddlewaretoken']").val();
+
+            let from = [];
+            $(".user").each(function () {
+                if ($(this).data('user') != user_id) {
+                    from.push($(this).data('user'))
+                }
+            });
+            {#console.log(from, csrf)#}
+
+            $.ajax({
+                url: '/ajax/chat/unseenCnt/',
+                method: 'post',
+                data: {
+                    from: from,
+                    csrfmiddlewaretoken: csrf
+                },
+                success: function (res) {
+                    {#console.log(res)#}
+                    if (res != '') {
+                        $(".user .badge").text("");
+
+                        for (let key in res) {
+                            $("[data-user='" + key + "'] .badge").text(res[key].count);
+                        }
+                    }
+                    resolve(true);
+                }
+            });
+        }
+
+        $("#attachment").on('change', function () {
+            if ($(this).val() != '') {
+                let fd = new FormData();
+                let files = $(this).prop('files')[0];
+                let user_id = $("#user_id").val();
+                let csrf = $("input[name='csrfmiddlewaretoken']").val();
+                fd.append('file', files);
+                fd.append('user_id', user_id);
+                fd.append('csrfmiddlewaretoken', csrf);
+
+
+                let today = new Date();
+                let hour = today.getHours();
+                let minute = today.getMinutes();
+                let prepand = (hour >= 12) ? " PM " : " AM ";
+                hour = (hour >= 12) ? hour - 12 : hour;
+                if (hour === 0 && prepand === ' PM ') {
+                    hour = 12;
+                    prepand = ' PM';
+                }
+                if (hour === 0 && prepand === ' AM ') {
+                    hour = 12;
+                    prepand = ' AM';
+                }
+
+                $.ajax({
+                    url: '/ajax/chat/sendAttach/',
+                    type: 'post',
+                    data: fd,
+                    enctype: 'multipart/form-data',
+                    contentType: false,
+                    processData: false,
+                    success: function (res) {
+                        let html = '';
+                        if (res.ext == 1) {
+                            html +=
+                                '<li class="media sent">' +
+                                '<div class="media-body">' +
+                                '<div class="msg-box">' +
+                                '<div>' +
+                                '<p><a href="' + res.url + '" class="mr-2" target="_blank">' + res.url + ' </a><i class="fas fa-external-link-alt"></i></p>' +
+                                '<ul class="chat-msg-info">' +
+                                '<li>' +
+                                '<div class="chat-time">' +
+                                '<span>' + hour + ':' + minute + '</span>' +
+                                '</div>' +
+                                '</li>' +
+                                '</ul>' +
+                                '</div>' +
+                                '</div>' +
+                                '</div>' +
+                                '</li>';
+                        } else if (res.ext == 2) {
+                            html +=
+                                '<li class="media sent">' +
+                                '<div class="media-body">' +
+                                '<div class="msg-box">' +
+                                '<div>' +
+                                '<div class="chat-msg-attachments">\n' +
+                                '<div class="chat-attachment">\n' +
+                                '<img src="' + res.url + '" alt="Attachment">\n' +
+                                '<div class="chat-attach-download d-flex justify-content-between">' +
+                                '<a href="' + res.url + '" download="' + res.url + '" >\n' +
+                                '<i class="fas fa-download"></i>\n' +
+                                '</a>\n' +
+                                '<a href="' + res.url + '" target="_blank"><i class="fas fa-external-link-alt"></i></a>' +
+                                '</div>' +
+                                '</div>\n' +
+                                '</div>' +
+                                '<ul class="chat-msg-info">' +
+                                '<li>' +
+                                '<div class="chat-time">' +
+                                '<span>' + hour + ':' + minute + '</span>' +
+                                '</div>' +
+                                '</li>' +
+                                '</ul>' +
+                                '</div>' +
+                                '</div>' +
+                                '</div>' +
+                                '</li>';
+                        }
+                        $("#chats").append(html);
+                        $("#chats").animate({scrollTop: $('#chats').prop("scrollHeight")}, 1000);
+                        $("#attachment").val('');
+                    }
+                });
+            }
+        });
+
+        let promise = Promise.resolve(true);
+        setInterval(function () {
+            promise = promise.then(function () {
+                return new Promise(function (resolve) {
+                    unseen(resolve);
+                });
+            });
+        }, 1000);
+        setInterval(function () {
+            promise = promise.then(function () {
+                return new Promise(function (resolve) {
+                    getMsgs(resolve);
+                });
+            });
+        }, 1000);
+    </script>
 {% endblock %}
