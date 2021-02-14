@@ -12,7 +12,8 @@ from django.template.response import TemplateResponse
 from django.urls import path
 from djongo import models
 
-from main.models import State, City, Designer, User, Branch, Category, Product, Design, Contact, Address, DesignElement
+from main.models import State, City, Designer, User, Branch, Category, Product, Design, Contact, Address, DesignElement, \
+    Order, OrderItemPdt, OrderItemDesign
 
 from . import views
 # Headers
@@ -201,7 +202,7 @@ def get_creator(user):
 class DesignForm(forms.ModelForm):
     class Meta:
         model = Design
-        fields = ('design_name', 'description', 'image','price', 'inserted_by', 'creator_id', 'status')
+        fields = ('design_name', 'description', 'image', 'price', 'inserted_by', 'creator_id', 'status')
 
         # readonly_fields = ("prodImg",)
 
@@ -258,7 +259,6 @@ admin.site.register(Contact, ContactAdmin)
 
 # my dummy model
 class DesignEle(models.Model):
-
     class Meta:
         # model = DesignElement
         verbose_name_plural = 'Design Element'
@@ -353,3 +353,47 @@ class DesignEleAdmin(admin.ModelAdmin):
 
 
 admin.site.register(DesignEle, DesignEleAdmin)
+
+
+class ItemPdt(admin.TabularInline):
+    model = OrderItemPdt
+    extra = 0
+    readonly_fields = ('qty', 'price', 'product')
+
+    def has_add_permission(self, request, obj=None):
+        return False
+
+
+class ItemDesign(admin.TabularInline):
+    model = OrderItemDesign
+    extra = 0
+    readonly_fields = ( 'price', 'design')
+
+    def has_add_permission(self, request, obj=None):
+        return False
+
+
+@admin.register(Order)
+class OrderAdmin(admin.ModelAdmin):
+    fields = ('status',)
+    list_display = ('id', 'user', 'addr', 'datetime', 'items', 'status')
+    list_filter = ('user', 'status')
+    inlines = [
+        ItemPdt,
+        ItemDesign,
+    ]
+
+    def items(self, obj):
+        pdt = OrderItemPdt.objects.filter(order=obj.id).values('order').annotate(dcount=Count('id'))
+        count = 0
+        if len(pdt) > 0:
+            count += pdt[0]['dcount']
+
+        design = OrderItemDesign.objects.filter(order=obj.id).values('order').annotate(dcount=Count('id'))
+        if len(design) > 0:
+            count += design[0]['dcount']
+
+        return count
+
+    def has_add_permission(self, request, obj=None):
+        return False

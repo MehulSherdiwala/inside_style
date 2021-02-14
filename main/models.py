@@ -166,8 +166,13 @@ class Cart(models.Model):
 
 
 class Order(models.Model):
+    ins_choice = (
+        (0, "Processing"),
+        (1, "Out For Delivery"),
+        (2, "Delivered")
+    )
     datetime = models.DateField(default=datetime.date.today)
-    status = models.IntegerField(default=0)
+    status = models.PositiveIntegerField(choices=ins_choice, default=0)
     addr = models.ForeignKey(Address, on_delete=models.CASCADE)
     user = models.ForeignKey(User, on_delete=models.CASCADE)
 
