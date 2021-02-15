@@ -271,7 +271,7 @@ def addtocart(request):
         type = request.GET['type']
         qty = int(request.GET['qty'])
 
-        if type == 1:
+        if type == '1':
 
             cart_count = Cart.objects.filter(product=pdt_id, user=request.session['id']).count()
 
