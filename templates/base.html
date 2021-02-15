@@ -125,17 +125,22 @@
                     {% else %}
                          <a class="nav-link dropdown-toggle" data-toggle="dropdown" href="#" role="button"
                                 aria-haspopup="true" aria-expanded="false">{{ request.session.username }}</a>
-                        <div class="dropdown-menu">
-                            <a class="dropdown-item" href="{% url 'cart' %}">Cart</a>
-                            <a class="dropdown-item" href="{% url 'user_dashboard' %}">Profile</a>
-                            {% if request.session.type == 0 %}
+                        {% if request.session.type == 0 %}
+                            <div class="dropdown-menu">
+                                <a class="dropdown-item" href="{% url 'cart' %}">Cart</a>
+                                <a class="dropdown-item" href="{% url 'user_dashboard' %}">Profile</a>
                                 <a class="dropdown-item" href="{% url 'chat' %}">Chat</a>
-                            {% else %}
+                                <a class="dropdown-item" href="{% url 'logout' %}">Logout</a>
+                            </div>
+                        {% else %}
+                            <div class="dropdown-menu">
+                                <a class="dropdown-item" href="{% url 'designer_dashboard' %}">Dashboard</a>
                                 <a class="dropdown-item" href="{% url 'designer_chat' %}">Chat</a>
-                            {% endif %}
-                            <a class="dropdown-item" href="{% url 'logout' %}">Logout</a>
-                        </div>
-                    {% endif %}
+
+                                <a class="dropdown-item" href="{% url 'logout' %}">Logout</a>
+                            </div>
+                        {% endif %}
+                     {% endif %}
                 </div>
                 <div class="search">
                     <span class="icon pe-7s-search cursor-pointer"></span>

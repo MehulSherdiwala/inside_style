@@ -1,0 +1,312 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block styles %}
+    <style>
+
+        .profile-sidebar {
+            background-color: #fff;
+        {#border: 1px solid #f0f0f0;#} border-radius: 5px;
+            margin-bottom: 30px;
+            overflow: hidden;
+            box-shadow: 0px 1px 13px #3f3f4a57;
+        }
+
+        .pro-widget-content {
+            border-bottom: 1px solid #f0f0f0;
+            padding: 20px;
+            text-align: center;
+        }
+
+        .profile-info-widget {
+            display: -webkit-box;
+            display: -ms-flexbox;
+            display: flex;
+            text-align: left;
+        }
+
+        .profile-info-widget .booking-doc-img {
+            margin-right: 15px;
+        }
+
+        .profile-info-widget .booking-doc-img img {
+            border-radius: 4px;
+            height: 90px;
+            width: 90px;
+            object-fit: cover;
+        }
+
+        .profile-det-info {
+            overflow: hidden;
+        }
+
+        .profile-det-info h3 {
+            font-size: 17px;
+            text-overflow: ellipsis;
+            white-space: nowrap;
+            overflow: hidden;
+        }
+
+        .patient-details h5 {
+            color: #757575;
+            font-size: 13px;
+            font-weight: normal;
+            margin-bottom: 8px;
+            overflow: hidden;
+            text-overflow: ellipsis;
+            white-space: nowrap;
+        }
+
+        .patient-details h5 i {
+            width: 18px;
+        }
+
+        .dashboard-menu ul {
+            color: #252531;
+            font-size: 14px;
+            line-height: 17px;
+            list-style: none;
+            margin: 0;
+            padding: 0;
+            text-transform: capitalize;
+        }
+
+        .dashboard-menu ul li {
+            line-height: inherit;
+        }
+
+        .dashboard-menu > ul > li {
+            border-bottom: 1px solid #f0f0f0;
+            position: relative;
+        }
+
+        .dashboard-menu > ul > li:last-child {
+            border-bottom: 0;
+        }
+
+        .dashboard-menu ul li a span,
+        .dashboard-menu ul li a i {
+            display: inline-block;
+            vertical-align: middle;
+        }
+
+        .dashboard-menu > ul > li > a {
+            color: #252531;
+            display: block;
+            padding: 16px 20px;
+        }
+
+        .dashboard-menu > ul > li:hover > a,
+        .dashboard-menu > ul > li.active > a {
+            color: #f0f0f0;
+            background-color: #252531;
+        }
+
+        .dashboard-menu ul li a i {
+            font-size: 16px;
+            margin-right: 10px;
+            width: 16px;
+        }
+
+        .unread-msg {
+            background-color: #ff4c3b;
+            color: #ffffff;
+            border-radius: 2px;
+            font-size: 10px;
+            font-style: normal;
+            padding: 0 5px;
+            position: absolute;
+            right: 20px;
+            text-align: center;
+            top: 50%;
+            transform: translateY(-50%);
+        }
+
+        .content {
+            padding: 35px;
+        }
+
+        .card {
+            background-color: #fff;
+            border-radius: 5px;
+            box-shadow: 0px 1px 13px #3f3f4a57;
+        }
+
+        .breadcrumb {
+            background-color: #fff;
+            border-radius: 5px;
+            box-shadow: 0px 1px 13px #3f3f4a57;
+            margin-bottom: 30px;
+        }
+
+        .breadcrumb .breadcrumb-item {
+            color: #252531;
+        }
+
+        .breadcrumb .breadcrumb-item.active {
+            color: #b19777;
+        }
+
+        .btn-success{
+            background-color: #b19777;
+            border-color: #b19777;
+        }
+    </style>
+{% endblock %}
+{% block content %}
+{#    <header class="" style="background-color: #252531; height: 11vh"></header>#}
+<header class="pages-header bg-img valign parallaxie" data-background="{% static 'img/pg1.jpg' %}"
+            data-overlay-dark="5" style="height: 42vh">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-12">
+                    <div class="cont text-center">
+                        <h1 style="margin-top: 50px;margin-bottom: 0;">Dashboard</h1>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <div class="content">
+
+        <div class="breadcrumb-bar">
+            <div class="container-fluid">
+                <div class="row align-items-center">
+                    <div class="col-md-12 col-12">
+                        <nav aria-label="breadcrumb" class="page-breadcrumb">
+                            <ol class="breadcrumb">
+                                <li class="breadcrumb-item"><a href="index.html">Home</a></li>
+                                <li class="breadcrumb-item active" aria-current="page">Profile</li>
+                            </ol>
+                        </nav>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="container-fluid">
+            <div class="row">
+
+                <!-- Profile Sidebar -->
+                <div class="col-md-5 col-lg-4 col-xl-3">
+                    <div class="profile-sidebar">
+                        <div class="dashboard-widget">
+                            <nav class="dashboard-menu">
+                                <ul>
+                                    <li>
+                                        <a href="{% url 'designer_design' %}">
+                                            <i class="fas fa-cart-arrow-down"></i>
+                                            <span>Design</span>
+                                        </a>
+                                    </li>
+                                    <li class="active">
+                                        <a href="{% url 'designer_dashboard' %}">
+                                            <i class="fas fa-user"></i>
+                                            <span>Profile</span>
+                                        </a>
+                                    </li>
+                                    <li>
+                                        <a href="{% url 'designer_chat' %}">
+                                            <i class="fas fa-comments"></i>
+                                            <span>Chat</span>
+                                        </a>
+                                    </li>
+                                    <li>
+                                        <a href="{% url 'logout' %}">
+                                            <i class="fas fa-sign-out-alt"></i>
+                                            <span>Logout</span>
+                                        </a>
+                                    </li>
+                                </ul>
+                            </nav>
+                        </div>
+
+                    </div>
+                </div>
+                <!-- / Profile Sidebar -->
+
+                <div class="col-md-7 col-lg-8 col-xl-9">
+                    <div class="card">
+                        <div class="card-body pt-4">
+                            <form action="{% url 'designer_dashboard' %}" method="post">
+                                {% csrf_token %}
+                                <div class="row">
+                                    <div class="col-md-6">
+                                        <div class="form-group">
+                                            <label for="">Username : :</label>
+                                            <input type="text" name="username" placeholder="Username"
+                                                   value="{{ username }}"
+                                                   class="form-control">
+                                        </div>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <div class="form-group">
+                                            <label for="">Email : :</label>
+                                            <input type="text" name="email" placeholder="Email" class="form-control"
+                                                   value="{{ email }}" readonly>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-md-6">
+                                        <div class="form-group">
+                                            <label for="">Phone No : :</label>
+                                            <input type="number" name="phone" placeholder="Phone No"
+                                                   class="form-control"
+                                                   value="{{ phone }}">
+                                        </div>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <div class="form-group">
+                                            <label for="">Description : :</label>
+                                            <textarea name="description" class="form-control"
+                                                      placeholder="Description">{{ description }}</textarea>
+                                        </div>
+                                    </div>
+                                </div>
+                            <br>
+                                <div class="row">
+                                    <div class="col-md-2 offset-5">
+                                        <div class="form-group">
+                                            <input type="submit" value="Save" class="btn btn-block btn-success">
+                                        </div>
+                                    </div>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock %}
+
+{% block script %}
+<script type="text/javascript">
+
+
+        $("#state").on('change', function () {
+            let state = $(this).val();
+            $.ajax({
+                url: '/ajax/load-cities',
+                data: {
+                    state: state
+                },
+                success: function (res) {
+                    let city = $("#city");
+
+                    city.empty()
+                        .append($("<option></option>")
+                            .attr("value", 0)
+                            .text("Select"));
+                    $.each(res, function (key, value) {
+                        city.append($("<option></option>")
+                            .attr('value', value.pk)
+                            .text(value.fields.city_name))
+                    });
+                }
+            })
+        });
+    </script>
+{% endblock %}

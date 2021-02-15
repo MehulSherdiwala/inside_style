@@ -42,4 +42,10 @@ urlpatterns = [
     path('ajax/chat/getUnseenMsg/', views.getUnseenMsg, name="getUnseenMsg"),
     path('ajax/chat/unseenCnt/', views.unseenCnt, name="unseenCnt"),
     path('ajax/chat/sendAttach/', views.sendAttach, name="sendAttach"),
+    path('designer_dashboard/', views.designer_dashboard, name="designer_dashboard"),
+    path('designer_design/', views.designer_design, name="designer_design"),
+    path('designer_design/add', views.designer_design_add, name="designer_design_add"),
+    path('designer_design/edit/<design_id>', views.designer_design_edit, name="designer_design_edit"),
+    path('designer_design/delete/<design_id>', views.designer_design_delete, name="designer_design_delete"),
+    path('generate/', views.GeneratePdf.as_view(), name="generate"),
 ]

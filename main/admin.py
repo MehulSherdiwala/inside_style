@@ -18,6 +18,7 @@ from main.models import State, City, Designer, User, Branch, Category, Product, 
 from . import views
 # Headers
 from main.views import contact
+from .utils import render_to_pdf
 
 AdminSite.site_header = "Inside Style"
 AdminSite.site_title = "Inside Style"
@@ -93,11 +94,36 @@ class DesignerForm(forms.ModelForm):
 @admin.register(Designer)
 class DesignerAdmin(admin.ModelAdmin):
     form = DesignerForm
+    change_list_template = "admin/designer_list.html"
     add_form_template = 'admin/designer_form.html'
     change_form_template = 'admin/designer_form.html'
     list_display = ("designer_name", "email", "phone", "status")
     list_filter = ("status", "join_date")
     search_fields = ("designer_name__startswith", "email__startswith")
+
+    def get_urls(self):
+        urls = super().get_urls()
+        my_urls = [
+            path('designer_report/', self.designer_report, name="designer_report"),
+        ]
+        return my_urls + urls
+
+    def designer_report(self, request):
+        if request.method == 'POST':
+            type = request.POST['type']
+            designer = {}
+
+            if type == '1':
+                designer = Designer.objects.all()
+
+            elif type == '2':
+                designer = Designer.objects.filter(status=request.POST['status'])
+
+            data = {
+                'data': designer
+            }
+            pdf = render_to_pdf('admin/designer_report.html', data)
+            return HttpResponse(pdf, content_type='application/pdf')
 
 
 # Designer --end--
@@ -131,11 +157,27 @@ class BranchForm(forms.ModelForm):
 @admin.register(Branch)
 class BranchAdmin(admin.ModelAdmin):
     form = BranchForm
+    change_list_template = "admin/branch_list.html"
     add_form_template = 'admin/designer_form.html'
     change_form_template = 'admin/designer_form.html'
     list_display = ("branch_name", "addr", "city")
     list_filter = ("city", "created_at")
     search_fields = ("branch_name__startswith", "city__startswith",)
+
+    def get_urls(self):
+        urls = super().get_urls()
+        my_urls = [
+            path('branch_report/', self.branch_report, name="branch_report"),
+        ]
+        return my_urls + urls
+
+    def branch_report(self, request):
+        branch = Branch.objects.all()
+        data = {
+            'data': branch
+        }
+        pdf = render_to_pdf('admin/branch_report.html', data)
+        return HttpResponse(pdf, content_type='application/pdf')
 
 
 # Branch Ends
@@ -143,6 +185,22 @@ class BranchAdmin(admin.ModelAdmin):
 class Catadmin(admin.ModelAdmin):
     list_display = ("cat_name", "total_product")
     search_fields = ("cat_name__startswith",)
+    change_list_template = "admin/cat_list.html"
+
+    def get_urls(self):
+        urls = super().get_urls()
+        my_urls = [
+            path('cat_report/', self.cat_report, name="cat_report"),
+        ]
+        return my_urls + urls
+
+    def cat_report(self, request):
+        cat = Category.objects.all()
+        data = {
+            'data': cat
+        }
+        pdf = render_to_pdf('admin/cat_report.html', data)
+        return HttpResponse(pdf, content_type='application/pdf')
 
     def total_product(self, obj):
         result = obj.product_set.count()
@@ -171,11 +229,40 @@ class CatFilter(SimpleListFilter):
 
 @admin.register(Product)
 class ProductAdmin(admin.ModelAdmin):
+    change_list_template = "admin/product_list.html"
     fields = ("pdt_name", "description", "price", "image", "prodImg", "category", "status")
     list_display = ("pdt_name", "price", "prodImg", "category", "status")
     list_filter = (CatFilter, "status", "created_at")
     search_fields = ("pdt_name", "category")
     readonly_fields = ("prodImg",)
+
+    def get_urls(self):
+        urls = super().get_urls()
+        my_urls = [
+            path('product_report/', self.product_report, name="product_report"),
+        ]
+        return my_urls + urls
+
+    def product_report(self, request):
+        if request.method == 'POST':
+            type = request.POST['type']
+            product = {}
+
+            if type == '1':
+                product = Product.objects.all()
+
+            elif type == '2':
+                cat = Category.objects.filter(cat_name=request.POST['category'])
+                product = Product.objects.filter(category=cat[0])
+
+            elif type == '3':
+                product = Product.objects.filter(status=request.POST['status'])
+
+            data = {
+                'data': product
+            }
+            pdf = render_to_pdf('admin/product_report.html', data)
+            return HttpResponse(pdf, content_type='application/pdf')
 
     def catagory(self, obj):
         result = Category.objects.filter(pk=obj)
@@ -224,11 +311,45 @@ class DesignForm(forms.ModelForm):
 @admin.register(Design)
 class DesignAdmin(admin.ModelAdmin):
     form = DesignForm
+    change_list_template = "admin/design_list.html"
     add_form_template = "admin/design_form.html"
     change_form_template = "admin/design_form.html"
     list_display = ('design_name', 'prodImg', "inserted_by", 'creator', 'status')
     list_filter = ('inserted_by', 'created_at', 'status')
     search_fields = ("design_name", "category")
+
+    def get_urls(self):
+        urls = super().get_urls()
+        my_urls = [
+            path('design_report/', self.design_report, name="design_report"),
+            path('admin_design_report/', self.admin_design_report, name="admin_design_report"),
+            path('designer_design_report/', self.designer_design_report, name="designer_design_report"),
+        ]
+        return my_urls + urls
+
+    def design_report(self, request):
+        design = Design.objects.all()
+        data = {
+            'design': design
+        }
+        pdf = render_to_pdf('admin/design_report.html', data)
+        return HttpResponse(pdf, content_type='application/pdf')
+
+    def admin_design_report(self, request):
+        design = Design.objects.filter(inserted_by=1)
+        data = {
+            'design': design
+        }
+        pdf = render_to_pdf('admin/admin_design_report.html', data)
+        return HttpResponse(pdf, content_type='application/pdf')
+
+    def designer_design_report(self, request):
+        design = Design.objects.filter(inserted_by=2)
+        data = {
+            'design': design
+        }
+        pdf = render_to_pdf('admin/designer_design_report.html', data)
+        return HttpResponse(pdf, content_type='application/pdf')
 
     def creator(self, obj):
         if obj.inserted_by == 1:
@@ -367,7 +488,7 @@ class ItemPdt(admin.TabularInline):
 class ItemDesign(admin.TabularInline):
     model = OrderItemDesign
     extra = 0
-    readonly_fields = ( 'price', 'design')
+    readonly_fields = ('price', 'design')
 
     def has_add_permission(self, request, obj=None):
         return False
@@ -382,6 +503,108 @@ class OrderAdmin(admin.ModelAdmin):
         ItemPdt,
         ItemDesign,
     ]
+    change_list_template = "admin/order_list.html"
+
+    def get_urls(self):
+        urls = super().get_urls()
+        my_urls = [
+            path('order_report/', self.order_report, name="order_report"),
+        ]
+        return my_urls + urls
+
+    def order_report(self, request):
+        if request.method == 'POST':
+            type = request.POST['type']
+            order = {}
+            data = {}
+            c = 0
+
+            if type == '1':
+                order = Order.objects.all()
+                for o in order:
+                    orderItem = OrderItemPdt.objects.filter(order=o)
+                    if len(orderItem) > 0:
+                        for i in orderItem:
+                            data.update({c: {
+                                'order': o.id,
+                                'price': i.price,
+                                'name': i.product.pdt_name,
+                                'type': 'Product',
+                                'qty': i.qty
+                            }})
+                            c += 1
+
+                    orderItem = OrderItemDesign.objects.filter(order=o)
+                    if len(orderItem) > 0:
+                        for i in orderItem:
+                            data.update({c: {
+                                'order': o.id,
+                                'price': i.price,
+                                'name': i.design.design_name,
+                                'type': 'Design',
+                                'qty': 1
+                            }})
+                            c += 1
+
+            elif type == '2':
+                user = User.objects.filter(username=request.POST['username'])
+                order = Order.objects.filter(user=user[0])
+                for o in order:
+                    orderItem = OrderItemPdt.objects.filter(order=o)
+                    if len(orderItem) > 0:
+                        for i in orderItem:
+                            data.update({c: {
+                                'order': o.id,
+                                'price': i.price,
+                                'name': i.product.pdt_name,
+                                'type': 'Product',
+                                'qty': i.qty
+                            }})
+                            c += 1
+
+                    orderItem = OrderItemDesign.objects.filter(order=o)
+                    if len(orderItem) > 0:
+                        for i in orderItem:
+                            data.update({c: {
+                                'order': o.id,
+                                'price': i.price,
+                                'name': i.design.design_name,
+                                'type': 'Design',
+                                'qty': 1
+                            }})
+                            c += 1
+
+            elif type == '3':
+                order = Order.objects.filter(status=request.POST['status'])
+                for o in order:
+                    orderItem = OrderItemPdt.objects.filter(order=o)
+                    if len(orderItem) > 0:
+                        for i in orderItem:
+                            data.update({c: {
+                                'order': o.id,
+                                'price': i.price,
+                                'name': i.product.pdt_name,
+                                'type': 'Product',
+                                'qty': i.qty
+                            }})
+                            c += 1
+
+                    orderItem = OrderItemDesign.objects.filter(order=o)
+                    if len(orderItem) > 0:
+                        for i in orderItem:
+                            data.update({c: {
+                                'order': o.id,
+                                'price': i.price,
+                                'name': i.design.design_name,
+                                'type': 'Design',
+                                'qty': 1
+                            }})
+                            c += 1
+            data.update({
+                'data': order,
+            })
+            pdf = render_to_pdf('admin/order_report.html', {'data' : data})
+            return HttpResponse(pdf, content_type='application/pdf')
 
     def items(self, obj):
         pdt = OrderItemPdt.objects.filter(order=obj.id).values('order').annotate(dcount=Count('id'))

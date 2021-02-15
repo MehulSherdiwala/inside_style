@@ -1,3 +1,5 @@
+from datetime import datetime
+
 from django.contrib.admin.views.decorators import staff_member_required
 from django.core import serializers
 from django.contrib import messages
@@ -9,7 +11,10 @@ from django.contrib.auth.models import User as adminUser
 from django.core.paginator import Paginator, EmptyPage, InvalidPage
 # Create your views here.
 from django.template import RequestContext
+from django.views.generic.base import View
+from .utils import render_to_pdf
 
+from main.forms import DesignForm
 from main.models import City, State, User, Designer, Address, Contact, Product, Category, Cart, Order, OrderItemPdt, \
     Payment, DesignElement, Design, ChatMessage, OrderItemDesign
 
@@ -635,3 +640,101 @@ def sendAttach(request):
         'ext': 2
     }
     return JsonResponse(data)
+
+
+def designer_dashboard(request):
+    if 'id' in request.session:
+        designer_id = request.session['id']
+        if request.method == "POST":
+            designer = Designer.objects.filter(pk=designer_id)[0]
+            designer.designer_name = request.POST['username']
+            designer.description = request.POST['description']
+            designer.phone = request.POST['phone']
+
+            designer.save()
+
+            return redirect("designer_dashboard")
+
+        else:
+            designer = Designer.objects.filter(pk=designer_id)[0]
+
+            data = {
+                'username': designer.designer_name,
+                'email': designer.email,
+                'phone': designer.phone,
+                'description': designer.description,
+            }
+
+            return render(request, "designer_dashboard.html", data)
+    else:
+        return redirect('login')
+
+
+def designer_design(request):
+    if 'id' in request.session:
+        design = Design.objects.all()
+        ins_choice = {
+            1: "Admin",
+            2: "Designer"
+        }
+
+        return render(request, 'designer_design.html', {'data': design})
+    else:
+        return redirect('designer_login/')
+
+
+def designer_design_add(request):
+    if 'id' in request.session:
+        if request.method == 'POST':
+            form = DesignForm(request.POST, request.FILES)
+
+            if form.is_valid():
+                form.save()
+                print('success')
+
+            return render('designer_design')
+        else:
+            return render(request, 'designer_design_add.html')
+    else:
+        return render('designer_login')
+
+
+def designer_design_edit(request, design_id):
+    if 'id' in request.session:
+        if request.method == 'POST':
+            design = Design.objects.filter(pk=design_id)[0]
+            design.design_name = request.POST['design_name']
+            design.price = request.POST['price']
+            design.description = request.POST['description']
+            if 'image' in request.FILES:
+                myfile = request.FILES['image']
+                fs = FileSystemStorage()
+                filename = fs.save(myfile.name, myfile)
+                design.image = filename
+            design.save()
+
+            return redirect('designer_design')
+        else:
+            design = Design.objects.filter(pk=design_id)[0]
+            return render(request, 'designer_design_edit.html', {'design': design})
+    else:
+        return redirect('designer_login')
+
+
+def designer_design_delete(request, design_id):
+    if 'id' in request.session:
+        design = Design.objects.filter(pk=design_id)[0]
+        design.delete()
+        return redirect('designer_design')
+    else:
+        return redirect('designer_login')
+
+
+class GeneratePdf(View):
+    def get(self, request, *args, **kwargs):
+        design = Design.objects.all()
+        data = {
+            'design': design
+        }
+        pdf = render_to_pdf('invoice.html', data)
+        return HttpResponse(pdf, content_type='application/pdf')

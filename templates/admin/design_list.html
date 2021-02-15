@@ -1,0 +1,16 @@
+{% extends "admin/change_list.html" %}
+{% block object-tools-items %}
+
+    {{ block.super }}
+
+    <li>
+        <a href="design_report/" target="_blank" class="grp-state-focus viewsitelink">Design Report</a>
+    </li>
+    <li>
+        <a href="admin_design_report/" target="_blank" class="grp-state-focus viewsitelink"> Admin Design Report</a>
+    </li>
+    <li>
+        <a href="designer_design_report/" target="_blank" class="grp-state-focus viewsitelink"> Designer Design Report</a>
+    </li>
+
+{% endblock %}
