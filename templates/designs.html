@@ -39,7 +39,7 @@
                 height:0;
             }
             100%{
-                height:35%;
+                height:45%;
             }
         }
 
@@ -79,10 +79,8 @@
                 <div class="">
                     <img alt="" src="/media/{{ d.image }}"/>
                     <div class="caption">
-                        <h4>{{ d.design_name }}</h4>
-                        <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Accusantium adipisci animi at cum
-                            eum illo in omnis reprehenderit, temporibus unde? A ad dicta iusto magnam quaerat
-                            repellendus suscipit. Nihil, soluta?</p>
+                        <h4>{{ d.design_name }} <a href="{% url 'chat' %}?id={{ d.creator_id }}" class="btn btn-secondary float-right">Chat</a></h4>
+                        <p>{{ d.description }}</p>
                         <div class="d-flex justify-content-between">
                             <a href="{% url 'designProduct' design_id=d.id %}" class="btn btn-secondary">View Products</a>
                             <span><i class="fa fa-rupee-sign"></i> {{ d.price }}</span>

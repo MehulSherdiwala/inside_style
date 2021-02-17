@@ -634,6 +634,17 @@
 {% block script %}
     <script>
 
+        $(window).load(function(){
+            let l = window.location.href;
+            let id = l.split('?');
+            if (id.length > 1){
+                id = id[1].split('=')[1];
+                $("#user_id").val(id);
+                getChats();
+            }
+
+        });
+
         $("#send").on('click', function () {
             let msg = $("#msg").val();
             $("#msg").val('');
@@ -750,7 +761,6 @@
                                 }
                             } else {
                                 let ext = obj[k]['fields'].msg.substr((obj[k]['fields'].msg.lastIndexOf('.') + 1));
-                                console.log(ext);
                                 if (ext == 'jpg' || ext == 'png' || ext == 'jpeg' || ext == 'gif') {
 
                                     if (obj[k]['fields'].sender == {{ request.session.type }}) {
@@ -785,33 +795,6 @@
                                     html += '</div>';
                                     html += '</li>';
 
-                                    {% comment %}html +=
-                                        '<li class="media sent">' +
-                                        '<div class="media-body">' +
-                                        '<div class="msg-box">' +
-                                        '<div>' +
-                                        '<div class="chat-msg-attachments">\n' +
-                                        '<div class="chat-attachment">\n' +
-                                        '<img src="' + obj[k]['fields'].msg + '" alt="Attachment">\n' +
-                                        '<div class="chat-attach-download d-flex justify-content-between">' +
-                                        '<a href="' + obj[k]['fields'].msg + '" download="' + obj[k]['fields'].msg + '" >\n' +
-                                        '<i class="fas fa-download"></i>\n' +
-                                        '</a>\n' +
-                                        '<a href="' + obj[k]['fields'].msg + '" target="_blank"><i class="fas fa-external-link-alt"></i></a>' +
-                                        '</div>' +
-                                        '</div>\n' +
-                                        '</div>' +
-                                        '<ul class="chat-msg-info">' +
-                                        '<li>' +
-                                        '<div class="chat-time">' +
-                                        '<span>' + timestamp + '</span>' +
-                                        '</div>' +
-                                        '</li>' +
-                                        '</ul>' +
-                                        '</div>' +
-                                        '</div>' +
-                                        '</div>' +
-                                        '</li>';{% endcomment %}
                                 } else {
                                     if (obj[k]['fields'].sender == {{ request.session.type }}) {
                                         html += '<li class="chat-list-right">';
@@ -852,7 +835,6 @@
             $.ajax({
                 url: '/ajax/chat/getChatList',
                 success: function (res) {
-                    {#console.log(res);#}
                     let html = '';
                     for (k in res) {
                         html += ' <li class="clearfix">' +
@@ -885,7 +867,6 @@
             }
         });
 
-        {#getMsgs();#}
 
         function getMsgs(resolve) {
             let user_id = $("#user_id").val();
@@ -900,7 +881,6 @@
                         user_id: user_id
                     },
                     success: function (res) {
-                        {#console.log(res);#}
                         if (res != "") {
                             let html = '';
 
@@ -955,8 +935,6 @@
                     from.push($(this).data('user'))
                 }
             });
-            {#console.log(from, csrf)#}
-
             $.ajax({
                 url: '/ajax/chat/unseenCnt/',
                 method: 'post',
@@ -965,7 +943,6 @@
                     csrfmiddlewaretoken: csrf
                 },
                 success: function (res) {
-                    {#console.log(res)#}
                     if (res != '') {
                         $(".user .badge").text("");
 

@@ -322,8 +322,6 @@ class DesignAdmin(admin.ModelAdmin):
         urls = super().get_urls()
         my_urls = [
             path('design_report/', self.design_report, name="design_report"),
-            path('admin_design_report/', self.admin_design_report, name="admin_design_report"),
-            path('designer_design_report/', self.designer_design_report, name="designer_design_report"),
         ]
         return my_urls + urls
 
@@ -335,28 +333,14 @@ class DesignAdmin(admin.ModelAdmin):
         pdf = render_to_pdf('admin/design_report.html', data)
         return HttpResponse(pdf, content_type='application/pdf')
 
-    def admin_design_report(self, request):
-        design = Design.objects.filter(inserted_by=1)
-        data = {
-            'design': design
-        }
-        pdf = render_to_pdf('admin/admin_design_report.html', data)
-        return HttpResponse(pdf, content_type='application/pdf')
-
-    def designer_design_report(self, request):
-        design = Design.objects.filter(inserted_by=2)
-        data = {
-            'design': design
-        }
-        pdf = render_to_pdf('admin/designer_design_report.html', data)
-        return HttpResponse(pdf, content_type='application/pdf')
-
     def creator(self, obj):
         if obj.inserted_by == 1:
             return adminUser.objects.filter(pk=obj.creator_id)[0].username
         else:
             return Designer.objects.filter(pk=obj.creator_id)[0].designer_name
 
+    def has_add_permission(self, request, obj=None):
+        return False
 
 @admin.register(Address)
 class AddressAdmin(admin.ModelAdmin):
