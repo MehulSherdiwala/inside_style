@@ -1,0 +1,143 @@
+{% extends  "admin/base_site.html" %}
+{% load static %}
+
+{% block extrastyle %}
+    <link rel="stylesheet" type="text/css" href="{% static "admin/css/changelists.css" %}">
+{% endblock %}
+
+{% block content %}
+    <div id="content" class="flex">
+
+        <h1>Select Design Element to change</h1>
+
+        <div id="content-main">
+
+            <ul class="object-tools">
+
+
+                <li>
+
+                    <a href="/admin/main/designele/add/" class="addlink">
+                        Add design element
+                    </a>
+                </li>
+
+
+            </ul>
+
+
+            <div class="module filtered" id="changelist">
+
+                <form id="changelist-form" method="post" novalidate=""><input type="hidden" name="csrfmiddlewaretoken"
+                                                                              value="7bOrghzsIXatkX8PPhZd2klqqqgUBeS4urq5Ir61yKAqMctesnCuL6UcKhxda5Sr">
+
+
+                    <div class="actions">
+
+
+                        <label>Action: <select name="action" required="">
+                            <option value="" selected="">---------</option>
+
+                            <option value="delete_selected">Delete selected designs</option>
+
+                        </select></label><input type="hidden" name="select_across" value="0" class="select-across">
+
+
+                        <button type="submit" class="button" title="Run the selected action" name="index" value="0">Go
+                        </button>
+
+
+                        <span class="action-counter" data-actions-icnt="2"
+                              style="display: inline;">0 of 2 selected</span>
+
+
+                    </div>
+
+
+                    <div class="results">
+                        <table id="result_list">
+                            <thead>
+                            <tr>
+
+                                <th scope="col" class="action-checkbox-column">
+
+                                    <div class="text"><span><input type="checkbox" id="action-toggle"></span></div>
+                                    <div class="clear"></div>
+                                </th>
+                                <th scope="col" class="sortable column-design_name">
+
+
+                                    <div class="text"><a href="?o=1">Design Name</a></div>
+                                    <div class="clear"></div>
+                                </th>
+                                <th scope="col" class="column-prodImg">
+
+                                    <div class="text"><span>Image</span></div>
+                                    <div class="clear"></div>
+                                </th>
+                                <th scope="col" class="sortable column-inserted_by">
+
+
+                                    <div class="text"><a href="?o=3">No Of Products</a></div>
+                                    <div class="clear"></div>
+                                </th>
+
+                            </tr>
+                            </thead>
+                            <tbody>
+
+                            {% for d, value in data.items %}
+                                <tr class="row1">
+                                    <td class="action-checkbox"><input type="checkbox" name="_selected_action" value="2"
+                                                                       class="action-select"></td>
+                                    <th class="field-design_name"><a href="/admin/main/designele/{{ value.design.id }}/change/">{{ value.design.design_name }}</a></th>
+                                    </th>
+                                    <td class="field-prodImg"><img src="/media/{{ value.design.image }}" width="100"></td>
+                                    <td class="field-inserted_by">{{ value.count }}</td>
+                                </tr>
+                            {% endfor %}
+
+
+{#                            <tr class="row1">#}
+{#                                <td class="action-checkbox"><input type="checkbox" name="_selected_action" value="2"#}
+{#                                                                   class="action-select"></td>#}
+{#                                <th class="field-design_name"><a href="/admin/main/design/2/change/">Living Room</a>#}
+{#                                </th>#}
+{#                                <td class="field-prodImg"><img src="/media/img/vid.jpg" width="100"></td>#}
+{#                                <td class="field-inserted_by">Designer</td>#}
+                                {#                                <td class="field-creator">Manthan</td>#}
+                                {#                                <td class="field-status"><img src="/static/admin/img/icon-yes.svg" alt="True"></td>#}
+{#                            </tr>#}
+
+
+{#                            <tr class="row2">#}
+{#                                <td class="action-checkbox"><input type="checkbox" name="_selected_action" value="1"#}
+{#                                                                   class="action-select"></td>#}
+{#                                <th class="field-design_name"><a href="/admin/main/design/1/change/">Test</a></th>#}
+{#                                <td class="field-prodImg"><img src="/media/img/02.jpg" width="100"></td>#}
+{#                                <td class="field-inserted_by">Designer</td>#}
+                                {#                                <td class="field-creator">Manthan</td>#}
+                                {#                                <td class="field-status"><img src="/static/admin/img/icon-yes.svg" alt="True"></td>#}
+{#                            </tr>#}
+
+                            </tbody>
+                        </table>
+                    </div>
+
+
+                    <p class="paginator">
+
+                        2 designs
+
+
+                    </p>
+
+                </form>
+            </div>
+        </div>
+
+
+        <br class="clear">
+    </div>
+{% endblock %}
+

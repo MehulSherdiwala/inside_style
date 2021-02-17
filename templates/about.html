@@ -1,0 +1,267 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block content %}
+    <!-- ==================== Start Header ==================== -->
+
+    <header class="pages-header bg-img valign parallaxie" data-background="{% static 'img/pg1.jpg' %}"
+            data-overlay-dark="5">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-12">
+                    <div class="cont text-center">
+                        <h1>About Us</h1>
+                        <div class="path">
+                            <a href="#">Home</a><span>/</span><a href="#" class="active">About Us</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <!-- ==================== End Header ==================== -->
+
+
+
+    <!-- ==================== Start about ==================== -->
+
+    <section class="about section-padding">
+        <div class="container">
+            <div class="row">
+                {% comment %}<div class="col-lg-6">
+                    <div class="numbers">
+                        <div class="row">
+                            <div class="col-sm-6">
+                                <div class="item mb-50">
+                                    <h3><span class="nbr custom-font"></span></h3>
+                                    <h6></h6>
+                                </div>
+                            </div>
+                            <div class="col-sm-6">
+                                <div class="item mb-50">
+                                    <h3><span class="nbr custom-font"></span></h3>
+                                    <h6></h6>
+                                </div>
+                            </div>
+                            <div class="col-sm-6">
+                                <div class="item">
+                                    <h3><span class="nbr custom-font"></span></h3>
+                                    <h6></h6>
+                                </div>
+                            </div>
+                            <div class="col-sm-6">
+                                <div class="item">
+                                    <h3><span class="nbr custom-font"></span></h3>
+                                    <h6></h6>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>{% endcomment %}
+                <div class="col-lg-12">
+                    <div class="txt-cont">
+                        <p class="mb-20">“Interior design shouldn’t be considered a luxury service.
+                            It’s for everyone interested in improving their lives in small and large
+                            ways by surrounding themselves with what brings them joy. For us,
+                            great design is a mix of smart investment items and unique selections.
+                            This helps to achieve the space’s full potential with a breath of fresh air.”</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ==================== End about ==================== -->
+
+
+
+    <!-- ==================== Start Services ==================== -->
+
+    <section class="services halfbg mb-50">
+        <div class="background bg-img valign parallaxie" data-background="{% static 'img/04.jpg' %}"
+             data-overlay-dark="7">
+            <a class="play-button vid" href="https://youtu.be/AzwC6umvd1s">
+                <svg class="circle-fill">
+                    <circle cx="43" cy="43" r="39" stroke="#fff" stroke-width=".5"></circle>
+                </svg>
+                <svg class="circle-track">
+                    <circle cx="43" cy="43" r="39" stroke="none" stroke-width="1" fill="none"></circle>
+                </svg>
+
+                <span class="polygon">
+                    <i class="pe-7s-play"></i>
+                </span>
+            </a>
+        </div>
+        <div class="container ontop">
+            <div class="row">
+                <div class="col-lg-3 col-md-6 item-bx">
+                    <h2 class="custom-font numb">01</h2>
+                    <h6 class="mb-20">Designer</h6>
+                    <p>A designer is a person who plans the look or workings of something prior to it being made.</p>
+                </div>
+
+                <div class="col-lg-3 col-md-6 item-bx">
+                    <h2 class="custom-font numb">02</h2>
+                    <h6 class="mb-20">Interior Design</h6>
+                    <p>it is the art and science of enhancing the interior of a building.</p>
+                </div>
+
+                <div class="col-lg-3 col-md-6 item-bx">
+                    <h2 class="custom-font numb">03</h2>
+                    <h6 class="mb-20">Customisation</h6>
+                    <p>All kind of customization will be done, so you get your dream home ready.</p>
+                </div>
+
+                <div class="col-lg-3 col-md-6 item-bx">
+                    <h2 class="custom-font numb">04</h2>
+                    <h6 class="mb-20">Interior Products</h6>
+                    <p>You can also buy all the products mentioned in the design separately. </p>
+                </div>
+
+            </div>
+        </div>
+    </section>
+
+    <!-- ==================== End Services ==================== -->
+
+
+
+    <!-- ==================== Start Skills ==================== -->
+
+    {% comment %}<div class="skills-sec section-padding pt-80">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-6 valign">
+                    <div class="skills-box full-width">
+                        <div class="skill-item">
+                            <h6>Architecture</h6>
+                            <div class="skill-progress">
+                                <div class="progres custom-font" data-value="90%"></div>
+                            </div>
+                        </div>
+                        <div class="skill-item">
+                            <h6>Interior Design</h6>
+                            <div class="skill-progress">
+                                <div class="progres custom-font" data-value="75%"></div>
+                            </div>
+                        </div>
+                        <div class="skill-item">
+                            <h6>3D Modeling</h6>
+                            <div class="skill-progress">
+                                <div class="progres custom-font" data-value="80%"></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-6">
+                    <div class="content">
+                        <h4 class="playfont line-height-50 mb-20">Providing Customized Design Solutions That Fits Every
+                            Space .</h4>
+                        <p class="mb-10">Beyond more stoic this along goodness hey this this wow ipsum manate far
+                            impressive manifest farcrud opened inside.</p>
+                        <p>Fustered impressive manifest crud opened inside owing punitively around forewent and after
+                            wasteful telling sprang coldly and spoke less clients. </p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>{% endcomment %}
+
+    <!-- ==================== End Skills ==================== -->
+
+
+
+    <!-- ==================== Start Testimonials ==================== -->
+
+    <section class="testimonials grid section-padding bg-img parallaxie" data-background="{% static 'img/001.jpg' %}"
+             data-overlay-dark="9">
+        <div class="container">
+            <div class="section-head text-center">
+                <div class="row justify-content-center">
+                    <div class="col-lg-6 col-md-8 col-sm-10">
+                        <h6 class="custom-font">Testimonials</h6>
+                        <h4 class="playfont">What People Says?</h4>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-lg-12">
+                    <div class="testim">
+                        <div class="item">
+                            <span class="quote-icon"><img src="{% static 'img/clients/quote.svg' %}" alt=""></span>
+                            <div class="cont">
+                                <p class="playfont">"I just love their design for all stunning details. You must know
+                                    what can you do for a project before taking it, but with Archo, the sky is the
+                                    limit."
+                                </p>
+                            </div>
+                            <div class="info">
+                                <div class="author">
+                                    <img src="{% static 'img/clients/1.jpg' %}" alt="">
+                                </div>
+                                <h6>Mitchl Jhon <span>Envato Customer</span></h6>
+                            </div>
+                        </div>
+                        <div class="item">
+                            <span class="quote-icon"><img src="{% static 'img/clients/quote.svg' %}" alt=""></span>
+                            <div class="cont">
+                                <p class="playfont">"I just love their design for all stunning details. You must know
+                                    what can you do for a project before taking it, but with Archo, the sky is the
+                                    limit."
+                                </p>
+                            </div>
+                            <div class="info">
+                                <div class="author">
+                                    <img src="{% static 'img/clients/1.jpg' %}" alt="">
+                                </div>
+                                <h6>Mitchl Jhon <span>Envato Customer</span></h6>
+                            </div>
+                        </div>
+                        <div class="item">
+                            <span class="quote-icon"><img src="{% static 'img/clients/quote.svg' %}" alt=""></span>
+                            <div class="cont">
+                                <p class="playfont">"I just love their design for all stunning details. You must know
+                                    what can you do for a project before taking it, but with Archo, the sky is the
+                                    limit."
+                                </p>
+                            </div>
+                            <div class="info">
+                                <div class="author">
+                                    <img src="{% static 'img/clients/1.jpg' %}" alt="">
+                                </div>
+                                <h6>Mitchl Jhon <span>Envato Customer</span></h6>
+                            </div>
+                        </div>
+                        <div class="item">
+                            <span class="quote-icon"><img src="{% static 'img/clients/quote.svg' %}" alt=""></span>
+                            <div class="cont">
+                                <p class="playfont">"I just love their design for all stunning details. You must know
+                                    what can you do for a project before taking it, but with Archo, the sky is the
+                                    limit."
+                                </p>
+                            </div>
+                            <div class="info">
+                                <div class="author">
+                                    <img src="{% static 'img/clients/1.jpg' %}" alt="">
+                                </div>
+                                <h6>Mitchl Jhon <span>Envato Customer</span></h6>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="navs mt-30">
+                        <span class="prev">
+                            <i class="fas fa-long-arrow-alt-left"></i>
+                        </span>
+                        <span class="next">
+                            <i class="fas fa-long-arrow-alt-right"></i>
+                        </span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+
+{% endblock %}

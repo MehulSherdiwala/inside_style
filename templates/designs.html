@@ -1,0 +1,165 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block styles %}
+    <style>
+        .img-link {
+            z-index: -1;
+            transition: 0.5s linear;
+        }
+
+        .img-link div {
+            z-index: 9;
+            position: absolute;
+            bottom: -50%;
+            text-align: justify;
+            background: #202020cc;
+            padding: 20px 30px;
+            height: 50%;
+            color: #ffffff;
+            transition: 0.5s linear;
+        }
+
+        .jg-entry-visible:hover div {
+            bottom: 0;
+            transition: 0.5s linear;
+        }
+
+        .caption {
+            background-color: #000000 !important;
+            height: 45%;
+            padding: 18px 50px !important;
+            text-align: justify;
+        }
+        .caption-visible{
+            animation: open 0.5s ease;
+        }
+        @keyframes open {
+            0%{
+                height:0;
+            }
+            100%{
+                height:45%;
+            }
+        }
+
+        .caption span {
+            margin: auto;
+            font-size: 20px
+        }
+
+    </style>
+{% endblock %}
+
+{% block content %}
+    <!-- ==================== Start Header ==================== -->
+
+    <header class="pages-header bg-img valign parallaxie" data-background="{% static 'img/portfolio/project1/bg.jpg' %}"
+            data-overlay-dark="5">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-12">
+                    <div class="cont text-center">
+                        <h1>Interior Designs</h1>
+                        <div class="path">
+                            <a href="javascript:void(0);">Home</a><span>/</span><a href="javascript:void(0);"
+                                                                                   class="active">Interior
+                            Design</a><span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </header>
+
+
+    <section class="projdtal">
+        <div class="justified-gallery">
+            {% for d in design %}
+                <div class="">
+                    <img alt="" src="/media/{{ d.image }}"/>
+                    <div class="caption">
+                        <h4>{{ d.design_name }} <a href="{% url 'chat' %}?id={{ d.creator_id }}" class="btn btn-secondary float-right">Chat</a></h4>
+                        <p>{{ d.description }}</p>
+                        <div class="d-flex justify-content-between">
+                            <a href="{% url 'designProduct' design_id=d.id %}" class="btn btn-secondary">View Products</a>
+                            <span><i class="fa fa-rupee-sign"></i> {{ d.price }}</span>
+                            <a href="javascript:void(0);" class="btn btn-secondary" onclick="addToCart({{ d.id }})">Add To Cart</a>
+                        </div>
+                    </div>
+                </div>
+            {% endfor %}
+        </div>
+    </section>
+    {% comment %}
+        <a href="{% url 'designProduct' design_id=d.id %}" class="img-link">
+            <img alt="" src="/media/{{ d.image }}"/>
+        </a>
+    {% endcomment %}
+
+    {% comment %}<section>
+        <div class="container-fluid">
+            <div class="video-wrapper section-padding bg-img parallaxie valign"
+                 data-background="{% static 'img/portfolio/project1/vid.jpg' %}" data-overlay-dark="4">
+                <div class="full-width text-center">
+                    <a class="vid" href="https://vimeo.com/127203262">
+                        <div class="vid-butn">
+                            <span class="icon">
+                                <i class="fas fa-play"></i>
+                            </span>
+                        </div>
+                    </a>
+                </div>
+            </div>
+        </div>
+    </section>{% endcomment %}
+
+    <section class="call-action nogif next">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-12">
+                    <div class="content text-center">
+                        <a href="javascript:void(0);">
+                            <h2 class="wow" data-splitting><b> Luxury </b> Furniture</h2>
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="nxt-img bg-img" data-background="{% static 'img/portfolio/project1/bg.jpg' %}"></div>
+    </section>
+
+    <!-- ==================== End call-to-action ==================== -->
+
+{% endblock %}
+
+
+{% block script %}
+    <script>
+
+        function addToCart(id){
+            $.ajax({
+                url: '/ajax/addtocart',
+                method: 'get',
+                data: {
+                    id: id,
+                    type: 2,
+                    qty: 1
+                },
+                beforeSend: function () {
+                    $("#loaderNew").fadeIn();
+                },
+                success:function (res){
+                    if (res.redirect != '' && typeof res.redirect != "undefined"){
+                        window.location = "{% url 'login' %}";
+                    } else {
+                        alert("Product added to cart successfully.....");
+                    }
+                },
+                complete: function () {
+                    $("#loaderNew").fadeOut();
+                }
+            })
+        }
+    </script>
+{% endblock %}
